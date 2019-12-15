@@ -1,0 +1,28 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+   x=3cm,y=3cm,
+   axis lines=middle,
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xmin=-0.6,
+   xmax=3.1,
+   ymin=-0.1,
+   ymax=2.1,
+   xtick={-1,-0.5,...,3},
+   ytick={-1,-0.5,...,2},]
+
+      \draw [-latex,line width=2pt,color=red] (0,0) -- (3,1);
+      \draw [-latex,line width=2pt,color=green] (0,0) -- (2,2);
+
+      \draw [-latex,line width=2pt,dashed,color=green] (0,0) -- (2.4,0.8);
+      \draw [line width=1.2pt,dashed,color=grey] (2,2)-- (2.4,0.8);
+      \draw [line width=1.2pt,dashed,color=grey] (-0.4,1.2)-- (2,2);
+
+      \draw [-latex,line width=2pt,color=green] (0,0) -- (-0.4,1.2);
+
+      \draw[color=red] (2.7,1.1) node {$v_{1} = u_{1}$};
+      \draw[color=green] (1.95, 1.8) node {$v_{2}$};
+      \draw[color=green] (2.3,0.5) node {$\proj_{u_1}(v_2)$};
+      \draw[color=green] (-0.5,1.1) node {$u_{2}$};
+   \end{axis}
+\end{tikzpicture}

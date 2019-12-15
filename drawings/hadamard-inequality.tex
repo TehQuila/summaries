@@ -1,0 +1,30 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+   x=1.5cm,y=1.5cm,
+   axis lines=middle,
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xmin=-0.1,
+   xmax=6.1,
+   ymin=-0.1,
+   ymax=2.1,
+   ticks=none]
+
+   \fill[line width=2pt,color=blue,fill=blue,fill opacity=0.15] (0,0) -- (4,0) -- (6,2) -- (2,2) -- cycle;
+   \fill[line width=2pt,color=red,fill=red,fill opacity=0.15] (0,2) -- (4,2) -- (4,0) -- (0,0) -- cycle;
+
+   \draw [-latex,line width=2pt,color=green] (0,0) -- (4,0);
+   \draw [-latex,line width=2pt,color=red] (0,0) -- (2,2);
+   \draw [-latex,line width=2pt,color=black,dashed] (0,0) -- (2,0);
+   \draw [-latex,line width=2pt,color=black,dashed] (0,0) -- (0,2);
+
+   \draw [line width=1pt,dashed] (4,0)-- (6,2);
+   \draw [line width=1pt,dashed] (0,2)-- (6,2);
+   \draw [line width=1pt,dashed] (4,0)-- (4,2);
+
+   \draw (3.5,0.2) node {$v_1$};
+   \draw (1.5,1.8) node {$v_2$};
+   \draw (1.5, 0.2) node {$v_2'$};
+   \draw (0.3,1.8) node {$v_2''$};
+   \end{axis}
+\end{tikzpicture}

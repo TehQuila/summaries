@@ -1,0 +1,117 @@
+\documentclass[english,titlepage]{uzhpub}
+% Font Encoding
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Glossaries
+\usepackage[toc,nonumberlist]{glossaries}
+\input{glossary.tex}
+\makeglossaries
+\glsaddall
+
+% enumerate Environment
+\usepackage{enumitem}
+\SetLabelAlign{Center}{\hfil(#1)\hfil} % center alignment for enumerate
+
+% Math Packages
+\usepackage{mathtools} % includes amsmath
+\usepackage{amsthm} % for theoremstyle, newtheorem
+\usepackage{amsfonts} % for mathbb, mathcal
+\usepackage{amssymb} % for blacksquare
+\usepackage{thmtools} % for theorem list
+\usepackage{mathrsfs} % for mathscr font
+
+% Drawing Packages
+\usepackage{pgf}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{tikz-cd}
+
+% base16 color scheme
+\usepackage{xcolor}
+\definecolor{black}{HTML}{383838}
+\definecolor{grey}{HTML}{787878}
+\definecolor{white}{HTML}{D8D8D8}
+\definecolor{red}{HTML}{AB4642}
+\definecolor{orange}{HTML}{DC9656}
+\definecolor{yellow}{HTML}{F7CA88}
+\definecolor{green}{HTML}{A1B56C}
+\definecolor{cyan}{HTML}{86C1B9}
+\definecolor{blue}{HTML}{7CAFC2}
+\definecolor{purple}{HTML}{BA8BAF}
+\definecolor{brown}{HTML}{A16946}
+
+% Referencing
+\usepackage{xr} % cross file referencing
+\usepackage{hyperref} % make references to hyperlinks
+% reset section counter for parts
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+\usepackage{cleveref} % prepend environment before reference number
+% LABELLING SCHEME
+% ch: chapter
+% sec: section
+% ssec: subsection
+% fig: figure
+% tab: table
+% eq: equation
+% lst: code listing
+% itm: enumerated list item
+% alg: algorithm
+% app: appendix subsection
+
+% def: definition
+% thm: theorem
+% pro: proposition
+% cor: corollary
+% lem: lemma
+% rem: remark
+
+% Math styling
+\renewcommand\qedsymbol{$\blacksquare$}
+\usepackage{mdframed}
+\newmdtheoremenv[linewidth=1, linecolor=black, backgroundcolor=white]{definition}{Definition}[section]
+\newmdtheoremenv[linewidth=1, linecolor=black, backgroundcolor=white]{proposition}[definition]{Proposition}
+\newmdtheoremenv[linewidth=1, linecolor=black, backgroundcolor=white]{lemma}[definition]{Lemma}
+\newmdtheoremenv[linewidth=1, linecolor=black, backgroundcolor=white]{theorem}[definition]{Theorem}
+\newmdtheoremenv[linewidth=1, linecolor=black, backgroundcolor=white]{corollary}{Corollary}[theorem]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{example}
+\newtheorem*{example}{Example}
+
+% Custom Math Commands
+% Algebra
+\DeclareMathOperator\adj{adj}
+\DeclareMathOperator\id{id}
+\DeclareMathOperator\im{im}
+\DeclareMathOperator\tr{tr}
+\DeclareMathOperator\inv{inv}
+\DeclareMathOperator\spanv{span}
+\DeclareMathOperator\Aut{Aut}
+\DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\End{End}
+\DeclareMathOperator\Eig{Eig}
+\DeclareMathOperator\Mat{Mat}
+\DeclareMathOperator\SR{SR}
+\DeclareMathOperator\ZR{ZR}
+\DeclareMathOperator\rk{rk}
+\DeclareMathOperator\GL{GL}
+\DeclareMathOperator\Sym{Sym}
+\DeclareMathOperator\chark{char}
+\DeclareMathOperator\OG{O}
+\DeclareMathOperator\SO{SO}
+\DeclareMathOperator\U{U}
+\DeclareMathOperator\SU{SU}
+\DeclareMathOperator\proj{proj}
+\DeclareMathOperator\coker{coker}
+\DeclareMathOperator\tors{tors}
+\DeclareMathOperator\pr{pr}
+\DeclareMathOperator\ev{ev}
+\DeclareMathOperator\sign{sign}
+\DeclareMathOperator\Perm{Perm}
