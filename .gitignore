@@ -1,0 +1,20 @@
+*.glsdefs
+*.out
+*.glo
+*.ist
+*.pdf
+*.toc
+*.aux
+*.log
+*.acn
+*.acr
+*.alg
+*.glg
+*.gls
+*.fdb_latexmk
+*.fls
+*.loe
+*.synctex.gz
+
+# don't ignore template pdfs
+!tex/*
