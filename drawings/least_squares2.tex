@@ -1,0 +1,22 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+      x=5cm,y=5cm,
+      axis lines=middle,
+      ymajorgrids=true,
+      xmajorgrids=true,
+      xmin=-0.2,
+      xmax=1.1,
+      ymin=-0.4,
+      ymax=1.1,
+      xtick={-0.2,0,...,1},
+      ytick={-0.2,0,...,1},]
+
+      \draw[line width=2pt,color=red,smooth,samples=100,domain=-0.4756904652101431:1.862519867624589] plot(\x,{3/2*(\x)-1/4});
+      \draw [line width=2pt,color=blue] (0,0)-- (0.5,0);
+      \draw [line width=2pt,color=blue] (0.5,1)-- (1,1);
+
+      \draw [fill=blue] (0,0) circle (2.5pt);
+      \draw [fill=blue] (0.5,1) circle (2.5pt);
+      \draw [fill=blue] (1,1) circle (2.5pt);
+   \end{axis}
+\end{tikzpicture}

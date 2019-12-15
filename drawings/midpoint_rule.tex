@@ -1,0 +1,33 @@
+\definecolor{wrwrwr}{rgb}{0.3803921568627451,0.3803921568627451,0.3803921568627451}
+\definecolor{rvwvcq}{rgb}{0.08235294117647059,0.396078431372549,0.7529411764705882}
+\definecolor{dtsfsf}{rgb}{0.8274509803921568,0.1843137254901961,0.1843137254901961}
+\definecolor{sexdts}{rgb}{0.1803921568627451,0.49019607843137253,0.19607843137254902}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+   x=1.5cm,y=1.5cm,
+   axis lines=middle,
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xmin=-0.4,
+   xmax=3.5,
+   ymin=-0.3,
+   ymax=2.4,
+   xtick={0,1.5,3},
+   ytick={0,1.5,3},]
+
+   \draw[line width=2pt,color=grey,smooth,samples=100,domain=-1.074180774429077:5.287785386815288] plot(\x,{(\x)+cos(((\x))*180/pi)});
+
+   \fill[line width=2pt,color=grey,fill=grey,fill opacity=0.1] (0,0) -- (3,0) -- (3,1.5707446637745) -- (0,1.5707446637745) -- cycle;
+   \draw [line width=2pt,color=green] (3,1.5707446637745)-- (0,1.5707446637745);
+   \draw [line width=1pt,dashed, color=black] (0,0)-- (3,0);
+   \draw [line width=1pt,dashed, color=black] (3,0)-- (3,1.5707446637745);
+   \draw [line width=1pt,dashed, color=black] (0,1.5707446637745)-- (0,0);
+
+   \draw [fill=red] (0,0) circle (2.5pt);
+   \draw[color=red] (-0.011918176338092792,-0.2) node {$a$};
+   \draw [fill=blue] (3,0) circle (2.5pt);
+   \draw[color=blue] (2.989118781110207,-0.2) node {$b$};
+   \draw [fill=grey] (1.5031137570903195,1.5707446637744837) circle (2.5pt);
+   \draw[color=grey] (1.758519487146881,2) node {$f\left(\frac{a+b}{2}\right)$};
+   \end{axis}
+\end{tikzpicture}

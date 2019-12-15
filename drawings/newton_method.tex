@@ -1,0 +1,29 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+   x=2cm,y=2cm,
+   axis lines=middle,
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xmin=-0.1,
+   xmax=4.4,
+   ymin=-1.4,
+   ymax=1.4,
+   ticks=none]
+
+      \draw [line width=2pt,color=green,smooth,samples=100,domain=-1:6] plot(\x,{(\x)+sin(((\x))*180/pi)-2});
+      \draw [line width=1pt,color=black,dashed] (4,0)-- (4.000124111431098,1.2431174327311216);
+      \draw [line width=1pt,color=black,dashed] (0.41161385698824204,0)-- (0.41089926118902464,-1.1896668409479316);
+
+      \draw [line width=1pt,color=red,dashed,domain=-1.057074056879713:6.005987402575526] plot(\x,{(-0.1426037491816876--0.34645031201114584*\x)/1});
+      \draw [line width=1pt,color=red,dashed, domain=-1.057074056879713:6.005987402575526] plot(\x,{(-1.9772629298598177--1.9167619981423398*\x)/1});
+
+      \draw [fill=blue] (4,0) circle (2.5pt);
+      \draw[color=black] (4,-0.15) node {\(x_0\)};
+      \draw [fill=blue] (4.000124111431098,1.2431174327311216) circle (2.5pt);
+      \draw [fill=blue] (0.41161385698824204,0) circle (2.5pt);
+      \draw[color=black] (0.45,0.15) node {\(x_1\)};
+      \draw [fill=blue] (0.41089926118902464,-1.1896668409479316) circle (2.5pt);
+      \draw [fill=blue] (1.0315641335628072,0) circle (2.5pt);
+      \draw[color=black] (1,0.15) node {\(x_2\)};
+   \end{axis}
+\end{tikzpicture}

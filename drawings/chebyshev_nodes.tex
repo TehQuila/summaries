@@ -1,0 +1,43 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+   x=5cm,y=5cm,
+   axis lines=middle,
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xmin=-1.1,
+   xmax=1.1,
+   ymin=-0.3,
+   ymax=1.1,
+   ticks=none]
+
+   \draw[line width=2pt,color=grey,smooth,samples=100,domain=-1.1:1.1] plot(\x,{1/(1+25*(\x)^(2))});
+
+   \draw[line width=1pt,color=orange,smooth,samples=100,domain=-1.1:1.1] plot(\x,{0-0.016510462323451446*(\x)^(11)-14.941614787579896*(\x)^(10)+0.04333438812251257*(\x)^(9)+45.42097360612821*(\x)^(8)-0.041118988505449885*(\x)^(7)-52.24265527669621*(\x)^(6)+0.0162854029388456*(\x)^(5)+28.237528170839447*(\x)^(4)-0.0017907298080349797*(\x)^(3)-7.259001597698399*(\x)^(2)-0.000268918142076891*(\x)+0.8161686649462505});
+
+   \draw [fill=orange] (-0.9914,0) circle (2.5pt);
+   \draw [fill=orange] (-0.9239,0) circle (2.5pt);
+   \draw [fill=orange] (-0.7934,0) circle (2.5pt);
+   \draw [fill=orange] (-0.6088,0) circle (2.5pt);
+   \draw [fill=orange] (-0.3827,0) circle (2.5pt);
+   \draw [fill=orange] (-0.1305,0) circle (2.5pt);
+   \draw [fill=orange] (0.1305,0) circle (2.5pt);
+   \draw [fill=orange] (0.3827,0) circle (2.5pt);
+   \draw [fill=orange] (0.6088,0) circle (2.5pt);
+   \draw [fill=orange] (0.7934,0) circle (2.5pt);
+   \draw [fill=orange] (0.9239,0) circle (2.5pt);
+   \draw [fill=orange] (0.9914,0) circle (2.5pt);
+
+   \draw [fill=orange] (-0.9914546461298307,0.039101360209733066) circle (2.5pt);
+   \draw [fill=orange] (-0.9238830528547382,0.04476476642255106) circle (2.5pt);
+   \draw [fill=orange] (-0.7935449721734806,0.05972702157240374) circle (2.5pt);
+   \draw [fill=orange] (-0.6084563010417139,0.09750887488715353) circle (2.5pt);
+   \draw [fill=orange] (-0.38285569923331336,0.21438698943376366) circle (2.5pt);
+   \draw [fill=orange] (-0.13105582284539402,0.699598778505821) circle (2.5pt);
+   \draw [fill=orange] (0.13110584412823714,0.6994383570283891) circle (2.5pt);
+   \draw [fill=orange] (0.38241495735717296,0.21477524889045738) circle (2.5pt);
+   \draw [fill=orange] (0.6088497424003506,0.0973951641860439) circle (2.5pt);
+   \draw [fill=orange] (0.7933436715094164,0.05975552391691297) circle (2.5pt);
+   \draw [fill=orange] (0.9237499394138372,0.0447770909371877) circle (2.5pt);
+   \draw [fill=orange] (0.991327504897445,0.03911099832671435) circle (2.5pt);
+   \end{axis}
+\end{tikzpicture}

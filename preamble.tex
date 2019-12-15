@@ -26,10 +26,35 @@
 \usepackage{pgf}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.15}
-\usepackage{mathrsfs}
 \usepackage{tikz}
 \usetikzlibrary{arrows}
 \usepackage{tikz-cd}
+\usepackage[customcolors]{hf-tikz} % equation styling
+
+% Code Snippets
+\usepackage{listings}
+\lstset{inputpath=codes}
+\lstset{
+   identifierstyle=\color{red},
+   keywordstyle=\color{blue},     % keyword style
+   commentstyle=\color{grey},     % comment style
+   stringstyle=\color{green},     % string literal style
+   numberstyle=\tiny,             % the style that is used for the line-numbers
+   basicstyle=\footnotesize,      % the size of the fonts that are used for the code
+   breakatwhitespace=false,       % sets if automatic breaks should only happen at whitespace
+   breaklines=true,               % sets automatic line breaking
+   captionpos=b,                  % sets the caption-position to bottom
+   keepspaces=true,               % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+   numbers=left,                  % where to put the line-numbers; possible values are (none, left, right)
+   stepnumber=1,                  % the step between two line-numbers. If it's 1, each line will be numbered
+   rulecolor=\color{black},       % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+   showspaces=false,              % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+   showstringspaces=false,        % underline spaces within strings only
+   showtabs=false,                % show tabs within strings adding particular underscores
+   tabsize=1,                     % sets default tabsize to 2 spaces
+   title=\lstname,
+   xleftmargin=7ex
+}
 
 % base16 color scheme
 \usepackage{xcolor}
@@ -127,4 +152,14 @@
 \DeclareMathOperator\arccosh{arccosh}
 \DeclareMathOperator\ixp{ixp}
 \DeclareMathOperator\argu{arg}
+
+% Numerics
+\newcommand{\imag}{\mathrm{i}}
+\DeclareMathOperator\suppf{suppf}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\opt{opt}
+\DeclareMathOperator\chop{chop}
+\DeclareMathOperator\fl{fl}
+\DeclareMathOperator\rd{rd}
+\DeclareMathOperator\eps{eps}
 

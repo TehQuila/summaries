@@ -1,0 +1,69 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+   x=5cm,y=5cm,
+   axis lines=middle,
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xmin=-1.1,
+   xmax=1.1,
+   ymin=-0.3,
+   ymax=1.1,
+   ticks=none]
+
+      \draw[line width=2pt,color=grey,smooth,samples=100,domain=-1.1:1.1] plot(\x,{1/(1+25*(\x)^(2))});
+
+      \draw[line width=1pt,color=green,smooth,samples=100,domain=-1.1:1.1] plot(\x,{0-0.9605666940940613*(\x)^(2)+0.00091056771030945*(\x)+1});
+
+      \draw[line width=1pt,color=blue,smooth,samples=100,domain=-1.1:1.1] plot(\x,{3.3066011127927677*(\x)^(4)-0.005539719969325123*(\x)^(3)-4.270644400012492*(\x)^(2)+0.003192951298840267*(\x)+1});
+
+      \draw[line width=1pt,color=purple,smooth,samples=100,domain=-1.1:1.1] plot(\x,{0-13.085082229627304*(\x)^(6)+0.03502661004626571*(\x)^(5)+20.889848411446145*(\x)^(4)-0.03526263625311973*(\x)^(3)-8.759779507825755*(\x)^(2)+0.0063480547983490974*(\x)+1});
+
+      \draw[line width=1pt,color=red,smooth,samples=100,domain=-1.1:1.1] plot(\x,{53.53397400034355*(\x)^(8)-0.04078974344789486*(\x)^(7)-102.53633487056128*(\x)^(6)+0.053031814162383964*(\x)^(5)+61.20579397680123*(\x)^(4)-0.031390015024642476*(\x)^(3)-13.181696778709927*(\x)^(2)+0.003472768447373123*(\x)+1});
+
+      \draw[line width=1pt,color=orange,smooth,samples=100,domain=-1.1:1.1] plot(\x,{0-220.15426884899335*(\x)^(10)+0.028272530875213947*(\x)^(9)+493.76101346945995*(\x)^(8)+0.030851161799076234*(\x)^(7)-380.9758835096143*(\x)^(6)-0.02392634986933301*(\x)^(5)+123.30244587188751*(\x)^(4)+0.0035948683694564773*(\x)^(3)-16.85357353119391*(\x)^(2)-0.0001075594270215077*(\x)+1});
+
+      \draw [fill=green] (0,0) circle (2.5pt);
+      \draw [fill=green] (-1,0) circle (2.5pt);
+      \draw [fill=green] (1,0) circle (2.5pt);
+      \draw [fill=blue] (-0.5,0) circle (2.5pt);
+      \draw [fill=blue] (0.5,0) circle (2.5pt);
+      \draw [fill=purple] (-0.666,0) circle (2.5pt);
+      \draw [fill=purple] (-0.333,0) circle (2.5pt);
+      \draw [fill=purple] (0.333,0) circle (2.5pt);
+      \draw [fill=purple] (0.666,0) circle (2.5pt);
+      \draw [fill=red] (-0.75,0) circle (2.5pt);
+      \draw [fill=red] (-0.25,0) circle (2.5pt);
+      \draw [fill=red] (0.25,0) circle (2.5pt);
+      \draw [fill=red] (0.75,0) circle (2.5pt);
+      \draw [fill=orange] (-0.8,0) circle (2.5pt);
+      \draw [fill=orange] (-0.6,0) circle (2.5pt);
+      \draw [fill=orange] (-0.4,0) circle (2.5pt);
+      \draw [fill=orange] (-0.2,0) circle (2.5pt);
+      \draw [fill=orange] (0.2,0) circle (2.5pt);
+      \draw [fill=orange] (0.4,0) circle (2.5pt);
+      \draw [fill=orange] (0.6,0) circle (2.5pt);
+      \draw [fill=orange] (0.8,0) circle (2.5pt);
+
+      \draw [fill=green] (-1.0000331146829422,0.03845908926608833) circle (2.5pt);
+      \draw [fill=orange] (-0.8015238064457861,0.05861317600642709) circle (2.5pt);
+      \draw [fill=red] (-0.7497028100187907,0.0664391895837701) circle (2.5pt);
+      \draw [fill=purple] (-0.6655094170962286,0.08283240707058878) circle (2.5pt);
+      \draw [fill=orange] (-0.6,0.1) circle (2.5pt);
+      \draw [fill=blue] (-0.5000777395728906,0.13789406669240173) circle (2.5pt);
+      \draw [fill=orange] (-0.4,0.2) circle (2.5pt);
+      \draw [fill=purple] (-0.3338504345324118,0.26410290943979614) circle (2.5pt);
+      \draw [fill=red] (-0.2502380809960402,0.3897909950387815) circle (2.5pt);
+      \draw [fill=orange] (-0.2,0.5) circle (2.5pt);
+      \draw [fill=green] (0,1) circle (2.5pt);
+      \draw [fill=orange] (0.2,0.5) circle (2.5pt);
+      \draw [fill=red] (0.2508309407182736,0.3886658779405162) circle (2.5pt);
+      \draw [fill=purple] (0.33485045456474666,0.26294195897723055) circle (2.5pt);
+      \draw [fill=orange] (0.4,0.2) circle (2.5pt);
+      \draw [fill=blue] (0.5009212953077645,0.13749383060795603) circle (2.5pt);
+      \draw [fill=orange] (0.6,0.1) circle (2.5pt);
+      \draw [fill=purple] (0.6665912924843211,0.08258593897907116) circle (2.5pt);
+      \draw [fill=red] (0.7483363568806485,0.066665855228832) circle (2.5pt);
+      \draw [fill=orange] (0.8006531980942979,0.05873322331347529) circle (2.5pt);
+      \draw [fill=green] (1.0010189412214463,0.038386282130172006) circle (2.5pt);
+   \end{axis}
+\end{tikzpicture}
