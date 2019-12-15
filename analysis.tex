@@ -1,0 +1,1446 @@
+% TODO: color-code remarks and examples
+\section{Sequences}
+In this section we use the notation \(\mathbb{K}\) to represent the field of \(\mathbb{R}\) respectively \(\mathbb{C}\).
+
+\begin{definition}[Sequence]
+   A sequence \((x_n)_{n \in \mathbb{N}}\) on \(\mathbb{K}\) is an enumerated collection
+   \[(x_n)_{n \in \mathbb{N}} := \{x_1, x_2, \ldots, x_n\}\]
+\end{definition}
+\begin{remark}[Notation]
+   For conciseness we denote ''\((x_n)_{n \in \mathbb{N}}\) is a sequence on \(\mathbb{K}\)`` as \((x_n) \in \mathbb{K}^\mathbb{N}\).
+\end{remark}
+\begin{remark}
+   Formally we define a sequence as a map \(x: \mathbb{N} \to \mathbb{K}\).
+\end{remark}
+
+\begin{definition}[Zero Sequence]
+   A sequence \((x_n)_{n \in \mathbb{N}}\) where \(x_n \xrightarrow{n \to \infty} 0\).
+\end{definition}
+
+\subsection{Bounded Sequences}
+\begin{definition}[Bounded Below Sequence]
+   A sequence \((x_n)_{n \in \mathbb{N}}\) where
+   \[\exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: b \leq x_n)\]
+\end{definition}
+
+\begin{definition}[Bounded Above Sequence]
+   A sequence \((x_n)_{n \in \mathbb{N}}\) where
+   \[\exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: x_n \leq b)\]
+\end{definition}
+
+\begin{definition}[Bounded Sequence]
+   A sequence \((x_n)_{n \in \mathbb{N}}\) which is bounded above and below
+   \[\exists b > 0 \in \mathbb{R}: (\forall n \in \mathbb{N}: |x_n| < b)\]
+\end{definition}
+
+\begin{theorem}[Convergent \(\implies\) Bounded]\label{thm:conv_bound}
+   Every convergent sequence is bounded.
+\end{theorem}
+\begin{remark}
+   The contraposition: ''Every unbounded sequence diverges``, is often more usefull.
+\end{remark}
+
+\subsection{Monotonic Sequences}
+\begin{definition}[Increasing Sequence]
+   A sequence \((x_n)_{n \in \mathbb{N}}\) where
+   \[\forall n \in \mathbb{N}: x_n \leq x_{n+1}\]
+\end{definition}
+\begin{remark}
+   If \(x_n < x_{n+1}\), we say \((x_n)\) is \emph{strictly} increasing.
+\end{remark}
+
+\begin{definition}[Decreasing Sequence]
+   A sequence \((x_n)_{n \in \mathbb{N}}\) where
+   \[\forall n \in \mathbb{N}: x_n \geq x_{n+1}\]
+\end{definition}
+\begin{remark}
+   If \(x_n > x_{n+1}\), \((x_n)\) is \emph{strictly} decreasing.
+\end{remark}
+
+\begin{remark}[Show Monotonic Behaviour]
+   To prove that a sequence is increasing, respectively decreasing we have the following options
+   \begin{enumerate}
+      \item \(x_{n+1} = \ldots \geq x_n\) resp. \(x_{n+1} = \ldots \leq x_n\)
+      \item \(\frac{x_{n+1}}{x_n} = \ldots \geq 1\) resp. \(\frac{x_{n+1}}{x_n} = \ldots < 1\)
+      \item \(x_{n+1} - x_n = \ldots \geq 0\) resp. \(x_{n+1} - x_n = \ldots \leq 0\)
+      \item For a recursive sequence we can use induction.
+   \end{enumerate}
+\end{remark}
+
+\subsection{Accumulation Points}
+\begin{definition}[Accumulation Point]
+   \(x \in \mathbb{K}\) is a accumulation point of \((x_n) \in \mathbb{K}^\mathbb{N}\) iff
+   \[\forall \varepsilon > 0: \exists~\text{an infinite}~N_{\varepsilon} \subset \mathbb{N}: (\forall n \in N_\varepsilon: |x_n - x| < \varepsilon)\]
+\end{definition}
+\begin{example}
+   \(x_n = (-1)^n\) doesn't converge but it has the accumulation points \(\pm 1\).
+\end{example}
+
+\begin{theorem}[Bolzano-Weierstrass]\label{thm:bolzano}
+   Every bounded sequence has at least one accumulation point.
+\end{theorem}
+% \begin{proof}[Proof in \(\mathbb{R}\)]
+%    Let \((x_n)_{n \in \mathbb{N}}\) be a bounded sequence, i.e.
+%    \[\exists l_0, u_0 \in \mathbb{R}: (\forall n \in \mathbb{N}: l_0 \leq x_n \leq u_0)\]
+%    Starting with \(l_0\) and \(u_0\) we recursively construct two sequences \((l_n)_{n \in \mathbb{N}}\) and \((u_n)_{n \in \mathbb{N}}\) such that \((l_n)\) are lower bounds and \((u_n)\) are upper bounds of \((x_n)\).
+%    Now assume we already have the the first \(n\) elements.
+%    We regard the middle of our boundary \(m := \frac{1}{2}(l_n + u_n)\)
+
+%    \textbf{Case 1:} \(x_n = m\) for infinitely many \(n \in \mathbb{N}\).
+%    Then is \(m\) a accumulation point of \((x_n)\).
+
+%    \textbf{Case 2:} \(x_n \in [l_n; m)\) for infinitely many \(n \in \mathbb{N}\).
+%    We set \(l_{n+1} = l_n\) and \(u_{n+1} = m\)
+
+%    \textbf{Case 3:} \(x_n \in (m; u_n]\) for infinitely many \(n \in \mathbb{N}\).
+%    We set \(l_{n+1} = m\) and \(u_{n+1} = u_n\)
+
+%    With this process we narrow our boundary sequences, this means that \((l_n)\) is increasing (since they are the lower boundaries) and \((u_n)\) is decreasing.
+%    Furthermore since \(\forall n \in \mathbb{N}: l_n, u_n \in [l_0; u_0]\) both are bounded.
+%    This means they converge according to \cref{thm:incr_bound_conv}.
+
+%    Since we half the distance between them with every step we have
+%    \[\forall n \in \mathbb{N}: u_n - l_n \leq \frac{1}{2^n} (u_0 - l_0)\]
+%    which means that they converge towards one another, hence
+%    \[\lim_{n \to \infty} l_n = \lim_{n \to \infty} u_n\]
+%    but this in turn means that those limit must be a accumulation point.
+
+%    Let \(c := \lim_{n \to \infty} l_n\) and \(\varepsilon > 0\) be arbitrary but fixed, then
+%    \[\exists n_{\varepsilon_1} \in \mathbb{N}: (\forall n \geq n_{\varepsilon_1}: c - \varepsilon < l_n \leq c) \qquad\text{and}\qquad \exists n_{\varepsilon_2} \in \mathbb{N}: (\forall n \geq n_{\varepsilon_2}: c \leq u_n < c + \varepsilon)\]
+%    Now let \(n_\varepsilon := \max\{n_{\varepsilon_1}, n_{\varepsilon_2}\}\), then
+%    \[c - \varepsilon < l_{n_\varepsilon} < u_{n_\varepsilon} < c + \varepsilon\]
+%    Finally since we constructed \((l_n)\) and \((u_n)\) according to \((x_n)\), there are infinitely many \(n \in \mathbb{N}: x_n \in [l_{n_\varepsilon};  u_{n_\varepsilon}]\), hence \(c\) is a accumulation point.
+% \end{proof}
+% \begin{proof}[Proof in \(\mathbb{C}\)]
+%    Let \((z_n)_{n \in \mathbb{N}}\) be a bounded sequence, for \(n \in \mathbb{N}\) we define sequences for the real and imaginary part
+%    \[r_n := \Re(z_n) \qquad\text{and}\qquad i_n := \Im(z_n)\]
+%    Since \(\forall z \in \mathbb{C}: |\Re(z)|, |\Im(z)| \leq |z|\) both are bounded.
+
+%    Because we've proven this theorem for sequences in \(\mathbb{R}\) we know that there exists a accumulation point \(a \in \mathbb{R}\) of \((r_n)\).
+%    So according to \cref{thm:cp_iff_subseq},
+%    \[\exists (r_{n_k})_{k \in \mathbb{N}}: r_{n_k} \xrightarrow{k \to \infty} a\]
+
+%    Now we regard the \emph{subsequence} \((i_{n_k})_{k \in \mathbb{N}}\) which is bounded since \((i_n)\) is bounded.
+%    So again as before there exists a accumulation point \(b \in \mathbb{R}\) of \((i_{n_k})\) and thus a sub-subsequence \((i_{n_{k_l}})_{l \in \mathbb{N}}\) where
+%    \[\lim_{l \to \infty} i_{n_{k_l}} = b\]
+%    according to \cref{thm:all_subseq_conv}.
+
+%    Now since \(\forall z \in \mathbb{C}: |z| \leq |\Re(z)| + |\Im(z)|\) we have
+%    \[|z_{n_{k_l}} - (a + ib)| \leq |r_{n_{k_l}} - a| + |i_{n_{k_l}} - b|\]
+%    So by construction
+%    \[|r_{n_{k_l}} - a| \xrightarrow{l \to \infty} 0 \qquad\text{and}\qquad |i_{n_{k_l}} - b| \xrightarrow{l \to \infty} 0\]
+%    thus according to \cref{pro:limit_comp}
+%    \[|z_{n_{k_l}} - (a + ib)| \xrightarrow{l \to \infty} 0\]
+%    hence \(a + ib\) is a accumulation point of \((z_n)\) according to \cref{thm:cp_iff_subseq}.
+% \end{proof}
+
+\begin{theorem}
+   Let \((x_n) \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\), then is
+   \[x~\text{an accumulation point of}~(x_n) \iff \forall \varepsilon > 0: (\forall n \in \mathbb{N}~\exists m \geq n: |x_m - x| < \varepsilon)\]
+\end{theorem}
+
+\begin{theorem}
+   Let \((x_n) \in \mathbb{K}^\mathbb{N}\) such that \(\lim_{n \to \infty} x_n = x \in \mathbb{K}\), the following statements are equivalent
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(x\) is the only accumulation point of \((x_n)\)
+      \item \(x\) is unique
+   \end{enumerate}
+\end{theorem}
+
+\subsection{Convergence}
+A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index \(n_\varepsilon\) \emph{all} following \(x_n\) are closer to \(x\) than an arbitrarily chosen error margin \(\varepsilon\).
+
+\begin{definition}[Convergent Sequence]\label{def:conv_seq}
+   \((x_n) \in \mathbb{K}^\mathbb{N}\) converges to \(x \in \mathbb{K}\) iff
+   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n > n_\varepsilon: |x_n - x| < \varepsilon)\]
+\end{definition}
+\begin{remark}[Notation]
+   If \((x_n)_{n \in \mathbb{N}}\) converges to \(x\) we write
+   \[x_n \xrightarrow{n \to \infty} x \qquad\text{or}\qquad \lim_{n \to \infty} x_n = x\]
+\end{remark}
+\begin{example}
+   Let \(x_n = \frac{1}{n}\), then \(x_n \to 0\).
+
+   Let \(\varepsilon > 0\) be arbitrary but fixed.
+   According to the archimedes principle \(\exists N_\varepsilon \in \mathbb{N}: \frac{1}{N_\varepsilon} < \varepsilon\).
+   Now since \(\forall n > N_\varepsilon: \frac{1}{n} < \frac{1}{N_\varepsilon}\) follows
+   \[\forall \varepsilon > 0~\exists N_\varepsilon: n > N_\varepsilon \implies \frac{1}{n} < \varepsilon\]
+
+   \begin{center}
+      \input{drawings/convergent_sequence.tex}
+   \end{center}
+\end{example}
+
+\begin{theorem}[Monotone \& Bounded \(\implies\) Convergent]\label{thm:incr_bound_conv}
+   If a sequence \((x_n)_{n \in \mathbb{N}}\) is
+   \[\text{increasing and bounded above, then is} \quad \lim_{n \to \infty} x_n = \sup\{x_n \mid n \in \mathbb{N}\}\]
+   \[\text{decreasing and bounded below, then is} \quad \lim_{n \to \infty} x_n = \inf\{x_n \mid n \in \mathbb{N}\}\]
+\end{theorem}
+\begin{example}
+   Let \(x_0 := a \geq 1\) and \(x_{n+1} := \frac{1}{2} \left(x_n + \frac{a}{x_n}\right)\).
+   We want to prove that \(\lim_{n \to \infty} x_n = \sqrt{a}\).
+
+   First we prove that \(x_n\) is decreasing.
+   \[x_{n+1} = \frac{1}{2} \left(x_n + \frac{a}{x_n}\right) = \frac{x_n}{2} \left(1 + \frac{a}{x_n^2}\right) \overset{x_n^2 \geq a}{\leq} \frac{x_n}{2} \left(1 + \frac{a}{a}\right) = x_n\]
+
+   Now we show that \(x_n\) is bounded below by induction over \(n\)
+
+   \textit{IB:} \(n = 0 \implies x_0 = a \geq \sqrt{a}\) holds since \(a \geq 1\).
+
+   \textit{IH:} For some \(n \in \mathbb{N}\) holds \(x_n \geq \sqrt{a}\).
+
+   \textit{IS:} Assume IH holds.
+   \begin{equation*}
+      \begin{split}
+         x_{n+1} \geq \sqrt{a} & \iff \frac{1}{2} \left(x_n + \frac{a}{x_n}\right) \geq \sqrt{a} \iff x_n + \frac{a}{x_n} \geq 2 \sqrt{a}\\
+                               & \iff x_n - 2\sqrt{a} \geq - \frac{a}{x_n} \iff x_n(x_n - 2\sqrt{a}) \geq -a
+      \end{split}
+   \end{equation*}
+   but
+   \[x_n(x_n - 2 \sqrt{a}) \overset{\text{IH}}{\geq} \sqrt{a}(\sqrt{a} - 2 \sqrt{a}) = -a\]
+   So according to the induction axiom and IB, IH, IS follows that \(x_n\) is bounded below \(\forall n \in \mathbb{N}\).
+\end{example}
+
+\subsubsection{Calculation Rules}
+\begin{lemma}\label{lem:zero_seq}
+   Let \((x_n)_{n \in \mathbb{N}}\) be a sequence and \((r_n)_{n \in \mathbb{N}}\) a zero sequence.
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[x_n \xrightarrow{n \to \infty} 0 \implies |x_n| \xrightarrow{n \to \infty} 0\]
+      \item \[x_n \xrightarrow{n \to \infty} x \implies x_n - x \xrightarrow{n \to \infty} 0\]
+      \item \[\exists n_0 \in \mathbb{N}: (\forall n \geq n_0: |x_n| \leq r_n) \implies (x_n) \xrightarrow{n \to \infty} 0\]
+   \end{enumerate}
+\end{lemma}
+
+\begin{proposition}[Rules for Sequence Limits]
+   Let \(x_n \to x\), \(y_n \to y\) and \(\alpha \in \mathbb{K}\), then holds
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[|x_n| \xrightarrow{n \to \infty} |x|\]
+      \item \[\alpha \cdot x_n \xrightarrow{n \to \infty} \alpha \cdot x\]
+      \item \[x_n + y_n \xrightarrow{n \to \infty} x + y\]
+      \item \[x_n - y_n \xrightarrow{n \to \infty} x - y\]
+      \item \[x_n \cdot y_n \xrightarrow{n \to \infty} x \cdot y\]
+      \item For \(y \neq 0\) and \(\forall n \in \mathbb{N}: y_n \neq 0\)
+         \[\frac{x_n}{y_n} \xrightarrow{n \to \infty} \frac{x}{y}\]
+      \item If \(\forall n \in \mathbb{N}: x_n \geq 0\)
+         \[p \in \mathbb{Z}, q \in \mathbb{Z} \setminus \{0\}: x_n^{\frac{p}{q}} \to a^{\frac{p}{q}}\]
+   \end{enumerate}
+\end{proposition}
+\begin{example}
+   We regard \(x_n := \left(1 + \frac{1}{n}\right)^k\) with \(k \in \mathbb{N}\).
+   We know that for \(a_n := 1\) and \(b_n := \frac{1}{n}\) holds
+   \[a_n \xrightarrow{n \to \infty} 1 \qquad\text{and}\qquad b_n \xrightarrow{n \to \infty} 0\]
+   Therefor follows from (iii) that
+   \[a_n + b_n \xrightarrow{n \to \infty} 1 + 0\]
+   Now since \(x_n = (a_n + b_n)^k\) we know from (v) that
+   \[x_n = (a_n + b_n)^k \xrightarrow{n \to \infty} (1+0)^k = 1\]
+\end{example}
+
+\subsubsection{Comparing Convergence}
+\begin{proposition}\label{pro:limit_comp}
+   Let \((x_n)_{n \in \mathbb{N}}\) and \((y_n)_{n \in \mathbb{N}}\) where for infinite \(n \in \mathbb{N}: x_n \leq y_n\), then is
+   \[\lim_{n \to \infty} x_n \leq \lim_{n \to \infty} y_n\]
+\end{proposition}
+\begin{remark}
+   \(x_n := \frac{1}{n}\) and \(y_n := -\frac{1}{n}\) show that \(\forall n \in \mathbb{N}: x_n > y_n\) does not imply \(\lim_{n \to \infty} x_n > \lim_{n \to \infty} y_n\).
+\end{remark}
+
+\begin{proposition}[Sandwich Sequence]\label{pro:sandwich_seq}
+   Let \((x_n)_{n \in \mathbb{N}}\), \((y_n)_{n \in \mathbb{N}}\) and \((z_n)_{n \in \mathbb{N}}\) be sequences with \(\lim_{n \to \infty} x_n = \lim_{n \to \infty} z_n = y\), then
+   \[\exists n_0 \in \mathbb{N}~\forall n > n_0: x_n \leq y_n \leq z_n \implies \lim_{n \to \infty} y_n = y\]
+\end{proposition}
+\begin{example}
+   We want to prove \(\lim_{n \to \infty} \frac{\sin(n)}{n} = 0\).
+   We know that \(-1 \leq \sin(x) \leq 1 \implies -\frac{1}{n} \leq \frac{\sin(x)}{n} \leq \frac{1}{n}\).
+   So we found \(x_n = -\frac{1}{n}\), \(c_n = \frac{1}{n}\) for \(b_n = \frac{\sin(n)}{n}\) such that
+   \[\forall n \in \mathbb{N}: x_n \leq b_n \leq c_n \quad\text{and}\quad \lim_{n \to \infty} x_n = \lim_{n \to \infty} c_n = 0\]
+   hence \(\lim_{n \to \infty} \frac{\sin(n)}{n} = 0\).
+\end{example}
+
+\subsubsection{Important Sequences}
+\begin{proposition}
+   For the sequence \(x_n := x^n\) hold the following cases
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[|x| < 1 \implies x^n \xrightarrow{n \to \infty} 0\]
+      \item \[x = 1 \implies x^n \xrightarrow{n \to \infty} 1\]
+      \item \[|x| \geq 1 \land x \neq 1 \implies x^n \xrightarrow{n \to \infty} \pm\infty\]
+   \end{enumerate}
+\end{proposition}
+\begin{proof}
+   Suppose \((x_n)\) converges, i.e. \(\lim_{n \to \infty} x^n = \tilde{x}\), then is
+   \[\tilde{x} = \lim_{n \to \infty} x^n = \lim_{n \to \infty} x^{(n+1)} = \lim_{n \to \infty} (x \cdot x^n) = x \cdot \lim_{n \to \infty} x^n = x \cdot \tilde{x}\]
+   where \(\tilde{x} = x \cdot \tilde{x}\) gives us two cases.
+
+   \textbf{Case 1:} \(x = 1\) and \(\tilde{x}\) arbitrary is directly (ii), which is trivial since \(\lim_{n \to \infty} 1^n = \lim_{n \to \infty} 1 = 1\).
+
+   \textbf{Case 2:} \(\tilde{x} = 0\) and \(x\) arbitrary.
+
+   \textbf{Case 2.1:} \(|x| < 1\) implies that \(x = \frac{a}{b}\) with \(a < b\), so we regard \(|x_n| = |x^n| = |x|^n\)
+   \[\frac{|x_{n+1}|}{|x_n|} = \frac{\left|\frac{a}{b}\right|^{n+1}}{\left|\frac{a}{b}\right|^n} = \frac{|a|^{n+1}\cdot|b|^n}{|a|^n\cdot|b|^{n+1}} = \left|\frac{a}{b}\right| < 1\]
+   hence \((|x_n|)\) is decreasing and since \(\forall n \in \mathbb{N}: 0 \leq |x_n|\) also bounded below.
+   So \(|x_n| \xrightarrow{n \to \infty} 0\), according to \cref{thm:incr_bound_conv} and thus \(\lim_{n \to \infty} x_n = 0\).
+
+   \textbf{Case 2.2:} \(|x| = 1\) but \(x \neq 1\).
+   Suppose \((x_n)\) converges, then \(\lim_{n \to \infty} x_n = \tilde{x} = 0\) by assumption.
+   So according to \cref{lem:zero_seq} (i) \(\lim_{n \to \infty} |x_n| = 0\).
+   But this is a contradiction to \(|x| = 1\), hence \((x_n)\) diverges.
+
+   \textbf{Cases 2.3:} \(|x| > 1 \implies \left(\frac{1}{|x|}\right)^n \xrightarrow{n \to \infty} 0\)
+   This means that
+   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: \left(\forall n > n_\varepsilon: \frac{1}{|x^n|} < \varepsilon\right)\]
+   hence \((x_n)\) is unbounded below and thus diverges according to \cref{thm:conv_bound}.
+\end{proof}
+
+\begin{proposition}
+   Fort the sequence \(x_n := n^r \cdot x^n\) where \(|x| < 1\) and \(r \in \mathbb{N}\) holds
+   \[n^r \cdot x^n \xrightarrow{n \to \infty} 0\]
+\end{proposition}
+\begin{remark}
+   This means that the sequence \(x^n\) converges faster to 0 than any other power of \(n\).
+\end{remark}
+\begin{proof}
+   The case where \(x = 0\) is trivial, so assume w.l.o.g. \(x \neq 1\).
+   We regard \(x_n := n^r \cdot |x|^n\), then \(x_n > 0\) and
+   \[\frac{x_{n+1}}{x_n} = \frac{(n+1)^r \cdot |x|^{n+1}}{n^r \cdot |x|^n} = |x| \left(\frac{n+1}{n}\right)^r = |x| \left(1 + \frac{1}{n}\right)^r \xrightarrow{n \to \infty} |x|\]
+   since \(\left(1 + \frac{1}{n}\right)^r \xrightarrow{n \to \infty} 1\).
+
+   Now let \(\alpha \in \big(|x|; 1\big)\), then
+   \[\exists n_0 \in \mathbb{N}~\forall n > n_0: \left(\frac{x_{n+1}}{x_n} - \alpha = \left|\frac{x_{n+1}}{x_n} - \alpha\right| < \alpha - |x| \implies \frac{x_{n+1}}{x_n} < \alpha  \implies x_{n+1} < \alpha \cdot x_n\right)\]
+   So by induction \(\forall n > n_0: x_n \leq x_{n_0} \cdot \alpha^{n - n_0}\), hence
+   \[|n^r \cdot x^n| = x_n \leq x_{n_0} \cdot \alpha^{n-n_0} \xrightarrow{n \to \infty} 0\]
+   So according to \cref{lem:zero_seq} (iii) is \(n^rx^n \to 0\).
+\end{proof}
+
+% TODO: finish
+% \begin{example}
+%    \[\lim_{n \to \infty} \sqrt[n]{n} = \infty\]
+% \end{example}
+% \begin{example}
+%    \[\forall r \in \mathbb{R}_{>0}: \lim_{n \to \infty} \sqrt[n]{r} = 1\]
+% \end{example}
+% \begin{example}
+%    \[\forall s \in \mathbb{R}_{>0}: \lim_{n \to \infty} \sqrt[n]{n^s} = 1\]
+% \end{example}
+% \begin{example}
+%    \[\forall z \in \mathbb{C}: \lim_{n \to \infty} \left(1 + \frac{z}{n}\right)^n = e^z\]
+% \end{example}
+% \begin{example}
+%    \[\lim_{n \to \infty} \frac{n!}{n^n} = 0\]
+% \end{example}
+
+\subsection{Subsequences}
+\begin{definition}[Subsequence]
+   Given \((x_n)_{n \in \mathbb{N}}\) and a strictly increasing \(\phi: \mathbb{N} \to \mathbb{N}\)
+   \[(x_{n_k})_{k \in \mathbb{N}} := (x_{\phi(k)})_{k \in \mathbb{N}}\]
+\end{definition}
+\begin{example}
+   Let \((x_n) = n = 1, 2, 3, \ldots\).
+   \[\begin{drcases}
+         x: \mathbb{N} \to X \quad\text{where}\quad n \mapsto n \\
+         \phi: \mathbb{N} \to \mathbb{N} \quad\text{where}\quad n \mapsto 2n
+   \end{drcases} x \circ \phi: \mathbb{N} \to \mathbb{N} \to X\]
+   \[x_1 = x(1) = 1 \qquad x_2 = x(2) = 2 \qquad x_3 = a(3) = 3 \qquad \ldots\]
+   \[x_{n_1} = x\big(\phi(1)\big) = x(2) = 2 \qquad x_{n_2} = x\big(\phi(2)\big) = x(4) = 4 \qquad x_{n_3} = x\big(\phi(3)\big) = x(6) = 6\]
+   We can write the subsequence in terms of the index of \(x_n\), without the subindices \(n_j\)
+   \[x_{2n} = x_2, x_4, x_6, \ldots = 2, 4, 6, \ldots\]
+\end{example}
+
+\begin{theorem}\label{thm:all_subseq_conv}
+   Let \((x_n) \in \mathbb{K}^\mathbb{N}\), then
+   \[x_n \xrightarrow{n \to \infty} x \iff \forall (x_{n_k}): x_{n_k} \xrightarrow{k \to \infty} x\]
+\end{theorem}
+
+\begin{theorem}\label{thm:cp_iff_subseq}
+   Let \((x_n)_{n \in \mathbb{N}}\) and \(x \in \mathbb{K}\)
+   \[x~\text{is accumulation point of}~(x_n) \iff \exists (x_{n_k}): x_{n_k} \xrightarrow{k \to \infty} x\]
+\end{theorem}
+
+\subsection{Cauchy Sequences}
+\begin{definition}[Cauchy Sequence]
+   Given a sequence \(x_n\) where
+   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall m, n > n_\varepsilon: |x_m - x_n| < \varepsilon)\]
+\end{definition}
+\begin{remark}
+   In other words, given any small positive distance, almost all elements of the sequence are less than that given distance from each other.
+\end{remark}
+\begin{remark}
+   The \emph{cauchy condition} can be restated as
+   \[\forall n, m > n_\varepsilon: |x_m - x_n| < \varepsilon \iff \forall m > n \geq n_\varepsilon: |x_m - x_n| < \varepsilon\]
+   and also
+   \[|x_m - x_n| = |(x_m - x) + (x - x_n)| \leq |x_m - x| + |x_n - x| < \varepsilon\]
+\end{remark}
+
+\begin{theorem}[Cauchy\(\implies\)Bounded]\label{thm:cauchy_bound}
+   Every Cauchy-sequence is bounded.
+\end{theorem}
+% \begin{proof}
+%    According to the definition
+%    \[\exists n_1 \in \mathbb{N}: (\forall n,m > n_1: |x_n - x_m| < 1)\]
+%    Let \(C := \max\{|x_n| + 1 \mid n > n_1\}\), then \(n \leq n_1: |x_n| \leq C\) and
+%    \[n > n_1: |x_n| = |x_n - x_{n_1} + x_{n_1}| \leq |x_n - x_{n_1}| + |x_{n_1}| < 1 + |x_{n_1} \leq C\]
+% \end{proof}
+
+\begin{theorem}[Cauchy\(\iff\)Convergent]\label{thm:cauchy_crit_seq}
+   \[(x_n)_{n \in \mathbb{N}}~\text{is convergent} \iff (x_n)_{n \in \mathbb{N}}~\text{is a cauchy sequence}\]
+\end{theorem}
+\begin{remark}
+   Only holds on order complete fields.
+\end{remark}
+% \begin{proof}
+%    First we show ,,\(\implies\)``, so suppose \((x_n) \to x\) and let \(\varepsilon > 0\), then
+%    \[\exists n_\varepsilon \in \mathbb{N}: \left(\forall n > n_\varepsilon: |x_n - x| < \frac{\varepsilon}{2}\right)\]
+%    For \(n, m > n_\varepsilon\) follows
+%    \[|x_n - x_m| = |(x_n - x) + (x_m - x)| \leq |x_n - x| + |x_m - x| < \varepsilon\]
+
+%    Now we show ,,\(\impliedby\)``.
+%    According to \cref{thm:bolzano} and \cref{thm:cauchy_bound} follows that \((x_n)\) has a accumulation point \(x\).
+%    Now Let \(\varepsilon > 0\), then
+%    \[\exists n_\varepsilon \in \mathbb{N}: \left(\forall n,m > n_\varepsilon: |x_n - x_m| < \frac{\varepsilon}{2}\right)\]
+%    Furthermore
+%    \[\exists k_\varepsilon \geq n_\varepsilon: |x - x_{k_\varepsilon}| < \frac{\varepsilon}{2}\]
+%    Then follows
+%    \[\forall n > n_\varepsilon: |x_n - x| = |x_n - x_{k_\varepsilon} + x_{k_\varepsilon} - x| \leq |x_n - x_{k_\varepsilon}| + |x_{k_\varepsilon} - x| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\]
+% \end{proof}
+
+\subsection{Improper Convergence}
+\begin{definition}[Extended Real Numbers]
+   \(\overline{\mathbb{R}} := \mathbb{R} \cup \{-\infty, +\infty\}\)
+\end{definition}
+\begin{remark}[Infinity Rules]
+   We define the symbols \(-\infty\) and \(\infty\) by the following characteristics
+   \[\forall x \in \mathbb{R}: -\infty < x < \infty\]
+   \[\sup(\emptyset) := -\infty \qquad \inf(\emptyset) := \infty\]
+   % TODO: defined in foundations --> merge
+   For \(M \subset \mathbb{R}\setminus \emptyset\)
+   \[\inf(M) := -\infty \iff M~\text{boundless below} \qquad \sup(M) := \infty \iff M~\text{boundless above}\]
+   It follows that every \(M \subset \mathbb{R}\) has an infimum respectively supremum.
+
+   We define the arithmetic operations of \(\overline{\mathbb{R}}\)
+   \[\forall x > -\infty: x + \infty := +\infty \qquad \forall x < \infty: x - \infty := -\infty\]
+   \[x \cdot \infty := \begin{cases}+\infty & x > 0\\ -\infty & x < 0\end{cases} \qquad x \cdot (-\infty) := -x \cdot \infty \qquad \forall x \in \mathbb{R}: \frac{x}{\infty} = \frac{x}{-\infty} := 0 \qquad \frac{x}{0} := \begin{cases}\infty & x > 0\\-\infty & x < 0\end{cases}\]
+\end{remark}
+
+\begin{remark}[Infinite Pitfalls]
+   Since \(\overline{\mathbb{R}}\) is not a field, some operations are not defined
+   \[\frac{\infty}{\infty} \quad \frac{\infty}{-\infty} \quad \frac{-\infty}{\infty} \quad \frac{-\infty}{-\infty} \qquad -\infty + \infty \quad \infty - \infty \qquad 0 \cdot \infty \quad 0 \cdot (-\infty)\]
+   If we reach such expressions while solving a problem, we have start over and rearrange in a way that circumvents those statements.
+\end{remark}
+
+\begin{definition}[Improper Convergence]
+   Given \((x_n)_{n \in \mathbb{N}} \in \overline{\mathbb{R}}\).
+   \[(x_n)~\text{diverges to}~+\infty~\text{if}~\forall M \in \mathbb{R}~\exists n_0 \in \mathbb{N}: (\forall n > n_0: x_n \geq M)\]
+   \[(x_n)~\text{diverges to}~-\infty~\text{if}~\forall M \in \mathbb{R}~\exists n_0 \in \mathbb{N}: (\forall n > n_0: x_n \leq M)\]
+\end{definition}
+
+\begin{theorem}[Rules for Improper Convergence]
+   Let \((x_n)_{n \in \mathbb{N}} \in \mathbb{R}\)
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[x_n \to \pm\infty \implies \frac{1}{x_n} \to 0\]
+      \item \[x_n \to 0~\text{and}~x_n > 0~\text{for almost all}~n \implies \frac{1}{x_n} \to \infty\]
+      \item \[x_n \to 0~\text{and}~x_n < 0~\text{for almost all}~n \implies \frac{1}{x_n} \to -\infty\]
+   \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Improper Limit]\label{thm:improper_limits}
+   Every monotonic sequence in \(\overline{\mathbb{R}}\) converges and
+   \[(x_n)~\text{increasing}~\implies \lim_{n \to \infty} x_n = \sup\{x_n \mid n \in \mathbb{N}\}\]
+   \[(x_n)~\text{decreasing}~\implies \lim_{n \to \infty} x_n = \inf\{x_n \mid n \in \mathbb{N}\}\]
+\end{theorem}
+\begin{remark}
+   Important to note here is that in contrast to \cref{thm:incr_bound_conv} we don't require \((x_n)\) to be bounded.
+\end{remark}
+
+\subsection{Limessuperior \& Limesinferior}
+Let \((x_n)_{n \in \mathbb{N}}\) be a bounded sequence: \(\forall n \in \mathbb{N}: |x_n| \leq b\).
+We define
+\[(\overline{x}_n) := \sup\{x_k \mid k \geq n\} \qquad\text{and}\qquad (\underline{x}_n) := \inf\{x_k \mid k \geq n\}\]
+Since \((x_n)\) is bounded holds \(\forall n \in \mathbb{N}: -b \leq \underline{x}_n \leq \overline{x}_n \leq b\) which means that they both are bounded.
+Furthermore follows from their definitions that \((\overline{x}_n)\) is increasing and \((\underline{x}_n)\) is decreasing.
+Hence they are convergent according to \cref{thm:improper_limits}.
+
+\begin{definition}[Limessuperior \& -inferior]
+   Given a bounded sequence \((x_n)_{n \in \mathbb{N}}\).
+   \[\limsup_{n \to \infty}(x_n) := \lim_{n \to \infty} \overline{x}_n\]
+   \[\liminf_{n \to \infty}(x_n) := \lim_{n \to \infty} \underline{x}_n\]
+\end{definition}
+\begin{remark}[Intuition]
+   Imagine a nonempty set.
+   If we remove an arbitrary element, \(\limsup\) can only get smaller.
+   If the removed element was the largest, \(\limsup\) indeed gets smaller, otherwise it stays the same.
+   This is why \((\overline{x}_n)\) is decreasing.
+   Regard for example the sequences \(a_n := 1 + \frac{1}{n}\) and \(b_n := 1 - \frac{1}{n}\), then is
+   \[\overline{a}_n = 1 + \frac{1}{n} \qquad\text{and}\qquad \overline{b}_n = 1\]
+\end{remark}
+\begin{example}
+   Let \(x_n := (-1)^n \left(1 + \frac{1}{n}\right)\).
+   We have
+   \[\sup x_n = x_2 = \frac{3}{2} \quad\text{and}\quad \inf x_n = x_1 = -2\]
+   \[\limsup_{n \to \infty} x_n = 1 \quad\text{and}\quad \liminf_{n \to \infty} x_n = -1\]
+\end{example}
+
+\begin{theorem}
+   Let \((x_n)_{n \in \mathbb{N}} \in \mathbb{R}\), then is
+   \[\limsup_{n \to \infty}(x_n)~\text{the largest and}~\liminf_{n \to \infty}(x_n)~\text{the smallest accumulation point of}~(x_n)~\text{in}~\overline{\mathbb{R}}\]
+\end{theorem}
+
+From \cref{pro:limit_comp} follows that
+\[\forall n \in \mathbb{N}: \underline{x}_n \leq \overline{x}_n \implies \liminf_{n \to \infty}(x_n) \leq \limsup_{n \to \infty}(x_n)\]
+
+\begin{theorem}[\(\liminf = \limsup \iff (x_n)\) convergent]\label{thm:limsup_inf_rules}
+   Let \((x_n)_{n \in \mathbb{N}}\) be a bounded sequence.
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[\liminf_{n \to \infty}(x_n) \leq \limsup_{n \to \infty}(x_n)\]
+      \item \[x_n~\text{converges} \iff \liminf_{n \to \infty}(x_n) = \limsup_{n \to \infty}(x_n)\]
+      \item \[x_n~\text{converges} \iff \lim_{n \to \infty}(x_n) = \liminf_{n \to \infty}(x_n) = \limsup_{n \to \infty}(x_n)\]
+   \end{enumerate}
+\end{theorem}
+\begin{example}
+   Let \(x_n = \frac{1}{n}\), then are
+   \[\overline{a}_n = \sup\left\{\frac{1}{j}~\middle|~j \geq n\right\} = \frac{1}{n} \quad\text{and}\quad \underline{a}_n = \inf\left\{\frac{1}{j}~\middle|~j \geq n\right\} = 0\]
+   \[\begin{drcases}
+      \overline{a}_n \to 0\\
+      \underline{a}_n \to 0
+   \end{drcases} \implies \liminf_{n \to \infty}(x_n) = 0 = \limsup_{n \to \infty}(x_n) \implies x_n~\text{converges}\]
+\end{example}
+
+% TODO: 
+\begin{remark}
+   It is important to remember the \(e^{\log}\) trick.
+   \[\lim_{x \to x_0} f(x)^{g(x)} = \lim_{x \to x_0} e^{\log(f(x)^{g(x)})} = \lim_{x \to x_0} e^{g(x) \cdot \log(f(x))} \overset{e~\text{cont.}}{=} \exp \left(\lim_{x \to x_0} g(x) \cdot log(f(x))\right)\]
+   is sometimes easier to calculate.
+\end{remark}
+
+
+\newpage
+
+\section{Series}
+\begin{definition}[Series]
+   Given a sequence \((x_n)_{n \in \mathbb{N}}\).
+   \[\sum_{n=0}^{\infty} x_n = x_0 + x_1 + \ldots\]
+\end{definition}
+\begin{remark}[Notation]
+   We can also shorten the notation above to \(\sum x_n\) where we mean that we sum over \emph{all} elements of \((x_n)\).
+\end{remark}
+
+\subsection{Convergence}
+\begin{definition}[Partial Sum]
+   Given a series \(\sum x_n\) its k-th partial sum is
+   \[s_k := \sum_{n = 0}^{k} x_n = x_0 + \ldots + x_k\]
+\end{definition}
+\begin{remark}[Terminology]
+   We say \((s_k)_{k \in \mathbb{N}}\) is the \emph{sequence of partial sums}.
+   From the definition we see that \(s_k =  s_{k-1} + x_k\).
+\end{remark}
+
+\begin{example}
+   \[\sum_{n = 1}^\infty \frac{1}{n^2}\]
+   \[s_k = \sum_{n=0}^k \frac{1}{n^2}\]
+   \((s_k)\) is increasing, now we show that it is bounded. We regard the first term seperately since we would divide by 0.
+   \[s_k = \frac{1}{1} + \sum_{n=2}^k \frac{1}{n^2} \leq 1 + \sum_{n=2}^k \frac{1}{n(n-1)} = 1 + \sum (\frac{1}{n-1} - \frac{1}{n} = 1 + \sum \frac{1}{n-1} - \sum \frac{1}{n} = 1 + \sum_{n=1}^{k-1} \frac{1}{n} - \sum_{n=2}^k \frac{1}{n} = 1 + 1 + \sum_{n=2}^{k-1} \frac{1}{n} - \sum_{n=2}^{k-1}\frac{1}{n} - \frac{1}{k} = 2 - \frac{1}{k} \leq 2\]
+\end{example}
+
+\begin{definition}[Convergent Series]\label{def:series_convergence}
+   A series \(\sum x_n\) where \(s_k \xrightarrow{k \to \infty} s\).
+   \[\sum_{n = 0}^{\infty} x_n := s = \lim_{k \to \infty} s_k\]
+\end{definition}
+\begin{remark}
+   If \(s_k \to \pm\infty\) we say the series \emph{diverges}.
+   If it neither converges nor diverges we say the series \emph{doesn't exist}.
+\end{remark}
+
+\begin{proposition}[Series Calculation Rules]\label{pro:series_calc_rules}
+   Let \(\alpha \in \mathbb{K}\) and \(\sum a_n\), \(\sum b_n\) be converget, then is
+   \[\sum (a_n + b_n)~\text{convergent and} \qquad \sum (a_n + b_n) = \sum a_n + \sum b_n\]
+   \[\sum \alpha \cdot a_n~\text{convergent and} \qquad \sum \alpha \cdot a_n = \alpha \cdot \sum a_n\]
+\end{proposition}
+
+\subsubsection{Absolute Convergence}
+\begin{definition}[Absolute Convergent Series]
+   \(\sum x_n\) is absolute convergent if \(\sum |x_n|\) converges.
+\end{definition}
+\begin{remark}
+   So if a series is not absolute convergent, then is
+   \[\sum_{n=0}^\infty |a_n| = \infty\]
+\end{remark}
+
+\begin{definition}[Conditionally Convergent Series]
+   A convergent series, which is not absolute convergent.
+\end{definition}
+
+\begin{theorem}[Absolute Convergent \(\implies\) Convergent]
+   An absolute convergent series converges.
+\end{theorem}
+\begin{remark}
+   Absolute convergence is sufficient for convergence but not necessary.
+\end{remark}
+
+\begin{theorem}[Cauchy Product]
+   Let \(\sum a_n\), \(\sum b_n\) be absolute converget, then is
+   \[\left(\sum_{n=0}^\infty a_n\right) \cdot \left(\sum_{n=0}^\infty b_n\right) = \sum_{n=0}^\infty\left(\sum_{k=0}^n a_k \cdot b_{n - k}\right)\]
+   also absolute convergent.
+\end{theorem}
+
+\subsection{Convergence Tests}
+In mathematics, convergence tests are methods of testing for the convergence, conditional convergence, absolute convergence or divergence of an infinite series.
+They define conditions for sequences and tell you whether their series converges.
+
+\subsubsection{Criteria for Convergence}
+\begin{proposition}[Term Test]\label{pro:series_sequence_converge}
+   \[\sum_{n = 0}^\infty a_n~\text{converges} \implies a_n \xrightarrow{n \to \infty} 0\]
+\end{proposition}
+\begin{remark}
+   The contraposition is more usefull, i.e. to show divergence.
+\end{remark}
+\begin{remark}
+   A zero sequence is necessary but not sufficient for the convergence of the series.
+   The harmonic series diverges even though \(\frac{1}{n} \to 0\).
+\end{remark}
+
+\begin{theorem}[Monotonicity Criterion]\label{thm:convergence=bounded}
+   Let \((a_n)_{n \in \mathbb{N}}\) where \(\forall n \in \mathbb{N}: 0 \leq a_n\).
+   \[\sum_{n = 0}^\infty a_n~\text{converges} \iff (s_k)_{k \in \mathbb{N}}~\text{is bounded}\]
+\end{theorem}
+
+\begin{theorem}[Cauchy Criterion for Series]\label{thm:cauchy_crit_ser}
+   \[\sum a_n\text{converges} \iff \forall \varepsilon > 0: \exists n_\varepsilon \in \mathbb{N}: \left(\forall n > m \geq n_\varepsilon: \left| \sum_{k = m + 1}^n a_k \right| < \varepsilon \right)\]
+\end{theorem}
+
+\begin{proposition}[Leibnitz Test]\label{pro:leibnitz}
+   Let \((x_n)_{n \in \mathbb{N}}\) be a decreasing with \(\forall n \in \mathbb{N}: 0 \leq x_n\) .
+   \[\sum (-1)^{n} \cdot x_n~\text{converges} \iff x_n \to 0\]
+\end{proposition}
+\begin{example}
+   We regard the series
+   \[\sum_{n=0}^\infty \frac{\cos(n \pi) \cdot n}{n^2 + 1}\]
+   Since \(\cos(n \pi) = (-1)^n\) and \(a_n = \frac{n}{n^2 + 1}\) is a decreasing zero sequence is the series convergent according to leibnitz.
+\end{example}
+
+\subsubsection{Criteria for Absolute Convergence}
+\begin{proposition}[Comparison Test]\label{pro:comparison_test}
+   Let \((b_n)_{n \in \mathbb{N}}\) where \(\forall n \in \mathbb{N}: 0 \leq b_n\) and \((x_n)_{n \in \mathbb{N}}\) where \(x_n \leq b_n\) for almost all \(n \in \mathbb{N}\), then is
+   \[\sum b_n~\text{convergent} \implies \sum x_n~\text{absolute convergent}\]
+   \[\sum x_n~\text{divergent} \implies \sum b_n~\text{divergent}\]
+\end{proposition}
+\begin{remark}
+   Typical series to use for comparison are the geometric and harmonic series.
+\end{remark}
+\begin{example}
+   The series
+   \[\sum_{j=0}^\infty \frac{1}{j!}\]
+   converges.
+   For \(j \geq 1\) we see that
+   \[\frac{1}{(j + 1)!} = \frac{1}{j + 1} \cdot \frac{1}{j!} \leq \frac{1}{2^1} \cdot \frac{1}{j!} \leq \frac{1}{2^2} \cdot \frac{1}{(j - 1)!} \leq \ldots \leq \frac{1}{2^j}\]
+   and so
+   \[\frac{1}{j!} = \frac{1}{j \cdot (j - 1) \cdot \ldots 2 \cdot 1} \leq \frac{1}{2^{j-1}} = 2 \cdot \frac{1}{2^j}\]
+   According to the comparison test converges the series \(\frac{1}{j!}\) because the series \(2 \cdot \frac{1}{2^j}\) converges.
+   Later on we define
+   \[e := \sum_{j=0}^\infty \frac{1}{j!}\]
+\end{example}
+% TODO
+\begin{example}
+   \[\sum_{n=1}^\infty \frac{1}{k^m}\]
+   Use comparison test with \(a_k := \frac{1}{k^2}\) we know \(\sum a_k\) is absolute convergent.
+   \[\frac{1}{k^m} \leq \frac{1}{k^2} \iff 1 \leq k^{m-2}\]
+   \[\begin{drcases}m \geq 2 \implies m-2 \geq 0\\k \geq 1\end{drcases} = k^{m-2} \geq 1\]
+   hence \(a_k\) is majorante for the series 
+\end{example}
+
+% TODO: english name
+% \begin{proposition}[Limit Comparison Test]\label{pro:vergleichskriterium}
+%    Let \((a_n)_{n \in \mathbb{N}}\) and \((b_n)_{n \in \mathbb{N}}\) where for almost all \(n \in \mathbb{N}: 0 < a_n, b_n\).
+%    \begin{equation}\label{eq:bn_convergent}
+%       \left(\limsup_{n \to \infty} \frac{b_n}{a_n} < \infty \quad\text{and}\quad \sum_{n=0}^\infty a_n~\text{convergent}\right) \implies \sum b_n~\text{convergent}
+%    \end{equation}
+%    \begin{equation}\label{eq:bn_divergent}
+%       \left(\liminf_{n \to \infty} \frac{b_n}{a_n} > 0 \quad\text{and}\quad \sum a_n~\text{divergent}\right) \implies \sum b_n~\text{divergent}
+%    \end{equation}
+% \end{proposition}
+% \begin{remark}
+%    Usefull for sequences with complicated fractions with dominant parts.
+% \end{remark}
+% \begin{example}
+%    We regard the series
+%    \[\sum_{n=0}^\infty \frac{n^2 + 3n + \sin(n) + \cos(n)}{n^6 + 3n^4 + \sqrt{n}}\]
+%    The dominant parts of this fraction are \(n^2\) and \(n^6\), so we use \(b_n = \frac{1}{n^4}\).
+%    \[\limsup_{n \to \infty} \left(\frac{b_n}{a_n}\right) = \lim_{n \to \infty} \frac{n^4 \big(n^2 + 3n + \sin(n) + \cos(n)\big)}{n^6 + 3n^4 + \sqrt{n}} = 1 < \infty \implies \text{series converges}\]
+% \end{example}
+% \begin{example}
+%    We regard the series
+%    \[\sum_{j=0}^\infty \frac{1}{\sqrt{j^2 + 1}}\]
+%    where we want to compare the sequences \(b_n = \frac{1}{\sqrt{n^2 + 1}}\) and \(a_n = \frac{1}{n}\)
+%    \[\frac{b_n}{a_n} = \frac{\frac{1}{\sqrt{n^2 + 1}}}{\frac{1}{n}} = \frac{n}{\sqrt{n^2 + 1}} = \frac{1}{\sqrt{1 + \frac{1}{n^2}}} \to 1 \implies \liminf_{n \to \infty} \frac{b_n}{a_n} = 1 > 0 \implies \sum_{n=1}^\infty \frac{1}{\sqrt{n^2 + 1}} = \infty\]
+%    Since \(\sum a_n\) diverges has \(\sum b_n\) to diverge as well.
+% \end{example}
+
+\begin{proposition}[Root Test]\label{pro:root_test}
+   Let \((x_n)_{n \in \mathbb{N}}\) with \(\alpha = \limsup_{n \to \infty} \sqrt[n]{|x_n|}\)
+   \[\alpha < 1 \implies \sum_{n=0}^\infty x_n~\text{absolute convergent}\]
+   \[\alpha > 1 \implies \sum_{n=0}^\infty x_n~\text{not absolute convergent}\]
+\end{proposition}
+\begin{remark}
+   Usefull when \(x_n = (y_n)^n\).
+\end{remark}
+\begin{example}
+   We regard the series
+   \[\sum_{n=1}^\infty \left(1 - \frac{1}{n}\right)^{n^2}\]
+   \[\limsup_{n \to \infty} \sqrt[n]{\left(1 - \frac{1}{n}\right)^{n^2}} = \limsup_{n \to \infty} \left(1 - \frac{1}{n}\right)^n = \frac{1}{e} < 1 \implies \text{series converges absolute}\]
+\end{example}
+
+\begin{proposition}[Ratio Test]\label{pro:ratio_test}
+   Let \((x_n)_{n \in \mathbb{N}}\) where \(0 \neq x_n\) for almost all \(n \in \mathbb{N}\), then
+   \[\limsup_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) < 1 \implies \sum x_n~\text{absolute convergent}\]
+   \[\liminf_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) > 1 \implies \sum x_n~\text{not absolute convergent}\]
+\end{proposition}
+\begin{remark}
+   If \(\limsup\), \(\liminf\) is 1, no statement is possible.
+   Usefull for sequences which contain \(n!\), \(x^n\) or polynomials.
+\end{remark}
+\begin{example}
+   We regard the series
+   % TODO: we have \infty/\infty --> how to deal with that?
+   \[\sum_{n=0}^\infty \frac{5 + n}{10^n}\]
+   \[\lim_{n \to \infty} \left|\frac{5 + n + 1}{10^{n+1}} \cdot \frac{10^n}{5 + n}\right| = \lim_{n \to \infty} \frac{6+n}{5+n} \cdot \frac{1}{10} = \frac{1}{10} < 1 \implies \text{series absolute convergent}\]
+\end{example}
+
+% TODO: needed?
+% \begin{proposition}[Telescoping Sum]\label{pro:telesc_sum}
+%    Let \((a_n)_{n \in \mathbb{N}} \subset \mathbb{R}\), then holds
+%    \[\sum_{n=1}^\infty (a_n - a_{n-1})~\text{converges} \iff a_n~\text{converges, in which case holds}~\sum_{n=1}^\infty a_n = \lim_{n \to \infty} a_n - a_0\]
+% \end{proposition}
+% \begin{example}
+%    Let \(a_n = -\frac{1}{n+1}\)
+%    \[a_n - a_{n-1} = -\frac{1}{n+1} + \frac{1}{n} = \frac{1}{n(n+1)}\]
+%    \[a_n \to 0 \implies \sum_{n=1}^\infty a_n \to a\]
+%    From \cref{pro:vergleichskriterium} follows
+%    \[\sum_{n=1}^\infty \frac{1}{n(n+1)} = 1 \implies \sum_{n=1}^\infty \frac{1}{n^2} < \infty\]
+% \end{example}
+
+% TODO: needed?
+% \begin{proposition}[Cauchy Condensation Test]\label{pro:cauchy_condens}
+%    Let \((a_n)_{n \in \mathbb{N}}\) with \(\forall n \in \mathbb{N}: 0 \leq a_n\) be a decreasing sequence, then holds
+%    \[\sum_{n=0}^\infty a_n~\text{converges} \iff \sum_{n=0}^\infty 2^n \cdot a_{2^n}~\text{converges}\]
+% \end{proposition}
+% \begin{remark}
+%    Especially usefull for \(\log\) since for example \(\log(2^k) = k \cdot \log(2)\) the \(\log\) is constant.
+% \end{remark}
+% \begin{example}
+%    \[\sum_{n=2}^\infty \frac{1}{\log(n)^{\log(n)}}\]
+%    We regard
+%    \[\sum_{n=2}^\infty \frac{2^n}{(n \cdot \log(2))^{n \cdot \log(2)}} = \sum_{n=2}^\infty \left(\frac{2}{(n \cdot \log(2))^{\log(2)}}\right)^n\]
+%    now we can use the root test (\ref{pro:root_test}).
+%    \[\lim_{n \to \infty} \frac{2}{(n \cdot \log(2))^{\log(2)}} = 0 < 1 \implies \text{series converges absolute}\]
+% \end{example}
+% \begin{example}
+%    Let \(\alpha = \frac{p}{q}\) with \(p, q \in \mathbb{N} \setminus \{0\}\) and we regard the series
+%    \[\sum_{n=0}^\infty \frac{1}{n^\alpha}\]
+%    We know that the series diverges for \(\alpha = 1\) and converges for \(\alpha = 2\).
+%    According to the condensation test
+%    \[\sum \frac{1}{n^\alpha}~\text{converges} \iff \sum_{n=1}^\infty 2^n \frac{1}{2^{\alpha n}} = \sum_{n=1}^\infty \left(\frac{1}{2^{\alpha - 1}}\right)^n~\text{converges}\]
+%    which is the case iff
+%    \[\frac{1}{2^{\alpha -1}} < 1 \iff 2^{\alpha - 1} > 1 \iff \alpha > 1\]
+%    Hence we showed that \(\sum \frac{1}{n^\alpha}\) converges iff \(\alpha > 1\).
+% \end{example}
+
+% TODO: needed?
+% \begin{proposition}[Integral Test]\label{pro:integral_test}
+%    Let \(f\) be positive decreasing on \([1; \infty)\), then is
+%    \[\sum_{n=1}^\infty f(n)~\text{convergent} \iff \int_1^\infty f(x) dx~\text{exists}\]
+% \end{proposition}
+
+% TODO: needed?
+% \begin{proposition}[Generalized Triangle Inequality]\label{pro:gener_triang_ineq}
+%    \[\left|\sum_{n = 0}^\infty a_n \right| \leq \sum_{n = 0}^\infty |a_n|\]
+% \end{proposition}
+% \begin{proposition}[Cauchy-Schwarz Inequality]\label{pro:cauchy-schwarz_ineq}
+%    Let \(a_n, b_n \in \mathbb{R}\) be sequences where
+%    \[\sum_{n=0}^\infty a_n^2~\text{and}~\sum_{n=0}^\infty b_n^2~\text{converge, then is} \qquad \sum_{n=0}^\infty |(a_n \cdot b_n)| < \infty\]
+%    and with the scalar product is
+%    \[\left|\sum_{n=0}^\infty a_nb_n\right| = \sum_{n = 0}^\infty |a_n||b_n| \leq \sqrt{\sum_{n=0}^\infty a_n^2} \cdot \sqrt{\sum_{n=0}^\infty b_n^2}\]
+%    the product of normed \(a_n\) and \(b_n\).
+% \end{proposition}
+% \begin{remark}
+%    Let \((a_n)_{n \in \mathbb{N}} \in \mathbb{C}\) be a sequence.
+%    \(\sum a_n\) converges if \(s_n = \sum_j^n a_j\) converges.
+%    In this case we define
+%    \[\sum_{j=0}^\infty a_j = \lim_{n \to \infty} s_n\]
+%    It holds just as in \(\mathbb{R}\), is the series \(a_n\) absolute convergent \(\sum |a_j| < \infty\) then is the series \(a_n\) convergent.
+%    The absolute value means that all complex parts of the sequence are removed.
+%    This means that all criterion that we introduced (except for Leibnitz) for series in \(\mathbb{R}\) also hold for series in \(\mathbb{C}\) with absolute convergence.
+% \end{remark}
+
+\subsection{Important Examples}
+\begin{proposition}[Harmonic Series]
+   \[\sum_{n = 1}^\infty \frac{1}{n} = \infty\]
+\end{proposition}
+\begin{remark}
+   To put it differently: \(\frac{1}{n}\) does not approach 0 fast enough so that the whole series would converge to 0.
+   The sum ''overtakes`` the convergence behaviour of \(\frac{1}{n}\) which is why it diverges to \(\infty\).
+\end{remark}
+\begin{proof}
+   We regard the sequence of partial sums
+   \[s_k = \sum_{n = 1}^k \frac{1}{n} = 1 + \frac{1}{2} + \ldots + \frac{1}{n}\]
+   and show that it is not a cauchy sequence, hence not converges.
+
+   Recall that \((s_k)\) is a cauchy sequence iff \(\forall \varepsilon > 0 \exists n_\varepsilon\) s.t.
+   \begin{equation*}
+      \begin{split}
+         \forall m, n > n_\varepsilon: |s_m - s_n| < \varepsilon \iff & \forall m > n \geq n_\varepsilon: |s_m - s_n| < \varepsilon \iff \\
+                                                                      & \forall m > n \geq n_\varepsilon: \left|\sum_{k=1}^m \frac{1}{k} - \sum_{k = 1}^n \frac{1}{k}\right| < \varepsilon \iff \\
+                                                                      & \forall m > n \geq n_\varepsilon: \left|\sum_{k=n+1}^m \frac{1}{k}\right| < \varepsilon
+      \end{split}
+   \end{equation*}
+   Now we claim that this statement is false for any \(n\) when we set \(m = 2n\).
+   \[\sum_{k=n+1}^{m} \frac{1}{k} = \sum_{k=n+1}^{2n} \frac{1}{k} \geq \sum_{k=n+1}^{2n} \frac{1}{2n} = \frac{1}{2n} (2n - (n+1) + 1) = \frac{n}{2n} = \frac{1}{2}\]
+   hence we have found \(\varepsilon := \frac{1}{2}\) where for any \(n\)
+   \[\sum_{k=n+1}^{m} \frac{1}{k} \geq \varepsilon\]
+\end{proof}
+
+\begin{proposition}[Geometric Series]
+   \[\sum_{n = 0}^\infty x^n = \frac{1}{1 - x} \qquad\text{for}~|x| < 1\]
+   \[\sum_{n = 0}^\infty x^n = \infty \qquad\text{for}~|x| \geq 1\]
+\end{proposition}
+\begin{proof}
+   Let \(|x| < 1 \), then is
+   \[s_k = \sum_{n = 0}^k x^n = \frac{1 - x^{n+1}}{1 - x} \xrightarrow{n \to \infty} \frac{1}{x-1}\]
+\end{proof}
+
+\begin{proposition}[Exponential Series]
+   For \(x \in \mathbb{R}\) is
+   \[\exp(x) := \sum_{n=0}^\infty \frac{x^n}{n!}\]
+   absolute convergent.
+\end{proposition}
+\begin{proof}
+   \(x = 0\) is trivial since
+   \[e^x = \sum_{n=0}^\infty \frac{0^n}{n!} = \frac{0^0}{0!} = 1\]
+   Now let \(x \neq 0\) and \(a_n := \frac{x^n}{n!}\).
+   For \(n \geq 2\lvert x\rvert\) follows from the quotient test
+   \[\left\lvert \frac{a_{n+1}}{a_n} \right\rvert = \left\lvert \frac{x^{n+1} \cdot n!}{x^n \cdot (n+1)!}\right\rvert = \frac{\lvert x\rvert}{n+1} \leq \frac{1}{2}\]
+\end{proof}
+
+\subsection{Rearrangement of Series}
+We look at the convergence of series, when we rearrange their elements, which has a profound impact on the value of the series.
+\begin{definition}[Rearranged Series]
+   Given a permutation \(\sigma\), \(\sum x_{\sigma(n)}\) is a rearrangement of \(\sum x_n\).
+\end{definition}
+
+\begin{theorem}[Rearrangement Theorem]\label{thm:rearrange_series}
+   Let \(\sum a_n\) be absolute convergent.
+
+   Every reaarranged series is also absolute convergent and for any permutation \(\sigma\)
+   \[\sum x_\sigma(n) = \sum x_n\]
+\end{theorem}
+
+\begin{proposition}[Riemann's Rearrangement Theorem]\label{pro:riemann_rearrang}
+   Let \(\sum x_n\) be conditionally convergent and \(\alpha \in \mathbb{R}\) be arbitrary.
+
+   There exists a permutation \(\sigma\) such that \(\sum x_{\sigma(n)} = \alpha\).
+\end{proposition}
+\begin{remark}
+   It can be shown that there exists a rearrangement of \(\sum x_n\) such that \(\sum x_{\sigma(n)} = \) for any \(z \in \mathbb{R}\).
+\end{remark}
+
+\subsection{Power Series}
+\begin{definition}[Power Series]\label{def:power_series}
+   Given \((a_n)_{n \in \mathbb{N}} \in \mathbb{C}\), \(c, z \in \mathbb{C}\)
+   \[\sum_{n=0}^\infty a_n (z - c)^n\]
+\end{definition}
+\begin{remark}
+   \(c\) is the center of the \textit{disk of convergence}
+   In many situations \(c\) is equal to zero and we can write the series as
+   \[\sum_{n=0}^\infty a_n z^n = a_0 + a_1z + a_2z^2 + \ldots\]
+\end{remark}
+
+\begin{definition}[Radius of Convergence]
+   Let \(\sum a_n z^n\) be a power series.
+   \[\rho := \frac{1}{\lim\sup_{n \to \infty} \sqrt[n]{|a_n|}}\]
+   where we define that \(\frac{1}{\infty} := 0\) and \(\frac{1}{0} := \infty\).
+\end{definition}
+\begin{remark}[Intuition]
+   As power series are complex series, their convergence can be imagined as an inward spiral.
+   This way \(\rho\) is the radius of the \emph{disk of convergence}, the set of all points for which the series converges
+   \[\{z \in \mathbb{C} \mid |c - z| < \rho\}\]
+\end{remark}
+
+% TODO: make better drawing
+% \begin{center}
+%    \input{drawings/disk_of_convergence.tex}
+% \end{center}
+
+\begin{theorem}[Power Series Convergence]\label{thm:conv_radius}
+   Let \(\rho\) be the radius of convergence for \(\sum a_n z^n\).
+   \[\forall |z| < \rho \implies \sum a_n z^n~\text{converges absolutely}\]
+   \[\forall |z| > \rho \implies \sum a_n z^n~\text{diverges.}\]
+\end{theorem}
+\begin{remark}
+   If \(\rho = 0\), diverges \(\sum a_nz^n~\forall z \neq 0\).
+
+   If \(\rho = \infty\) converges \(\sum a_nz^n~\forall z \in \mathbb{C}\) and the convergence is uniform on \(\{z \in \mathbb{C} \mid |z| < r\}\).
+\end{remark}
+\begin{example}
+   For \(\sum_{n=0}^\infty z^n\) is \(\rho = 1\).
+   The series converges to 0 for all \(|z| < 1\) and diverges for all \(|z| \geq 1\).
+\end{example}
+\begin{example}
+   For \(\sum_{n=0}^\infty \frac{1}{n} z^n\) is \(\rho = 1\).
+   It converges for \(|z| < 1\), diverges for \(z = 1\) (like the harmonic series).
+   For \(z = -1\) is it the alternating harmonic series and converges.
+\end{example}
+
+\begin{proposition}\label{pro:conv_rad_ratio_test}
+   Let \(\rho\) be the radius of convergence of \(\sum a_n z^n\).
+   \[\rho = \lim_{n \to \infty} \frac{|a_n|}{|a_{n+1}|}\]
+\end{proposition}
+\begin{remark}
+   This proposition states that \(\rho\) can be calculated with the ratio test (\ref{pro:ratio_test}).
+\end{remark}
+
+\begin{theorem}
+   Let \(\alpha \in \mathbb{C}\), \(\sum a_n (z - c)^n\) and \(\sum b_n (z-c)^n\) be power series with radius of convergence \(\rho_a\) respectively \(\rho_b\).
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\forall |z-c| < \rho_a: \alpha \sum a_n (z - c)^n = \sum \alpha a_n (z - c)^n\)
+      \item \(\forall |z-c| < \min\{\rho_a, \rho_b\}: \sum a_n (z-c)^n + \sum b_n (z-c)^n = \sum (a_n + b_n)(z-c)^n\)
+      \item \(\forall |z-c| < \min\{\rho_a, \rho_b\}:\)
+            \[\sum a_n (z-c)^n \cdot \sum b_n (z-c)^n = \sum_{n=0}^\infty\left(\sum_{k=0}^\infty a_k \cdot b_{n-k}\right)(z-c)^n\]
+   \end{enumerate}
+\end{theorem}
+
+\newpage
+
+\subsection{Elementary Functions}
+An \emph{elementary function} is a function of a single variable composed of particular simple functions.
+They are typically defined as a sum, product, and/or composition of finitely many polynomials, rational functions, trigonometric and exponential functions, and their inverse functions.
+
+\subsubsection{Exponential Function}
+\begin{definition}[Exponential Function]
+   Given \(z \in \mathbb{Z}\) we define \(\exp: \mathbb{C} \to \mathbb{C}\) by
+   \[\exp(z) := \sum_{n = 0}^\infty \frac{z^n}{n!}\]
+\end{definition}
+
+\begin{proposition}[Properties]
+   Let \(x, y, z \in \mathbb{C}\)
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item The series has radius of convergence \(\rho = \infty\)
+      \item \(\exp\) is continuous
+      \item \(\exp(x + y) = \exp(x) \cdot \exp(y)\)
+      \item \(\exp(-z) = \frac{1}{\exp(z)}\)
+   \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Eulers Number]
+   \[e := \exp(1) = \sum_{n=0}^\infty \frac{1}{n!}\]
+\end{definition}
+\begin{remark}[Notation]
+   From above we have \(e^z := \exp(z)\).
+\end{remark}
+
+Let \(z \in \mathbb{C}\), we see that
+\[\exp(z) = \exp(x + iy) = \exp(x) \cdot \exp(iy)\]
+which means that the complex \(\exp\) function is characterized by
+\[\exp: \mathbb{R} \to \mathbb{R} \qquad\text{and}\qquad \exp: i\mathbb{R} \to \mathbb{R}\]
+
+\subsubsection{Logarithm}
+\begin{proposition}
+   Let \(\exp: \mathbb{R} \to \mathbb{R}\), then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\exp\) is strictly increasing
+      \item \(\im(\exp) = (0; \infty)\)
+      \item \(\forall n \in \mathbb{N}: \lim_{x \to \infty} \frac{\exp(x)}{x^n} = \infty\)
+      \item \(\lim_{x \to -\infty} \exp(x) = 0\)
+   \end{enumerate}
+\end{proposition}
+\begin{remark}[Intuition]
+   We would split (ii) into the following observations:
+   \[\forall x < 0: \exp(x) \in (0; 1) \qquad \forall x > 0: \exp(x) \in (1; \infty) \qquad \exp(0) = 1\]
+   Point (v) means that \(\exp\) grows faster than any other power.
+\end{remark}
+
+\begin{definition}[Logarithm]
+   The inverse of \(\exp: \mathbb{R} \to (0; \infty)\) is
+   \[\ln(x): (0; \infty) \to \mathbb{R} \qquad\text{where}\qquad \ln(x) = y \iff \exp(y) = x\]
+\end{definition}
+
+\begin{proposition}[Properties]
+   Let \(x, y \in (0; \infty)\)
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\ln\) is continuous
+      \item \(\ln\) is strictly increasing
+      \item \(\lim_{x \to \infty} \ln(x) = \infty\)
+      \item \(\lim_{x \to 0} \ln(x) = -\infty\)
+      \item \(\ln(x \cdot y) = \ln(x) + \ln(y)\)
+      \item \(\ln\left(\frac{x}{y}\right) = \ln(x) - \ln(y)\)
+   \end{enumerate}
+\end{proposition}
+\begin{remark}
+   From above we also have that \(\ln(1) = 0\).
+\end{remark}
+
+\subsubsection{Real Exponents}
+Now that we have that \(x = \exp\big(\ln(x)\big)\) we can define \(x^r\) with \(r \in \mathbb{R}\).
+First we need to check if everything remains the same as with whole exponents, so let \(n \in \mathbb{N}\) and \(x > 0\), then
+\[x^n = \Big(\exp\big(\ln(x)\big)\Big)^n = \left(e^{\ln(x)}\right)^n = \exp\big(n \cdot \ln(x)\big)\]
+\[x^{-n} = \frac{1}{x^n} = \frac{1}{\exp\big(n \cdot \ln(x)\big)} = \frac{1}{e^{n \cdot \ln(x)}} = e^{-n \cdot \ln(x)} = \exp\big(-n \cdot \ln(x)\big)\]
+\[\sqrt[n]{x} = x^{\frac{1}{n}} = \Big(\exp\big(\ln(x)\big)\Big)^\frac{1}{n} = \exp\left(\frac{1}{n} \ln(x)\right)\]
+and for \(p \in \mathbb{Z}\), \(q \in \mathbb{N}_{>0}\)
+\[x^\frac{p}{q} = \Big(\exp\big(\ln(x)\big)\Big)^\frac{p}{q} = \exp\left(\frac{p}{q} \ln(x)\right)\]
+
+\begin{definition}[Real Exponents]
+   Given \(x > 0\) and \(r \in \mathbb{R}\)
+   \[x^r := \exp\big(r \cdot \ln(x)\big)\]
+\end{definition}
+
+\begin{proposition}[Calculation Rules]
+   Let \(x, y \in \mathbb{R}_{>0}\) and \(r, s \in \mathbb{R}\), then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(x^r \cdot x^s = x^{r + s}\)
+      \item \(\frac{x^r}{x^s} = x^{r-s}\)
+      \item \(x^r \cdot y^r = (x \cdot y)^r\)
+      \item \((x^r)^s = x^{r \cdot s}\)
+      \item \(\ln(x^r) = r \cdot \ln(x)\)
+   \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+   Let \(r \in \mathbb{R}_{>0}\) then
+   \[\lim_{x \to \infty} x^{-r} \cdot \ln(x) = 0 \qquad\text{and}\qquad \lim_{x \to 0} x^r \cdot \ln(x) = 0\]
+\end{proposition}
+\begin{remark}
+   This proposition states that \(\ln\) is damped by \(\frac{1}{x^n}\).
+\end{remark}
+
+\subsubsection{Trigonometric Functions}
+\begin{definition}[Cosine]
+   Given \(z \in \mathbb{C}\) we define \(\cos: \mathbb{C} \to \mathbb{C}\) by
+   \[\cos(z) := \sum_{n=0}^\infty (-1)^n \frac{z^{2n}}{(2n)!}\]
+\end{definition}
+
+\begin{definition}[Sine]
+   Given \(z \in \mathbb{C}\) we define \(\sin: \mathbb{C} \to \mathbb{C}\) by
+   \[\sin(z) := \sum_{n=0}^\infty (-1)^n \frac{z^{2n + 1}}{(2n+1)!}\]
+\end{definition}
+
+\begin{proposition}[Properties]
+   Let \(x, y \in \mathbb{R}\) and \(z \in \mathbb{C}\), then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item Both series have radius of convergence \(\rho = \infty\)
+      \item \(\cos\) and \(\sin\) are continuous
+      \item \(\cos(-z) = \cos(z)\)
+      \item \(\sin(-z) = -\sin(z)\)
+      \item \(\cos(x \pm y) = \cos(x) \cdot \cos(y) \mp \sin(x) \cdot \sin(y)\)
+      \item \(\sin(x \pm y) = \sin(x) \cdot \cos(y) \pm \cos(x) \cdot \sin(y)\)
+      \item \(\sin(x) - \sin(y) = 2 \cos\left(\frac{x+y}{2}\right) \cdot \sin\left(\frac{x-y}{2}\right)\)
+      \item \(\cos(x) - \cos(y) = -2 \sin\left(\frac{x+y}{2}\right) \cdot \sin\left(\frac{x-y}{2}\right)\)
+      \item \(\cos^2(z) + \sin^2(z) = 1\)
+   \end{enumerate}
+\end{proposition}
+
+\subsubsection{Connecting Exponential and Trigonometric}
+In this section we regard \(\exp: i\mathbb{R} \to \mathbb{R}\).
+
+\begin{proposition}
+   Let \(z \in \mathbb{C}\), then
+   \[\cos(z) = \frac{\exp(iz) + \exp(-iz)}{2} \qquad\text{and}\qquad \sin(z) = \frac{\exp(iz) - \exp(-iz)}{2i}\]
+\end{proposition}
+
+\begin{proposition}
+   Let \(\exp: i\mathbb{R} \to \mathbb{R}\) and \(x \in \mathbb{R}\), then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\cos(x) = \Re\big(\exp(ix)\big)\)
+      \item \(\sin(x) = \Im\big(\exp(ix)\big)\)
+      \item \(\exp(ix) = \cos(x) + i \cdot \sin(x)\)
+   \end{enumerate}
+\end{proposition}
+
+For simplicity sake we define
+\[\ixp: \mathbb{R} \to \mathbb{C} \qquad\text{where}\qquad x \mapsto \exp(ix)\]
+
+\begin{theorem}[Unit Circle]
+   \(\im(\ixp) = S^1 := \{z \in \mathbb{C} \mid \lvert z\rvert = 1\}\)
+\end{theorem}
+
+\begin{center}
+   \input{drawings/unit_circle.tex}
+\end{center}
+
+\begin{theorem}
+   The set
+   \[M := \{x \in (0; \infty) \mid \ixp(x) = 1\}\]
+   has a positive minimum
+   \[\pi := \frac{1}{2} \min(M)\]
+\end{theorem}
+
+\begin{definition}[Periodic Function]
+   \(f: \mathbb{K} \to \mathbb{K}\) is \(p\)-periodic iff
+   \[\forall x \in \mathbb{K}: f(x + p) = f(x)\]
+\end{definition}
+
+\begin{theorem}
+   Let \(z \in \mathbb{C}\) and \(k \in \mathbb{Z}\), then
+   \[\exp(z) = 1 \iff z = 2 \pi i \cdot k\]
+   \[\exp(z) = -1 \iff z = (2k + 1)\pi i\]
+\end{theorem}
+\begin{remark}
+   It follows that for \(k \in \mathbb{Z}\)
+   \[\exp(z) = \exp(z + 2k\pi i)\]
+   i.e. \(\exp\) is \(2\pi i\)-periodic.
+\end{remark}
+
+\begin{theorem}
+   For \(x \in \mathbb{R}\) is
+   \[\ixp: [x; x + 2\pi) \to S^1\]
+   bijective.
+\end{theorem}
+
+\begin{proposition}[Properties]
+   Let \(k \in \mathbb{Z}\) and \(z \in \mathbb{C}\), then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\cos(z) = \cos(z + 2k\pi)\)
+      \item \(\sin(z) = \sin(z + 2k\pi)\)
+      \item \(\cos(z) = 0 \iff z = \frac{\pi}{2} + k\pi\)
+      \item \(\sin(z) = 0 \iff z = k\pi\)
+      \item \(\forall x \in (0; \pi): \sin(x) > 0\)
+      \item \(\forall x \in \left(0; \frac{\pi}{2}\right): \cos(x) > 0\)
+      \item \(\sin\) is strictly increasing on \(\left[0; \frac{\pi}{2}\right]\)
+      \item \(\sin(z + \pi) = -\sin(z)\)
+      \item \(\cos(z + \pi) = -\cos(z)\)
+      \item \(\sin\left(\frac{\pi}{2} - z\right) = \cos(z)\)
+      \item \(\cos\left(\frac{\pi}{2} - z\right) = \sin(z)\)
+      \item \(\im(\cos) = \im(\sin) = [-1;1]\)
+   \end{enumerate}
+\end{proposition}
+
+\begin{theorem}
+   For \(x \in \mathbb{R}\) is
+   \[\exp: \mathbb{R} + i[x; x + 2\pi) \to \mathbb{C}\setminus\{0\}\]
+   bijective.
+\end{theorem}
+\begin{remark}
+   From this are polar coordinates of complex numbers derived.
+\end{remark}
+
+\begin{theorem}
+   For \(z \in \mathbb{C}\setminus\{0\}\)
+   \[\exists! \alpha \in [0; 2\pi): z = \lvert z\rvert \exp(i \alpha)\]
+\end{theorem}
+\begin{remark}
+   We call \(\alpha\) the \emph{argument} of \(z\): \(\alpha := \argu(z)\).
+\end{remark}
+
+\begin{theorem}
+   For \(x \in \mathbb{C}\) has \(z^n = x\) \(n\) distinct solutions
+   \[z_k = \lvert x\rvert^\frac{1}{n} \exp\left(\frac{i(\argu(x) + 2\pi k)}{n}\right)\]
+\end{theorem}
+
+
+\newpage
+
+\section{Function Limits}
+So far we only looked at limits of sequences, now we want to regard how \(f: X \to Y\) behave as \(x \to x_0\).
+
+\begin{definition}[Function Limit]\label{def:func_limit}
+   Given \(f: D \to \mathbb{R}\) and a limit point \(x_0 \in D\) of \(X\).
+   \[\lim_{x \to x_0} f(x) = L :\iff \forall \varepsilon > 0~\exists \delta > 0: (\forall x \in D: \lvert x - x_0 \rvert < \delta \implies \lvert f(x) - L\rvert < \varepsilon\]
+\end{definition}
+\begin{remark}[Intuition]
+   Note that we can rewrite
+   \[\lvert x - x_0\rvert < \delta \iff -\delta < x - x_0 < \delta \iff x_0 - \delta < x < x_0 + \delta \iff x \in (x_0 - \delta; x_0 + \delta)\]
+   Hence we can rewrite the condition above as
+   \[\forall x \in (x_0 - \delta; x_0 + \delta): f(x) \in \big(L - \varepsilon; L + \varepsilon\big)\]
+\end{remark}
+
+\begin{center}
+   \input{drawings/continuity.tex}
+\end{center}
+
+\subsection{Calculation-Rules \& -Tricks}
+\begin{proposition}[Calculation Rules]
+   Let \(f: I \to \mathbb{R}\), \(g: I \to \mathbb{R}\) and \(c \in \mathbb{R}\)
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\lim_{x \to a}\big(f(x) \pm g(x)\big) = \lim_{x \to a}\big(f(x)\big) \pm \lim_{x \to a}\big(g(x)\big)\)
+      \item \(\lim_{x \to a} c \cdot f(x) = c \cdot \lim_{x \to a} f(x)\)
+      \item \(\lim_{x \to a} f(x) \cdot g(x) = \lim_{x \to a} f(x) \cdot \lim_{x \to a} g(x)\)
+      \item \(\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)}\)
+   \end{enumerate}
+\end{proposition}
+
+\subsubsection{Root-Trick}
+The following is a usefull method to determine limits which contain the root function.
+We want to find \(\lim_{x \to \infty} \sqrt{x^2 + x} - x\).
+\begin{equation*}
+   \begin{split}
+      \lim_{x \to \infty} \left(\sqrt{x^2 + x} - x\right) & = \lim_{x \to \infty} \left(\left(\sqrt{x^2 + x} - x\right) \frac{\left(\sqrt{x^2 + x} + x\right)}{\left(\sqrt{x^2 + x} + x\right)}\right) = \lim_{x \to \infty} \left(\frac{x^2 + x - x^2}{\sqrt{x^2 + x} + x}\right) =\\
+                                                          & = \lim_{x \to \infty} \left(\frac{x}{\sqrt{x^2 + x} + x}\right) = \lim_{x \to \infty} \frac{x}{x \left(\frac{\sqrt{x^2 + x}}{x} + 1\right)} = \frac{1}{\lim_{x \to \infty}\left(\frac{\sqrt{x^2 + x}}{x} + 1\right)} =\\
+                                                          & = \frac{1}{\lim_{x \to \infty}\left(\sqrt{\frac{x^2 + x}{x^2}}\right) + 1} = \frac{1}{\sqrt{\lim_{x \to \infty}\frac{x^2 \left(1 + \frac{1}{x}\right)}{x^2}} + 1} = \frac{1}{\sqrt{\lim_{x \to \infty}\left(1 + \frac{1}{x}\right)} + 1} =\\
+                                                          & = \frac{1}{\sqrt{1} + 1} = \frac{1}{2}
+   \end{split}
+\end{equation*}
+
+\subsubsection{Fundamental Limit \(e\)}
+We know that
+\[\lim_{x \to \infty} \left(1 + \frac{1}{x}\right)^x = e \qquad\text{and}\qquad \lim_{x \to 0} (1 + x)^{\frac{1}{x}} = e\]
+From this follows (not trivially) a neat trick:
+\[\lim_{x \to x_0} \left(1 + \frac{1}{\ast}\right)^* = e\]
+where \(\ast\) is some term in \(x\) with \(\ast \xrightarrow{x \to x_0} \infty\).
+Equivalently we have
+\[\lim_{x \to x_0} (1 + \ast)^{\frac{1}{\ast}} = e\]
+where \(\ast \xrightarrow{x \to x_0} 0\).
+\begin{example}
+   We want to find \(\lim_{x \to \infty} \left(1 - \frac{3}{x}\right)^{2x}\).
+   \[\lim_{x \to \infty} \left(1 - \frac{3}{x}\right)^{2x} = \lim_{x \to \infty} \left(\left(1 + \frac{1}{-\frac{x}{3}}\right)^{-\frac{x}{3}}\right)^{-\frac{3}{x} \cdot 2x} = \lim_{x \to \infty} e^{-\frac{6x}{x}} = e^{-6}\]
+\end{example}
+
+\subsubsection{Fundamental Limit \(\sin(x)\)}
+We know that
+\[\lim_{x \to 0} \frac{\sin(x)}{x} = 1\]
+From this follows a neat trick:
+\[\lim_{x \to x_0} \frac{\sin(\ast)}{\ast} = 1\]
+where \(\ast\) is some term in \(x\) with \(\ast \xrightarrow{x \to x_0} 0\).
+\begin{example}
+   We want to find \(\lim_{x \to 1} \frac{\sin(1-x^2)}{1-x}\)
+   \[\lim_{x \to 1} \frac{\sin(1-x^2)}{1-x} = \lim_{x \to 1}\frac{\sin(1-x^2)}{1-x^2} \cdot \frac{1-x^2}{1-x} = 1 \cdot \lim_{x \to 1} \frac{(1-x)(1+x)}{1-x} = \lim_{x \to 1} 1 + x = 2\]
+\end{example}
+
+% TODO: l'hopital needed
+\subsubsection{\(e^{\log}\) - Trick}
+The following is a usefull method to determine limits \(\lim_{x \to x_0} f(x)^{g(x)}\).
+The main idea is to rewrite
+\[f(x)^{g(x)} = \exp\Big(\log\big(f(x)^{g(x)}\big)\Big) = \exp\Big(g(x) \cdot \log\big(f(x)\big)\Big)\]
+as \(\exp\) is continuous, we can pull the limit into the argument.
+\begin{example}
+   We want to find \(\lim_{x \to 0} x^{\sin(x)}\)
+\end{example}
+
+\subsection{One-Sided Limits}
+\begin{definition}[One-Sided Limit]\label{def:one-sided_limit}
+   Given a limit point \(x_0 \in \mathbb{R}\) of \(D\) and \(f: D \to \mathbb{R}\).
+   \[\lim_{x \uparrow x_0}f(x) = \lim_{x \to x_0} f|_{D \cap (-\infty; x_0)}\]
+   \[\lim_{x \downarrow x_0}f(x) = \lim_{x \to x_0} f|_{D \cap (x_0; \infty)}\]
+\end{definition}
+\begin{remark}[Terminology]
+   We call \(\lim_{x \uparrow x_0} f(x)\) a \emph{left-handed} and \(\lim_{x \downarrow x_0} f(x)\) a \emph{right-handed} limit.
+\end{remark}
+\begin{remark}
+   From \cref{def:func_limit} we can equivalently write
+   \[\lim_{x \uparrow x_0} f(x) = L \iff \forall \varepsilon~\exists \delta > 0: (x \in D: x_0- \delta < x < x_0 \implies |f(x) - L| < \varepsilon)\]
+   \[\lim_{x \downarrow x_0} f(x) = L \iff \forall \varepsilon~\exists \delta > 0: (x \in D: x_0 < x < x_0 + \delta \implies |f(x) - L| < \varepsilon)\]
+\end{remark}
+\begin{example}
+   We regard
+   \[f(x) = \begin{cases}0 & x \leq 0\\ 1 & x > 0\end{cases}\]
+   where we see that
+   \[\lim_{x \uparrow 0} f(x) = 0 \qquad \lim_{x \downarrow 0} f(x) = 1\]
+\end{example}
+\begin{center}
+   \input{drawings/one-sided-limit.tex}
+\end{center}
+
+\newpage
+
+\section{Continuity}
+In this sections we regard functions
+\[f: D \subset (X, \|\ldots\|) \to (Y, \|\ldots\|)\]
+
+\begin{theorem}[Continuity Definitions are Equivalent]
+   \[\text{\cref{def:neigh_cont}} \iff \text{\cref{def:eps_delt_cont}} \iff \text{\cref{def:seq_cont}}\]
+\end{theorem}
+
+\begin{definition}[Set of Continuous Functions]
+   \(C^0(D, Y)\) the set of continuous functions in \(Y\).
+\end{definition}
+
+\subsection{In Terms of Function Limits}
+\begin{definition}[\(\varepsilon-\delta\) Continuity]\label{def:eps_delt_cont}
+   \(f: D \to \mathbb{R}\) is continuous in \(x_0 \in D\) iff
+   \[\forall \varepsilon > 0~\exists \delta > 0: (\forall x \in D: |x-x_0| < \delta \implies |f(x) - f(x_0)| < \varepsilon)\]
+\end{definition}
+\begin{remark}[Intuition]
+   A \emph{continuous function} is a function that does not have any abrupt changes in value, known as \emph{discontinuities}.
+   More precisely, sufficiently small changes in the input of a continuous function result in arbitrarily small changes in its output.
+\end{remark}
+\begin{remark}[Terminology]
+   \(f\) is \emph{continuous} (on \(D\)) iff \(f\) is continuous in all \(x_0 \in D\).
+
+   \(f\) is \emph{discontinuous} in \(x_0\) iff
+   \[\exists \varepsilon > 0~\forall \delta > 0: (\exists x \in D: |x - x_0| < \delta~\text{but}~|f(x) - f(x_0)| \geq \varepsilon)\]
+\end{remark}
+
+With \cref{def:func_limit} we see that
+\begin{theorem}[Function Continuity]
+   Let \(f: D \to \mathbb{R}\) and \(x_0 \in D\), then is
+   \[f~\text{continuous in}~x_0 \iff \lim_{x \to x_0} f(x) = f(x_0)\]
+\end{theorem}
+
+This makes sense, because if \(f\) does not approach \(f(x_0\), there must be a ''gap in the function graph``.
+This becomes apparant when regarding both one-sided limits, approaching the same point.
+
+\begin{theorem}
+   Let \(x_0 \in \mathbb{R}\) be a limit point of \(D\) and \(f: D \to \mathbb{R}\).
+   \[\lim_{x \to x_0} f(x) = L \iff \lim_{x \uparrow x_0} f(x) = L = \lim_{x \downarrow x_0} f(x)\]
+\end{theorem}
+
+\begin{definition}[Jump Discontinuity]
+   Given \(D \subset \mathbb{R}\) and \(f: D \to \mathbb{R}\)
+   \[x_0 \in \mathbb{R}: x_0 \in \overline{D \cap (-\infty; x_0)} \cap \overline{D \cap (x_0; \infty)}\]
+   is a \emph{jump discontinuity} iff
+   \[\lim_{x \uparrow a} f(x) \neq \lim_{x \downarrow a} f(x)\]
+\end{definition}
+
+\begin{theorem}
+   Let \(f:D \to \mathbb{R}\) be monotonic. \(f\) has countable jump discontinuities.
+\end{theorem}
+
+\begin{proposition}\label{pro:one_sided_lim_incr}
+   Let \(f: [a; b] \to \mathbb{R}\) and \(c \in (a; b)\).
+
+   If \(f\) is increasing, then
+   \[\lim_{x \uparrow c} f(x) = \sup\{f(x) \mid x < c\} \qquad\text{and}\qquad \lim_{x \downarrow c} f(x) = \inf\{f(x) \mid x > c\}\]
+
+   If \(f\) is decreasing, then
+   \[\lim_{x \uparrow c} f(x) = \inf\{f(x) \mid x < c\} \qquad\text{and}\qquad \lim_{x \downarrow c} f(x) = \sup\{f(x) \mid x > c\}\]
+\end{proposition}
+\begin{example}
+   \[f(c_1) = \lim_{x \uparrow c_1} f(x) = f(c_1^-) < f(c_1^+)\]
+   \[f(c_2) = \lim_{x \to c_2} f(x) = f(c_2^-) = f(c_2^+)\]
+   \[f(c_3^-) < f(c_3) < f(c_3^+)\]
+\end{example}
+\begin{center}
+   \input{drawings/one-sided_limit.tex}
+\end{center}
+
+\subsection{In Terms of Sequences}
+\begin{definition}[Sequence Continuity]\label{def:seq_cont}
+   \(f: D \to \mathbb{R}\) is continuous in \(x_0 \in D\) iff
+   \[\forall (x_n) \in (D\setminus\{x_0\})^\mathbb{N}: \lim_{n \to \infty} x_n = x_0 \implies \lim_{n \to \infty} f(x_n) = f(x_0)\]
+\end{definition}
+\begin{remark}
+   This definition allows us interchange \(\lim f(x) = f(\lim(x))\).
+\end{remark}
+
+\begin{proposition}[Function Limit = Sequence Limit]
+   Let \(x_0 \in X\) be a limit point of \(D\) and \(f: D \to \mathbb{R}\)
+   \[\lim_{x \to x_0} f(x) = L \iff \forall (x_n) \in (D\setminus\{x_0\})^\mathbb{N}: \left(\lim_{n \to \infty} x_n = x_0 \implies  \lim_{n \to \infty} f(x_n) = L\right)\]
+\end{proposition}
+
+\subsection{In Terms of Topology}
+\begin{definition}[Neighbourhood Continuity]\label{def:neigh_cont}
+   \(f: D \to Y\) is continuous in \(x_0 \in D\) iff
+   \[\forall V \in \mathcal{U}\big(f(x_0)\big)~\exists U \in \mathcal{U}(x_0): f(U \cap D) \subset V\]
+\end{definition}
+\begin{remark}
+   Equivalently \(x \in U \implies f(x) \in V\)
+\end{remark}
+
+\begin{theorem}
+   Given \(D' \subset D\), the following statements are equivalent
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(f: D \to Y\) is continuous on \(D'\)
+      \item Pre-images of open sets in \(Y\) are relatively open in \(D'\).
+      \item Pre-images of closed sets in \(Y\) are relatively closed in \(D'\)
+   \end{enumerate}
+\end{theorem}
+
+\begin{definition}[One-Sided Continuity]
+   \(f: D \to \mathbb{R}\) is
+   \[\text{left-continuous in}~x_0 \in D \iff \forall V \in \mathcal{U}\big(f(x_0)\big) \exists \delta > 0: f\big(D \cap (x_0 - \delta; x_0]\big) \subset V\]
+   \[\text{right-continuous in}~x_0 \in D \iff \forall V \in \mathcal{U}\big(f(x_0)\big) \exists \delta > 0: f\big(D \cap [x_0; x_0 + \delta)\big) \subset V\]
+\end{definition}
+
+\begin{proposition}
+   \(f: D \to \mathbb{R}\) is continuous in \(x_0 \in D\) iff it is left- and right-continuous in \(x_0\).
+\end{proposition}
+
+\subsection{Properties}
+\begin{proposition}[Calculation Rules]
+   Let \(f, g: D \to Y\) be continuous in \(x_0 \in D\), then is
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\alpha \cdot f: D \to Y \quad\text{where}\quad (\alpha \cdot f)(x) := \alpha \cdot f(x)\)
+      \item \(f + g: D \to Y \quad\text{where}\quad (f + g)(x) := f(x) + g(x)\)
+      \item \(f \cdot g: D \to \mathbb{K} \quad\text{where}\quad (f \cdot g)(x) := f(x) \cdot g(x)\)
+      \item If \(g(x_0) \neq 0\)
+         \[\frac{f}{g}: D \to \mathbb{K} \quad\text{where}\quad \left(\frac{f}{g}\right)(x) := \frac{f(x)}{g(x)}\]
+   \end{enumerate}
+   also continuous in \(x_0\).
+\end{proposition}
+
+\begin{corollary}
+   Polynomials and rational functions are continuous.
+\end{corollary}
+
+\begin{proposition}[Composition is Continuous]\label{pro:contin_continuation}
+   Let \(f: D_f \to Y\) and \(g: D_g \to Z\) such that \(\im(f) \subset D_g\).
+
+   If \(f\) continuous at \(x_0 \in D_f\) and \(g\) at \(f(x_0) \in D_g\) then is
+   \[g \circ f: D_f \to Z~\text{continuous in}~x_0\]
+\end{proposition}
+\begin{example}
+   Let \(f(x) = x^2 + 3\) and \(g(x) = \sqrt{x}\).
+
+   \(h(x) = (g \circ f)(x) = \sqrt{x^2 + 3}\) is continuous since \(f\) and \(g\) both are.
+\end{example}
+
+\begin{theorem}[Vector Functions]
+   \(f := (f_1, f_2, \ldots, f_n): D \to \mathbb{K}^n\) is continuous in \(x_0 \in D\) iff
+   \[\forall i \in [1; n]: f_i~\text{is continuous in}~x_0\]
+\end{theorem}
+
+\begin{theorem}[Complex Functions]
+   \(f: D \to \mathbb{C}\) is continuous in \(x_0 \in D\) iff
+   \[\Re(f)~\text{and}~\Im(f)~\text{are continuous in}~x_0\]
+\end{theorem}
+
+\begin{proposition}[Continuous Continuation]
+   Let \(x_0\) be a limit point of \(D\) and assume there exists \(y := \lim_{x \to x_0} f(x)\).
+   We define \(\tilde{f}: D \cup \{x_0\} \to Y\) by
+   \[\tilde{f}(x) := \begin{cases}f(x) & \text{if}~x \in D\\ y & \text{if}~x = x_0\end{cases}\]
+   then is \(\tilde{f}\) continuous in \(x_0\).
+\end{proposition}
+
+\subsection{Uniform Continuity}
+Continuity itself is a local property of a function—that is, a function \(f\) is continuous, or not, at a particular point, and this can be determined by looking only at the values of the function in an (arbitrarily small) neighbourhood of that point.
+When we speak of a function being continuous on an interval, we mean only that it is continuous at each point of the interval.
+In contrast, uniform continuity is a global property of \(f\), in the sense that the standard definition refers to pairs of points rather than individual points.
+
+\begin{definition}[Uniform Continuity]
+   \(f: D \to Y\) is uniform continuous iff
+   \[\forall \varepsilon > 0~\exists \delta > 0: (\forall x,y \in D': |x - y| < \delta \implies |f(x) - f(y)| < \varepsilon)\]
+\end{definition}
+\begin{remark}[Intuition]
+   A function \(f\) is uniformly continuous if, it is possible to guarantee that \(f(x)\) and \(f(y)\) be as close to each other as we please by requiring only that \(x\) and \(y\) are sufficiently close to each other.
+\end{remark}
+\begin{remark}
+   The difference to regular continuity is that for uniform continuity \(\delta\) does not depend on \(x_0\) but only on \(\varepsilon\).
+   This means that the same \(\delta\) must be applicabale to all \(x \in D\).
+
+   As this is a more strict requirement we have that every uniformly continuous function is also continuous.
+\end{remark}
+
+\section{Functions in R}
+\begin{theorem}[Intermediate Value]\label{thm:intmd_value}
+   Let \(f: [a; b] \to \mathbb{R}\) be continuous and \(f(a) < 0 < f(b)\).
+   \[\exists \xi \in (a;b): f(\xi) = 0\]
+\end{theorem}
+\begin{remark}
+   More in general: if \(f(a) < f(c) < f(b)\) then \(\exists \xi \in (a;b): f(\xi) = f(c)\).
+\end{remark}
+
+% TODO intervall types --> merge with foundations and equivalent reformulations (function limit)
+\begin{theorem}
+   Let \(f: [a;b] \to \mathbb{R}\) be continuous and strictly increasing, then is
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(f\big([a;b]\big)\) an intervall of the same type as \([a;b]\).
+      \item \(f:[a;b] \xrightarrow{\sim} f\big([a;b]\big)\)
+      \item \(f^{-1}\) is continuous as strictly increasing.
+   \end{enumerate}
+\end{theorem}
+\begin{remark}
+   The same holds for decreasing \(f\).
+\end{remark}
+\begin{example}
+   Let \(n \in \mathbb{N}: n \geq 2\) and \(f(x) := x^n\).
+   First we show that \(f\) is strictly increasing, let \(x \in \mathbb{R}_{\geq 0}: x < y\), then
+   \[f(y) - f(x) = y^n - x^n = y^n \left(1 - \left(\frac{x}{y}\right)^n\right)\]
+   Recall that by the geometric series we have
+   \[(1- q^n) = (1-q) \sum_{l=0}^{n-1} q^l = (1-q)\left(1 + \sum_{l=1}^{n-1} q^l\right)\]
+   hence
+   \[y^n \left(1 - \left(\frac{x}{y}\right)^n\right) = y^n \left(1 - \frac{x}{y}\right) \sum_{j=0}^{n-1} \left(\frac{x}{y}\right)^{n-1-j} > 0\]
+   Therefor we have an inverse which is continuous and strictly increasing
+   \[\sqrt[n]{x} := f^{-1}(x)\]
+\end{example}
