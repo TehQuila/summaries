@@ -1,0 +1,214 @@
+\section{Basic Terminology}
+\subsection{Topological Spaces}
+% TODO: unit sphere, different norms
+\begin{definition}[Open Ball]
+   Given \((X, d)\), a \emph{ball} of radius \(r\) around \(x_0 \in X\) is
+   \[B(x_0, r) := \{x \in X \mid d(x_0, x) < r\}\]
+\end{definition}
+\begin{remark}
+   A \emph{closed} ball would be \(\{x \in X \mid d(x_0, x) \leq r\}\).
+\end{remark}
+
+\begin{definition}[Open Set]
+   \(M \subset (X, d)\) where
+   \[\forall x \in M~\exists r > 0: \big(B(x, r) \subset M\big)\]
+\end{definition}
+\begin{remark}
+   Equivalently \(M\) is open if all its points are interior.
+\end{remark}
+\begin{remark}
+   A set being \emph{not open}, does not imply that it is closed.
+\end{remark}
+
+\begin{theorem}[Properties of Open Sets]\label{thm:open_sets}
+   Let \(\mathcal{T} \subset \mathcal{P}(X)\) be the set of all open sets of \((X, d)\), then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\emptyset \in \mathcal{T}\) and \(X \in \mathcal{T}\)
+      \item For \(n \in \mathbb{N} \cup \{\infty\}\)
+         \[\bigcup_{i=1}^n \tau_i \in \mathcal{T} \quad\text{where}~\tau_i \in \mathcal{T}\]
+      \item For \(n \in \mathbb{N}\)
+         \[\bigcap_{i=1}^n \tau_i \in \mathcal{T} \quad\text{where}~\tau_i \in \mathcal{T}\]
+   \end{enumerate}
+\end{theorem}
+
+\begin{definition}[Topology]
+   A set \(\mathcal{T}\) as in \cref{thm:open_sets}.
+\end{definition}
+
+\begin{definition}[Topological Space]
+   A set \(X\) with a topology \(\mathcal{T}\).
+\end{definition}
+\begin{remark}[Notation]
+   \((X, \mathcal{T})\)
+\end{remark}
+
+\begin{definition}[Open Neighbourhood]
+   \(U \subset (X, \mathcal{T})\) is the \emph{open neighbourhood} of \(x \in (X, \mathcal{T})\), iff
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(U\) is open
+      \item \(x \in U\)
+   \end{enumerate}
+\end{definition}
+\begin{remark}[Intuition]
+   A neighbourhood of a point is a set containing that point where one can move some amount in any direction away from that point without leaving the set.
+\end{remark}
+\begin{remark}[Notation]
+   The set of all neighbourhoods of \(x\) is denoted with \(\mathcal{U}(x)\).
+\end{remark}
+
+\subsection{Closed Sets}
+\begin{definition}[Closed Set]
+   Given \((X, \mathcal{T})\), \(M \subset X\) is \emph{closed} iff \(M^C = X \setminus M\) is open.
+\end{definition}
+
+\begin{theorem}\label{thm:closed_sets}
+   Let \(\mathcal{C} \subset \mathcal{P}\big((X, \mathcal{T})\big)\) be the set of all closed sets, then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\emptyset\) and \(X\) are closed
+      \item Arbitrary unions of closed sets are closed.
+      \item Finite intersections of closed sets are closed.
+   \end{enumerate}
+\end{theorem}
+
+\begin{definition}[Limit Point]
+   \(x \in X\) is a \emph{limit point} of \(M \subset (X, \mathcal{T})\) iff
+   \[\forall U \in \mathcal{U}(x): (U \cap M) \setminus \{x\} \neq \emptyset\]
+\end{definition}
+\begin{remark}[Intuition]
+   A limit point has in every neighbourhood around it at least one other point than itself.
+\end{remark}
+
+\begin{proposition}
+   Let \(M \subset (X, \mathcal{T})\), then is
+   \[x \in X~\text{a limit point of}~M \iff \exists (x_n)_{n \in \mathbb{N}} \in (M\setminus\{x\})^\mathbb{N}: \lim_{n \to \infty} x_n = x\]
+\end{proposition}
+
+\begin{theorem}
+   Given \((X, \mathcal{T})\) and \(M \subset X\), the following statements are equivalent
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(M\) is closed.
+      \item \(M\) contains all its limit points.
+      \item \[\forall (x_n) \in M^\mathbb{N}: \lim_{n \to \infty} x_n \in X \implies \lim_{n \to \infty} x_n \in M\]
+   \end{enumerate}
+\end{theorem}
+
+\subsection{Closure}
+\begin{definition}[Adherent Point]
+   \(x \in X\) is an \emph{adherent point} of \(M \subset (X, \mathcal{T})\) iff
+   \[\forall U \in \mathcal{U}(x): U \cap M \neq \emptyset\]
+\end{definition}
+\begin{remark}[Intuition]
+   An adherent point has in every neighbourhood around it at least one point (maybe even only itself).
+\end{remark}
+\begin{remark}
+   Every limit point is and adherent point.
+\end{remark}
+
+\begin{proposition}
+   Let \(M \subset (X, \mathcal{T})\), then is
+   \[x \in X~\text{an adherent point of}~M \iff \exists (x_n) \in M^\mathbb{N}: \lim_{n \to \infty} x_n = x\]
+\end{proposition}
+
+\begin{definition}[Closure of a Set]
+   The set of all adherent points of \(M \subset (X, \mathcal{T})\), denoted \(\overline{M}\).
+\end{definition}
+\begin{remark}[Intuition]
+   The \emph{closure} of a set are all points including its \emph{boundary}.
+\end{remark}
+
+\begin{theorem}
+   Let \(M \subset (X, \mathcal{T})\), then is \(\overline{M}\) the smallest closed superset of \(M\) and
+   \[\overline{M} = \bigcap_{\substack{M \subset M_i\\ M_i \text{closed}}} M_i\]
+\end{theorem}
+
+\begin{theorem}
+   Given \((X, \mathcal{T})\) and \(M \subset X\), then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(M \subset \overline{M}\)
+      \item \(M = \overline{M} \iff M~\text{is closed}\)
+   \end{enumerate}
+\end{theorem}
+
+\begin{proposition}[Closure Rules]
+   Given the subsets \(A, B \subset (X, \mathcal{T})\),
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(A \subset B \implies \overline{A} \subset \overline{B}\)
+      \item \(\overline{(\overline{A})} = \overline{A}\)
+      \item \(\overline{A \cup B} = \overline{A} \cup \overline{B}\)
+   \end{enumerate}
+\end{proposition}
+
+\subsection{Interior}
+\begin{definition}[Interior Point]
+   Given \(M \subset (X, d)\), \(x \in M\) is an \emph{interior point} iff
+   \[\exists \varepsilon > 0: \big(B(x, \varepsilon) \subset M\big)\]
+\end{definition}
+
+\begin{definition}[Interior of a Set]
+   The set of all interior points of \(M \subset (X, \mathcal{T})\), denoted \(M^\circ\).
+\end{definition}
+\begin{remark}[Intuition]
+   The \emph{interior} of a set are all points except its \emph{boundary}.
+\end{remark}
+
+\begin{theorem}
+   Let \(M \subset (X, \mathcal{T})\), then is \(M^\circ\) the largest open subset of \(M\) and
+   \[M^\circ = \bigcup_{\substack{M_i \subset M\\ M_i \text{open}}} M_i\]
+\end{theorem}
+
+\begin{theorem}
+   Let \(M \subset (X, \mathcal{T})\)
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(M^\circ \subset M\)
+      \item \(M^\circ = M \iff M~\text{is open}\)
+   \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+   Given \(A, B \subset (X, \mathcal{T})\)
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(A \subset B \implies A^\circ \subset B^\circ\)
+      \item \((A^\circ)^\circ = A^\circ\)
+      \item \((A \cap B)^\circ = A^\circ \cap B^\circ\)
+   \end{enumerate}
+\end{theorem}
+
+\subsection{Boundary}
+\begin{definition}[Boundary of Sets]
+   Given \(M \subset (X, \mathcal{T})\)
+   \[\partial M := \overline{M} \setminus M^\circ\]
+\end{definition}
+\begin{remark}[Intuition]
+   The \emph{boundary} of a set are all points in its \emph{closure} except for those in the \emph{interior}.
+\end{remark}
+
+\begin{theorem}
+   Let \(x, y \in X: x \neq y\).
+   Then there exist \(U_x \in \mathcal{U}(x)\) and \(U_y \in \mathcal{U}(y)\) such that
+   \[U_x \cap U_y = \emptyset\]
+\end{theorem}
+
+\begin{corollary}
+   Let \(x \in X\), then is \(\{x\}\) is closed.
+\end{corollary}
+
+\subsection{Relative Topology}
+\begin{definition}[Relative Topology]
+   Given \(M \subset (X, \mathcal{T})\)
+   \[\mathcal{T}_M := \{M \cap U \mid U \in \mathcal{T}\}\]
+\end{definition}
+
+\begin{definition}[Relatively open Set]
+   Given \(M \subset (X, \mathcal{T})\), \(A \subset M\) iff
+   \[\exists B \subset X: B~\text{open, such that}~A = B \cap M\]
+\end{definition}
+
+\begin{definition}[Relatively closed Set]
+   Given \(M \subset (X, \mathcal{T})\), \(A \subset M\) iff
+   \[\exists B \subset X: B~\text{closed, such that}~A = B \cap M\]
+\end{definition}
+
+\begin{definition}[Relative interior Point]
+   Given \(M \subset (X, \mathcal{T})\), \(x \in M\) iff
+   \[\exists U \in \mathcal{T}_M: x \in U \subset M\]
+\end{definition}
