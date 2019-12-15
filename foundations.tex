@@ -1,0 +1,1812 @@
+\section{Basic Terminology}
+\subsection{Statements}
+Mathematical logic revolves around statements i.e. sentences, which we can (uniquely) assign a truth-value such as \(t = \text{true}\) and \(f = \text{false}\).
+\begin{definition}[Statement]
+   A \textit{statement} always has a truth-value.
+\end{definition}
+\begin{example}
+   The sentence ''It is raining.`` is a statement but we define ''This statement is false.`` not to be a statement.
+\end{example}
+
+\begin{definition}[Predicate]
+   A statement about a property of an object.
+\end{definition}
+\begin{remark}
+   If \(x\) has the feature \(F\) we say: \(F(x)\) is true.
+   When introducing sets we could write the set of all \(x\) with feature \(F\) as \(\{x \in X \mid F(x)\}\).
+\end{remark}
+
+\begin{definition}[Proposition]
+   A statement proven to be true.
+\end{definition}
+
+\begin{definition}[Theorem]
+   An important proposition.
+\end{definition}
+
+\begin{definition}[Corollary]
+   A statement that follows directly from a proposition (i.e. a speciel case of a proposition).
+\end{definition}
+
+\begin{definition}[Lemma]
+   A proposition used to prove another proposition.
+\end{definition}
+\begin{remark}
+   A lemma is usually part of another larger proof and was extracted in order to structure the larger proof properly.
+\end{remark}
+
+\subsection{Methods of Proofs}
+A \textit{direct proof} is a way of showing the truth or falsehood of a given statement by a straightforward combination of established facts, usually axioms, existing lemmas and theorems, without making any further assumptions.
+In contrast, an \textit{indirect proof} may begin with certain hypothetical scenarios and then proceed to eliminate the uncertainties in each of these scenarios until an inescapable conclusion is forced.
+
+For example
+\paragraph{Proof by Contradiction:} In proof by contradiction (also known as ''reductio ad absurdum``), it is shown that if some statement were true, a logical contradiction occurs, hence the statement must be false.
+\paragraph{Proof by Contraposition:} Proof by contraposition infers the conclusion ''if A then B`` from the premise ''if not B then not A``.
+The statement ''if not B then not A`` is called the \textit{contrapositive}.
+
+An example for a direct proof would be
+\paragraph{Proof by Induction:} In proof by mathematical induction, a single ''base case`` is proved, and an ''induction rule`` is proved that establishes that any arbitrary case implies the next case.
+Since in principle the induction rule can be applied repeatedly starting from the proved base case, we see that all (usually infinitely many) cases are provable.
+This avoids having to prove each case individually.
+
+\subsection{Logical Connective}
+In logic, a logical connective (or logical operator) is a symbol or word used to connect two or more sentences in a grammatically valid way, such that the value of the compound sentence produced depends only on that of the original sentences and on the meaning of the connective.
+
+We can define such operators through \textit{truth tables} where specify for each combination of true/false statements, what the result will be.
+
+\begin{definition}[Negation]
+   Given a statement \(A\)
+   \[\neg A := \text{not}~A\]
+
+   \[\begin{array}{c||c|c}
+         A & \neg A & \neg(\neg A)\\
+         \hline
+         t & f & t\\
+         f & t & f
+      \end{array}\]
+\end{definition}
+
+\begin{definition}[Conjunction]
+   Given statements \(A, B\)
+   \[A \land B := A~\text{and}~B\]
+
+   \[\begin{array}{c|c||c}
+      A & B & A \land B \\
+      \hline
+      t & t & t \\
+      t & f & f \\
+      f & t & f \\
+      f & f & f
+   \end{array}\]
+\end{definition}
+
+\begin{definition}[Disjunction]
+   Given statements \(A, B\)
+   \[A \lor B := A~\text{or}~B\]
+
+   \[\begin{array}{c|c||c}
+      A & B & A \lor B \\
+      \hline
+      t & t & t \\
+      t & f & t \\
+      f & t & t \\
+      f & f & f
+   \end{array}\]
+\end{definition}
+
+\begin{theorem}[De Morgan for Logical Connectives]
+   \[\neg (A \land B) \iff \neg A \lor \neg B\]
+   \[\neg (A \lor B) \iff \neg A \land \neg B\]
+\end{theorem}
+
+\begin{definition}[Implication]
+   Given statements \(A, B\)
+   \[A \implies B := \neg A \lor B\]
+
+   \[\begin{array}{c|c||c}
+      A & B & A \implies B \\
+      \hline
+      t & t & t \\
+      t & f & f \\
+      f & t & t \\
+      f & f & t
+   \end{array}\]
+\end{definition}
+\begin{remark}
+   If \(A \implies B\) we say ''from \(A\) follows \(B\)`` or ''if \(A\) is true, then \(B\) is true``.
+   If \(A\) is false it makes no sense to ask for its implication, therefor it is always true.
+\end{remark}
+
+\begin{proposition}[Contraposition]
+   Let \(A, B\) be statements, then is
+   \[(A \implies B) \iff (\neg B \implies \neg A)\]
+\end{proposition}
+
+\begin{definition}[Equivalent Statements]
+   Given statements \(A, B\)
+   \[A \iff B := (A \implies B) \land (B \implies A)\]
+
+   \[\begin{array}{c|c||c}
+         A & B & A \iff B \\
+         \hline
+         t & t & t \\
+         t & f & f \\
+         f & t & f \\
+         f & f & t
+   \end{array}\]
+\end{definition}
+\begin{remark}
+   If \(A \iff B\) we say ''\(A\) is \textit{equivalent} to \(B\)`` or ''\(B\) is true \textit{if and only if} \(A\) is true`` which we shorten with ''\(B\) \textit{iff} \(A\)``.
+\end{remark}
+
+\subsection{Logical Quantifier}
+In logic, quantification specifies the quantity of specimens in the domain of discourse that satisfy an open formula.
+
+\begin{definition}[For All]
+   \[\forall := \text{for all}\]
+\end{definition}
+\begin{remark}
+   \[\neg(\forall x \in X: F(x)) \iff \exists x \in X: \neg F(x)\]
+\end{remark}
+\begin{example}
+   \(\forall x \in X: F(x)\) means that \(F\) is true for all elements of the set \(X\).
+   It is true if there is not one \(x \in X\) for which \(F(x)\) is false.
+   \[\nexists x \in X: \neg F(x)\]
+\end{example}
+
+\begin{definition}[For Almost All]
+   \(F(x)\) holds for \emph{almost all} \(x \in X\) iff
+   \[\Big|\big\{x \in X \mid \neg F(x)\big\}\Big| < \infty\]
+\end{definition}
+\begin{remark}
+   In words: \(F(n)\) is true for \emph{almost all} iff it is true for all but some.
+\end{remark}
+
+\begin{definition}[There Exists]
+   \[\exists :=~\text{there exists at least one}\]
+   \[\exists! :=~\text{there exists exactly one}\]
+\end{definition}
+\begin{example}
+   \(\exists x \in X: F(x)\) means that there exists at least one element for which \(F\) is true.
+\end{example}
+
+\section{Na\"ive Set Theory}
+Na\"ive set theory is any of several theories of sets used in the discussion of the foundations of mathematics.
+Unlike axiomatic set theories, which are defined using formal logic, na\"ive set theory is defined informally, in natural language.
+It describes the aspects of mathematical sets familiar in discrete mathematics (for example Venn diagrams and symbolic reasoning about their Boolean algebra), and suffices for the everyday use of set theory concepts in contemporary mathematics.
+
+\subsection{Subset}
+\begin{definition}[Emptyset]\label{def:emptyset}
+   The only set containing no elements
+   \[\emptyset_a = \{a \in A \mid a \neq a\}\]
+\end{definition}
+
+\begin{definition}[Equivalent Sets]
+   \[A = B \iff A \subset B \land B \subset A\]
+\end{definition}
+
+\begin{definition}[Subset]
+   Given sets \(A\) and \(B\)
+   \[A \subset B := \forall a \in A: a \in B\]
+\end{definition}
+\begin{remark}
+   If we write \(A \supset B\) then is \(B\) the \emph{superset} of \(A\).
+   It holds that \(A \subset B \iff B \supset A\).
+\end{remark}
+
+\begin{proposition}[Properties of Subset]
+   Let \(A, B, C\) be sets, then holds the following
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item Reflexivity: \(A \subset A\)
+      \item Transitivity: \(A \subset B \land B \subset C \implies A \subset C\)
+      \item Emptyset fullfils all predicates: \(a \in \emptyset_a \implies F(a)\)
+      \item Emptyset is unique: \(\emptyset_a = \emptyset_b\)
+   \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Powerset]
+   The set of all subsets of a set \(X\).
+   \[\mathcal{P}(X) = \{A \mid A \subset X\}\]
+\end{definition}
+\begin{example}
+   \[\mathcal{P}(\emptyset) = \{\emptyset\}\]
+   \[\mathcal{P}\big(\{x, y\}\big) = \big\{\emptyset, \{x\}, \{y\}, \{x, y\}\big\}\]
+\end{example}
+
+\subsection{Intersection \& Union}
+\begin{definition}[Intersection]
+   Given the subsets \(A, B \subset X\)
+   \[A \cap B := \{x \in X \mid x \in A \land x \in B\}\]
+\end{definition}
+\begin{remark}
+   If \(A \cap B = \emptyset\) we say \(A\) and \(B\) are \textit{disjoint}.
+\end{remark}
+
+\begin{definition}[Union]
+   Given the subsets \(A, B \subset X\)
+   \[A \cup B := \{x \in X \mid x \in A \lor x \in B\}\]
+\end{definition}
+
+\begin{proposition}[Rules for Union/Intersection]
+   Let \(A, B, C\) be sets, then holds the following
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item Commutativity: \(A \cup B = B \cup A \quad\text{and}\quad A \cap B = B \cap A\)
+      \item Associativity: \((A \cup B) \cup C = A \cup (B \cup C) \quad\text{and}\quad (A \cap B) \cap C = A \cap (B \cap C)\)
+      \item Distributivity: \(A \cup (B \cap C) = (A \cup B) \cap (A \cup C) \quad\text{and}\quad A \cap (B \cup C) = (A \cap B) \cup (A \cap C)\)
+      \item \(A \subset B \iff A \cup B = B \iff A \cap B = A\)
+   \end{enumerate}
+\end{proposition}
+
+\subsection{Complement}
+\begin{definition}[Relative Complement]
+   Given the subsets \(A, B \subset X\)
+   \[A \setminus B := \{x \in X \mid x \in A \land x \notin B\}\]
+\end{definition}
+
+\begin{definition}[Absolute Complement]
+   Given a set \(X\) with the subset \(A \subset X\)
+   \[A^c := X \setminus A = \{x \in X \mid x \not\in A\}\]
+\end{definition}
+
+% TODO
+\begin{proposition}[De Morgan for Complements]
+   Let \(X\) be a set and \(A, B \subset X\), then is
+   \[(A \cup B)^c = A^c \cap B^c\]
+   \[(A \cap B)^c = A^c \cup B^c\]
+\end{proposition}
+
+\begin{definition}[Symmetric Difference]
+   Given the sets \(A, B\)
+   \[A \Delta B := (A \setminus B) \cup (B \setminus A)\]
+\end{definition}
+\begin{remark}
+   The set of all elements only in \(A\) and only in \(B\).
+\end{remark}
+
+\subsection{Product \& Families}
+\begin{definition}[Cartesian Product]
+   Given the sets \(A, B\)
+   \[A \times B := \{(a, b) \mid a \in A, b \in B\}\]
+\end{definition}
+\begin{remark}
+   The set of all ordered pairs of \(A\) and \(B\).
+   \[(a, b) = (a', b') \iff a = a' \land b = b'\]
+\end{remark}
+\begin{remark}
+   Given sets \(X_1, \ldots, X_n\)
+   \[\bigtimes_{i=1}^n X_i = \{(x_1, \ldots, x_n) \mid x_1 \in X_1, \ldots, x_n \in X_n\}\]
+   Regarding notation we write \(X^n\) for \(X \times \ldots \times X\).
+\end{remark}
+
+\begin{proposition}[Rules for Cartesian Products]
+   Let \(A, B\) be sets, then holds the following
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(A \times B = \emptyset \iff A = \emptyset \lor B = \emptyset\)
+      \item \((A \times B = B \times A) \iff A = B\) for \(A, B \neq \emptyset\)
+   \end{enumerate}
+\end{proposition}
+
+\begin{definition}[(Indexed) Family]
+   Given an index set \(I \neq \emptyset\) and a set \(X\)
+   \[(x_i)_{i \in I} := \{x_i \in X \mid \forall i \in I\}\]
+\end{definition}
+\begin{remark}
+   Formally we define an indexed family as the map \(\varphi: I \to X \quad\text{with}\quad i \mapsto x_i\).
+\end{remark}
+\begin{remark}
+   Given a set \(X\) and a family of subsets \((A_i)_{i \in I} = \{A_i \subset X \mid \forall i \in I\}\)
+   \[\bigcap_{i \in I} A_i = \{x \in X \mid \forall i \in I: x \in A_i\} \subset X\]
+   \[\bigcup_{i \in I} A_i = \{x \in X \mid \exists i \in I: x \in A_i\} \subset X\]
+\end{remark}
+
+\begin{proposition}[Union/Intersection of Families]
+   Let \((A_i)_{i \in I}\) and \((B_j)_{j \in J}\) be families of sets, then holds the following
+
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item Associativity:
+         \[\left(\bigcap_{i \in I} A_i\right) \cap \left(\bigcap_{j \in J} B_j\right) = \bigcap_{(i, j) \in I \times J} A_i \cap B_j \quad\text{and}\quad \left(\bigcup_{i \in I} A_i\right) \cup \left(\bigcup_{j \in J} B_j\right) = \bigcup_{(i, j) \in I \times J} A_i \cup B_j\]
+      \item Distributivity:
+         \[\left(\bigcap_{i \in I} A_i\right) \cup \left(\bigcap_{j \in J} B_j\right) = \bigcap_{(i, j) \in I \times J} A_i \cup B_j \quad\text{and}\quad \left(\bigcup_{i \in I} A_i\right) \cap \left(\bigcup_{j \in J} B_j\right) = \bigcup_{(i, j) \in I \times J} A_i \cap B_j\]
+   \end{enumerate}
+\end{proposition}
+
+\begin{theorem}[De Morgan for complement Families]
+   Let \((A_i)_{i \in I}\) be a family of subsets of \(X\).
+   \begin{equation}\label{eq:de_morgan_fam_comp}
+      \left(\bigcap_{i \in I} A_i \right)^c = \bigcup_{i \in I} A_i^c
+   \end{equation}
+   \[\left(\bigcup_{i \in I} A_i \right)^c = \bigcap_{i \in I} A_i^c\]
+\end{theorem}
+
+\subsection{Infinite Sets}
+The fact that an \(n \in \mathbb{N}\) is a set itself containing all \(x \in n: x < n\) lays the foundation for the definition of finite and infinite sets.
+
+\begin{definition}[\(\mathbb{N}_{<n}\)]
+   \[\mathbb{N}_{<n} := \{m \in \mathbb{N} \mid m < n\}\]
+\end{definition}
+\begin{example}
+   \[\mathbb{N}_{<0} = \emptyset \quad \mathbb{N}_{<1} = \{0\} \quad \mathbb{N}_{<2} = \{0, 1\} \quad \mathbb{N}_{<n} = \{0, 1, 2, \ldots, n - 1\}\]
+\end{example}
+
+\begin{definition}[Finite Set]\label{def:finite_set}
+   Given \(n \in \mathbb{N}\) a set \(A\) is finite if
+   \[\exists!~f: \mathbb{N}_{<n} \xrightarrow{\sim} A\]
+   We therefore call \(A\) \emph{countable} or enumerable.
+\end{definition}
+\begin{remark}
+   A set \(A \subset \mathbb{N}\) is at most countably infinite since \(\leq\) is a well-order on \(\mathbb{N}\) we can define an order-preserving bijection.
+\end{remark}
+
+\begin{definition}[Infinite Set]
+   A set \(A\) is countable infinite iff
+   \[\exists~f: \mathbb{N} \xrightarrow{\sim} A\]
+   Otherwise we call \(A\) \emph{uncountable infinite}.
+\end{definition}
+\begin{example}
+   \(\mathcal{P}(\mathbb{N})\) is uncountably infinite.
+
+   Suppose there exists \(f: \mathbb{N} \xrightarrow{\sim} \mathcal{P}(\mathbb{N})\) which enumerates all subsets of \(\mathbb{N}\).
+   \[f(n) = A \subset \mathcal{P}(\mathbb{N})\]
+   \[A := \{n \in \mathbb{N} \mid n \not\in f(n)\}\]
+   which means that \(A \not\in \im(f)\) which implies that \(f\) is not bijective, hence is \(\mathcal{P}(\mathbb{N})\) uncountably infinite.
+\end{example}
+
+\begin{definition}[Cardinality]
+   \(n \in \mathbb{N}\) the number of elements of a set \(A\)
+   \[|A| := n \]
+\end{definition}
+\begin{remark}
+   Where \(n\) is unique, hence the same as in \cref{def:finite_set}.
+\end{remark}
+
+\begin{proposition}[Infinite Set Properties]
+   Let \(A\) be a set, the following statements are equivalent
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(A\) is infinite.
+      \item \(\exists~\mathbb{N} \hookrightarrow A\).
+      \item \(\exists~A \hookrightarrow A\) which is not surjective.
+   \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Equipotent Sets]
+   Two sets \(A\) and \(B\) are equipotent (have the same cardinality) if
+   \[\exists f: A \xrightarrow{\sim} B\]
+\end{definition}
+
+\begin{theorem}[Cantor]
+   A set \(X\) is never equipotent as its power set.
+   \[\nexists X \twoheadrightarrow \mathcal{P}(X)\]
+\end{theorem}
+
+\begin{proposition}[Subset of Countable Set]
+   Every subset of a countable set is also countable.
+\end{proposition}
+\begin{remark}
+   For statements about countably infinite sets we can always assume that they are \(\mathbb{N}_0\).
+   Therefore we could've also stated ''All subsets of \(\mathbb{N}_0\) are countable``.
+\end{remark}
+
+\begin{proposition}[Union of Countable Sets]
+   Let \(\forall n \in \mathbb{N}\) be \(A_n\) a countable set, then is
+   \[\bigcup_{n=1}^{\infty} A_n~\text{countable}\]
+\end{proposition}
+
+\begin{proposition}[Product of Countable Sets]
+   \(\mathbb{N} \times \mathbb{N}\) is countable.
+\end{proposition}
+\begin{proof}
+   Use cantors scheme.
+\end{proof}
+
+\section{Relations}
+\subsection{Definition \& Terminology}
+\begin{definition}[(Binary) Relation]
+   Given a set \(X\)
+   \[R \subset X \times X\]
+\end{definition}
+\begin{remark}
+   For two elements \(x, y \in X\) we say \(x\) is in relation \(R\) to \(y\), written as
+   \[(x, y) \in R \quad\text{or}\quad xRy \quad\text{or}\quad x \sim_R y\]
+\end{remark}
+\begin{example}
+   The graph of a function \(f: M \to M\) is a relation with the property that \(\forall x \in M \exists! y \in M: (x, y) \in \mathcal{G}(f)\).
+\end{example}
+
+\begin{definition}[Reflexive Relation]
+   A relation \(R\) where
+   \[\forall x \in X: xRx\]
+\end{definition}
+
+\begin{definition}[Diagonal Relation]
+   A solely reflexive relation
+   \[\Delta_X = \{(x, x) \mid x \in X\}\]
+\end{definition}
+\begin{example}
+   Let \(X = \{1, 2, 3\}\), in this case
+   \(\Delta_X = \{(1, 1), (2, 2), (3, 3)\}\)
+   would even be an equivalence relation (\ref{def:equivalence_relation}).
+\end{example}
+
+\begin{definition}[Symmetrical Relation]
+   A relation \(R\) where
+   \[\forall x, y \in X: xRy \implies yRx\]
+\end{definition}
+
+\begin{definition}[Transitive Relation]
+   A relation \(R\) where
+   \[\forall x, y, z \in X: (xRy \land yRz) \implies xRz\]
+\end{definition}
+\begin{example}
+   Let \(X = \{1, 2, 3\}\), then is \(<\) transitive since
+   \[1 < 2 \land 2 < 3 \implies 1 < 3\]
+   however it is not reflexive or symmetrical.
+\end{example}
+
+\subsection{Equivalence Relations}
+The idea of an equivalence relation is to group elements of a set together by some property.
+\begin{definition}[Equivalence Relation]\label{def:equivalence_relation}
+   A relation \(\sim\) on a set \(X\) which is
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \textit{reflexive}: \(\forall x \in X: x \sim x\)
+      \item \textit{symmetrical}: \(\forall x, y \in X: x \sim y \implies y \sim x\)
+      \item \textit{transitive}: \(\forall x, y, z \in X: (x \sim y \land y \sim z) \implies x \sim z\)
+   \end{enumerate}
+\end{definition}
+If two elements both satisfy this property they belong to the same \emph{equivalence class}.
+\begin{definition}[Equivalence Class]
+   Given an equivalence relation \(\sim\) on a set \(X\) and \(x \in X\)
+   \[[x] := \{x' \mid x' \sim x\} \subset X\]
+\end{definition}
+\begin{remark}
+   An element of \([x]\) is a \emph{representative} of this particular equivalence class.
+\end{remark}
+So every equivalence class is a set of elements which are equivlant in some sense.
+If we want to look at all those sets we regard the
+\begin{definition}[Quotient Set]
+   Given a set \(X\) with an equivalence relation \(\sim\)
+   \[X_{/\sim} := \big\{[x] \mid x \in X \big\} \subset \mathcal{P}(X)\]
+\end{definition}
+Now we see how naturally equivalence classes are a good way of grouping elements of a set.
+It can be proven that
+\begin{theorem}
+   \(\forall [x], [x'] \in X_{/\sim}: [x] \cap [x'] \neq \emptyset \implies [x] = [x']\)
+\end{theorem}
+From which follows that
+\[\bigcup_{[x] \in X_{/\sim}} [x] = X\]
+Hence \(X_{/\sim}\) is a \emph{partition} of \(X\), defining what elements belong together.
+\begin{definition}[Partition]
+   Given a set \(X\), the subset \(\mathbb{X} \subset \big(\mathcal{P}(X) \setminus \{\emptyset\}\big)\) is a partition of \(X\) iff
+   \[\forall x \in X: \big(\exists! \mathcal{X} \in \mathbb{X}: x \in \mathcal{X}\big)\]
+\end{definition}
+\begin{remark}
+   In words: a partition \emph{partitions} a set \(X\) into multiple subsets \(\mathcal{X}\)
+   Those subsets \(\mathcal{X}\) are formed such that every element of \(X\) belongs to exactly one such subset.
+   All those \(\mathcal{X}\) are grouped into \(\mathbb{X}\) such that
+   \[\bigcup_{\mathcal{X} \in \mathbb{X}} \mathcal{X} = X\]
+   furthermore for any \(\mathcal{X}, \mathcal{Y} \in \mathbb{X}\) we have that
+   \[\mathcal{X} \cap \mathcal{Y} = \emptyset\]
+\end{remark}
+
+Hence we can say that
+\begin{theorem}\label{thm:equivcls}
+   An equivalence relation defined on a set \(X\) induces a partition of \(X\).
+\end{theorem}
+The partition of this statements also leads to a surjective projection (\ref{def:projection}) from a set to it's quotient set.
+\[p_x: X \twoheadrightarrow X_{/\sim} \qquad\text{where}\qquad x \mapsto [x]\]
+We call this a \emph{canonical projection}.
+It's a \emph{projection} because it maps \(X\) into a sub-structure \(X_{/\sim}\) and \emph{canonical} as it arises naturally from the definition of the two structures it maps.
+Note that \(\forall [x] \in X_{/\sim}: [x] \subset X\), i.e. \(X_{/\sim}\) is ''more`` structured than \(X\), hence we call it a substructure.
+
+\subsubsection{Important Example}
+One important example groups numbers by their \emph{remainder} or \emph{residue} when we divide them by some number \(n\).
+Recall Euclidean division of whole numbers;
+\[a = n \cdot q + r\]
+where \(q \in \mathbb{N}\) is the \emph{quotient} -- the ratio between \(a\) and \(n\) -- and \(r \in \mathbb{N}\) is the \emph{remainder}.
+
+Now we want to group numbers by their remainder \(r\), so we introduce the \emph{modulo operation}, which gives us the remainder of the Euclidean division of \(a\) by \(n\).
+\[a \bmod n = r\]
+A handy notation of modular arithmetic is
+\[a \equiv b \mod n \iff a \equiv_n b\]
+where we say \(a\) is equivalent to \(b\), modulo \(n\), so we can define our equivalence relation like so
+\[a \sim b :\iff a \equiv b \mod n\]
+However this gives us only intuitive notation, however to prove that this is an equivalence relation we need some more background.
+
+\(a \equiv_n b\) actually means that \(a\) and \(b\) are \emph{congruent modulo} \(n\), meaning that \(n\) divides \(a - b\).
+This follows since they have the same remainder.
+\[\begin{drcases}a = n \cdot q_a + r\\b = n \cdot q_b + r \implies r = b - n \cdot q_b\end{drcases} \implies a = n \cdot q_a + b - n \cdot q_b \implies a - b = n \cdot (q_a - q_b)\]
+Now for a concrete example let \(n = 10\) we define \(\sim\) on \(\mathbb{Z}\) as follows
+\[a \sim b :\iff \exists k \in \mathbb{Z}: a - b = k \cdot 10\]
+and show that it is an equivalence relation.
+
+\textbf{Reflexivity:} Let \(a \in \mathbb{Z}\).
+\[a - a = 0 = 0 \cdot 10\]
+
+\textbf{Symmetry:} Let \(a, b \in \mathbb{Z}: a \sim b\).
+\[a \sim b \implies a - b = k \cdot 10 \implies (-1)(a - b) = (-1)k \cdot 10 \implies b - a = (-1)k \cdot 10 \implies b \sim a\]
+
+\textbf{Transitivity} Let \(a, b, c \in \mathbb{Z}: a \sim b \land b \sim c\).
+\begin{equation*}
+   \begin{split}
+      \begin{drcases}a \sim b \implies a - b = k \cdot 10\\ b \sim c \implies b - c = l \cdot 10 \implies b = c + l \cdot 10\end{drcases} & \implies a - (c + l \cdot 10) = k \cdot 10\\
+      & \implies a - c = (k + l) \cdot 10 \implies a \sim c
+   \end{split}
+\end{equation*}
+
+
+\subsection{Order Relations}
+\begin{definition}[Antisymmetrical Relation]
+   A relation \(R\) where
+   \[\forall x, y \in X: (xRy \land yRx) \implies x = y\]
+\end{definition}
+
+\begin{definition}[(Partial) Order]
+   A relation \(\preceq\) on a set \(X\), which is
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \textit{reflexive}: \(\forall x \in X: x \preceq x\)
+      \item \textit{antisymetrical}: \(\forall x, y \in X: (x \preceq y \land y \preceq x) \implies x = y\)
+      \item \textit{transitive}: \(\forall x, y, z \in X: (x \preceq y \land y \preceq z) \implies x \preceq z\)
+   \end{enumerate}
+\end{definition}
+
+\begin{definition}[Total Relation]
+   A relation \(R\) where
+   \[\forall x, y \in X: xRy \lor yRx\]
+\end{definition}
+
+\begin{definition}[Total Order]
+   A partial order \(\preceq\) on a set \(X\), where \(\preceq\) is a total relation
+   \[\forall x, y \in X: x \preceq y \lor y \preceq x\]
+\end{definition}
+\begin{example}
+   \((\mathbb{R}, \leq)\) is a totally ordered set.
+\end{example}
+
+\begin{definition}[Well-Order]
+   A total order \(R\) on a set \(X\), where
+   \[\forall A \subset X: A \neq \emptyset~\text{have a minimum.}\]
+\end{definition}
+\begin{remark}
+   We say \(X\) is \emph{backwards} well-ordered if \(A\) has a least element and \emph{forwards} well-ordered if \(A\) has a greatest element.
+\end{remark}
+\begin{example}
+   \((\mathbb{N}, \leq)\) is backwards well-orderd, since it has 1 as its least item.
+   It is however not well-ordered forwards, since it has not a greatest element
+\end{example}
+
+\subsection{Ordered Sets}
+\begin{definition}[(Partially) Ordered Set]
+   A set \(X\) with an order relation \(\preceq\) denoted as \((X, \preceq)\).
+\end{definition}
+\begin{example}
+   \((\mathcal{P}(X), \subset)\) is an ordered set, where we call \(\subset\) the ''natural order`` of \(\mathcal{P}(X)\).
+   But for \(X = \{1, 2\} \implies \mathcal{P}(X) = \big\{\emptyset, \{1\}, \{2\}, \{1, 2\}\big\}\) is \((\mathcal{P}(X), \subset)\) not totally ordered since \(\{1\} \not\subset \{2\} \land \{2\} \not\subset \{1\}\).
+\end{example}
+
+\begin{definition}[Totally Ordered Set]
+   A set \(X\) with a total order \(\preceq\).
+\end{definition}
+\begin{example}
+   \((\mathbb{N}, <)\) and \((\mathbb{R}, \leq)\).
+\end{example}
+
+\begin{proposition}[Property of Totally Ordered Sets]
+   Let \((X, \preceq)\) be a totally ordered set, then only one of the following holds
+   \[\forall x, y \in X: (x < y) \lor (x = y) \lor (x > y)\]
+\end{proposition}
+\begin{proof}
+   Since \(\preceq\) is total, at least one of the above must hold, but since it's antisymmetrical no more than one can hold.
+\end{proof}
+
+\begin{definition}[Order Complete Set]
+   A totally ordered set \((M, \preceq)\) is order complete if the following holds.
+
+   Given the subsets \(A, B \neq \emptyset \subset M\) with \(\forall a \in A, \forall b \in B: a \preceq b\)
+   \[\exists c \in M: (\forall a \in A: a \preceq c) \land (\forall b \in B: c \preceq b)\]
+\end{definition}
+\begin{remark}
+   \(\mathbb{Q}\) is a totally ordered set but not order complete. Given
+   \[A = \{x \in \mathbb{Q}^+: 0 < x \land x^2 < 2\}\]
+   \[B = \{x \in \mathbb{Q}^+: 0 < x \land x^2 > 2\}\]
+   \[\not\exists c \in \mathbb{Q}: a \leq c \leq b~\forall a \in A, \forall b \in B\]
+   Would there exists such a \(c\) it would be \(\sqrt{2}\)
+\end{remark}
+
+\begin{definition}[Bounded Below Set]
+   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+   \[A~\text{is bounded below if}~\exists b \in X: (\forall a \in A: b \preceq a)\]
+\end{definition}
+
+\begin{definition}[Bounded Above Set]
+   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+   \[A~\text{is bounded above if}~\exists b \in X: (\forall a \in A: a \preceq b)\]
+\end{definition}
+\begin{remark}
+   We say \(A\) is \textit{bounded} if it is bounded above and below.
+\end{remark}
+
+\begin{definition}[Lower Bound]
+   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+   \[b \in X~\text{is a lower bound if}~\forall a \in A: b \preceq a\]
+\end{definition}
+\begin{example}
+   Let \(A = [0;1) = \{x \in A \mid 0 \leq x < 1\}\).
+
+   Everything \(> 1\) is an upper bound and \(0\) is one lower bound (of infinitely many)
+   \([0;\infty)\) however is only bounded below and not above.
+\end{example}
+
+\begin{definition}[Upper Bound]
+   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+   \[b \in X~\text{is an upper bound if}~\forall a \in A: a \preceq b\]
+\end{definition}
+
+\begin{definition}[Minimal Element]
+   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+   \[m \in A~\text{is minimal if}~(a \in A) \land (a \preceq m) \implies a = m\]
+\end{definition}
+
+\begin{definition}[Maximal Element]
+   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+   \[m \in A~\text{is maximal if}~(a \in A) \land (m \preceq a) \implies a = m\]
+\end{definition}
+\begin{remark}
+   In other words, a minimal element of \(A\) is \textit{not greater} than any other element in \(A\), likewise a maximal element is \textit{not smaller} than any other element.
+\end{remark}
+\begin{remark}
+   In general, the minimal and maximal elements don't have to exist or be unique.
+   However if the order on \(X\) is total, then they are unique.
+
+   Let \(m_1, m_2 \in A\) be two maximal elements.
+   It holds that either \(m_1 \preceq m_2\) or \(m_2 \preceq m_1\).
+   \[m_1 \preceq m_2 \implies m_2 = m_1~\text{since}~m_1~\text{is maximal}\]
+   \[m_2 \preceq m_1 \implies m_1 = m_2~\text{since}~m_2~\text{is maximal}\]
+   hence \(m_1 = m_2\), the same can be proven for the minimal element.
+\end{remark}
+\begin{remark}
+   The notions of maximal and minimal elements are weaker than those of greatest element and least element which are also known, respectively, as maximum and minimum.
+   While a (partially) ordered set can have at most one each maximum and minimum it may have multiple maximal and minimal elements.
+\end{remark}
+
+\begin{definition}[Infimum]
+   Given a partially ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+   \[\inf(A) := \text{maximal element of}~\{x \in X \mid x~\text{lower bound of}~A\}\]
+\end{definition}
+
+\begin{definition}[Supremum]
+   Given a partially ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+   \[\sup(A) := \text{minimal element of}~\{x \in X \mid x~\text{upper bound of}~A\}\]
+\end{definition}
+\begin{remark}
+   From the uniqueness of the minimal and maximal element (of totally ordered sets) follows that \(\sup\) and \(\inf\) are unique if they exist.
+\end{remark}
+
+\begin{definition}[Maximum]
+   Given an totally ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+   \[\max(A) := \sup(A)~\text{if}~\sup(A) \in A\]
+\end{definition}
+
+\begin{definition}[Minimum]\label{def:set_minimum}
+   Given an totally ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+   \[\min(A) := \inf(A)~\text{if}~\inf(A) \in A\]
+\end{definition}
+
+% TODO: merge with analysis
+\begin{definition}[Inf/Sup of unbounded Set]\label{def:unbounded_subsets}
+   Given a set \(M \subset \mathbb{R}: M \neq \emptyset\) which is not bounded above or below
+   \[\sup(M) = \infty \quad\text{and}\quad \inf(M) = -\infty\]
+\end{definition}
+
+\section{Maps}
+\subsection{Definition \& Terminology}
+\begin{definition}[Map]\label{def:map}
+   Given the sets \(X, Y\)
+   \[f: X \to Y \quad\text{where}\quad x \in X \mapsto f(x) \in Y\]
+   and
+   \[\forall x \in X: f(x)~\text{is defined} \qquad\text{and}\qquad \forall x \in X: f(x)~\text{is unique}\]
+\end{definition}
+\begin{remark}
+   Formally we would define a map as a subset of \(X \times Y\).
+   \[\Gamma_f = \big\{(x, f(x)) \in X \times Y \mid \forall x \in X\big\}\]
+   \[\forall x \in X: (\exists! y \in Y: (x, y) \in \Gamma_f)\]
+\end{remark}
+
+\begin{definition}[Equivalent Maps]
+   Given the maps \(f: X \to Y\) and \(g: X' \to Y'\)
+   \[f = g := (X = X') \land (Y = Y') \land (\forall x \in X: f(x) = g(x))\]
+\end{definition}
+
+\begin{definition}[Graph of a Map]
+   Given a map \(f: X \to Y\)
+   \[\mathcal{G}(f) := \big\{(x, f(x)) \in X \times Y \mid \forall x \in X\big\}\]
+\end{definition}
+
+\begin{definition}[Composition of Maps]
+   Given the maps \(f: X \to Y\) and \(g: Y \to Z\)
+   \[g \circ f: X \to Z \quad\text{where}\quad x \mapsto g(f(x))\]
+\end{definition}
+\begin{remark}
+   Regarding notation we write
+   \[(g \circ f)(x) = g(f(x))\]
+\end{remark}
+
+\begin{proposition}[Composition Associativity]
+   Let \(f: W \to X\), \(g: X \to Y\) and \(h: Y \to Z\) be maps, then is
+   \[(h \circ g) \circ f = h \circ (g \circ f)\]
+\end{proposition}
+\begin{proof}
+   Let \(w \in W\) be arbitrary
+   \[h \circ (g \circ f)(w) = h(g \circ f(w)) = h(g(f(w))) = h \circ g(f(w)) = (h \circ g) \circ f(w)\]
+\end{proof}
+
+\begin{definition}[Commutative Diagram]
+   Given the maps \(f: X \to Y\), \(g: Y \to Z\) and \(h: X \to Z\)
+   \begin{center}
+      \begin{tikzcd}
+         X \arrow[r, "f"] \arrow[rd, "h"] & Y \arrow[d, "g"] \\
+                                          & Z \\
+      \end{tikzcd}
+   \end{center}
+   We say the diagram is \textit{commutative} or \textit{commutates} if you can reach \(Z\) from \(X\) in every way.
+\end{definition}
+
+\begin{definition}[Domain of a Map]\label{def:domain}
+   The set \(X\) of a map \(f: X \to Y\).
+\end{definition}
+\begin{remark}
+   Sometimes also called \textit{source}.
+\end{remark}
+
+\begin{definition}[Co-Domain of a Map]\label{def:codomain}
+   The set \(Y\) of a map \(f: X \to Y\).
+\end{definition}
+\begin{remark}
+   Sometimes also called \textit{target}.
+\end{remark}
+
+\begin{definition}[Image of a Map]
+   Given a map \(f: X \to Y\)
+   \[\im(f) := f(X) = \{y \in Y \mid \exists x \in X: y = f(x)\}\]
+\end{definition}
+\begin{remark}
+   Sometimes also called \textit{range}: \(\Ran(f)\).
+\end{remark}
+\begin{remark}
+   The image of a single element \(x \in X\) is the \textit{value} of \(f\) at \(x\).
+\end{remark}
+
+\begin{definition}[Image of a Subset]
+   Given a map \(f: X \to Y\) and a subset \(A \subset X\)
+   \[f(A) = \{f(a) \in Y \mid \forall a \in A\}\]
+\end{definition}
+
+\begin{definition}[Pre-Image of a Map]\label{def:pre-image}
+   Given a map \(f: X \to Y\) and a subset \(A \subset Y\)
+   \[f^{-1}(A) = \{x \in X \mid \forall f(x) \in A\}\]
+\end{definition}
+\begin{remark}
+   Sometimes also called \textit{inverse image}.
+\end{remark}
+
+\begin{example}[Image Set, Image \& Pre-Image]
+   Let \(M = \{1, 2, 3, 4, 5\}\) and \(N = \{6, 7, 8\}\).
+   We define \(f: M \to N\) as follows
+   \[f(1) = f(2) = f(4) = 6\]
+   \[f(3) = f(5) = 7\]
+   \(f\) is well-defined since every \(m \in M\) is mapped.
+   The image set is \(f(M) = \{1, 2\}\)
+   The pre-images are
+   \[f^{-1}(\{6\}) = \{1, 2, 4\}\]
+   \[f^{-1}(\{7\}) = \{3, 5\}\]
+   \[f^{-1}(\{8\}) = \emptyset\]
+\end{example}
+
+\begin{proposition}[Properties of Image/Pre-Image]
+   Let \(f: X \to Y\) be a map and \((A_i)_{i \in I}, A, B \subset X\) and \((A'_j)_{j \in J}, A', B' \subset Y\) be subsets, then holds the following
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(A \subset B \implies f(A) \subset f(B)\)
+      \item \(A' \subset B' \implies f^{-1}(A') \subset f^{-1}(B')\)
+      \item \(f(\bigcup A_i) = \bigcup f(A_i) \quad\text{and}\quad f(\bigcap A_i) = \bigcap f(A_i)\)
+      \item \(f^{-1}(\bigcup A'_j) = \bigcup f^{-1}(A'_j) \quad\text{and}\quad f^{-1}(\bigcap A'_j) = \bigcap f^{-1}(A'_j)\)
+      \item \(f(A^c) \supset f(X) \setminus f(A)\)
+      \item \(f^{-1}(A'^c) = f^{-1}(A')^c\)
+   \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Fibre of an Element]
+   Given a map \(f: X \to Y\) and an element \(y \in Y\)
+   \[f^{-1}(y) = \{x \in X \mid f(x) = y\}\]
+\end{definition}
+\begin{remark}
+   Every fibre is the pre-image of a single element.
+   In other words, the fibre of \(y\) is the set of all \(x \in X\) which \(f\) maps to \(y\).
+\end{remark}
+
+\begin{proposition}[Fibre of Compositions]
+   Let \(f: X \to Y\) and \(g: Y \to Z\) be maps, then is
+   \[\forall B \subset Z: (g \circ f)^{-1}(B) = f^{-1} \circ g^{-1}(B)\]
+\end{proposition}
+
+\begin{definition}[Set of all Maps]
+   Given the sets \(X\) and \(Y\)
+   \[Y^X = \Abb(X, Y) := \{f: X \to Y\}\]
+\end{definition}
+\begin{example}
+   Let \(X = Y = \{1, 2\}\).
+   We have the following maps \(X \to Y\)
+   \[f_1: 1_x \mapsto 1_y \land 2_x \mapsto 2_y \qquad f_2: 1_x \mapsto 1_y \land 2_x \mapsto 1_y\]
+   \[f_3: 1_x \mapsto 2_y \land 2_x \mapsto 2_y \qquad f_4: 1_x \mapsto 2_y \land 2_x \mapsto 1_y\]
+   \[Y^X = \{f_1, f_2, f_3, f_4\}\]
+\end{example}
+
+\subsection{Important Examples}
+\begin{example}[Identity]
+   Given a set \(X\)
+   \[\id_X: X \to X \quad\text{where}\quad x \mapsto x\]
+\end{example}
+
+\begin{definition}[Projection]\label{def:projection}
+   Given the sets \(Y \subset X\)
+   \[p: Y \to X \quad\text{where}\quad y \in Y \mapsto y \in X\]
+\end{definition}
+
+\begin{definition}[Inclusion/Projection]
+   Given the sets \(X \subset Y\)
+   \[i: X \to Y \quad\text{where}\quad x \in X \mapsto x \in Y\]
+\end{definition}
+
+\begin{example}[Restriction of a Map]
+   Given a map \(f: X \to Y\) and a subset \(A \subset X\)
+   \[f|_A: A \to Y \quad\text{where}\quad a \mapsto y\]
+   where we ''shrank`` the domain (\ref{def:domain}) of \(f\).
+\end{example}
+
+\begin{example}[Map of Sets]
+   Given a map \(f: X \to Y \quad\text{where}\quad x \in X \mapsto f(x) \in Y\)
+   \[g: \mathcal{P}(X) \to \mathcal{P}(Y) \quad\text{where}\quad A \in \mathcal{P}(X) \mapsto f(A) \in \mathcal{P}(Y)\]
+   \[g^{-1}: \mathcal{P}(Y) \to \mathcal{P}(X) \quad\text{where}\quad A \in \mathcal{P}(Y) \mapsto f^{-1}(A) \in \mathcal{P}(X)\]
+   where \(g^{-1}\) and \(f^{-1}\) are the corresponding pre-images (\ref{def:pre-image}).
+\end{example}
+
+\subsection{Injectivity, Surjectivity \& Bijectivity}
+\begin{definition}[Injective Map]\label{def:injective}
+   A map where
+   \[\forall x, x' \in X: f(x) = f(x') \implies x = x'\]
+\end{definition}
+\begin{remark}[Notation]
+   \(f: X \xhookrightarrow{} Y\)
+\end{remark}
+\begin{remark}
+   No multiple elements of \(X\) are mapped to the same element in \(Y\).
+   Or differently put, every element in \(Y\) is mapped at most once.
+\end{remark}
+
+\begin{definition}[Surjective Map]\label{def:surjective}
+   A map  where
+   \[\text{im}(f) = Y \implies f(X) = Y \implies \forall y \in Y~\exists x \in X: y = f(x)\]
+\end{definition}
+\begin{remark}[Notation]
+   \(f: X \twoheadrightarrow Y\)
+\end{remark}
+\begin{remark}
+   Every element in \(Y\) is mapped at least once.
+\end{remark}
+
+\begin{definition}[Bijective Map]\label{def:bijective}
+   An injective and surjective map, i.e.
+   \[\forall y \in Y~\exists! x \in X: f(x) = y\]
+\end{definition}
+\begin{remark}[Notation]
+   \(f: X \xrightarrow{\sim} Y\)
+\end{remark}
+\begin{remark}
+   There is a one-to-one correspondence between \(X\) and \(Y\).
+   Or differently put, every element in \(Y\) is mapped exactly once.
+\end{remark}
+\begin{example}
+   The identity map is per definition bijective.
+\end{example}
+
+\begin{proposition}[Inverse of a Bijection]
+   Let \(f: X \to Y\) be a map, then is
+   \[f: X \xrightarrow{\sim} Y \iff \exists! g: Y \to X~\text{where}~g \circ f = \id_X~\text{and}~f \circ g = \id_Y\]
+\end{proposition}
+\begin{remark}
+   Since \(g\) is unique, we write \(f^{-1}: Y \to X\) where \(y = f(x) \mapsto x = f^{-1}(y)\) hence \(f^{-1}(f(x)) = x\).
+\end{remark}
+\begin{proof}[Proof ``\(\implies\)'']
+   Suppose \(f\) is bijective.
+   First we prove the existence of \(g\).
+   \[\exists y \in Y: (\exists! x \in X: y = f(x))\]
+   So we define \(g: Y \to X\) through \(g(y) := x\).
+
+   Now we show that \(g\) is unique.
+   Let \(h: Y \to X\) be a second map with \(h \circ f = \id_X\) and \(f \circ h = \id_Y\).
+   \[g = g \circ \id_Y = g \circ \underbrace{f \circ h}_{\id_Y} = \underbrace{g \circ f}_{\id_X} \circ h = \id_X \circ h = h\]
+\end{proof}
+\begin{proof}[Proof ``\(\impliedby\)'']
+   Let \(g: Y \to X\) be a map with \(g \circ f = \id_X\) and \(f \circ g = \id_Y\), we prove that \(f\) is bijective.
+
+   From \(f \circ g = \id_Y\) follows that \(f\) is surjective since
+   \[\forall y \in Y: f(g(y)) = y\]
+
+   Now let \(x, x' \in X: f(x) = f(x')\).
+   \[x = \id_X(x) = g(f(x)) = g(f(x')) = \id_X(x') = x'\]
+   Thus \(f\) is injective.
+\end{proof}
+
+\begin{proposition}[Inverse of a Composition]
+   Let \(f: X \xrightarrow{\sim} Y\) and \(g: Y \xrightarrow{\sim} Z\) be bijections, then is
+   \[g \circ f: X \to Z~\text{a bijection with}~(g \circ f)^{-1} = f^{-1} \circ g^{-1}\]
+\end{proposition}
+\begin{proof}
+   \(g \circ f\) is surjective, since \(f\) and \(g\) are surjective.
+   Let \(x, x' \in X\)
+   \[g(f(x)) = g(f(x')) \implies f(x) = f(x') \implies x = x'\]
+   since both are injective.
+   \[(f^{-1} \circ g^{-1}) \circ (g \circ f) = f^{-1} \circ \id_Y \circ f = f^{-1} \circ f = \id_X\]
+\end{proof}
+
+\subsection{Maps with ordered Co-/Domain}
+\begin{definition}[Increasing Map]
+   Given a map \(f: (X, \preceq_X) \to (Y, \preceq_Y)\)
+   \[x \preceq_X y \implies f(x) \preceq_Y f(y)\]
+\end{definition}
+\begin{remark}
+   We say \(f\) is \textit{strictly} increasing if \(x \prec y \implies f(x) \prec f(y)\)
+\end{remark}
+
+\begin{definition}[Decreasing Map]
+   Given a map \(f: (X, \preceq_X) \to (Y, \preceq_Y)\)
+   \[x \preceq_X y \implies f(x) \succeq_Y f(y)\]
+\end{definition}
+\begin{remark}
+   We say \(f\) is \textit{strictly} decreasing if \(x \prec y \implies f(x) \succ f(y)\)
+\end{remark}
+
+\begin{remark}[Monotonic]
+   We call a map which is either increasing or decreasing \textit{monotonic} as in ''\(f\) is monotonically increasing``.
+\end{remark}
+
+\begin{definition}[Bounded Below Map]
+   Given a map \(f: X \to (Y, \preceq_Y)\)
+   \[\exists b \in \im(f): \forall y \in \im(f): b \preceq_Y y\]
+\end{definition}
+\begin{remark}
+   In other words, \(f\) is bounded below if \(\im(f)\) is bounded below.
+\end{remark}
+
+\begin{definition}[Bounded Above Map]
+   Given a map \(f: X \to (Y, \preceq_Y)\)
+   \[\exists b \in \im(f): \forall y \in \im(f): y \preceq_Y b\]
+\end{definition}
+\begin{remark}
+   In other words, \(f\) is bounded above if \(\im(f)\) is bounded above.
+\end{remark}
+\begin{remark}
+   Given a subset \(A \subset X\), we say \(f\) is \textit{bounded on bounded subsets} if the set \(f(A)\) is bounded.
+\end{remark}
+
+\subsection{Operations}
+\begin{definition}[Operation]
+   Given a set \(X\)
+   \[\ast: X \times X \to X \quad\text{with}\quad (x, y) \mapsto \ast(x, y)\]
+\end{definition}
+\begin{remark}[Notation]
+   For \(\ast(x, y)\) we write \(x \ast y\).
+\end{remark}
+
+\begin{definition}[Closed Set]
+   Given a subset \(A \subset X: A \neq \emptyset\) and the operation \(*: X \times X \to X\)
+   \[(A \ast A) \subset A\]
+\end{definition}
+\begin{remark}
+   We say \(A\) \emph{is closed} or \emph{has closure} regarding \(\ast\).
+\end{remark}
+
+\begin{definition}[Associative Operation]
+   An operation \(\ast\) on a set \(X\) where
+   \[(a \ast b) \ast c = a \ast (b \ast c)\]
+\end{definition}
+\begin{remark}
+   Once we introduced the principle of induction we can prove that associativity also holds for more than 3 elements.
+\end{remark}
+
+\begin{definition}[Commutative Operation]
+   An operation \(\ast\) on a set \(X\) where
+   \[a \ast b = b \ast a\]
+\end{definition}
+
+\begin{definition}[Neutral Element]
+   Given a set \(X\), an element \(e \in X\) where
+   \[\forall x \in X: e \ast x = x = x \ast e\]
+\end{definition}
+\begin{example}
+   For the operation \(+\) is 0 the neutral element, for \(\cdot\) it is 1.
+   For \(\circ: \Abb(X, X) \times \Abb(X, X) \to \Abb(X, X)\) it is \(\id_X\).
+\end{example}
+
+\begin{proposition}[Neutral Element is Unique]
+   The neutral element is unique.
+\end{proposition}
+\begin{proof}
+   Let \(e, e' \in X: e \neq e'\) be neutral elements
+   \[e = e \ast e' = e'\]
+\end{proof}
+
+\begin{definition}[Invertible]
+   Given a set \(X\) and an operation \(\ast: X \times X \to X\) with a neutral element \(e\), then is \(x \in X\) invertible with the Inverse \(x^{-1} \in X\) if
+   \[x \ast x^{-1} = e = x^{-1} \ast x\]
+\end{definition}
+
+\section{Sets of Numbers}
+Consider the following axiom
+
+Let \(F\) be a feature.
+Then there exists a set \(X = \{x \mid F(x)\}\).
+
+The proof why such an axiom is problematic comes from Russell.
+
+Consider the set \(R = \{X \mid X \not\in X\}\).
+Is \(R \in R \implies R \not\in R\) or if \(R \not\in R \implies R \in R\).
+Hence \(R\) cannot be a set.
+
+This is the liar paradox (a liar declares: ''I am lying.``) in set theory terms.
+It is the reason we define what a ''set`` is axiomatically where it holds that if you have a set you can build new sets from it.
+
+\subsection{ZFC Set Theory}
+\begin{definition}[ZFC Axioms]\label{def:zfc}
+   We use Zermelo, Fraenkel, Choice (ZFC) set theory as a foundation.
+   \begin{enumerate}
+      \item Two sets are equal if they have the same elements: \(A = B \iff \forall c: (c \in A \iff c \in B)\)
+      \item There exists \(\emptyset\)
+      \item For two sets \(A, B\) there is a set \(\{A, B\}\) (if \(A = B\) it is \(\{A\}\))
+      \item For a set \(A\) there exists \(\bigcup_{x \in A} x\) consisting of all elements, of the elements of \(A\)
+      \item There exists a set \(A\) with
+      \begin{enumerate}[label=\roman*, align=Center]
+         \item \(\emptyset \in A\)
+         \item \(\forall x \in A: x \cup \{x\} \in A\)
+      \end{enumerate}
+      \item For a set \(A\) there exist a set \(\mathcal{P}(A)\) of all subsets of \(A\): \(X \in \mathcal{P}(A) \iff X \subset A\)
+      \item Every non-empty set \(A\) contains an element which is disjoint (disjunkt) of \(A\)
+      \item For a set \(A\) and a predicate \(J\) there exists the set \(\{x \in A: J(x)\}\)
+      \item For a set \(A\) and a binary predicate \(J\) with \(\forall b, c, d: (J(b, c) \land J(b, d) \implies c = d)\) there exists the set \(\{y \mid \exists x: x \in A \land F(x, y)\}\)
+      \item For a set \(A\) with pairwise disjoint elements, there exists a set to which \(\forall x \in A\) exactly one element of \(x\) belongs.
+         \(\forall X, Y \in A \setminus \emptyset: X \cap Y = \emptyset \implies \exists Z \subset A: \forall X \in A: X \cap Z\)
+   \end{enumerate}
+\end{definition}
+\begin{example}[ZFC 7.]
+   This axiom is needed so that things such as \(A \in A\) or \(A \in B \land B \in A\) are not possible.
+\end{example}
+\begin{example}[ZFC 9.]
+   The power set of all subsets of \(A\): \(\{P(X): X \in A\}\)
+\end{example}
+
+With this collection of axioms it is possible to grasp all mathematical terms as sets.
+They can also be extended with the axiom of choice:
+
+\paragraph{Axiom of Choice:} Every family of non-empty subsets has a choice function.
+In other words, if \(A\) is a set of non-empty sets, then exists \(f: A \to \bigcup A\) which maps every element \(C\) of \(A\) to an element \(D \in C\).
+\begin{example}
+   We can interpret functions as sets.
+   Is \(f: X \to Y\) we can say \(f \subset X \times Y: (x, f(x)) \subset X \times Y\).
+\end{example}
+\begin{example}
+   The axiom of choice postulates the existence of a map onto a family of non-empty subsets \(S\) such that \(f(X) \in X\) for an \(X \in S\) holds.
+
+   We can explicitly construct such a map through \(\{x\} \mapsto x, \{y\} \mapsto y, \ldots\) where \(S = \{\{x\}, \{y\}, \ldots\}\).
+
+   For a \(S = \{1, \ldots, n\}\) can the existence of such a map be shown by induction over \(|S|\).
+
+   Or in the case of \(S \subset \mathbb{R}\) where \(S\) is finite is \(f(x) = \inf(X)\).
+
+   In general we can't construct such a map and it is axiomatically required.
+\end{example}
+
+\begin{theorem}[Well-Order Theorem]
+   Every set has a well-order.
+\end{theorem}
+\begin{example}
+   \begin{enumerate}
+      \item Infinite sets
+      \item \(\mathbb{N}_0, \mathbb{Z}, \mathbb{Q}\)
+   \end{enumerate}
+\end{example}
+
+The axiom of choice and the well-order theorem are in fact equivalent.
+Another commonly used version of the axiom of choice is
+\begin{theorem}[Zorn's Lemma]
+   Let \((X, \leq)\) be a partially ordered set.
+   If every chain has an upper bound then has \(X\) a maximal element.
+\end{theorem}
+\begin{remark}
+   A \emph{chain} is a non-empty subset of a partially ordered set which is totally ordered.
+\end{remark}
+
+\begin{definition}[Successor]\label{def:successor}
+   From 5.(ii) of \cref{def:zfc} we define
+   \[S(x) := x \cup \{x\}\]
+\end{definition}
+\begin{example}
+   Given an empty set \(A\) (only containing \(\emptyset\))
+
+   When we now say that \(A\) also contains all successors of its elements \(\forall x \in A: S(x) \in A\) we get the following set
+   \[A = \{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}, \{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}\}, \ldots\}\]
+\end{example}
+
+\subsection{Natural Numbers - \texorpdfstring{\(\mathbb{N}\)}{N}}
+\begin{proposition}[Characterization of \(\mathbb{N}\)]\label{pro:n}
+   We use \cref{def:successor} to derive the natural numbers from the 5. ZFC-axiom
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item Given \(\mathbb{N}\) with \(\emptyset \in \mathbb{N}\) and \(\forall x \in \mathbb{N}: S(x) \in \mathbb{N}\)
+      \item Given set \(A\) with \(\emptyset \in A\) and \(\forall x \in A: S(x) \in A\), it holds that \(\mathbb{N} \subset A\)
+      \item Given subset \(M \subset A\) with \(\emptyset \in M\) and \(\forall x \in M: S(x) \in M\)\\
+         of any set \(A\) as defined in (ii) it holds that \(M = \mathbb{N}\)
+   \end{enumerate}
+\end{proposition}
+\begin{remark}
+   According to this proposition we now have a way to tell \(\mathbb{N}\) from other sets apart.
+   For any \(A \subset \mathbb{N}\) with \(\emptyset \in A\) and \(\forall x \in A: S(x) \in A\) holds \(A = \mathbb{N}\).
+   Differently put is \(\mathbb{N}\) the intersection of all sets \(A\) for which the former two conditions hold.
+\end{remark}
+
+\begin{definition}[Natural Numbers]\label{def:n}
+   We use \(\emptyset\) and its successors (\ref{def:successor})
+   \[0 := \emptyset\]
+   \[1 := \{\emptyset\} = S(0) = \{0\}\]
+   \[2 := \{\emptyset, \{\emptyset\}\} = S(1) = \{0, 1\}\]
+   \[3 := \{\emptyset, \{\emptyset\},\{\emptyset, \{\emptyset\}\}\} = S(2) = \{0, 1, 2\}\]
+   \[\ldots\]
+\end{definition}
+\begin{remark}
+   Apart from \(\emptyset\) are all other elements successors of \(\emptyset\): \(\forall x \in \mathbb{N}: (x = \emptyset \lor \exists y \in \mathbb{N}: x = S(y))\). This holds since a set
+   \[A := \{x \in \mathbb{N}: (x = \emptyset \lor \exists y \in \mathbb{N}: x = S(y))\}\]
+   satisfies \(\emptyset \in A\) and \(y \in A \implies y \in \mathbb{N} \implies S(y) \in A\)
+\end{remark}
+
+\subsubsection{Peano}
+\begin{definition}[Peano Axioms]\label{def:peano_axioms}
+   The natural numbers is a set \(\mathbb{N}_0\) with \(0 \in \mathbb{N}_0\) and
+   \[v: \mathbb{N}_0 \to (\mathbb{N} = \mathbb{N}_0 \setminus \{0\}) \quad\text{where}\quad n \mapsto n + 1\]
+   is the \textit{successor function} for which holds that
+   \begin{enumerate}[leftmargin=0.85cm]
+      \item [PA1] \(v\) is injective.
+      \item [PA2] Induction Maxim: If \(N \subset \mathbb{N}_0: (0 \in N \land \forall n \in N \implies v(n) \in N)\) then is \(N = \mathbb{N}_0\).
+   \end{enumerate}
+\end{definition}
+\begin{example}
+   We define \(0 := \emptyset\)
+   \[\mathbb{N}_0 = \big\{0,~1 = v(0) = \{0\},~2 = v(v(0)) = \{0, 1\},~3 = v(v(v(0))) = \{0, 1, 2\}, \ldots\big\}\]
+\end{example}
+
+\begin{proposition}[\(v\) bijective]\label{pro:v_bijective}
+   The successor function \(v\) is bijective.
+\end{proposition}
+\begin{proof}
+   Let \(N = \{n \in \mathbb{N}_0: (\exists n' \in \mathbb{N}_0: v(n') = n)\} \cup \{0\}\) then is
+   \[N = \text{im}(v) \cup \{0\}\]
+   from PA2 follows \(N = \mathbb{N}_0 \implies \text{im}(v) = \mathbb{N}\) which means that \(v\) is surjective.
+\end{proof}
+
+\begin{proposition}[\(\mathbb{N}_0\) is not finite]
+   The set of natural numbers \(\mathbb{N}_0\) is not finite.
+\end{proposition}
+\begin{proof}
+   Suppose \(\mathbb{N}_0 = \{x_0, \ldots, x_n\}\) and \(x_0 \mapsto x_1 \mapsto \ldots \mapsto x_n\)
+
+   Then is \(v(x_n) = x_0\) since \(v\) is injective.
+   But this is a contradiction that \(v: \mathbb{N}_0 \to \mathbb{N}\) works.
+\end{proof}
+
+\begin{theorem}[Peano]\label{thm:peano}
+   On \(\mathbb{N}\) exist two unique operations \(+\) and \(\cdot\) and an order \(\leq\) such that
+   \begin{enumerate}
+      \item + is associative, commutative and has 0 as identity.
+      \item \(\cdot\) is associative, commutative and has 1 as identity.
+      \item + and \(\cdot\) are distributive \(\forall l, m, n \in \mathbb{N}: (l + m) \cdot n = l \cdot n + m \cdot n\).
+      \item \(0 \cdot n = 0\).
+      \item \((\mathbb{N}_0, \leq)\) is totally ordered with \(0 = \text{min}(\mathbb{N}_0)\).
+      \item For \(n \in \mathbb{N}_0 \not\exists k \in \mathbb{N}_0: n < k < n + 1\)
+      \item \(\forall m, n \in \mathbb{N}_0: (m \leq n \iff \exists d \in \mathbb{N}_0: m + d = n) \land (m < n \iff \exists d \in \mathbb{N}: m + d = n)\)\\
+         \(d\) is unique an is called difference.
+      \item \(\forall m, n \in \mathbb{N}_0: (m \leq n \iff m + l \leq n + l) \land (m < n \iff m + l < n + l) \forall l \in \mathbb{N}_0\).
+      \item For \(m, n \in \mathbb{N}: m \cdot n \in \mathbb{N}\) and \(m \cdot n = 0 \iff m = 0 \lor n = 0\)
+         \item \(\forall m, n \in \mathbb{N}_0: (m \leq n \iff m \cdot l \leq n \cdot l) \land (m < n \iff m \cdot l < n \cdot l) \forall l \in \mathbb{N}\).
+   \end{enumerate}
+\end{theorem}
+
+\begin{proposition}[Well-Ordering Principle]\label{pro:wellorder_N}
+   A subset \(A \subset \mathbb{N}_0\) with \(A \neq \emptyset\) has a minimum (\ref{def:set_minimum}).
+\end{proposition}
+\begin{example}
+   Finite subsets of \(\mathbb{N}_0\) have obviously a minimum but also the set of all odd numbers has 1 as a minimum
+   \[1 = \min\{n \in \mathbb{N}_0: 2 \nmid n\} \subset \mathbb{N}_0\]
+\end{example}
+
+\subsubsection{Induction}
+To prove a predicate \(F(n)\) for all \(n \in \mathbb{N}_0\) we can use a \textit{proof by induction}
+\begin{enumerate}
+   \item \textit{Induction Basis (IB)}: Prove \(F(0)\).
+   \item \textit{Induction Hypothesis (IH)}: For some \(n \in \mathbb{N}_0\) holds \(F(n)\).
+   \item \textit{Induction Step (IS)}:
+   \begin{enumerate}
+      \item Assume IH is true.
+      \item Prove that \(F(n) \implies F(n + 1)\)
+   \end{enumerate}
+\item \textit{Induction End (IE)}: According to the induction maxim and the steps 1-3 follows \(\forall n \in \mathbb{N}_0: F(n)\).
+\end{enumerate}
+So it holds that
+\[[F(0) \land (\forall n \in \mathbb{N}_0: F(n) \implies F(n+1))] \iff (\forall n \in \mathbb{N}_0: F(n))\]
+As we'll see later we don't necessarily have to start at 0.
+
+\begin{proposition}[Proof by Induction]
+   A proof of \(F\) by induction proves that \(\forall n \in \mathbb{N}_0: F(n)\).
+\end{proposition}
+\begin{proof}
+   Follows from PA2 in \cref{def:peano_axioms}.
+\end{proof}
+
+\begin{proposition}[Induction Principle]
+   Let \(F(n)\) be a predicate and \(n_0 \in \mathbb{N}_0\) such that
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(F(n_0)\) is true
+      \item \(\forall n \geq n_0: F(n) \implies F(n + 1)\)
+   \end{enumerate}
+   then is \(F(n)\) true for all \(n \geq n_0\).
+\end{proposition}
+\begin{proof}
+   Let \(N = \{n \in \mathbb{N}_0 \mid F(n + n_0)\}\), then is \(0 \in N\) according to (i) and \(n \in N \implies n + 1 \in N\) according to (ii).
+   This means that \(N = \mathbb{N}_0\) according to PA2.
+\end{proof}
+\begin{example}
+   We claim that \(1 + 3 + \ldots + (2n - 1) = n^2\).
+
+   \textit{IH:} \(\forall n \in \mathbb{N}: \sum_{k = 1}^{n} 2k - 1 = n^2\).
+
+   \textit{IB:} \(n = 1 \implies 2^1 - 1 = 1 = 1^2\)
+
+   \textit{IS:} Assume IH holds.
+   \[\sum_{k = 1}^{n+1} 2k - 1 = \sum_{k = 1}^{n} 2k - 1 + 2(n + 1) - 1\]
+   Because we assume IH holds is \(\sum_{k = 1}^{n} 2k - 1 = n^2\) and so
+   \[\sum_{k = 1}^{n} 2k - 1 + 2(n + 1) - 1 = n^2 + 2(n + 1) -1 = n^2 + 2n + 1 = (n + 1)^2\]
+\end{example}
+\begin{example}
+   We claim that every \(n \in \mathbb{N}\) can be written as a product of two primes.
+
+   \textit{IB:} \(F(1)\) is true since 1 is prime.
+
+   \textit{IS:} We assume our hypothesis is true.
+
+   If \(n+1\) is prime we are done.
+
+   If \(n+1\) not prime \(\exists p, q \in \mathbb{N}: p \cdot q = n + 1\)
+
+   Since \(p, q \leq n\) it follows from IH that \(p\) and \(q\) themselves can be written as a product of primes.
+\end{example}
+
+\begin{proposition}[Induction Starting Point]
+   Let \(F(n)\) be a predicate and \(n_0 \in \mathbb{N}_0\) such that
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(F(n_0)\) is true
+      \item \(\forall n \geq n_0: F(k)~\text{true for}~n_0 \leq k \leq n \implies F(n + 1)~\text{true}\)
+   \end{enumerate}
+   then is \(F(n)\) true for all \(n \geq n_0\).
+\end{proposition}
+\begin{remark}
+   This version of the induction principle assures that we can use all elements between \(n_0\) and \(n\) to show \(F(n+1)\).
+\end{remark}
+\begin{proof}
+   Let \(N = \{n \in \mathbb{N}_0 \mid n \geq n_0 \land E(n)~\text{false}\} \neq \emptyset\).
+   According to the well-ordering principle exists a minimum \(m \in N\).
+   According to (i) is \(m \neq n \implies m > n_0\).
+   Since \(m\) is a minimum it follows that \(E(k)\) is true \(\forall k \in \mathbb{N}_0: n_0 \leq k \leq n\) where \(n + 1 = m\).
+   But then follows from (ii) that \(E(n+1)\) is true, which is a contradiction.
+\end{proof}
+
+\subsubsection{Recursion}
+Recursion occurs when a thing is defined in terms of itself or of its type.
+A class of objects or methods exhibit recursive behavior when they can be defined by two properties:
+\begin{enumerate}
+   \item A simple \emph{base case} - a terminating scenario that does not use recursion to produce an answer.
+   \item A set of rules that reduce all other cases toward the base case.
+\end{enumerate}
+
+\begin{example}
+   The factorial is the map
+   \[\mathbb{N}_0 \to \mathbb{N}_0 \quad\text{with}\quad 0 \mapsto 1 \quad\text{and }\quad n \mapsto 1 \cdot \ldots \cdot n\]
+   Its recursive definition is
+   \[0! := 1\]
+   \[(n+1)! := (n + 1) \cdot n!\]
+\end{example}
+
+\begin{theorem}[Recursion Principle]
+   Let \(X \neq \emptyset\), \(a \in X\) and let \(\forall n \in \mathbb{N}\) be a map \(v_n: X^n \to X\), then \(\exists! f: \mathbb{N}_0 \to X\) such that
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(f(0) = a\)
+      \item \(f(n+1) = v_{n+1}(f(0), f(1), \ldots, f(n))\)
+   \end{enumerate}
+\end{theorem}
+\begin{example}[Factorial]
+   What we want to explain is \(\ldots\) in \(n! = 1 \cdot \ldots \cdot n\).
+   Let \(v_n: \mathbb{N}_0^n \to \mathbb{N}_0\) with \((y_0, \ldots, y_{n-1}) \mapsto y_{n-1} \cdot n\).
+   \[\exists! f: \mathbb{N}_0 \to \mathbb{N}_0: f(0) = 1 \land f(n) = v_n(f(0), \ldots, f(n-1)) = f(n-1) \cdot n\]
+   which is the factorial.
+\end{example}
+
+\subsection{Whole Numbers - \texorpdfstring{\(\mathbb{Z}\)}{Z}}
+As we've seen in \cref{thm:peano} \(\mathbb{N}_0\) has the operation \(+\) with the unit \(0\), but no element is invertible since
+\[\forall m, n \in \mathbb{N}_0: m + n = 0 \implies m = n = 0\]
+
+\begin{definition}[Whole Numbers]
+   Let \((a, b) \sim (c, d) :\iff a + d = c + b\)
+   \[\mathbb{Z} := (\mathbb{N} \times \mathbb{N})_{/\sim}\]
+\end{definition}
+ \begin{remark}
+    This way some \(n \in \mathbb{N}\) is identified through \([(n, 0)] \in \mathbb{Z}\).
+ \end{remark}
+
+\begin{theorem}
+   \(\mathbb{Z} \supset \mathbb{N}_0\) is the smallest ring free of zero divisor, which induces \(+, \cdot\) onto \(\mathbb{N}_0\) and is unique except for isomorphisms.
+\end{theorem}
+\begin{remark}
+   The term \emph{smallest} means that every other ring \(R\) with these properties holds \(\mathbb{Z} \subset R\).
+\end{remark}
+
+\subsection{Rational Numbers - \texorpdfstring{\(\mathbb{Q}\)}{Q}}
+Now we still can't cancel the multiplication which is why we introduce the rational numbers.
+Every field is free of zero divisiors.
+\[a \cdot b = 0 \iff a = 0 \lor b = 0\]
+It follows that \(\forall q \in K^\times,~\forall x, p \in K: qx = p\) has a solution namely \(x = p \cdot q^{-1}\).
+We call these solutions \textit{quotients} and denote them as \(\frac{p}{q}\).
+
+\begin{lemma}[Fraction Rules]
+   For \(a, c \in K\) and \(b, d \in K^\times\) holds
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[\frac{a}{b} = \frac{c}{d} \iff ad = bc\]
+      \item \[\frac{a}{b} + \frac{c}{d} = \frac{ad + cb}{bd}~\text{and}~\frac{a}{b} - \frac{c}{d} = \frac{ad - cb}{bd}\]
+      \item \[\frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}\]
+      \item \[\frac{a}{b} / \frac{c}{d} = \frac{ad}{bc}\]
+   \end{enumerate}
+\end{lemma}
+
+ \begin{definition}[Rational Numbers]\label{def:rat_num}
+    Let \((a, b) \sim (c, d) :\iff a \cdot d = c \cdot b\)
+    \[\mathbb{Q} := \mathbb{Z} \times (\mathbb{Z} \setminus \{0\})_{/\sim}\]
+ \end{definition}
+ \begin{remark}[Notation]
+    An element \(x \in \mathbb{Q}\) is defined through
+    \[a \in \mathbb{Z}, b \in \mathbb{Z} \setminus \{0\}: x = \frac{a}{b} := [(a, b)]\]
+    this way we also deal equal fractions the same since
+    \[[(1, 2)] = \{(2, 4), (3, 6), (4, 8), \ldots\}\]
+ \end{remark}
+
+\begin{theorem}
+   There exists a smallest field \(\mathbb{Q} \supset \mathbb{Z} \supset \mathbb{N}_0\) which induces \(+, \cdot\) onto \(\mathbb{Z}\) and \(\mathbb{N}_0\) and is unique except for isomophisms.
+\end{theorem}
+
+\begin{proposition}[Wholes/Rationals Countably Infinite]
+   \(\mathbb{Z}\) and \(\mathbb{Q}\) are countably infinite.
+\end{proposition}
+\begin{proof}
+   Since \(\mathbb{N}_0 \subset \mathbb{Z} \subset \mathbb{Q}\) are \(\mathbb{Z}\) and \(\mathbb{Q}\) infinite.
+   Let \(\varphi: \mathbb{N}_0 \to \mathbb{Z}\) be defined through
+   \[\varphi(n) = \begin{cases}\frac{n}{2} & n~\text{even}\\ \frac{-(n+1)}{2} & n~\text{odd}\end{cases}\]
+   then is \(\varphi\) an isomorphism.
+
+   Now we claim that
+   \[r \in \mathbb{Q} \iff \exists (p, q) \in \mathbb{Z} \times \mathbb{N}^\times: r = \frac{p}{q}\]
+   ''\(\impliedby\)`` is trivial, so we prove ''\(\implies\)``.
+
+   Let \(r = [(a,b)]: b \in -\mathbb{N}^\times\) then is
+   \[-a \cdot b = a \cdot (-b) = (-a) \cdot b = -a \cdot b \implies (a,b) \sim (-a, -b)\]
+   so is \(r = [(a,b)] = [(-a, -b)]\) where \(-b \in \mathbb{N}^\times\).
+   Therefor is \(\mathbb{Q}\) the set \(\mathbb{Z} \times \mathbb{N}^\times\) which means that \(\mathbb{Q}\) is countably infinite.
+\end{proof}
+
+\subsection{Real Numbers - \texorpdfstring{\(\mathbb{R}\)}{R}}
+\subsubsection{Motivation}
+In \(\mathbb{Q}\) are addition and multiplication invertible, which means it is always possible to solve linear equations.
+In other words, for an arbitrary \(a \in \mathbb{Q} \setminus \{0\}\) and \(b \in \mathbb{Q}\) exists exactly one solution \(x \in \mathbb{Q}\) to the equation \(a \cdot x + b = 0\).
+
+However already for quadratic equations arises the first problem.
+
+\begin{theorem}[\(\sqrt{2} \not\in \mathbb{Q}\)]
+   \[\not\exists x \in \mathbb{Q}: x^2 = 2\]
+\end{theorem}
+\begin{proof}
+   Suppose \(\exists x \in \mathbb{Q}: x^2 = 2\) then \(\exists q \in \mathbb{N} \setminus \{0\}: q \cdot x \in \mathbb{Z}\).
+   \[M = \{q \in \mathbb{N}\setminus\{0\}: q \cdot x \in \mathbb{Z}\}\]
+   Since \(M \neq \emptyset\), the well-order principle implies that \(M\) has a minimum.
+
+   Let \(g \in M\) be the minimal element and \(p = g \cdot x \in \mathbb{Z}\), then \(x = \frac{p}{g}\) holds.
+   \(g\) being the minimal element implies that \(p\) and \(g\) are coprime.
+   \[2 = \frac{p^2}{g^2} \implies p^2 = 2 g^2\]
+   This implies that \(p^2\) is even.
+   Because of that, \(p\) must be even as well (since \((2n + 1)^2 = 4n^2 + 4n + 1\) is always uneven).
+   This means that a \(\exists m \in \mathbb{Z}: p = 2m\), then
+   \[4m^2 = (2m)^2 = p^2 = 2g^2 \implies g^2 = 2m^2\]
+   which means that \(g\) is even as well.
+   This leads to a contradiction to the fact that \(g\) and \(p\) are coprime.
+\end{proof}
+
+\begin{proposition}[\(\sqrt{2} \in \mathbb{R}\)]
+   \[\exists c > 0 \in \mathbb{R}: c^2 = 2\]
+\end{proposition}
+\begin{proof}
+   Given the bounded above set \(A = \{x \in \mathbb{R}: (x \geq 0) \land (x^2 \leq 2)\}\) and its supremum \(c = \sup A\).
+
+   We assert that \(c^2 = 2\) and now assume that \(c^2 < 2\).
+   We choose
+   \[0 < \epsilon < \frac{2 - c^2}{2c + 1} \leq 1\]
+   \[(c + \epsilon)^2 = c^2 + 2c\epsilon + \epsilon^2 \leq c^2 + (2c + 1)\epsilon \leq 2\]
+   Because of this is \((c + \epsilon) \in A\), which leads to the contradiction that \(c\) is an upper bound.
+
+   We proceed by asserting that \(c^2 > 2\).
+   We chose
+   \[0 < \epsilon < \frac{c^2 - 2}{2c}\]
+   \[(c - \epsilon)^2 = c^2 - 2\epsilon c + \epsilon^2 \leq c^2 - 2\epsilon c > 2\]
+   This implies that \(c - \epsilon\) is an upper bound of \(A\), which is again a contradiction to that \(c\) is the supremum.
+
+   Hence it holds that \(c^2 = 2\).
+\end{proof}
+\begin{remark}
+   Given \(a > 0 \in \mathbb{R}\) and \(p \in \mathbb{N}\setminus 0\)
+   \[\exists! x > 0 \in \mathbb{R}: x^p = a\]
+\end{remark}
+
+\subsubsection{Construction}
+In order to construct the real numbers we first need to introduce some concepts.
+
+\paragraph{Dedekind Cuts} are a method of construction of the real numbers from the rational numbers.
+A Dedekind cut is a partition of the rational numbers into two non-empty sets \(A\) and \(B\), such that all elements of A are less than all elements of \(B\), and \(A\) contains no greatest element.
+
+For convenience we may take the lower set \(A\) as the representative of any given cut \((A,B)\), since \(A\) completely determines \(B\).
+By doing this we may think intuitively of a real number as being represented by the set of all smaller rational numbers.
+In more detail, a real number \(\alpha\) is any subset of the set \(\mathbb{Q}\) that fulfills the following conditions:
+
+\begin{enumerate}
+   \item \(\alpha \neq \emptyset\)
+   \item \(\alpha \neq \mathbb{Q}\)
+   \item \(\forall x, y \in \mathbb{Q}: x < y~\text{holds}~y \in \alpha \implies x \in \alpha\)
+   \item \(\forall x \in \alpha~\exists y \in \alpha: x < y\)
+\end{enumerate}
+
+The idea is that every cut is identified with a ''number`` in the set \(\mathbb{K}\) that we want to construct.
+For example is \(\sqrt{2}\) identified with \(\alpha = \{x \in \mathbb{Q} \mid x^2 < 2\}\).
+It is important that the cuts don't have a maximum since for example \(\{x \in \mathbb{Q} \mid p < 1\}\) and \(\{x \in \mathbb{Q} \mid x \leq 1\}\) would correspond to the same ''number`` in \(\mathbb{K}\).
+
+\begin{theorem}[Real Numbers]
+   It exists an order complete ordered field \(\mathbb{R}\), which is unique except for isomorphisms.
+\end{theorem}
+\begin{remark}
+   ``except for isomporphisms'' means that given two order complete ordered fields
+   \[(K_1, +_1, \cdot_1, \leq_1)\]
+   \[(K_2, +_2, \cdot_2, \leq_2)\]
+   have to be isomorphic which means that there exists a bijection \(\phi: K_1 \to K_2\) with
+   \[\phi(a +_1 b) = \phi(a) +_2 \phi(b)\]
+   \[\phi(a \cdot_1 b) = \phi(a) \cdot_2 \phi(b)\]
+   \[a \leq_1 b \iff \phi(a) \leq_2 \phi(b)\]
+\end{remark}
+\begin{proof}[Proof (Order Completeness)]
+   We define
+   \[\mathbb{K} := \{\alpha \subset \mathbb{Q} \mid \alpha~\text{is a cut}\}\]
+   to be the set of all cuts.
+   For an \(y \in \mathbb{Q}\) we set
+   \[[y] = \{x \in \mathbb{Q} \mid x < y\}\]
+   then is \([y]\) a cut, which allows us to identify \(\mathbb{Q}\) is a subset of \(\mathbb{K}\).
+   Since \(\mathbb{R}\) is supposed to be a superset of \(\mathbb{Q}\) are not all elements of \(\mathbb{K}\) of the form \([y]\).
+
+   We define an order relation.
+   \[\alpha, \beta \in \mathbb{K}: \alpha \subset \beta \implies \alpha \preceq \beta\]
+   this relation is reflexive, antisymmetrical and transitive.
+   Now we show that it is a total order.
+   Let \(\alpha, \beta \in \mathbb{K}\)
+   \[\alpha \not\subset \beta \implies \exists x \in \alpha: x \not\in \beta\]
+   This implies that \(\forall y \in \beta: y < x\) but then is \(\beta \subset \alpha\), hence \(\forall \alpha, \beta \in \mathbb{K}: \alpha \preceq \beta \lor \beta \preceq \alpha\).
+
+   Now we show that \((\mathbb{K}, \preceq)\) is order complete.
+   Let \(A, B \subset \mathbb{K}: A, B \neq \emptyset\) with \(\forall \alpha \in A, \beta \in B: \alpha \preceq \beta\).
+   We need to show that
+   \[\exists \gamma \in \mathbb{K}~\text{such that}~\forall \alpha \in A: \alpha \preceq \gamma~\text{and}~\forall \beta \in B: \gamma \preceq \beta\]
+   So we define \(\gamma := \bigcup_{\alpha \in A} \alpha\).
+   It holds that
+   \[\forall \alpha \in A: \alpha \preceq \gamma \quad\text{since}\quad \forall \alpha \in A: \alpha \subset \gamma\]
+   by definition of \(\gamma\).
+   Furthermor is
+   \[(\forall \alpha \in A: \alpha \subset \beta \implies \forall \beta \in B: \gamma \subset \beta) \implies \forall \beta \in B: \gamma \preceq \beta\]
+   Now it must hold that \(\gamma \in \mathbb{K}\) which means we need to show that \(\gamma\) is a cut.
+   \[A \neq \emptyset \implies \gamma \neq \emptyset\]
+
+   \[B \neq \emptyset \land \forall \beta \in B: \gamma \subset \beta \land (\beta~\text{is a cut} \implies \beta \neq \mathbb{Q}) \implies \gamma \neq \mathbb{Q}\]
+
+   \[y \in \gamma \implies \exists \alpha \in A: y \in \alpha~\text{is}~x \in \mathbb{Q}: x < y \implies x \in \alpha \implies x \in \gamma\]
+
+   \[x \in \gamma \implies \exists \alpha \in A: x \in \alpha\]
+   since \(\alpha\) has no maximum follows \(\exists y \in \alpha: y > x \implies y \in \gamma \implies \forall x \in \gamma \exists y \in \gamma: y > x\).
+
+   Therefore is \((\mathbb{K}, \preceq)\) order complete.
+\end{proof}
+\begin{proof}[Proof (Field)]
+   We define
+   \[+: \mathbb{K} \times \mathbb{K} \to \mathbb{K} \quad\text{through}\quad \alpha + \beta = \{x + y \mid x \in \alpha \land y \in \beta\}\]
+   which is well-defined since \(\alpha + \beta \in \mathbb{K}\)
+   \[\alpha, \beta \neq \emptyset \implies \alpha + \beta \neq \emptyset\]
+
+   \[\alpha, \beta \neq \mathbb{Q} \implies \exists z, z' \in \mathbb{Q}: (\forall x \in \alpha: x < z) \land (\forall y \in \beta: y < z')\]
+   \[\implies \forall x \in \alpha, y \in \beta x + y \leq z + z' \implies \alpha + \beta \neq \mathbb{Q}\]
+
+   \[y \in \alpha + \beta \implies \exists z \in \alpha, z' \in \beta: y = z + z'\]
+   \[x \in \mathbb{Q}: x < y \implies x = y + (x - y) = z + z' + (x -y)~\text{where}\]
+   \[z' + (x -y) \in \mathbb{Q} \land z' + (x - y) < z' \implies z \in \alpha, z' + (x -y) \in \beta \implies x \in \alpha + \beta\]
+
+   \[y \in \alpha + \beta: y = z + z'~\text{for}~z \in \alpha, z' \in \beta,~\alpha~\text{has no maximum}~\implies \exists \widetilde{z} \in \alpha: z < \tilde{z}\]
+   \[\implies x = \widetilde{z} + z' \in \alpha + \beta \land x > y \implies \alpha + \beta~\text{has no maximum}\]
+
+   Now we would check that \(+\) is commutative, associative and has a neutral element \([0] = \{x \in \mathbb{Q} \mid x < 0\}\).
+   To prove the existence of an inverse we define \(-\alpha := \{x \in \mathbb{Q} \mid \exists y \not\in \alpha: x < -y\}\) and would show that \(-\alpha\) is a cut.
+
+   Now we prove that \(\alpha + (-\alpha) = [0]\).
+   We note that for arbitrary
+   \[x \in \alpha, y \not\in \alpha \implies x < y \implies -x > -y \implies -x \not\in -\alpha \land \forall z \in -\alpha: -x > z\]
+   this means that \(\forall x \in \alpha, z \in -\alpha: x + z < 0 \implies \alpha + (-\alpha) \subset [0]\).
+   Now let \(y \in \mathbb{Q}: y < 0\) and we set \(v = -\frac{y}{2} > 0\).
+   \[\exists n_0 \in \mathbb{Z}: n_0 \cdot v \in \alpha\]
+   for an \(n \in \mathbb{Z}\) large enough is \(n \cdot v \not\in \alpha\) since \(\alpha \neq \mathbb{Q}\).
+   From this follows that \(A = \{n \in \mathbb{Z} \mid n \geq n_0 \land n \cdot v \in \alpha\}\) finite which means it has a maximum
+   \[m \in \mathbb{Z} \implies m \cdot v \in \alpha \land (m + 1) \cdot v \not\in \alpha \implies -(m + 2) \cdot v \in -\alpha\]
+   \[y = -2 \cdot v = m \cdot v + (-(m + 2) \cdot v) \in \alpha + (-\alpha) \implies [0] \subset \alpha + (-\alpha)\]
+
+   Next up we define the multiplication for \(\alpha, \beta \in \mathbb{K}: [0] \preceq \alpha, \beta \land \alpha, \beta \neq [0]\)
+   \[\cdot: \mathbb{K} \times \mathbb{K} \to \mathbb{K} \quad\text{through}\quad \alpha \cdot \beta = \{x \in \mathbb{Q} \mid \exists z \in \alpha, z' \in \beta: z, z' \geq 0 \land x \leq z \cdot z'\}\]
+
+   Is \(\alpha = [0] \lor \beta = [0]\) we set \(\alpha \cdot \beta = [0]\).
+
+   Is \(\alpha \prec [0] \prec \beta\) we set \(\alpha \cdot \beta = -(-\alpha) \cdot \beta\).
+
+   Is \(\beta \prec [0] \prec \alpha\) we set \(\alpha \cdot \beta = -\alpha \cdot (-\beta)\).
+
+   Is \(\alpha, \beta \prec [0]\) we set \(\alpha \cdot \beta = (-\alpha) \cdot (-\beta)\).
+
+   Then we would check that \(\cdot\) is commutative, associative and has a neutral element \([1]\).
+   The multiplicative inverse is defined as
+   \[\alpha^{-1} := \left\{x \in \mathbb{Q} \mid \exists y \not\in \alpha: x < \frac{1}{y}\right\} = \left(-\infty; \frac{y}{x}\right)\]
+   If \(\alpha \prec [0]\) we set \(\alpha^{-1} = -(-\alpha)^{-1}\).
+   We would again prove that \(\alpha^{-1}\) is a cut and in fact \(\alpha \cdot \alpha^{-1} = [1]\).
+
+   Now we show distributivity for \(\alpha, \beta, \gamma \in \mathbb{K}: [0] \prec \alpha, \beta, \gamma\) (other combinations follow analogously).
+   This assumption implies \([0] \prec \beta + \gamma\).
+   First we note that
+   \[s \in \alpha \cdot (\beta + \gamma) \iff \exists a \in \alpha, d \in \beta + \gamma: a, d > 0 \land z \leq a \cdot d\]
+   \[d \in \beta + \gamma \implies \exists b \in \beta, c \in \gamma: d = b + c\]
+   W.l.o.g we assume that \(b, c > 0\) since \(d\) will only get bigger.
+   It follows that
+   \[\alpha \cdot (\beta + \gamma) = \{s \in \mathbb{Q} \mid \exists~a \in \alpha,~b \in \beta,~c \in \gamma: a, b, c > 0 \land s < a(b + c)\}\]
+   Now let \(s \in \alpha \cdot \beta + \alpha \cdot \gamma\)
+   \[\exists r \in \alpha \cdot \beta, y \in \alpha \cdot \gamma: s = r + y\]
+   According to the definition of \(\alpha \cdot \beta\) and \(\alpha \cdot \gamma\)
+   \[\exists a', a'' \in \alpha, b \in \beta, c \in \gamma: a', a'', b, c > 0 \land r < a' \cdot b \land q < a'' \cdot c\]
+   If we set \(a = \max(a', a'') \in \alpha\) follows \(s < a' \cdot b + a'' \cdot c \leq a(b + c)\), hence
+   \[\alpha \cdot \beta + \alpha \cdot \gamma \subset \{s \in \mathbb{Q} \mid \exists~a \in \alpha,~b \in \beta,~c \in \gamma: a, b, c > 0 \land s < a(b + c)\]
+      Now if \(a \in \alpha, b \in \beta, c \in \gamma: s < a(b + c)\) follows \(s < ab + ac\) since \(ab \in \alpha \cdot \beta\) and \(ac \in \alpha \cdot \gamma\) hence \(s \in \alpha \cdot \beta + \alpha \cdot \gamma\) which shows equality.
+\end{proof}
+\begin{proof}[Proof (Ordered Field)]
+   If \(\beta \subset \gamma\) then is
+   \[\alpha + \beta = \{a + b \mid a \in \alpha, b \in \beta\} \subset \{a + c \mid a \in \alpha, c \in \gamma\} = \alpha + \gamma\]
+   which shows that \(\beta \preceq \gamma \implies \beta + \alpha \preceq \gamma + \alpha\).
+
+   To show that \(\alpha \preceq \beta \land 0 \preceq \gamma \implies \alpha \cdot \gamma \preceq \beta \cdot \gamma\) it is sufficient to show that \([0] \preceq \alpha, \gamma \implies [0] \preceq \alpha \cdot \gamma\).
+   This can be done using the property above and distributivity.
+   The case \(\alpha = [0] \lor \gamma = [0]\) is trivial, so suppose \(\alpha, \gamma \in \mathbb{K}: [0] \prec \alpha, \gamma\).
+   \[\exists a \in \alpha, c \in \gamma: a, c > 0 \implies \alpha \cdot \gamma \ni a \cdot c > 0 \implies [0] \preceq \alpha \cdot \gamma\]
+\end{proof}
+\begin{proof}[Proof (Uniqueness)]
+   Finally we can prove that \(\mathbb{K}\) is unique using decimal fraction notation.
+   To do that we would define \(+\) and \(\cdot\) on \(\mathcal{A}\) such that it is a completely ordered field.
+   Then we would define two isomorphisms for \((\mathbb{K}_1, +_1, \cdot_1, \leq_1)\) and  \((\mathbb{K}_2, +_2, \cdot_2, \leq_2)\)
+   and show that \(\phi := \phi_2^{-1} \circ \phi_1: \mathbb{K}_1 \to \mathbb{K}_2\) is an isomophism.
+\end{proof}
+
+\subsubsection{Consequences}
+\begin{proposition}[Supremum Principle]\label{pro:supremum}
+   Every non-empty, bounded above subset \(A \subset \mathbb{R}\) has a supremum.
+\end{proposition}
+\begin{remark}
+   This follows from ther order completeness of the real numbers.
+\end{remark}
+
+\begin{proposition}[Sup/Inf of boundless Sets]\label{pro:supremum_epsilon}
+   Given \(A \neq \emptyset \subset \mathbb{R}\) bounded above.
+   \[s = \sup A \iff (\forall a \in A: a \leq s) \land (\forall \varepsilon > 0: (\exists a \in A: s - \varepsilon < a \leq s))\]
+\end{proposition}
+\begin{remark}
+   If \(A\) is bounded above we write \(\sup(A) = +\infty\) and if it is bounded below \(\inf(A) = -\infty\).
+\end{remark}
+
+\begin{theorem}[Archimedes Principle]\label{thm:archimedes}
+   \(\mathbb{N} \subset \mathbb{R}\) is boundless above.
+\end{theorem}
+
+\begin{corollary}\label{cor:arch}
+   \[\forall \epsilon > 0: \left(\exists n \in \mathbb{N} \setminus \{0\}: 0 < \frac{1}{n} < \epsilon \right)\]
+\end{corollary}
+
+\begin{proposition}\label{pro:surrounding_n}
+   Let \(x \in \mathbb{R}\)
+   \[\exists! n \in \mathbb{Z}: n \leq x < n + 1\]
+\end{proposition}
+
+\begin{proposition}[\(\mathbb{Q}\) is dense in \(\mathbb{R}\)]\label{pro:Q_density}
+   Given \(x, y \in \mathbb{R}: x < y\)
+   \[\exists r \in \mathbb{Q}: x < r < y\]
+\end{proposition}
+\begin{remark}
+   It follows that for every \(x \in \mathbb{R}\) and \(\epsilon > 0\) there is an \(r \in \mathbb{Q}\) with \(|x - r| < \epsilon\) because
+   \[|x - r| \impliedby \begin{cases} x - r < \epsilon\\ x - r > - \epsilon \end{cases}\]
+   Where \(\epsilon\) is the approximation error.
+   Furthermore exist infinite \(r \in \mathbb{Q}\) between \(x, y \in \mathbb{R}: x < y\)
+\end{remark}
+
+\subsubsection{Decimal Fraction Notation}
+Real numbers can be written as a decimal fraction, which consist of a whole number \(d_0\) and the sequence of decimals.
+\[(d_0, d_1, d_2,\ldots)~\text{with}~d_0 \in \mathbb{Z}~\text{and}~d_j \in \{0, 1, 2, \ldots 9\}\]
+We use the dot notation \(d_0.d_1d_2d_3\ldots\) for the following number:
+\[x = \sum_{j=0}^\infty d_j \cdot 10^{-j} = d_0 + \frac{d_1}{10^1} + \frac{d_2}{10^2} + \frac{d_3}{10^3}+\ldots\]
+The problem lies in uniqueness, we choose \(x = 0.999\ldots\)
+\[10x = 9.999\ldots \implies 9 \cdot x = 10 \cdot x - x = 9 \implies x = 1\]
+Thus we define that a sequence \(d_0, d_1, d_2,\ldots\) is ``valid'' if
+\[d_0 \in \mathbb{Z}\]
+\[d_j \in \{0, \ldots, 9\}\]
+\[\not\exists k_0 \in \mathbb{N}: (d_k = 9~\forall k > k_0)\]
+We define the set
+\[\mathcal{A} := \{(d_0, d_1, d_2,\ldots): (d_0 \in \mathbb{Z}) \land (d_j \in \{0, \cdots, 9\} \forall j \in \mathbb{N}\setminus 0) \land \text{valid sequence}\}\]
+and the map
+\[\phi: \mathbb{R} \to \mathcal{A}\]
+\[x \mapsto (d_0, d_1, d_2, \ldots)\]
+Given \(x \in \mathbb{R}\) we define \(\phi(x) \in \mathcal{A}\) as follows.
+According to \cref{pro:surrounding_n} we find
+\[d_0 \in \mathbb{Z}: d_0 \leq x < d_0 + 1\]
+which relates to the input of \(\phi(x)\).
+Then we set
+\[\widetilde{x_1} = x - d_0 \in [0;1)\]
+\[x_1 = 10 \cdot \widetilde{x_1} \in [0;10)\]
+\[d_1 \in \{0,\ldots,9\}: d_1 \leq x_1 < d_1 + 1\]
+
+\[\widetilde{x_2} = x_1 - d_1\]
+\[x_2 = 10 \cdot \widetilde{x_2}\]
+\[d_2 \in \{0,\ldots,9\}: d_2 \leq x_2 < d_2 + 1\]
+\[\ldots\]
+With this procedure we can produce a number with \(n\) decimals.
+\[d_0 + \frac{d_1}{10^1} + \frac{d_2}{10^2} + \ldots + \frac{d_n}{10^n} \leq x < d_0 + \frac{d_1}{10^1} + \frac{d_2}{10^2} + \ldots + \frac{d_n + 1}{10^n}\]
+
+\begin{definition}[Decimal Fraction]
+   We define the sequence described above uniquely through recursion
+   \[\widetilde{x_k} = x_{k-1} - d_{k-1}\]
+   \[x_k = 10 \cdot \widetilde{x_k}\]
+   \[d_k \in \{0,\ldots,9\}: d_k \leq x_k < d_k + 1\]
+
+   \[\forall n \in \mathbb{N}: d_k + \frac{d_{k+1}}{10^1} + \ldots + \frac{d_{k+n}}{10^n} \leq x_k < d_k + \frac{d_{k+1}}{10} + \ldots + \frac{d_{k+n} + 1}{10^n}\]
+\end{definition}
+\begin{remark}
+   This definition ensures that the sequence is ``valid''.
+   Suppose there exists a \(k_0 \in \mathbb{N}\) with \(d_k = 9 \forall k \geq k_0\)
+   \[x_{k_0} \geq d_{k_{0}} + \frac{d_{k_0}}{10^1} + \ldots + \frac{d_{k_0 + 1}}{10^n} = 9 + \frac{9}{10^1} + \ldots + \frac{9}{10^n} = 10 \cdot \left(1 - \frac{1}{10^{n+1}}\right)\]
+   This is only possible if \(x_{k_{0}} \geq 10\) which is a contradiction to the definition that \(x_{k_0} \in [0;10)\).
+
+   Therefor is \(\phi\) well-defined: \(\forall x \in \mathbb{R}: \phi(x) \in \mathcal{A}\)
+\end{remark}
+
+\begin{theorem}[\(\phi\) is bijective]\label{thm:decimal_map}
+   The map \(\phi: \mathbb{R} \to \mathcal{A}\) is bijective.
+\end{theorem}
+
+\begin{proposition}[\(|\mathbb{R}| = \infty\)]\label{pro:R_uncountable}
+   \(\mathbb{R}\) is uncountably infinite.
+\end{proposition}
+
+\subsection{Complex Numbers - \texorpdfstring{\(\mathbb{C}\)}{C}}
+We have a similar problem with \(\mathbb{R}\) as the one we solved when introducing real numbers.
+Many polynomials in \(\mathbb{R}\) have no root.
+Also the equation \(x^2 = -1\) has no solution in \(\mathbb{R}\) since it is an ordered field which forces \(x^2 \geq 0\).
+
+Complex numbers form a field \(\mathbb{C}\) which contains \(\mathbb{R}\) and an element \(i^2 = -1\).
+
+\begin{definition}[Complex Numbers]
+   \[\mathbb{C} :=  \mathbb{R} \times \mathbb{R}\]
+\end{definition}
+\begin{remark}
+   More formally we would define that \(i \in \mathbb{C}: i^2 = -1\) and
+   \[\mathbb{C} = \{x + iy \mid x, y \in \mathbb{R}\}\]
+   with
+   \[z_1 + z_2 = (x_1 + iy_1) + (x_2 + iy_2) = (x_1 + x_2) + i(y_1 + y_2)\]
+   \[z_1 \cdot z_2 = (x_1 + iy_1) \cdot (x_2 + iy_2) = x_1x_2 + ix_1y_2 + ix_2y_1 + i^2y_1y_2 = (x_1x_2 - y_1y_2) + i(x_1y_2 + x_2y_1)\]
+
+   \[z \in \mathbb{C}: z = (x, y) = x \cdot (1, 0) + y \cdot (0, 1) = x + iy\]
+   for such a complex number \(z\) we call
+   \[\Re(z) := x\]
+   \[\Im(z) := y\]
+   the \emph{real} respectively \emph{imaginary} part.
+\end{remark}
+
+\begin{definition}[Complex Conjugate]
+   Given \(z = x + iy \in \mathbb{C}\)
+   \[\overline{z} = x - iy\]
+\end{definition}
+\begin{remark}
+   The following calculation rules apply
+   \[\overline{z_1 + z_2} = \overline{z_1} + \overline{z_2}\]
+   \[\overline{z_1 \cdot z_2} = \overline{z_1} \cdot \overline{z_2}\]
+   \[z \cdot \overline{z} = \overline{z} \cdot z = (x+iy) \cdot (x-iy) = x^2 + y^2 \geq 0 \in \mathbb{R}\]
+\end{remark}
+
+Geometrically, complex numbers extend the concept of the one-dimensional number line to the two-dimensional complex plane by using the horizontal axis for the real part and the vertical axis for the imaginary part.
+The complex number \(z = x + iy\) can be identified with the point \((x, y)\) in the complex plane.
+
+% TODO: redraw with geogebra
+% \begin{figure}[h]
+%    \centering
+%    \begin{tikzpicture}
+%       % coords
+%       \coordinate (OR) at (0, 0);
+%       \coordinate (LX) at (-0.5, 0);
+%       \coordinate (RX) at (4, 0);
+%       \coordinate (TY) at (0, 3);
+%       \coordinate (BY) at (0, -3);
+
+%       % coordinate system
+%       \draw[->][line width=1.00pt] (LX) -- (RX) node[anchor=north west] {\(\Re(z)\)};
+%       \draw[->][line width=1.00pt] (BY) -- (TY) node[anchor=south east] {\(\Im(z)\)};
+
+%       \coordinate (z) at (3, 2);
+%       \coordinate (y) at (0, 2);
+%       \coordinate (x) at (3, 0);
+
+%       \draw[fill] (z) node[anchor=west]{\(z = x + iy\)} circle [radius=0.05];
+%       \draw[dashed] (x) node[anchor=north west]{\(x\)} -- (z);
+%       \draw[dashed] (y) node[anchor=east]{\(y\)} -- (z);
+%       \draw[-{latex}, blue] (OR) -- (z) node [midway, above, sloped, black] (TextNode) {\(r = |z|\)};
+%       \pic[draw, -, "\(\varphi\)", angle eccentricity=1.5] {angle=x--OR--z};
+
+%       \coordinate (conjz) at (3, -2);
+%       \coordinate (-y) at (0, -2);
+%       \draw[fill] (conjz) node[anchor=west]{\(\overline{z} = x - iy\)} circle [radius=0.05];
+%       \draw[dashed] (x) -- (conjz);
+%       \draw[dashed] (-y) node[anchor=east]{\(-y\)} -- (conjz);
+%       \draw[-{latex}, blue] (OR) -- (conjz);
+%    \end{tikzpicture}
+% \end{figure}
+
+\begin{proposition}[\(\mathbb{C}\) is a Field]
+   The set \(\mathbb{C}\) with the operations
+   \[+: (x_1, y_1) + (x_2, y_2) = (x_1 + x_2, y_1 + y_2)\]
+   \[\cdot: (x_1, y_1) \cdot (x_2, y_2) = (x_1x_2 - y_1y_2, x_1y_2 + x_2y_1)\]
+   is a field.
+\end{proposition}
+\begin{proof}
+   The additive neutral element is \((0, 0)\) and the inverse is \(-(x, y) = (-x, -y)\).
+
+   The multiplicative neutral element is \((1, 0)\).
+   The multiplicative inverse element is given through
+   \[\frac{1}{x + iy} = \frac{x - iy}{(x+iy)(x-iy)} = \frac{x}{x^2 + y^2} - i\frac{y}{x^2 + y^2}\]
+   \[(x, y)^{-1} := \left(\frac{x}{x^2 + y^2}, \frac{-y}{x^2 + y^2}\right)\]
+\end{proof}
+
+\begin{definition}[Complex Absolute Value]
+   Given \(z = x + iy \in \mathbb{C}\)
+   \[|z| := \sqrt{\overline{z}z} = \sqrt{x^2 + y^2}\]
+\end{definition}
+\begin{remark}
+   The following calculation rules apply
+   \[|z_1 \cdot z_2| = |z_1| \cdot |z_2|\]
+   \[|z| = \iff z = 0\]
+   \[|\Re(z)| \leq |z|\]
+   \[|\Im(z)| \leq |z|\]
+   \[|z_1 + z_2| \leq |z_1| + |z_2|\]
+\end{remark}
+
+% TODO: add polar coordinates
+
+\begin{theorem}[Fundamental Theorem of Algebra]
+   Every polynomial
+   \[p(x) = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0\]
+   with a rank \(n \geq 1\) and complex coefficients has at least one root (nullstelle) in \(\mathbb{C}\).
+   Which means \(\exists w \in \mathbb{C}: p(w) = 0\)
+\end{theorem}
