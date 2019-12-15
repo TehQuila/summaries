@@ -1,0 +1,194 @@
+\section{System of linear Equations}
+\begin{definition}[System of Linear Equations]\label{def:sys_lin_eq}
+   Consists of \(m\) equations and \(n\) variables \((x_1, \ldots, x_n)\).
+   \[a_{11} x_1 + a_{12} x_2 + \ldots + a_{1n} x_n = b_1\]
+   \[a_{21} x_1 + a_{22} x_2 + \ldots + a_{2n} x_n = b_2\]
+   \[\vdots\]
+   \[a_{m1} x_1 + a_{m2} x_2 + \ldots + a_{mn} x_n = b_m\]
+\end{definition}
+
+\subsection{Matrix Representation}
+The \textit{i}-th equation of a system of linear equations can be written as
+\[\left(\displaystyle\sum_{j=1}^n a_{ij} x_j = b_{ij}\right)_{1 \leq i \leq m}\]
+which reveals the structure of a matrix multiplication (\ref{def:matrix_mult})
+\[A_{m,n} \cdot x_{1,n} = b_{1,m}\]
+\[\begin{pmatrix} a_{11} x_1 + & \ldots & + a_{1n} x_n \\ \vdots & \ddots & \vdots \\ a_{m1} x_1 + & \ldots & + a_{mn} x_n\end{pmatrix} = \begin{pmatrix} b_1 \\ \vdots \\ b_m \end{pmatrix}\]
+
+\begin{definition}[Coefficient Matrix]
+   A matrix consisting of the coefficients of the variables in a system of linear equations (\ref{def:sys_lin_eq})
+   \[A_{m,n} := \begin{pmatrix} a_{11} & \cdots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{m1} & \cdots & a_{mn}\end{pmatrix}\]
+\end{definition}
+
+\begin{definition}[Extended Coefficient Matrix]\label{def:extended_coefficient_matrix}
+   A matrix consisting of the coefficient matrix with the column vector of the solutions as additional column
+   \[(A, b) := \begin{pmatrix} a_{11} & \cdots & a_{1n} & b_1 \\ \vdots & \ddots & \vdots & \vdots \\ a_{m1} & \cdots & a_{mn} & b_m\end{pmatrix}\]
+\end{definition}
+
+\begin{definition}[Solution Set]
+   The solutions of a system of linear equations (\ref{def:sys_lin_eq}) is the set
+   \[L(A, b) := \{x \in K^n: A \cdot x = b\}\]
+   \[L := \left\{(x_1, \ldots, x_n) \in K^n \bigm| \sum_{j=1}^n a_{ij} x_j = b_{j} : \forall 1 \leq i \leq m \right\}\]
+\end{definition}
+
+\subsection{Elementary Row Transformations}
+\begin{definition}[Elementary Row Transformations]\label{def:elementary_row_transformation}
+   Given \(A \in \text{Mat}_{m, n}(K)\) and \(\lambda \in K^*\), there are three transformations
+
+   \(Z_1\): Add the \(\lambda\) multiple of \(A_{j,n}\) to the \textit{i}-th row of \(A\).
+
+   \(Z_2\): Multiply the \textit{i}-th row of \(A\) with \(\lambda\).
+
+   \(Z_3\): Switch the \textit{i}-th and the \textit{j}-th row of \(A\).
+\end{definition}
+
+\begin{theorem}[\(L(A, b) = L(\tilde{A}, \tilde{b})\)]
+   Given the extended coefficient matrix \((A, b)\) and the - through finite many elementary row transformations (\ref{def:elementary_row_transformation}) on \((A, b)\) - created matrix \((\tilde{A}, \tilde{b})\)
+   \[L(A, b) = L(\tilde{A}, \tilde{b})\]
+\end{theorem}
+
+\begin{proof}[Proof \(Z_1\) doesn't change \(L(A, b)\).]
+   Let \(\sum_{j=1}^n a_{ij} x_j = b_{i}\) be the \textit{i}-th and \(\sum_{j=1}^n a_{lj} x_l = b_{l}\) the \textit{l}-th row.
+   \[\sum_{j=1}^n a_{ij} x_j + \lambda \left(\sum_{j=1}^n a_{lj} x_j\right) = \sum_{j=1}^n (a_{ij} + \lambda \cdot a_{lj}) x_j = b_i + \lambda b_{l}\]
+\end{proof}
+
+\begin{proof}[Proof \(Z_2\) doesn't change \(L(A, b)\).]
+   Let \(\sum_{j=1}^n a_{ij} x_j = b_{ij}\) be the \textit{i}-th row and \(\lambda \in K \setminus \{0\}\).
+   \[\lambda \cdot \sum_{j=1}^n a_{ij} x_j = \lambda \cdot b_{ij}\]
+\end{proof}
+
+\begin{proof}[Proof \(Z_3\) doesn't change \(L(A, b)\).]
+   \[\text{The order of the equations does not have an influence of the solution space.}\]
+\end{proof}
+
+Thus we showed that \(x \in L(A, b) \land x \in L(\tilde{A}, \tilde{b})\) thus \(L(A, b) \subset L(\tilde{A}, \tilde{b})\).
+To prove that \(L(A, b) = L(\tilde{A}, \tilde{b})\) we have to show also that \(L(\tilde{A}, \tilde{b}) \subset L(A, b)\).
+\begin{proof}[Proof \(L(\tilde{A}, \tilde{b}) \subset L(A, b)\).]
+\((\tilde{A}, \tilde{b})\) was created from through applying \(Z_1\) to \((A, b)\).
+
+When we now apply \(Z_1\) to \((\tilde{A}, \tilde{b})\) to add the \(-\lambda\) multiple of the lth row to the ith row of \((\tilde{A}, \tilde{b})\) we get \((A, b)\) again.
+Thus we have shown that we can create \((A, b)\) through applying row transformations to \((\tilde{A}, \tilde{b})\) which means that \(L(\tilde{A}, \tilde{b}) \subset L(A, b)\).
+
+Therefore is \(L(A, b) = L(\tilde{A}, \tilde{b})\).
+\end{proof}
+
+\subsection{Elementary Column Transformations}
+\begin{definition}[Elementary Column Transformations]\label{def:el_col_transf}
+   Given \(A \in \text{Mat}_{m, n}(K)\) and \(\lambda \in K^*\), there are three transformations
+
+   \(S_1\): Add the \(\lambda\) multiple of \(A_{m,j}\) to the \textit{i}-th column of \(A\).
+
+   \(S_2\): Multiply the \textit{i}-th column of \(A\) with \(\lambda\).
+
+   \(S_3\): Switch the \textit{i}-th and the \textit{j}-th column of \(A\).
+\end{definition}
+% todo: correct?
+\begin{remark}
+   The paralells to elementary \textit{row} transformation becomes obvious when thinking about them in terms of matrix multiplications with elementary matrices (\ref{def:elementary_matrix}) where \(Z_1\) does the same as \(S_1\) when looking at
+   \[A' = Q_{ij}(\lambda) \cdot A = A^T \cdot Q_{ij}^T(\lambda)\]
+\end{remark}
+
+\begin{theorem}[Row/Column Transformation Composition]
+   For \(A \in \text{Mat}_{m,n}(K)\) there exist two invertible matrices \(U\), \(V\) (a composition of elementary row/column transformations) such that
+   \[U \cdot A \cdot V = \left(\begin{array}{c|c} I_r & 0 \\ \hline 0 & 0 \end{array}\right)\]
+\end{theorem}
+\begin{proof}
+   \(U = E_1 \cdot \ldots \cdot E_n\) represents all the elementary row transformations on \(A\) until it is in row echelon form (\ref{def:row_echelon}) with elementary matrix mutliplications.
+
+   We can find a permutation matrix \(P\) such that
+   \[UAP = \left(\begin{array}{c|c} D_r & * \\ \hline 0 & 0 \end{array}\right)\]
+   Then we can choose a diagonal matrix \(D_i\) such that
+   \[UAPD_i = \left(\begin{array}{c|c} I_r & * \\ \hline 0 & 0 \end{array}\right)\]
+   And finally we take \(S\) that
+   \[UAPD_iS = \left(\begin{array}{c|c} I_r & 0 \\ \hline 0 & 0 \end{array}\right)\]
+   Thus we found \(V = PD_iS\)
+\end{proof}
+
+\begin{corollary}[\(\text{rank}A = \text{rank}A^T\)]
+   Given \(A \in \text{Mat}_{m,n}\)
+   \[\text{rank}A = \text{rank}A^T\]
+   \[\text{rank}A~\text{is the maximal number of linear independent rows.}\]
+\end{corollary}
+\begin{proof}
+   Given \(A \in \text{Mat}_{m,n}\)
+   \[\text{rank}A^T = \text{rank}V^TA^TU^T = r = \text{rank}A\]
+\end{proof}
+
+\subsection{Gaussian Elimination}
+\begin{theorem}[Gauss Elimination]
+   Every matrix \(A\) can be transformed through finite many elementary row transformations (\ref{def:elementary_row_transformation}) into a matrix \(\tilde{A}\) in row echelon form (\ref{def:row_echelon}).
+\end{theorem}
+\begin{proof}
+Let \(A \neq 0_{m,n} \in Mat_{m,n}(K)\)
+
+We choose the collumn with the smallest index \(j_1\).
+\[j_1 = min\{j: \exists i \text{ with } a_{ij} \neq 0\}\]
+
+If \(a_{1j_1} \neq 0\) we can choose it, otherwise we choose an \(a_{i_1j_1} \neq 0\) and use \(Z_3\) to switch the first row with the row \(i_1\)
+This way \(i_1\) is already the first row of \(\tilde{A}\) with \(\tilde{a}_{1j_1} = a_{i_1j_1}\).
+
+Through transformations of \(Z_1\) we can set all entries 0 below \(\tilde{a}_{1j_1}\).
+If \(a\) is such an entry \(a + \lambda \tilde{a}_{1j_1} = 0\) must hold, therefore we choose \(\lambda = -\frac{a}{\tilde{a}_{1j_1}}\) for \(Z_1\)
+
+This gives us the matrix
+\[\tilde{A}_1 = \begin{pmatrix}
+   0 & \cdots & 0 & \tilde{a}_{1j_1} & * & \cdots & * \\
+   \vdots &   & \vdots & 0 & - & - & - \\
+   \vdots &   & \vdots & \vdots & - & A_2 & - \\
+   0 & \cdots & 0 & 0 & - & - & - \\
+\end{pmatrix}\]
+
+Where the \(*\) are other entries.
+The matrix \(A_2\) has \(m - 1\) rows and \(n - j_1\) columns.
+
+In the second step we repeat it with \(A_2\).
+We choose again the column with the smallest index, in the case of \(A_2\) it must be \(j_2 > j_1\) so that we get the next entry \(\tilde{a}_{2j_2}\).
+
+The necessary row transformations can be applied to all rows with indexes \(2 \leq i \leq m\) without changing columns 1 to \(j_1\) since there are only 0.
+From here on we repeat this until we have \(\tilde{A}\).
+
+This process must come to an end because the number of rows and columns of the matrices \(A_k\) decline or \(A_k = 0_{mn}\) which also marks the end.
+
+\[\tilde{A} = \begin{pmatrix}
+   0 & \cdots & 0 & \tilde{a}_{1j_1} & * & \cdots & * \\
+   \vdots &   & \vdots & 0 & \tilde{a}_{2j_2} & * & * \\
+   \vdots &   & \vdots & \vdots & \ddots & \ddots & \tilde{a}_{rj_r} \\
+   0 & \cdots & 0 & 0 & \cdots & \cdots & 0 \\
+\end{pmatrix}\]
+\end{proof}
+
+\subsection{Solving a System of Linear Equations}
+\begin{definition}[Homogenous System of Linear Equations]
+   A system of linear equations (\ref{def:sys_lin_eq}) for which
+   \[b_i = 0\]
+\end{definition}
+
+\begin{enumerate}
+\item Write down the coefficient matrix \((A, b)\).
+\item Transform \((A, b)\) in row echelon form (only choosing pivots in \(A\)).
+\item Look at \(\tilde{b}\) to determine whether there are solutions.
+\end{enumerate}
+
+% todo
+if there is a 0 row (a matrix turns out to be \(0_{mn}\) during the gauss elimination) there are two possible cases \(\forall i: b_i = 0 \implies L(A, b) = K^n\) or \(\exists i: b_i \neq 0 \implies L(A, b) = \emptyset\).
+
+n is number of columns, m is number of rows
+\begin{enumerate}
+\item \(k < m\): if there exists a 0 row \(\exists b_i, k + 1 \leq i \leq m: b_i = 0 \implies L = \emptyset\)
+\item \(k = m\): there are no 0 rows or \(\tilde{b}_{k+1} = \tilde{b}_{k+2} = \ldots = \tilde{b}_m = 0\)
+\begin{enumerate}
+\item \(k = n \implies \tilde{A} = I_m\) --> \(x_i = \tilde{b}_i\), in this case \(A\) is invertible and \(x = A^{-1} b\)
+if \(k = n = m\) there is a progression of row transformations (with elementary matrices \(E_k\) so that \(A\) can be transformed into \(I_m\) \(\exists E_1, \ldots, E_k: E_1 \cdot \ldots \cdot E_k \cdot A = I_m\)
+for \(B := E_1 \cdot \ldots E_k\) we can say that \(B^{-1} \cdot B \cdot A = B^{-1} \implies A = B^{-1}\)
+and \(B = A^{-1}\)
+
+\item \(k < n\): there are less equations than variables \(x_{n_i} = \tilde{b}_i - \sum_{j = n_1 + 1}^n \tilde{a}_{ij} x_j\) --> there are infinite solutions
+\end{enumerate}
+\end{enumerate}
+
+if there is a 0 row but \(b \neq 0\) there is no solution.
+if there is a 0 row and \(b = 0\) there are infinite solutions.
+else there is 1 solution.
+
+a homogenous system of equations has 1 or infinite solutions
+
+\(A\) is an upper triangular matrix which implies \(A = \prod (I_m + \lambda E_{ij})\) \(i < j\)

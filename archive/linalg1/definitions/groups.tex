@@ -1,0 +1,121 @@
+\section{Groups}
+
+\subsection{Definition}
+\begin{definition}[Group]
+   A set \textit{G} with an operation \(\circ: G \times G \to G,~(a, b) \mapsto a \circ b\) \\
+   if the following holds:
+   \begin{enumerate}[label=(\roman*)]
+      \item Operation is associative: \(\forall a, b, c \in G: (a \circ b) \circ c = a \circ (b \circ c)\)
+      \item There exists a Left Identity: \(\forall a \in G: e \circ a = a\)
+      \item There exists a Left Inverse: \(\forall a, a' \in G: a' \circ a = e\)
+   \end{enumerate}
+   Can be written as \((G, \circ, e)\).
+\end{definition}
+
+\begin{definition}[Abelian Group]\label{def:abel_group}
+   A group is \textit{abelian}, when the operation is commutative.
+   \[\forall a, b \in G: a \circ b = b \circ a\]
+\end{definition}
+
+\subsubsection{Identity Element}
+\begin{proposition}[Left Identity = Right Identity]
+   \(\forall a \in G:\)
+   \[ea = a \implies ae = a\]
+\end{proposition}
+\begin{proof}
+   Given \(\forall a \in G,~\exists e' \in G: ae' = a\) a right identity \(e' \neq e\):
+   \[ee' = e \land ee' = e' \implies e = e'\]
+\end{proof}
+
+\begin{proposition}[Uniqueness of \(e\)]
+   \[\text{The identity element is unique within the group.}\]
+\end{proposition}
+\begin{proof}
+   Given \(\forall a \in G,~\exists e, \tilde{e} \in G: \tilde{e}a = a \land ea = a\) a second identity \(\tilde{e} \neq e\)
+   \[e\tilde{e} = e \land e\tilde{e} = \tilde{e} \implies e = \tilde{e}\]
+\end{proof}
+
+\subsubsection{Inverse Element}
+\begin{proposition}[Left Inverse = Right Inverse]\label{pro:linv=rinv}
+   \(\forall a \in G:\)
+   \[a'a = e \implies aa' = e\]
+\end{proposition}
+\begin{proof}
+   Given \(\forall a \in G,~\exists a', a'' \in G: a''a' = e\) where \(a''\) is the left inverse element of \(a'\):
+   \[aa' = (ea)a' = e(aa') = (a''a')(aa') = a''((a'a)a') = a''(ea') = a''a' = e\]
+\end{proof}
+
+\begin{proposition}[Uniqueness of \(a'\)]\label{pro:unique_a}
+   \[\text{The inverse element is unique and written as} ~ a^{-1} := a'\]
+\end{proposition}
+\begin{proof}
+   Given \(\forall a \in G,~\exists a', \tilde{a}' \in G: \tilde{a}' a = e \land a' a = e\) a second inverse element \(\tilde{a}' \neq a'\):
+   \[a'a\tilde{a}' = a'e = a' \land a'a\tilde{a}' = e\tilde{a}' = \tilde{a}' \implies a' = \tilde{a}'\]
+\end{proof}
+
+\begin{corollary}[\((a^{-1})^{-1}\)]
+   For \(a^{-1} \in G:\)
+   \[(a^{-1})^{-1} = a\]
+\end{corollary}
+\begin{proof}
+   \[\text{From \cref{pro:linv=rinv} follows:}~aa^{-1} = e \implies (a^{-1})^{-1} = a\]
+\end{proof}
+
+\begin{corollary}[\((ab)^{-1}\)]
+   \(\forall a, b \in G:\)
+   \[(ab)^{-1} = b^{-1}a^{-1}\]
+\end{corollary}
+\begin{proof}
+   \(\forall a, b \in G: (b^{-1}a^{-1})(ab) = e \implies (ab)^{-1} = b^{-1}a^{-1}\)
+   \[(b^{-1}a^{-1})(ab) = b^{-1}(a^{-1}a)b = b^{-1}eb = b^{-1}b = e\]
+\end{proof}
+
+\subsubsection{Closure}
+A set has \textit{closure} under an operation if performance of that operation on members of the set always produces a member of the same set; in this case we also say that the set is \textit{closed} under the operation.
+
+\begin{proposition}[\(ax = b\)]
+   \(\forall a, b \in G,~\exists x \in G:\)
+   \[ax = b\]
+\end{proposition}
+\begin{proof}
+   Given \(a, b, x \in G\)
+   \[ax = b \implies x = a^{-1}b\]
+   \[x := a^{-1}b\]
+   \[ax = a(a^{-1}b) = eb = b\]
+\end{proof}
+
+\begin{proposition}[\(ya = b\)]
+   \(\forall a, b \in G,~\exists y \in G:\)
+   \[ya = b\]
+\end{proposition}
+\begin{proof}
+   Given \(a, b, y \in G\)
+   \[ya = b \implies y = ba^{-1}\]
+   \[y := ba^{-1}\]
+   \[ya = ba^{-1}a = b(a^{-1}a) = be = b\]
+\end{proof}
+
+% todo: still part of closure?
+\begin{proposition}[\(ab = ac\)]
+   \(\forall a, b, c \in G:\)
+   \[b = c \iff ab = ac\]
+\end{proposition}
+\begin{proof}[Proof \(ab = ac \implies b = c\).]
+   Given \(a, b, c \in G\)
+   \[b = eb = (a^{-1}a)b = a^{-1}(ab) = a^{-1}(ac) = ec = c\]
+\end{proof}
+\begin{proof}[Proof \(b = c \implies ab = ac\).]
+   \[G \times G \to G~\text{is well-defined.}\]
+\end{proof}
+
+\begin{proposition}[\(ba = ca\)]
+   \(\forall a, b, c \in G:\)
+   \[b = c \iff ba = ca\]
+\end{proposition}
+\begin{proof}[Proof \(ba = ca \implies b = c\).]
+   Given \(a, b, c \in G\)
+   \[b = be = b(a^{-1}a) = (ba)a^{-1} = (ca)a^{-1} = ce = c\]
+\end{proof}
+\begin{proof}[Proof \(b = c \implies ba = ca\).]
+   \[G \times G \to G~\text{is a linear map}\]
+\end{proof}

@@ -1,0 +1,120 @@
+\documentclass[english,titlepage]{uzhpub}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+
+% Math Packages
+\usepackage{mathtools} % includes amsmath
+\usepackage{amsthm} % for theoremstyle, newtheorem
+\usepackage{amsfonts} % for mathbb
+\usepackage{amssymb} % for blacksquare
+\usepackage{thmtools} % for theorem list
+
+% Drawing Packages
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+% Formality Packages
+\usepackage[toc,nonumberlist]{glossaries}
+\makeglossaries
+\input{appendix/glossary.tex} 
+\glsaddall
+
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage{cleveref}
+% LABELLING SCHEME
+% ch: chapter
+% sec: section
+% subsec: subsection
+% fig: figure
+% tab: table
+% eq: equation
+% lst: code listing
+% itm: enumerated list item
+% alg: algorithm
+% app: appendix subsection
+
+% def: definition
+% thm: theorem
+% pro: proposition
+% cor: corollary
+% lem: lemma
+% rem: remark
+
+% Math styling
+\renewcommand\qedsymbol{$\blacksquare$}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{plain}
+\newtheorem*{theorem*}{Theorem} % unnumbered theorem
+\newtheorem{theorem}{Theorem}[section] % numbered theorem
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{example}
+\newtheorem*{example}{Example}
+
+\begin{document}
+   \title{Linear Algebra 1}
+   \subtitle{Definitions, Proofs and Examples}
+   \author{Tim Bachofen}
+   \date{HS 2018}
+
+   \maketitle
+
+   \begin{abstract}
+      This document is a collection of all definitions, theorems, propositions, corollaries and lemmas of the course MAT111 Linear Algebra 1.
+      Furthermore it contains examples and more detailed explanations of the important concepts.
+
+      A theorem for example will be structured as the following:
+
+      \begin{theorem*}[Name or Statement]
+         Assumptions and given variables
+         \[\text{Full statement of the theorem}\]
+      \end{theorem*}
+      \begin{proof}[Proof (assertion to be proven).]
+         Assumptions and given variables
+
+         \[\text{Actual proof}\]
+      \end{proof}
+   \end{abstract}
+
+   \newpage
+   \tableofcontents
+   \newpage
+
+   \listoftheorems[ignoreall, show={definition,theorem,proposition,corollary,lemma}]
+
+   \newpage
+
+   % todo: add (whenever a definition is referenced in plaintext) a cref for easy access
+   % todo: add different theorem envs for numbering prop after def, 
+   \part{Definitions & Proofs}
+   \input{definitions/groups.tex}
+   \newpage
+   \input{definitions/rings.tex}
+   \newpage
+   \input{definitions/fields.tex}
+   \newpage
+   \input{definitions/vector_spaces.tex}
+   \newpage
+   \input{definitions/matrices.tex}
+   \newpage
+   \input{definitions/linear_equations.tex}
+   \newpage
+   \input{definitions/linear_maps.tex}
+   \newpage
+   \input{definitions/mapping_spaces.tex}
+
+   \newpage
+   \part{Examples & Explanations}
+   \input{examples/main.tex}
+
+
+   \newpage
+   \printglossaries{}
+\end{document}

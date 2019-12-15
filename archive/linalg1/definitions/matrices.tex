@@ -1,0 +1,615 @@
+\section{Matrices}
+\begin{definition}[Matrix]
+Given \(m, n \in \mathbb{Z}\). An \(m \times n\) \textit{matrix} consists of \(m\) rows and \(n\) columns, thus \(m \cdot n\) numbers, arranged in a rectangle:
+
+\[
+A_{m,n} = (a_{ij}) =
+\bordermatrix{
+   ~ & & & & j & \cr
+     & a_{11} & a_{12} & \cdots & \cdots & a_{1n} \cr
+     & a_{21} & a_{22} & \cdots & \cdots & a_{1n} \cr
+   i & \vdots & \vdots & \ddots & a_{ij} & \vdots \cr
+     & \vdots & \vdots & \vdots & \ddots & \vdots \cr
+     & a_{m1} & \cdots & \cdots & \cdots & a_{mn} \cr
+}_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}}
+\]
+
+The matrix-entries are written as \(a_{ij}\) where \(i\) is the row index with \(1 \leq i \leq m\) and \(j\) is the column index with \(1 \leq j \leq n\).
+
+Given a field \(K\) we say \(\text{Mat}_{m,n}(K)\) is the set of all matrices whose coefficients are in \(K\).
+\[A = (a_{ij}) \in \text{Mat}_{m,n}(K): a_{ij} \in K\]
+\end{definition}
+
+\subsection{Special Cases}
+\begin{definition}[Quadratic Matrix]
+   An \(m \times n\) matrix where \(m = n\).
+\end{definition}
+
+\begin{definition}[Row Vector]
+   A matrix where \(m = 1\)
+   \[A_{1,n} = (a_1, \ldots, a_n)\]
+\end{definition}
+
+\begin{definition}[Column Vector]
+   A matrix where \(n = 1\)
+   \[A_{m,1} = \begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix}\]
+\end{definition}
+
+\begin{definition}[Zero Matrix]
+   An \(m \times n \) matrix whose entries are all \(0\).
+\end{definition}
+
+\begin{definition}[Kronecker Delta]
+   \[\delta_{ij} := \begin{cases} 1: & i=j\\ 0: & i \neq j\end{cases}\]
+\end{definition}
+
+\begin{definition}[Diagonal Matrix]
+   A quadratic matrix where all entries \(a_{ij} \in K\) with \(i \neq j\) are \(0\)
+\end{definition}
+
+\begin{definition}[Identity Matrix]
+   A diagonal matrix whose diagonal entries are 1.
+   \[I_m := (\delta_{ij})\]
+\end{definition}
+
+\begin{definition}[Single-Entry Matrix]
+   A quadratic matrix whose entry in the \textit{i}-th row and the \textit{j}-th column is 1 and all other entries are 0.
+   \[E_{ij} := (\delta_{ii'} \cdot \delta_{jj'})_{\substack{1 \leq i' \leq n \\ 1 \leq j' \leq m}}\]
+\end{definition}
+\begin{remark}
+   This means that the entry \(a_{i'j'\) of the matrix \(E_{ij}\) is given by \(\delta_{ii'} \cdot \delta_{jj'}\) so we see that this product is 1 if and only if \(i = i' \land j = j'\) otherwise it is 0.
+   This means that exactly one entry of \(E_{ij}\) is nonzero, namely the one at row \(i\) and column \(j\).
+\end{remark}
+% todo: what is this?
+\[(E_{ij} \cdot A)_{kl} = \sum_{p=1}^m (E_{ij})_{kp} \cdot a_{pl} = \sum_{p=1}^m \delta_{ik} \delta_{jp} a_{pl} = \begin{cases}a_{jl}: & i=k\\ 0: & i \neq k\end{cases}\]
+
+% todo: illustrating example
+\begin{definition}[Row Echelon Form]\label{def:row_echelon}
+   Given \(A \in \text{Mat}_{m,n}\), \(r \in \mathbb{Z}: 0 \leq r \leq m\) and the column indexes \(j_i := min\{j: a_{ij} \neq 0\}\) where \(1 \leq j_i \leq n\) and \(\forall i: 1 \leq i \leq r\).
+
+   \(A\) is in row-echelon form if the following holds:
+
+   \begin{enumerate}[label=(\roman*)]
+      \item The rows 1 to \(r\) are not zero rows and the rows \(r+1\) to \(m\) are.
+      \item \(j_1 < j_2 < \ldots < j_r\)
+   \end{enumerate}
+\end{definition}
+
+\subsection{Operations}
+\begin{definition}[Scalar Multiplication]
+   Given \(A \in \text{Mat}_{m,n}(K)\) and \(\lambda \in K\):
+   \[\lambda \cdot A := \lambda (a_{ij}) = (\lambda a_{ij})\]
+\end{definition}
+
+\begin{proposition}[\(\lambda (A + B)\)]
+   \(\forall A, B \in \text{Mat}(K),~\forall \lambda \in K\)
+   \[\lambda (A + B) = \lambda A + \lambda B\]
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}[\((\lambda + \mu) A\)]
+   \(\forall A, B \in \text{Mat}(K), \forall \lambda, \mu \in K\)
+   \[(\lambda + \mu) A = \lambda A + \mu A\]
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}[\(\lambda (\mu A)\)]
+   \(\forall A, B \in \text{Mat}(K), \forall \lambda, \mu \in K\)
+   \[\lambda (\mu A) = (\lambda \cdot \mu) A\]
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{definition}[Matrix Addition]
+   \(\forall A, B \in \text{Mat}_{m,n}(K)\)
+   \[A + B := (a_{ij}) + (b_{íj}) = (a_{ij} + b_{ij})\]
+   \[A - B := A + (-1) \cdot B = (a_{ij}) + (-1)(b_{ij}) = (a_{ij} - b_{ij})\]
+\end{definition}
+\begin{remark}
+   The addition is only defined for equally sized matrices.
+\end{remark}
+
+\begin{proposition}[Matrix Addition Associativity]
+   \(\forall A, B, C \in \text{Mat}(K)\)
+   \[A + (B + C) = (A + B) + C\]
+\end{proposition}
+\begin{proof}
+   Holds since associativity holds for all \(a_{ij}\) since \(a_{ij} \in K\).
+\end{proof}
+
+\begin{proposition}[\(0_{m,n} + A\)]
+   \(\forall A \in \text{Mat}(K)\)
+   \[0_{m,n} + A = A\]
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}[\(A - A\)]
+   \(\forall A \in \text{Mat}(K)\)
+   \[A - A = 0_{m,n}\]
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{definition}[Matrix Multiplication]\label{def:matrix_mult}
+   Given \(A \in \text{Mat}_{m,n}(K)\) and \(B \in \text{Mat}_{n,l}(K)\)
+   \[A_{m,n} \cdot B_{n,l} := \left(\sum_{j=1}^n a_{ij} \cdot b_{jk}\right)_{\substack{1 \leq i \leq m \\ 1 \leq k \leq l}}\]
+\end{definition}
+\begin{remark}
+   This means \(A\) and \(B\) can only be multiplied if \(A\) has \(n\) columns and \(B\) has \(n\) rows:
+   \[A \in \text{Mat}_{m,n} B \in \text{Mat}_{n,l} \implies A \cdot B \in \text{Mat}_{m,l}(K)\]
+\end{remark}
+
+\begin{proposition}[\(I_m \cdot A\)]
+   \(\forall A \in \text{Mat}(K)\)
+   \[I_m \cdot A = A \cdot I_m = A\]
+\end{proposition}
+
+\begin{proposition}[\(0_{m,n} \cdot A\)]
+   \(\forall A \in \text{Mat}(K)\)
+   \[0_{m,n} \cdot A = 0_{m,n}\]
+\end{proposition}
+\(\forall A, B \in \text{Mat}(K)\)
+
+\begin{proposition}[Matrix Multiplication Associativity]
+   \(\forall A, B, C \in \text{Mat}(K)\)
+   \[A \cdot (B \cdot C) = (A \cdot B) \cdot C\]
+\end{proposition}
+
+\subsection{Row Transformations as Matrix Multiplications}
+\begin{definition}[Elementary Matrix]\label{def:elementary_matrix}
+   A matrix which differs from the identity matrix by one single elementary row operation (\ref{def:elementary_row_transformation})
+   \[\text{For }Z_1: Q_{ij}(\lambda) := I_m + \lambda E_{ij} = \bordermatrix{
+      ~ &   &   &   &   &   &   \cr
+        & 1 & 0 & 0 & 0 & 0 & 0 \cr
+        & 0 & \ddots & 0 & 0 & 0 & 0 \cr
+      i & 0 & 0 & 1 & 0 & \lambda & 0 \cr
+        & 0 & 0 & 0 & 1 & 0 & 0 \cr
+      j & 0 & 0 & 0 & 0 & 1 & 0 \cr
+        & 0 & 0 & 0 & 0 & 0 & 1
+   }\]
+   \[\text{For }Z_2: S_i(\lambda) := I_m + (\lambda - 1) E_{ii} = \bordermatrix{
+      ~ &   &   &   &   &   &   \cr
+        & 1 & 0 & 0 & 0 & 0 & 0 \cr
+        & 0 & \ddots & 0 & 0 & 0 & 0 \cr
+        & 0 & 0 & 1 & 0 & 0 & 0 \cr
+      i & 0 & 0 & 0 & \lambda & 0 & 0 \cr
+        & 0 & 0 & 0 & 0 & 1 & 0 \cr
+        & 0 & 0 & 0 & 0 & 0 & 1
+   }\]
+   % todo: show parallels to permutation matrix
+   \[\text{For }Z_3: P_{ji} := \bordermatrix{
+      ~ &   &   &   &   &   &   \cr
+        & 1 & 0 & 0 & 0 & 0 & 0 \cr
+        & 0 & \ddots & 0 & 0 & 0 & 0 \cr
+      i & 0 & 0 & 0 & 0 & 1 & 0 \cr
+        & 0 & 0 & 0 & 1 & 0 & 0 \cr
+      j & 0 & 0 & 1 & 0 & 0 & 0 \cr
+        & 0 & 0 & 0 & 0 & 0 & 1
+   }\]
+\end{definition}
+\begin{remark}
+   To add the \(\lambda\) multiple of the \textit{j}-th row of a matrix \(A\) to its \textit{i}-th row for example we would
+   \[A' = Q_{ij}(\lambda) \cdot A\]
+   Which is exactly the same as \(Z_1\) of \cref{def:elementary_row_transformation}
+   If we would swap the matrix multiplication as follows
+   \[A' = A \cdot Q_{ij}(\lambda)\]
+   we didn't to a row- but rather a \textit{column} transformation as defined in \cref{def:el_col_transf}
+
+   In other words: lefthand multiplication results in a row transformation whereas righthand multiplication with an elementary matrix results a column transformation. (Keep in mind that for a righthand multiplication with \(P_{ji}\) its indices are swapped!)
+\end{remark}
+
+\paragraph{\(Q_{ij}\) represents \(Z_1\)}
+Let \(A \in Mat_{m,n}(K), \lambda \in K \setminus \{0\}\) and indexes \(i, j\) with \(1 \leq i \leq n, 1 \leq j \leq m\) and \(i \neq j\).
+Let \(A'\) be a matrix which was created by adding the \(\lambda\) multiple of the jth row of \(A\) to its ith row.
+
+\begin{proposition}[\(Q_{ij}\) = \(Z_1\)]
+   \(Z_1\) is represented by \(Q_{ij}(\lambda)\)
+   \[A' = (I_m + \lambda E_{ij}) \cdot A\]
+\end{proposition}
+% todo: lookup proof
+\begin{proof}
+   \[[(I_m + \lambda E_{ij}) \cdot A] = I_m \cdot A + \lambda E_{ij} \cdot A = A + \lambda E_{ij} \cdot A\]
+   \[(A + \lambda E_{ij} \cdot A)_{kl} = a_{kl} + \lambda \delta_i \begin{cases}a_{jl}: & i=k\\ 0: & i \neq k\end{cases}\]
+\end{proof}
+
+\begin{proposition}[\(Q_{ij}(-\lambda)\) is inverse \(Z_1\)]
+   \[(I_m + \lambda E_{ij})^{-1} = I_m - \lambda E_{ij}\]
+\end{proposition}
+\begin{proof}
+   \[(I_m - \lambda E_{ij})(I_m + \lambda E_{ij}) = I_m - \lambda E_{ij} + \lambda E_{ij} = I_m\]
+\end{proof}
+
+\paragraph{\(S_i\) represents \(Z_2\)}
+Let \(A \in Mat_{m,n}(K), \lambda \in K \setminus \{0\}\).
+Let \(A'\) be the matrix which was created by multiplying the ith row of \(A\) with \(\lambda\).
+
+\begin{proposition}[\(S_i(\lambda)\) = \(Z_2\)]
+   \[A' = (I_m + (\lambda - 1) E_{ii}) \cdot A\]
+\end{proposition}
+% todo
+\begin{proof}
+\end{proof}
+
+\begin{proposition}[\(S_{i}(-\lambda)\) is inverse \(Z_2\)]
+   \[(I_m + (\lambda - 1) E_{ii})^{-1} = I_m + \left(\frac{1}{\lambda} - 1\right) E_{ii}\]
+\end{proposition}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\paragraph{\(P_{ji}\) represents \(Z_3\)}
+Let \(A \in Mat_{m,n}(K), \lambda \in K \setminus \{0\}\).
+Let \(A'\) be the matrix which was created by swapping the ith row of \(A\) with the jth.
+\begin{proposition}[\(P_{ji}\) = \(Z_3\)]
+   \[A' = P_{ji} \cdot A\]
+\end{proposition}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+% todo
+\begin{proposition}[\(P_{ji}^{-1}\) is inverse of \(Z_3\)]
+   \[P_{ji}^{-1} = P_{ji}\]
+\end{proposition}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\subsection{Triangular Matrices}
+\begin{definition}[Triangular Matrix]\label{def:triangular_matrix}
+   Given \(A_{m,n} = (a_{ij})_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}}\) we say
+
+   \begin{enumerate}[label=(\roman*)]
+      \item \(A\) is an \textit{upper} triangular matrix if \(\forall i > j: a_{ij} = 0\)
+      \item \(A\) is an \textit{lower} triangular matrix if \(\forall i < j: a_{ij} = 0\)
+   \end{enumerate}
+\end{definition}
+
+\begin{proposition}[Triangular Matrix Operations]
+   Given upper triangular matrices \(A\) and \(B\)
+
+   \begin{enumerate}[label=(\alph*)]
+      \item \(A + B\) is an upper triangular matrix.
+      \item \(A \cdot B\) is an upper triangular matrix.
+   \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof (a).]
+   Follows from \cref{def:triangular_matrix}
+\end{proof}
+\begin{proof}[Proof (b).]
+   Given upper triangular matrices \(A, B\)
+   \[(A \cdot B)_{ij} = \displaystyle\sum_{k=1}^m a_{ik} b_{kj} = 0~\text{if}~i > j\]
+   which means
+   \[i > k \lor k > j \lor k > j\]
+\end{proof}
+
+\begin{proposition}
+   Given an upper triangular matrix \(A\) with all diagonal entries 1.
+
+   \begin{enumerate}[label=(\alph*)]
+      \item \(A\) can be transformed into \(I_m\) by adding a multiple of a later row to an earlier row.
+      \item \(A = \prod(I_m + \lambda E_{ij})\) with \(\lambda \in K^*,~i < j\)
+   \end{enumerate}
+\end{proposition}
+%todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{proposition}
+   An upper triangular matrix \(A\)
+
+   \begin{enumerate}[label=(\alph*)]
+      \item \(A\) is invertible \(\iff\) no diagonal entry is 0.
+      \item Every left and right inverse of \(A\) is again an upper triangular matrix.
+   \end{enumerate}
+\end{proposition}
+\begin{proof}[Proof (a).]
+   \[A = \prod D_{i, a_{11}^{-1}} \cdot \prod(I_m + \lambda E_{ij}\]
+\end{proof}
+
+\subsection{Permutation Matrix}
+\begin{definition}[Permutation Matrix]
+   A matrix that has exactly one entry equal to \(1\) in each row and column and 0s elsewhere.
+\end{definition}
+\begin{remark}
+   \(P_{ji}\) of \cref{def:elementary_matrix} is a special kind of permutation matrix (hence the name ``Vertauschungsmatrix'').
+\end{remark}
+
+\begin{proposition}
+   \(\forall~\text{permutation matrices}~P\)
+   \[P^{-1} = P^T\]
+\end{proposition}
+% todo
+\begin{proof}[Proof (\(P \cdot P^T = I_m \iff (P P^T)_{ik} = \delta_{ik}\)).]
+   \[\sum_{j=1}^m P_{ij} P_{jk}^T = \sum_{j=1}^m P_{ij} P_{kj} = \begin{cases}1: & i=k\\ 0: & i \neq k\end{cases}\]
+\end{proof}
+
+\begin{theorem}[\(U \cdot P \cdot A\) in row echelon form]
+   \(\forall A \in Mat_{m,n}(K)\) exists a permutation matrix \(P\) and an invertible, lower triangular matrix \(U\) such that
+   \[U \cdot P \cdot A~\text{is in row echelon form}\]
+\end{theorem}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{theorem}[LU-Decomposition]
+   For every invertible matrix \(A\) exists a permutation matrix \(P\) and invertible lower \(L\) and upper \(R\) triangular matrix so that
+   \[A = P \cdot L \cdot R\]
+\end{theorem}
+\begin{proof}
+   \(L := U^{-1},~P' := P^T\)
+   \[R = UPA\]
+   is invertible since the row echelon form of \(A\) has no 0 rows
+   \[U^{-1} R = PA \iff P^T U^{-1} R = A\]
+   \[P'LR = A\]
+\end{proof}
+
+\begin{theorem}
+   Given \(A \in Mat_n(K)\) are the following statements equivalent
+   \begin{enumerate}
+      \item \(A\) can be transformed with \(Z_1 - Z_3\) to \(I_m\)
+      \item \(A\) is invertible
+      \item \(A = \prod D_{i,\lambda} \cdot \prod (I_m + \lambda E_ij)\)
+      \item \(A\) in row echelon form has no 0 rows
+   \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+   \[(A \mid I_m) \xrightarrow{Z_1 - Z_3} (B \mid U) \implies B = UA\]
+   \[(A \mid I_m) \rightarrow (I_m, A^{-1})\]
+\end{theorem}
+\begin{proof}
+   \[B = E_1 \cdot \ldots \cdot E_k \cdot A\]
+   \[U = E_1 \cdot \ldots \cdot E_k \cdot I_m\]
+   \[B = UA\]
+
+   \[B = I_m \implies I_m = UA \implies U = A^{-1}\]
+\end{proof}
+
+\subsection{Invertible Matrices}
+\begin{definition}[Invertible Matrix]
+   A matrix \(A \in Mat_m(K)\) is invertible if
+   \[\exists A' \in Mat_m(K): A \cdot A' = A' \cdot A = I_m\]
+\end{definition}
+\begin{remark}
+   To proof that a right inverse element exists we need to assume exactly that, thus we need to define the inverse such that the left = right inverse.
+
+   For a matrix \(A \in Mat_m(K)\) are the following statements equivalent:
+   \begin{enumerate}
+      \item \(A\) is invertible.
+      \item \(\exists A' \in Mat_m(K): A' \cdot A = I_m\)
+      \item \(\exists A' \in Mat_m(K): A \cdot A' = I_m\)
+   \end{enumerate}
+\end{remark}
+
+% todo: p.166
+\begin{theorem}[Invertible Matrix = Product of Elementary Matrices]
+   Given an invertible matrix \(A \in Mat_{m,n}(K)\)
+   \[A~\text{is a finite product of elementary matrices.}\]
+\end{theorem}
+\begin{remark}
+   The group \(GL_m(K)\) is created by elementary matrices.
+   \[GL_m(K) := \{A \in Mat_m(K) \mid A~\text{is invertible}\]
+\end{remark}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{proposition}[General Linear Group]\label{pro:general_linear_group}
+   Given \(GL_m(K)\)
+   \[(GL_m(K), MM, I_m)~\text{is a group}\]
+\end{proposition}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{corollary}[Uniqueness of \(A'\)]
+\(A \in GL_m(K) \implies A'~\text{is unique}\)
+\[A^{-1} := A'\]
+\end{corollary}
+\begin{proof}
+   \(\forall A \in GL_m(K),~\exists A', \tilde{A}' \in GL_m(K)\)
+   \[\tilde{A}' \cdot A = A \cdot \tilde{A}' = I_m\]
+   \[A' \cdot A = A \cdot A' = I_m\]
+   \[A' \neq \tilde{A}'\]
+   \[A \cdot A' = I_m = A \cdot \tilde{A}' \iff (A' \cdot A) \cdot A' = (A' \cdot A) \cdot \tilde{A}' \iff I_m \cdot A' = I_m \cdot \tilde{A}' \iff A' = \tilde{A}'\]
+\end{proof}
+
+\begin{corollary}[\((A^{-1})^{-1} = A\)]
+   \(A \in GL_m(K) \implies A^{-1} \in GL_m(K) \land (A^{-1})^{-1} = A\)
+\end{corollary}
+\begin{proof}
+   \[((A^{-1})^{-1} \cdot A^{-1} = A^{-1} \cdot (A^{-1})^{-1}) \land (A \cdot A^{-1} = A^{-1} \cdot A = I_m) \implies A = (A^{-1})^{-1}\]
+\end{proof}
+\begin{proof}
+   \(\exists (A^{-1})^{-1} \in Mat_m(K)\)
+   \[A'' A' = A' A'' = I_m \implies A'' = A \in GL_m(K)\]
+\end{proof}
+
+\begin{corollary}[\((A \cdot B)^{-1} = B^{-1} \cdot A^{-1}\)]
+   \[A, B \in GL_m(K) \implies A \cdot B \in GL_m(K) \land (A \cdot B)^{-1} = B^{-1} \cdot A^{-1}\]
+\end{corollary}
+\begin{proof}
+\end{proof}
+
+\begin{corollary}[\(A \cdot B, B \cdot A \in GL_m(K)\)]
+   \[A, B \in GL_m(K) \implies A \cdot B \in GL_m(K) \land B \cdot A \in GL_m(K)\]
+\end{corollary}
+\begin{proof}
+\end{proof}
+
+% todo: structure
+\subsection{Transposed Matrices}
+\begin{definition}[Transposed Matrix]
+   Given \(A \in \text{Mat}_{m,n} : A = (a_{ij})_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}}\)
+   \[A^T := (a_{ji})_{\substack{1 \leq j \leq m \\ 1 \leq i \leq n}}\]
+\end{definition}
+\begin{remark}
+   Transposing a matrix means rewriting its rows as columns, therefore is
+   \[0_{mn}^T = 0_{nm}\]
+   \[I_{m}^T = I_{m}\]
+\end{remark}
+
+\begin{proposition}[\((A^T)^T\)]
+   \[(A^T)^T = A\]
+\end{proposition}
+\begin{proof}
+   Follows from definition.
+\end{proof}
+
+\begin{proposition}[\((A + B)^T\)]
+   \[(A + B)^T = A^T + B^T\]
+\end{proposition}
+
+\begin{proposition}[\((\lambda \cdot A)^T\)]
+   \[(\lambda \cdot A)^T = \lambda \cdot A^T\]
+\end{proposition}
+
+\begin{proposition}[\((A \cdot B)^T\)]
+   \[(A \cdot B)^T = B^T \cdot A^T\]
+\end{proposition}
+\begin{proof}
+   \[(A \cdot B)_{ki}^T = (A \cdot B)_{ik} = \sum_{j=1}^n a_{ij} b_{jk} = \sum_{j=1}^n (B^T)_{kj} \cdot (A^T)_{jk} = (B^T \cdot A^T)_{ki}\]
+\end{proof}
+\begin{proof}
+   \[(A \cdot B)^T = \left(\displaystyle\sum_{j=1}^n a_{ij} b_{jk}\right)^T = \left(\displaystyle\sum_{j=1}^n b_{jk} a_{ij}\right)^T = \displaystyle\sum_{j=1}^n (b_{kj})^T (a_{ji})^T = (B^T \cdot A^T)\]
+\end{proof}
+
+\begin{proposition}
+   \[A \in GL_m(K) \implies A^T \in GL_m(K)\]
+\end{proposition}
+
+\begin{proposition}
+   \[(A^T)^{-1} = (A^{-1})^T\]
+\end{proposition}
+
+\subsection{Matrix Rank}
+\begin{definition}[Row Space]
+   Given \(A \in \text{Mat}_{m,n}(K)\) with rows \(r_1, \ldots, r_n\)
+   \[ZR(A) := \text{span}_{K}(r_1, \ldots, r_n)\]
+\end{definition}
+
+\begin{definition}[Column Space]
+   Given \(A \in \text{Mat}_{m,n}(K)\) with columns \(c_1, \ldots, c_n\) (respectively rows of \(A^T\))
+   \[SR(A) := \text{span}_{K}(c_1, \ldots, c_n)\]
+\end{definition}
+\begin{remark}
+   We would show that the column rank is constructed exactly as the row rank since we can transpose \(A\) and use it's rows.
+\end{remark}
+
+\begin{definition}[Row/Column Rank]
+   Given \(A \in \text{Mat}_{m,n}(K)\)
+   \[\text{row rank} A := \text{dim} ZR(A)\]
+   \[\text{column rank} A := \text{dim} SR(A)\]
+\end{definition}
+\begin{remark}
+   Because of \cref{thm:rowrank=colrank} we say the rank of a matrix is
+   \[\text{rank} A := \text{row rank} A\]
+   The rank is therefore the number of linear independent columns of \(A\).
+\end{remark}
+
+% todo: p159 (2.6.6) --> p140 (2.4.3) --> p117 (2.2.4);
+\begin{theorem}\label{thm:rowrank=colrank}
+   \(\forall A \in \text{Mat}_{m,n}(K):\)
+   \[\text{row rank}A = \text{column rank}A\]
+\end{theorem}
+\begin{proof}
+   We regard matrix \(A\) (through \cref{thm:linmap=mat}) as the linear mapping \(f: K^n \to K^m\) and choose bases \(B \subset K^n, B' \subset K^m\) according to \cref{cor:transmat_optimal_basis}
+   \[{}_{B}M_{B'}(f) = \begin{pmatrix}I_r & 0 \\ 0 & 0\end{pmatrix}\]
+   \[\text{row rank}{}_{B}M_{B'}(f) = r = \text{column rank}{}_{B}M_{B'}(f)\]
+   According to \cref{lem:rowrank=colrank} we choose \(S\) and \(T\) so that
+   \[S \cdot A \cdot T = {}_{B}M_{B'}(f)\]
+\end{proof}
+
+\subsection{Transformation Matrix}
+\begin{proposition}\label{pro:transmat_linearmap}
+   Given the linear map \(f: V \to W\) between K-vector spaces \(V, W\) with bases \(B, B'\), (and two isomorphisms \(\varphi_{B} \text{ and } \varphi_{B'}\) according to \cref{cor:basis_isomorphism}) we construct the \textit{transformation matrix} through \cref{thm:linmap=mat}: \(A = {}_{B'}M_{B}(f)\)
+
+   \begin{center}
+   \begin{tikzcd}
+   B \arrow[d, "\varphi_{B}"]\arrow[r, "L_{A}"] & B' \arrow[d, "\varphi_{B'}"] \\
+   V \arrow[r, "f"]                             & W
+   \end{tikzcd}
+   \end{center}
+
+   since this diagram is \textit{commutative} or \textit{commutates} (because you can follow both ways to reach \(W\)) following holds:
+   \[\varphi_{B'} \circ L_{A} = f \circ \varphi_{B} \implies L_{A} = \varphi_{B'}^{-1} \circ f \circ \varphi_{B}\]
+\end{proposition}
+\begin{remark}
+   The jth column of \(A\) are the coordinates of \(f(v_j)\) in basis \(B'\).
+\end{remark}
+\begin{proof}
+   \[f(v_j) = (f \circ \varphi_{B})(e_j) = (\varphi_{B'} \circ L_{A})(e_j) = \varphi_{B'}(A e_j) = \varphi_{B'}\begin{pmatrix} a_{1j} \\ a_{2j} \\ \vdots \\ a_{mj} \end{pmatrix} = \sum_{i=1}^m a_{ij} w_i\]
+\end{proof}
+
+\begin{definition}[Coordinate System]\label{def:coord_system}
+   Given a K-vector space \(V\) with basis \(B = (v_1, \ldots, v_n)\) there exists according to \cref{cor:basis_isomorphism} exactly one isomorphism \(\varphi_{B}: K^n \to V \text{ with } \varphi_{B}(e_i) = v_i\).
+   More generally, we say
+   \[\varphi_{B}(x_1, \ldots, x_n) = \sum_{i=1}^n x_i v_i\]
+   is the, through \(B\) determined, \textit{coordinate system} in \(V\) and
+   \[x = (x_1, \ldots, x_n) = \varphi_{B}^{-1}(v) \in K^n\]
+   are the \textit{coordinates} of \(v = \sum_{i=1}^n x_i v_i\)
+\end{definition}
+
+\begin{definition}[Transformation Matrix]\label{def:bases_transmat}
+   Given a K-vector space \(V\) with two bases \(B = (v_1, \ldots, v_n)\) and \(B' = (w_1, \ldots, w_n)\) we call
+   \[{}_{B'}T_{B} := {}_{B'}M_{B}(\text{id}_{V})\]
+   the, to \(B, B'\) associated \textit{transformation matrix for the change of bases}:
+
+   \begin{center}
+   \begin{tikzcd}
+   B \arrow[dd, "{}_{B'}T_{B}"]\arrow[dr, "\varphi_{B'}"] & \\
+     & V \\
+   B' \arrow[ur, "\varphi_{B'}"] &
+   \end{tikzcd}
+   \end{center}
+
+   \[v \in V = \sum_{i=1}^n x_i v_i = \sum_{i=1}^n y_i w_i\]
+   \[\begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix} = {}_{B'}M_{B}(\text{id}_{V}) \cdot \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}\]
+\end{definition}
+
+\begin{proposition}
+   \({}_{B'}M_{B}(\text{id}_{V})\) is invertible.
+   \[{}_{B}M_{B'}(\text{id}_{V}) = {}_{B'}M_{B}'(\text{id}_{V})\]
+\end{proposition}
+\begin{proof}
+   \({}_{B}M_{B'}(\text{id}_{V}) \cdot {}_{B'}M_{B}(\text{id}_{V}) = {}_{B}M_{B}(\text{id}_{V}) = I_n\)
+\end{proof}
+
+\begin{proposition}\label{pro:transmat_mm}
+   Let \(B_{V}, B_{V}'\) be ordered bases of the K-vector space \(V\) and \(B_{W}, B_{W}'\) of \(W\) and \(f: V \to W\).
+   For the transformation matrices
+   \[A = {}_{B_{V}}M_{B_{V}'}(\text{id}_{V}), ~ B = {}_{B_{W}}M_{B_{W}'}(\text{id}_{W}), ~ C = {}_{B_{V}}M_{B_{W}}(f), ~ D = {}_{B_{V}'}M_{B_{W}'}(f)\]
+   the following holds:
+   \[D = A \cdot B \cdot C\]
+\end{proposition}
+\begin{proof}
+   Since both diagrams of \cref{def:bases_transmat} and \cref{prop:transmat_linearmap} commutate, is the following diagram also commutative:
+   \begin{center}
+   \begin{tikzcd}
+   B_{V} \arrow[dd, bend right, "L_{A}"]\arrow[dr, "\varphi_{B_{V}}"]\arrow[rrr, "L_{C}"] &                  &   & B_{W} \arrow[dd, bend left, "L_{B}"]\arrow[dl, "\varphi_{B_{W}}"] \\
+                                                        & V \arrow[r, "f"] & W & \\
+   B_{V}' \arrow[ur, "\varphi_{B_{V}'}"]\arrow[rrr, "L_{D}"] & & & B_{W}' \arrow[ul, "\varphi_{B_{W}'}"]
+   \end{tikzcd}
+   \end{center}
+\end{proof}
+
+\begin{corollary}
+   If the linear mapping \(f\) of above is an endomorphism (namely if \(V = W\)) and \(B, B'\) are bases of \(V\)
+   \[{}_{B'}M_{B'}(f) = {}_{B}M_{B'}(\text{id}_{V}) \cdot {}_{B}M_{B}(f) \cdot {}_{B'}M_{B}(\text{id}_{V})\]
+   or as above
+   \[D = A \cdot C \cdot A^{-1}\]
+\end{corollary}
+
+\begin{lemma}\label{lem:rowrank=colrank}
+   For a matrices \(A \in Mat_{m,n}(K), S \in GL_m(K), T \in GL_n(K)\) the following holds
+   \[\text{column rank}(S \cdot A \cdot T) = \text{column rank} A\]
+   \[\text{row rank}(S \cdot A \cdot T) = \text{row rank} A\]
+\end{lemma}
+\begin{proof}
+   The linear mappings represented through \(A\) and \(SAT\) have the same rank, since \(L_{S}\) and \(L_{T}\) are isomorphisms, which means that the first equation holds.
+   From that follows also the second equation through transposition \(\text{row rank} A = \text{column rank} A^{T}\) and \((SAT)^T = T^T A^T S^T\).
+\end{proof}

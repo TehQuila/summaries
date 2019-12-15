@@ -1,0 +1,512 @@
+\section{Linear Maps}
+\begin{definition}[Linear Map]
+   Given two sets \(X\) and \(Y\)
+   \[f: X \to Y\]
+   \[x \mapsto f(x)\]
+\end{definition}
+
+\begin{definition}[Injective]\label{def:injective}
+   A linear map \(f: X \xhookrightarrow{} Y\) is injective if
+   \[\forall x, x' \in X: f(x) = f(x') \implies x = x'\]
+\end{definition}
+
+\begin{definition}[Surjective]\label{def:surjective}
+   A linear map \(f: X \twoheadrightarrow Y\) is surjective if
+   \[f(X) = Y~\text{which means}~\forall y \in Y~\exists x \in X: y = f(x)\]
+\end{definition}
+
+\begin{definition}[Bijective]\label{def:bijective}
+   A linear map \(f: X \xrightarrow{\sim} Y\) is bijective if
+   \[f~\text{is injective and surjective, which means}~\forall y \in Y~\exists! x \in X: f(x) = y\]
+\end{definition}
+\begin{remark}
+   If \(f\) is bijective there exists an inverse linear map \(f^{-1}: Y \to X, y \mapsto x = f^{-1}(y)\) with \(y = f(x)\).
+\end{remark}
+
+\subsection{Kernal & Image}
+\begin{definition}[Image]
+   Given a linear map \(f: V \to W\) between two K-vector spaces \(V, W\)
+   \[\text{Im}f := f(V) = \{f(v) \in W \mid v \in V\}\]
+\end{definition}
+
+\begin{proposition}[\(\text{Im}f \subset W\)]
+   Given a linear map \(f: V \to W\) between two K-vector spaces \(V, W\)
+   \[\text{Im}f \subset W\]
+   \(\text{Im}f\) is a vector subspace of \(W\)
+\end{proposition}
+\begin{proof}
+   \(f(v), f(w) \in \text{Im}f \implies \lambda f(v) + \mu f(w) \in \text{Im}f\)
+   \[f(\lambda v + \mu w) = \lambda f(v) + \mu f(w) \in \text{Im}f\]
+\end{proof}
+
+\begin{definition}[Kernel]
+   Given a linear map \(f: V \to W\) between two K-vector spaces \(V, W\)
+   \[\text{Ker}f = f^{-1}(0) := \{v \in V \mid f(v) = 0_{W}\} \subset V\]
+\end{definition}
+\begin{remark}
+   According to \cref{def:bijective}
+   \[f^{-1}(w) := \{v \in V \mid f(v) = w\}\]
+\end{remark}
+
+\begin{proposition}[\(\text{Ker}f \subset V\)]
+   Given a linear map \(f: V \to W\) between two K-vector spaces \(V, W\)
+   \[\text{Ker}f \subset V\]
+   \(\text{Ker}f\) is a vector subspace of \(V\)
+\end{proposition}
+\begin{proof}
+   \(x, y \in \text{Ker}f \implies \lambda x + \mu y \in \text{Ker}f\)
+   \[f(\lambda x + \mu y) = \lambda f(x) + \mu f(y) = \lambda 0_{W} + \mu 0_{W} = 0_{W}\]
+\end{proof}
+
+\begin{proposition}[\(\text{Ker}f = 0\)]\label{pro:kerf=0}
+   \[f~\text{is injective} \iff \text{Ker}f = 0\]
+\end{proposition}
+\begin{proof}[Proof (\(\implies\)).]
+   Follows from \cref{def:injective}.
+\end{proof}
+\begin{proof}[Proof (\(\impliedby\)).]
+   \[f~\text{is injective} \iff (f(x) = f(y) \implies x = y)\]
+   \[f(x) - f(y) = 0 \implies x = y\]
+   \[f(x-y) = 0 \implies x = y\]
+   \[x-y \in \text{Ker}f \implies x = y\]
+   \[\text{Ker}f = \{0\}\]
+\end{proof}
+
+\begin{proposition}[\(\text{Im}f = W\)]
+   \[f~\text{is surjective} \iff \text{Im}f = W\]
+\end{proposition}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\subsection{Indexed Family}
+\begin{definition}[Indexed Family]\label{def:index_fam}
+   Given a set \(X\) and an Indexset \(I\), we call the linear mapping
+   \[\varphi: I \to X\]
+   \[i \mapsto \varphi(i) = x_i\]
+   an \textit{indexed family}, which can be written as \((x_i)_{i \in I}~\text{with}~x_i \in X~\forall i \in I\).
+\end{definition}
+The direct product \(x \in X^n = (x_1, \ldots, x_n)~\forall i \in I\) can be written as \(x = (\varphi(1), \ldots, \varphi(n)~\forall i \in I\)
+
+\begin{definition}[Subfamily]
+   For a subset \(J \subset I\) of all indices we call \((v_j)_{j \in J}\) a \textit{subfamily}.
+\end{definition}
+
+\subsection{Relations}
+\begin{definition}[Binary Relation]
+   A binary relation \(R\) on a set \(X\) is a set of ordered pairs
+   \[R \subset X \times X\]
+   For two elements \(x, y \in X\) we say \(x\) is in relation \(R\) to \(y\)
+   \[(x, y) \in R~\text{or}~xRy\]
+\end{definition}
+
+\begin{definition}[Reflexive]
+   A relation \(R\) is reflexive if
+   \[\forall x \in X: xRx\]
+\end{definition}
+
+\begin{definition}[Symmetrical]
+   A relation \(R\) is symmetrical if
+   \[\forall x,y \in X: xRy \implies yRx\]
+\end{definition}
+
+\begin{definition}[Antisymmetrical]
+   A relation \(R\) is antisymmetrical if
+   \[\forall x,y \in X: (xRy \land yRx) \implies x = y\]
+\end{definition}
+
+\begin{definition}[Transitive]
+   A relation \(R\) is transitive if
+   \[\forall x, y, z \in X: (xRy \land yRz) \implies xRz\]
+\end{definition}
+
+\begin{definition}[Equivalence Relation]\label{def:equiv_rel}
+   A reflexive, symmetrical and transitive binary relation \(R\)
+   \[x \sim y\]
+   \[\text{means}~x~\text{is equivalent to}~y\]
+\end{definition}
+
+\begin{definition}[Partial Order]
+   A reflexive, \textit{anti}symmetrical and transitive binary relation \(R\)
+   \[x \sim y\]
+   \[\text{means}~x~\text{is equivalent to}~y\]
+\end{definition}
+
+\subsection{Equivalence Class}
+\begin{definition}[Equivalence Class]
+   The subset \(A \subset X\) with an equivalence relation \(\sim\) on \(X\) is an equivalence class relative to \(R\) if the following holds:
+
+   \begin{enumerate}[label=(\roman*)]
+      \item \(A \neq \emptyset\)
+      \item \(\forall x, y \in A: x \sim y\)
+      \item \(\forall x \in A,~\forall y \in X: x \sim y \implies y \in A\)
+   \end{enumerate}
+
+   The equivalence class of an element \(x \in X\) is \([x] := \{y \in X \mid y \sim x\} \subset X\)
+\end{definition}
+
+\begin{proposition}
+   \(\forall x, y \in X:\)
+   \[[x] \cap [y] \neq \emptyset \iff [x] = [y]\]
+\end{proposition}
+\begin{proof}
+   \(\forall x' \in [x],~\forall y' \in [y],~\exists a \in [x] \cap [y]\)
+   \[a \sim x' \land a \sim y' \implies x' \sim y' \implies [x] = [y]\]
+\end{proof}
+
+\begin{definition}[Quotient Set]
+   The set of all equivalence classes of a set \(X\) 
+   \[X/R := \{[x] \mid x \in X\}\]
+\end{definition}
+\begin{remark}
+   We say \(X/R\) is the quotient set of \(X\) by \(R\)
+\end{remark}
+
+\begin{definition}[Quotientspace]
+   Given a vector subspace \(U \subset V\) of a K-vector space \(V\)
+   \[V/U = \{[v] \mid v \in V\}~\text{with}~v \sim v'~\text{if}~v - v' \in U\]
+\end{definition}
+
+\begin{proposition}
+   Given the surjective linear map \(\pi: V \to V/U, v \mapsto [v]\)
+   \[\text{Ker}(\pi) = U\]
+\end{proposition}
+\begin{remark} % todo
+   For the linear maps \(f: V \to W\) and \(\pi: V \to V/U\) where \(U \subset \text{Ker}f\) is a subspace.
+   \[\exists!~\overline{f}: V/U \to W~\text{with}~\overline{f} \circ \pi = f\]
+
+   \begin{center}
+      \begin{tikzcd}
+         V \arrow{r}{f} \arrow{dr}{\pi} & W \\ & V/U \arrow{u}{\overline{f}}
+      \end{tikzcd}
+   \end{center}
+
+   Given the basis \(\{u_1, \ldots, u_m\}\) of \(U\) and the extended basis \(\{u_1, \ldots, u_m, v_{n+1}, \ldots, v_n\}\) of \(V\), the basis of \(V/U\) is \(\{[v_{n+1}], \ldots, [v_n]\}\)
+
+   \[\overline{f}([v_{n+1}]) = f(v_{n+1})~\forall x \in [v_{n+1}]: x = u + v_{n+1}, u \in U\]
+   \[\overline{f}(x) = f(u + v_{n+1}) = f(u) + f(v_{n+1}) = f(v_{n+1})\]
+\end{remark}
+
+\subsection{Homomorphisms}
+\begin{definition}[Homomorphism]
+   A linear map \(f: V \to W\) between two K-vector spaces \(V, W\) if
+
+   \begin{enumerate}[label=(\roman*)]
+      \item \(\forall v, v' \in V: f(v + v') = f(v) + f(v')\)
+      \item \(\forall v \in V,~\forall \lambda \in K: f(\lambda v) = \lambda f(v)\)\\
+      which can be summarized into
+      \item \(\forall v, v' \in V,~\forall \lambda, \mu \in K: f(\lambda v + \mu v') = \lambda f(v) + \mu f(v')\)
+   \end{enumerate}
+\end{definition}
+\begin{remark}
+   In mathematics, a morphism is a structure-preserving map from one mathematical structure to another one of the same type.
+   A homomorphism is the same between two \textit{algebraic} structures (such as two groups, two rings, or two vector spaces).
+\end{remark}
+
+\begin{proposition}
+   Given two K-vector spaces \(V, W\), the linear map \(f: V \to W\) and the subspaces \(U \subset V, T \subset W\).
+   \[f(U) \subset W~\text{is a vector subspace}\]
+   \[f^{-1}(T) = \{v \in V \mid f(v) \in T\} \subset V~\text{is a vector subspace}\]
+\end{proposition}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{definition}[Constraint]
+   Given two K-vector spaces \(V, W\), the linear map \(f: V \to W\) and a vector subspace \(U \subset V\)
+   \[f|_{U}: U \to W\]
+   \[u \mapsto f(u)\]
+\end{definition}
+\begin{remark}
+   We say \(f|_{U}\) is a constraint of \(f\) on \(U\).
+\end{remark}
+
+\begin{proposition}[\(V \to W \to X = V \to X\)]
+   Given the linear maps \(f: V \to W\) and \(g: W \to X\) between the K-vector spaces \(V, W, X\)
+   \[g \circ f: V \to X~\text{is also a linear map}\]
+\end{proposition}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{definition}[Monomorphism]
+   An injective linear map of two K-vector spaces \(V, W\)
+   \[f: V \xhookrightarrow{} W\]
+\end{definition}
+
+\begin{definition}[Epimorphism]
+   A surjective linear map of two K-vector spaces \(V, W\)
+   \[f: V \twoheadrightarrow W\]
+\end{definition}
+
+\begin{definition}[Isomorphism]
+   A bijective linear map of two K-vector spaces
+   \[f: V \xrightarrow{\sim} W\]
+\end{definition}
+
+\begin{lemma}
+   Given an isomorphism \(f: V \xrightarrow{\sim} W\)
+   \[f^{-1}: W \to V\]
+   is also an isomorphism.
+\end{lemma}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{lemma}
+   Given the isomorphisms \(f: V \xrightarrow{\sim} W\) and \(g: W \xrightarrow{\sim} X\)
+   \[g \circ f\]
+   is also an isomorphism.
+\end{lemma}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{lemma}
+   Given an isomorphism \(f: V \xrightarrow{\sim} W\) and vector subspace \(U \subset V\)
+   \[f|_{U}: U \to \text{Im}f|_{U}\]
+   is also an isomorphism.
+\end{lemma}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{lemma}
+   Given a basis \(B = \{v_1, \ldots, v_n\}\) of \(V\) and an isomorphism \(f: V \xrightarrow{\sim} W\)
+   \[B' = \{f(v_1), \ldots, f(v_n)\}~\text{is a basis of}~W\]
+\end{lemma}
+\begin{proof}
+   \[\text{Ker}f = 0 \implies B'~\text{is linear independent}\]
+   \[\text{Im}f = W \implies B'~\text{is a generator}\]
+\end{proof}
+
+\begin{lemma}
+   Given an isomorphism \(f: V \xrightarrow{\sim} W\) \(\exists g: W \to V\) such that
+   \[g \circ f = \text{id}_V\]
+   \[f \circ g = \text{id}_W\]
+\end{lemma}
+\begin{proof}[Proof (\(g := f^{-1}: W \to V\) linear).]
+   \[f(\lambda g(u) + \mu g(v)) = \lambda (f \circ g)(u) + \mu (f \circ g)(v) = \lambda u \mu v\]
+   \[g(\lambda u + \mu v) = \lambda g(u) + \mu g(v) \implies g~\text{is linear}\]
+\end{proof}
+
+\begin{definition}[Isomorphic]
+   Given an isomorphism \(f: V \xrightarrow{\sim} W\), the two K-vector spaces \(V, W\) are isomorphic
+   \[V \cong W\]
+\end{definition}
+
+\begin{theorem}
+   Given two finite dimensional K-vector spaces \(V, W\)
+   \[V \cong W \iff \text{dim}V = \text{dim}W\]
+\end{theorem}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{theorem}
+   An isomorphism \(f: V \xrightarrow{\sim} W\) between two K-vector spaces \(V, W\) is an equivalence relation (\ref{def:equiv_rel}).
+\end{theorem}
+\begin{proof}
+   \[V \cong W \implies W \cong V\]
+   \[V \cong W,~W \cong X \implies V \cong X\]
+\end{proof}
+
+\begin{definition}[Endomorphism]
+   A linear map of a K-vector space \(V\) onto itself
+   \[f: V \xrightarrow{\simeq} V\]
+\end{definition}
+
+\begin{definition}[Automorphism]
+   An injective linear map of a K-vector space \(V\) onto itself
+   \[f: V  \xrightarrow{\cong} V\]
+\end{definition}
+
+\subsection{Coordinate System}
+\begin{theorem}[Linear Map between Vector Spaces]\label{thm:linmap_between_spaces}
+   Given \(v_1, \ldots, v_n \in V\) and \(w_1, \ldots, w_n \in W\) of the finite dimensional K-vector spaces \(V, W\), the following holds:
+
+   \begin{enumerate}
+      \item If \(v_1, \ldots, v_n\) are linear independent, there exists at least one linear map
+      \item If \((v_1, \ldots, v_n)\) is a basis there exists exactly one linear map
+      \[f: V \to W~\text{with}~f(v_i) = w_i~\forall i \in \{1, \ldots, n\}\]
+      with the follwing properties:
+      \begin{enumerate}
+         \item \(\text{Im}f = \langle w_1, \ldots, w_n \rangle\)
+         \item \(f~\text{is injective} \iff w_1, \ldots, w_n~\text{are linear independent}\)
+      \end{enumerate}
+   \end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof (2).]
+   \[\forall v \in V: v = \sum_{i=1}^n \lambda_i v_i\]
+
+   Since \(f(v_i) = w_i\) and \(f\) is linear
+   \[f(v) = \sum_{i=1}^n \lambda_i w_i\]
+\end{proof}
+
+\begin{proof}[Proof (\(f\) is linear).]
+   \begin{equation}
+      \begin{split}
+         f(v + v') & = f\left(\sum_{i=1}^n \lambda_i v_i + \sum_{i=1}^n \lambda'_i v_i\right)
+         = f\left(\sum_{i=1}^n (\lambda_i + \lambda'_i) v_i\right) = \sum_{i=1}^n (\lambda_i + \lambda'_i) f(v_i) \\
+         & = \sum_{i=1}^n (\lambda_i + \lambda'_i) w_i
+         = \sum_{i=1}^n \lambda_i w_i + \sum_{i=1}^n \lambda'_i w_i
+         = f(v) + f(v')
+      \end{split}
+   \end{equation}
+
+   \begin{equation}
+      \begin{split}
+         f(\lambda v) & = f\left(\lambda \sum_{i=1}^n \lambda_i v_i\right)
+         = \lambda \sum_{i=1}^n \lambda_i f(v_i)
+         = \lambda \sum_{i=1}^n \lambda_i w_i
+         = \lambda f(v)
+      \end{split}
+   \end{equation}
+\end{proof}
+
+\begin{proof}[Proof (a - \(\text{span}(W) \subset \text{Im}f\)).]
+   \[w = \sum_{i=1}^n \mu_i w_i \implies w = f\left(\sum_{i=1}^n \mu_i v_i\right)\]
+\end{proof}
+
+\begin{proof}[Proof (b).]
+   We assume \(W\) is linear dependent.
+   \[\sum_{\substack{i=1 \\ \mu_i \neq 0}}^n \mu_i w_i = 0 \implies f\left(\sum_{\substack{i=1 \\ \mu_i \neq 0}}^n \mu_i v_i\right) = 0 \implies f \text{ is not injective}\]
+\end{proof}
+
+\begin{proof}[Proof (1).]
+   Are \(v_1, \ldots, v_n\) linear independent we can extend it to a basis with \((v_1, \ldots, v_n, v_{n+1}, \ldots, v_m)\).
+
+   Given \(w_{n+1}, \ldots, w_m\) according to \textit{2.} find a linear map \(f\) with \(f(v_i) = w_i~\forall i \in \{1, \ldots, m\}\)
+\end{proof}
+
+\begin{corollary}[Coordinate System]\label{cor:basis_isomorphism}
+   Given a K-vector space \(V\) with the basis \(B = (v_1, \ldots, v_n)\), there exists exactly one isomorphism
+   \[\varphi_{B}: K^n \to V\]
+   \[\varphi_{B}(e_i) \mapsto v_i\]
+   where \((e_1, \ldots, e_n)\) is the canonical basis of \(K^n\). % todo
+\end{corollary}
+\begin{remark}
+   \Cref{def:coord_system} of a coordinate system uses this corollary.
+\end{remark}
+
+\subsection{Linear Map for Matrix Multiplication}
+\begin{definition}[\(L_A\)]
+   Given \(A \in \text{Mat}_{m,n}(K)\) and the column vector \(x \in \text{Mat}_{m,1}(K)\)
+   \[L_{A} := \text{Mat}_{m,1}(K) \to \text{Mat}_{1,n}(K)\]
+   \[x \mapsto A \cdot x\]
+\end{definition}
+
+\begin{corollary}\label{cor:linmap_mat}
+   \(\forall (f: K^n \to K^m)\)
+   \[\exists A \in \text{Mat}_{m,n}(K): f(x) = L_{A}(x) = A \cdot x\]
+\end{corollary}
+\begin{proof}
+   Writing \(f(e_1), \ldots f(e_n)\) as column vectors results in \(A\).
+   \[f(e_j) = \begin{pmatrix} a_{1j} \\ \vdots \\ a_{mj} \end{pmatrix} \in K^m\]
+   \[f(x) = f\left(\sum_{j=1}^n x_j e_j\right) = \sum_{j=1}^n x_j f(e_j) =
+   \begin{pmatrix}\sum a_{1j} x_j \\ \sum a_{2j} x_j \\ \vdots \\ \sum a_{mj} x_j\end{pmatrix} = Ax\]
+\end{proof}
+\begin{remark}
+   The \textit{i}-th column of \(A\) is the image of the \textit{i}-th standard basis vector \(e_i\) under \(f\).
+   \[\text{Im}A = A(K^n) = \text{span}_K(Ae_1, \ldots, Ae_n)\]
+\end{remark}
+
+\begin{theorem}[Linear Maps = Matrices]\label{thm:linmap=mat}
+   Given the K-vector spaces \(V, W\) with bases \(B = (v_1, \ldots, v_n)\) and \(B' = (w_1, \ldots, w_m)\)
+
+   \begin{equation} \label{eq:mat=map_theorem}
+      \forall (f: V \to W)~\exists! A \in \text{Mat}_{m,n}(K): f(v_j) = \sum_{i=1}^m a_{ij} w_i~\forall j \in \{1, \ldots, n\}
+   \end{equation}
+
+   This gives us the following linear mapping:
+   \[{}_{B'}M_{B}: \text{Hom}(V, W) \to \text{Mat}_{m,n}(K)\]
+   \[f \mapsto A\]
+   which is an isomorphism of K-vector spaces.
+\end{theorem}
+\begin{remark}
+   After choosing fixed bases, linear mappings between vector spaces can be interchanged (analogous to \cref{cor:linmap_mat} but more general) with matrices.
+   \[{}_{B'}M_{B}(f) = A\]
+The matrix \(A\) is said to \textit{represent} a linear mapping \(f\) regarding the bases \(B\) and \(B'\).
+\end{remark}
+\begin{proof}
+   The linear combinations of \(f\) and thus the columns of the matrix are both uniquely defined since \(B'\) is a basis.
+
+   \begin{proof}[Proof (\({}_{B'}M_{B}\) is linear).]
+      Given a linear map \(g\), which corresponds to the matrix \(B\), the following holds:
+      \[(f + g)(v_j) = f(v_j) + g(v_j) = \sum_{i=1}^m a_{ij} w_i + \sum_{i=1}^m b_{ij} w_i = \sum_{i=1}^m (a_{ij} + b_{ij}) w_i\]
+      and for \(\lambda \in K\)
+      \[(\lambda f)(v_j) = \lambda f(v_j) = \lambda \sum_{i=1}^m a_{ij} w_i = \sum_{i=1}^m \lambda a_{ij} w_i\]
+   \end{proof}
+
+   Since \(B\) is a basis, there exists (according to \cref{thm:linmap_between_spaces}) exactly one \(f\), which outputs the values specified by \cref{eq:mat=map_theorem}.
+   This means \({}_{B'}M_{B}\) is bijective which means that for every linear mapping between two vector spaces, there exists a matrix which represents this linear mapping and vice versa.
+\end{proof}
+
+\begin{theorem}
+   Given the K-vector spaces \(V, W, X\) with bases \(B, B', B''\) and the linear maps \(f: V \to W\), \(g: W \to X\)
+   \[{}_{B''}M_{B}(g \circ f) = {}_{B''}M_{B'}(g) \cdot {}_{B'}M_{B}(f)\]
+   The composition of linear mappings is the matrix product of the transformation matrices of those linear mappings.
+\end{theorem}
+\begin{proof}
+   \[(g \circ f) \circ \varphi_{B} = g \circ (\varphi_{B'} \circ L_{A}) = \varphi_{B''} L_{B} L_{A} = \varphi_{B''} L_{BA}\]
+
+   \begin{center}
+      \begin{tikzcd}
+         V  \arrow[r, "f"]                               & W \arrow[r, "g"]                                 & X\\
+         K^m \arrow[u, "\varphi_{B}"] \arrow[r, "L_{A}"] & K^n \arrow[u, "\varphi_{B'}"] \arrow[r, "L_{B}"] & K^k \arrow[u, "\varphi_{B''}"]
+      \end{tikzcd}
+   \end{center}
+\end{proof}
+
+\subsection{Rank}
+\begin{definition}[Rank of Linear Maps]\label{def:linmaprank}
+   Given a linear map \(f: V \to W\)
+   \[\text{rk}f = \text{rank}(f) := \text{dim}(\text{Im}f)\]
+\end{definition}
+
+\begin{theorem}
+   Given a matrix \(A \in \text{Mat}_{m,n}(K)\) and the linear map \(L_{A}: K^n \to K^m\)
+   \[\text{rank}A = \text{rank}L_{A}\]
+\end{theorem}
+\begin{proof}
+   \(\text{Im}(L_{A}) = \text{span}_K(Ae_1, \ldots, Ae_n)\)
+   \[\text{rank}A = \text{dim}(SR(A)) = \text{dim}(\langle Ae_1, \ldots, Ae_n \rangle) = \text{dim}(\text{Im}(L_{A})) = \text{rank}L_{A}\]
+\end{proof}
+
+\begin{corollary}
+   \[\text{rank}f = \text{rank}{}_{B}M_{B'}(f)\]
+\end{corollary}
+% todo: correct proof?
+\begin{proof}
+   \(A = {}_{B}M_{B'}(f)\)
+   \[f(v_j) = \sum_{i=1}^m a_{ij} w_i\]
+
+   \(f = id_{V}\)
+   \[{}_{B}M_{B'}(f) \cdot {}_{B'}M_{B}(f) = {}_{B}M_{B}(f) = I_n\]
+\end{proof}
+
+\begin{theorem}[\(\text{rank}(\psi \circ f \circ \varphi) = \text{rank}f\)]
+   Given the linear maps \(f: V \to W,~\varphi: V' \xrightarrow{\sim} V,~\psi: W \xrightarrow{\sim} W'\)
+   \[\text{rank}(\psi \circ f \circ \varphi) = \text{rank}f\]
+\end{theorem}
+\begin{proof}
+   \(\text{Im}(\varphi(V')) = V\)
+   \[\text{dim}(\text{Im}(\psi \circ f \circ \varphi)) = \text{dim}(\text{Im}(\psi \circ f(V)) = \text{dim}(\text{Im}(f(V)) = \text{rank}f\]
+\end{proof}
+
+\begin{corollary}% todo
+   Given the invertible matrices \(P, A, Q\)
+   \[\text{rank}(P A Q) = \text{rank}A\]
+\end{corollary}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+% todo: correct?
+\begin{corollary}
+   Elementary row operations don't change the rank of a matrix
+\end{corollary}
+\begin{proof}
+   Because they are invertible.
+\end{proof}

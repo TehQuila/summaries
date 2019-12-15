@@ -1,0 +1,557 @@
+\section{Vector Spaces}
+\begin{definition}[K-Vector Space]\label{def:vector_spaces}
+   A field (\ref{def:field}) \(K\), a set \(V\) and two operations
+   \[\dot{+}: V \times V \to K,~(v, w) \mapsto v + w\]
+   \[\cdot: K \times V \to V,~(\lambda, v) \mapsto \lambda \cdot v\]
+
+   if the following holds:
+   \begin{enumerate}[label=(\roman*)]
+      \item \((V, \dot{+}, 0_V)\) is an abelian group (\ref{def:abel_group})
+      \item The scalar multiplication \(\cdot\) is compatible with the \(\dot{+}\) operation as follows:\\
+            \(\forall \lambda, \mu \in K\) and \(\forall v, w \in V\):
+         \begin{enumerate}
+            \item \((\lambda + \mu) v = \lambda v \dot{+} \mu v\)
+            \item \(\lambda (v \dot{+} w) = \lambda v \dot{+} \lambda w\)
+            \item \(\lambda (\mu \cdot v) = (\lambda \mu) \cdot v\)
+            \item \(1_K \cdot v = v\)
+         \end{enumerate}
+   \end{enumerate}
+   Can be written as \((V, +, \cdot, 0_V)\)
+\end{definition}
+
+\begin{proposition}[\(0_K \cdot v = 0_V\)]\label{pro:zero_vector}
+   \(\forall v \in V:\)
+   \[0_K \cdot v = 0_V\]
+\end{proposition}
+\begin{proof}
+   Given \(\lambda \in K\) and \(v \in V\)
+   \[\lambda v = (\lambda + 0_K) v = \lambda v + 0_K v \implies 0_K v = 0_V\]
+\end{proof}
+
+\begin{proposition}[\(\lambda 0_V = 0_V\)]
+   \(\forall \lambda \in K:\)
+   \[\lambda \cdot 0_V = 0_V\]
+\end{proposition}
+\begin{proof}
+   Given \(\lambda \in K\) and \(v \in V\)
+   \[\lambda v = \lambda (v \dot{+} 0_V) = \lambda v \dot{+} \lambda 0_V \implies \lambda 0_V = 0_V\]
+\end{proof}
+
+% todo: correct proof?
+\begin{proposition}[\(\lambda \cdot v = 0_V\)]
+   \(\forall \lambda \in K,~\forall v \in V:\)
+   \[\lambda \cdot v = 0_V \iff \lambda = 0_K \lor v = 0_V\]
+\end{proposition}
+\begin{proof}[Proof \(\lambda = 0_K \lor v = 0_V \implies \lambda \cdot 0_V = 0_V\).]
+   \[\text{Proven in \cref{pro:zero_vector}}\]
+\end{proof}
+\begin{proof}[Proof \(\lambda \cdot 0_V = 0_V \implies \lambda = 0_K \lor v = 0_V\)]
+   Assumed \(\lambda v = 0_V\) but \(\lambda \neq 0_K\) and \(\lambda^{-1} := \frac{1}{\lambda}\)
+   \[v = \lambda^{-1} \cdot \lambda v = \lambda^{-1} \cdot 0_V = 0_V\]
+\end{proof}
+
+\begin{proposition}[Inverse of \(v\)]
+   \(\forall v \in V:\)
+   \[(-1) \cdot v = -v\]
+\end{proposition}
+\begin{proof}
+   Given \(-1 \in K,~ v \in V\)
+   \[v \dot{+} (-1) \cdot v = 1 \cdot v \dot{+} (-1) \cdot v = (1 - 1) \cdot v = 0 \cdot v = 0_V\]
+\end{proof}
+
+\begin{definition}[Linear Combination]\label{def:lin_comb}
+   A vector \(v\) of a K-vector space (\ref{def:vector_spaces}) \(V\), \\
+   if there exist \(\lambda_1, \ldots, \lambda_n \in K\) so that
+   \[v = \sum_{i \in I} \lambda_i v_i\]
+   where \(v_i \in V~\forall i \in I\) is an indexed family (\ref{def:index_fam}) and \(\lambda_i = 0\) for almost all \(i \in I\).
+\end{definition}
+\begin{remark}
+   \textit{almost all} means that infinite \(\lambda_i\) should be 0 while finite many \(\lambda_i \neq 0\).
+\end{remark}
+
+\subsection{Vector Subspaces}
+\begin{definition}[Vector Subspace]\label{def:vector_subspace}
+   Subset \(U \subset V\) of a K-vector space (\ref{def:vector_spaces}), if the following holds:
+   \begin{enumerate}[label=(\roman*)]
+      \item \(U \neq \emptyset\)
+      \item \(U\) has closure under the addition: \(\forall v, u \in U: v + u \in U\)
+      \item \(U\) has closure under the scalar multiplication: \(\forall u \in U,~\lambda \in K: \lambda \cdot u \in U\)
+   \end{enumerate}
+\end{definition}
+\begin{remark}
+   (ii) and (iii) can be summarized to \(\forall u, v \in U,~\lambda, \mu \in K: \lambda u + \mu v \in U\)
+\end{remark}
+
+\begin{theorem}[Subspace = Vector Space]\label{thm:subspace=vecspace}
+   A vector subspace \(U \subset V\) is with the induced addition and scalar multiplication also a vector space.
+\end{theorem}
+\begin{proof}
+   It is to show that \((U, +, 0_V)\) is an abelian group.
+
+   From (i) in \cref{def:vector_subspace} follows that \(U \neq \emptyset \implies \exists u \in U\).
+
+   With (ii) follows that there is a neutral element \(0_K u = 0_V \in U\).
+
+   Also from (ii) follows that there is an inverse element \(\forall u \in U: (-1)u = -u \in U\)
+
+   The commutativity and associativity in (ii) of \cref{def:vector_spaces} hold in \(U\) since they hold in \(V\).
+\end{proof}
+
+\begin{proposition}[Subspace Intersection]
+   Given an Indexset \(I\) and \(\forall i \in I: U_i\) subspaces (\ref{def:vector_subspace}) of a K-vector space \(V\)
+   \[U := \bigcap_{i \in I} U_i \subset V\]
+   is again a vector subspace.
+\end{proposition}
+% todo: how is U_i vs U_i \forall i \in I different?
+% todo: what do we need to show
+\begin{proof}
+   \[\text{Since}~0_V \in V \implies 0_V \in U_i~\forall i \in I \implies 0_V \in U \implies U \neq \emptyset\]
+   \[\text{If}~u, v \in U \implies u, v \in U_i~\forall i \in I\]
+   \[\text{thus}~\forall u, v \in U_i: u + v \in U_i \implies u + v \in U\]
+   \[\text{and}~\forall u \in U_i, \forall \lambda \in K: \lambda u \in U_i \implies \lambda u \in U\]
+\end{proof}
+
+\begin{definition}[Subspace Sum]\label{def:subspace_sum}
+   Given vector subspaces (\ref{def:vector_subspace}) \(U_1, \ldots, U_n \subset V\) of a K-vectorspace \(V\)
+   \[U_1 + \ldots + U_n := \{\forall v \in V~\exists v_i \in U_i: v = v_1 + \ldots + v_n\}\]
+   is the \textit{sum of} \(U_1, \ldots, U_n\).
+\end{definition}
+
+\newpage
+
+\begin{theorem}[Summed Subspaces = Subspace]
+   Given vector subspaces (\ref{def:vector_subspace}) \(U_1, \ldots, U_n \subset V\) of a K-vectorspace \(V\)
+   \[U_1 + \ldots + U_n \subset V\]
+   is again a vector subspace.
+\end{theorem}
+\begin{proof}[Proof (ii) and (iii) of \cref{def:vector_subspace}.]
+   Assumed \(u, v \in U_1 + \ldots + U_n\) and \(\forall \lambda, \mu \in K\)
+   \[u = u_1 + \ldots + u_n\]
+   \[v = v_1 + \ldots + v_n\]
+   \[\lambda u + \mu v = \sum_{i=1}^n (\lambda u_i + \mu v_i) \implies \lambda u + \mu v \in U_1 + \ldots + U_n\]
+\end{proof}
+
+\begin{definition}[Direct Sum of Subspaces]\label{def:direct_sum}
+   A K-vector space \(V\) is the direct sum of two vector subspaces \(U_1, U_2\)
+   \[V = U_1 \oplus U_2\]
+   if \(V = U_1 + U_2\) (\ref{def:subspace_sum}) and \(U_1 \cap U_2 = \emptyset\)
+\end{definition}
+\begin{remark}
+   The direct sum can also be represented by the bijective linear map
+   \[F: U_1 \times U_2 \to V, (v_1, v_2) \mapsto v_1 + v_2\]
+   (surjective since \(V = U_1 + U_2\) and injective since \(U_1 \cap U_2 = \{0\}\))
+\end{remark}
+
+\begin{definition}[Subspace Complement]\label{def:complement}
+   For the direct sum \(V = U_1 \oplus U_2\)
+   \[U_1~\text{is the complement of}~U_2~\text{and}~U_2~\text{of}~U_1~\text{in}~V\]
+\end{definition}
+
+\begin{lemma}
+   Every vector subspace of a K-vector space \(V\) has a complement (\ref{def:complement}).
+\end{lemma}
+\begin{proof}
+   Given a subspace \(U \subset V\)
+
+   Since \(U\) is a K-vector space according to \cref{thm:subspace=vecspace} there exists a basis \(B_{U}\) which can be extended to a basis \(B_{V}\) of \(V\)
+\end{proof}
+
+\begin{theorem}[Direct Sum = Subspace Sum]
+   For a finite-dimensional K-vectorspace \(V\) with subspaces \(U_1, U_2\) are the following statements equivalent:
+   \begin{enumerate}
+      \item \(V = U_1 \oplus U_2\) (\ref{def:direct_sum})
+      \item The basis of \(U_1\) respectively \(U_2\) form together \(B_{U_1} \cup B_{U_2}\) a basis of \(V\).
+      \item \(V = U_1 + U_2\) (\ref{def:subspace_sum}) and thus \(\text{dim}V = \text{dim}U_1 + \text{dim}U_2\)
+   \end{enumerate}
+\end{theorem}
+ % todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{corollary}
+   \(B_{V} \setminus B_{U}\) is a basis of the complement (\ref{def:complement}) \(U'\) of \(U\), which means
+   \[U' = \langle B_{V} \setminus B_{U}\]
+   \[V = U + U'\]
+   \[U \cap U' = \{0\}\]
+\end{corollary}
+ % todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{lemma}[\(\text{dim}U \leq \text{dim}V\)]
+   Given the vector subspace \(U \subset V\)
+   \[\text{dim}U \leq \text{dim}V\]
+   \[\text{dim}U = \text{dim}V \implies U = V\]
+\end{lemma}
+ % todo: missing proof
+\begin{proof}
+\end{proof}
+
+% todo
+\begin{definition}[Quotient Vector Space]
+   Let \(V\) be a K-vector space and \(U \subset V\) a subspace, the equivalence relation (\ref{def:equiv_rel}) on \(V\) is defined \(\forall v_1, v_2 \in V\) as the following:
+   \[v_1 \sim v_2 \iff v_1 - v_2 \in U \text{ is reflexive since } 0_V \in U\]
+   \[v_2 \sim v_1 \iff v_2 - v_1 \in U \text{ is transitive since } (-1)(v_1 - v_2) \in U\]
+   \[\text{Given } v_2 \sim v_3: v_1 \sim v_3 \iff v_1 - v_3 = (v_2 - v_3) \in U\]
+
+   \[V/U = \{[v] \mid v \in V\} \text{ is called a quotient vector space}\]
+   \[[v_1] + [v_2] := [v_1 + v_2]\]
+   \[\lambda [v] := [\lambda v]\]
+   \[(V/U, +, \cdot, [0_V]) \text{ is a K-vector space (Quotient von V nach U)}\]
+\end{definition}
+
+\subsection{Span}
+\begin{definition}[Span]
+   Given a set of vectors \(S \subset V\) of a K-vector space,
+
+   the set of all vectors that are a linear combination (\ref{def:lin_comb}) of \(S\) 
+   \[\langle S\rangle = \text{span}_{K}(S) := \left\{\sum_{s \in S} \lambda_s s \right\}\]
+   is the \textit{span} of \(S\).
+   We say \(\text{span}_{K}(S)\) is the of \(S\) \textit{spanned} space.
+\end{definition}
+\begin{remark}
+   The set \(S\) can also be explained as a finite subfamily where \(J\) only includes those indices of vectors used in the linear combination.
+\end{remark}
+
+\begin{definition}[\(\text{span}(\emptyset)\)]
+   \[\text{span}_{K}(S)_{s \in \emptyset} := \{0\}\]
+\end{definition}
+
+% todo: proposition?
+\(\text{span}_{K}(S) \subset V\) is the smallest vector subspace of \(V\) which includes subset \(S\).
+
+\begin{proposition}[Span = Subspace]
+   \[\text{span}_{K}(S) \subset V~\text{is a vector subspace}\]
+\end{proposition}
+\begin{proof}
+   Given the subset \(S \subset U\) of a vector subspace \(U \subset V\)
+   \[\text{if}~S = \emptyset: \langle S\rangle = \{0\} \implies \{0\} \subset U\]
+   \[S \neq \emptyset, \text{ given } s \in S: 0 \cdot s = 0_V \in \langle S\rangle\]
+   \[x, y \in \langle S\rangle\]
+   \[x = \sum_{s \in S} \lambda_s s\]
+   \[y = \sum_{s \in S} \mu_s s\]
+   \[\lambda x + \mu y = \sum_{s \in S} (\lambda \lambda_s + \mu \mu_s)s \in \langle S\rangle\]
+\end{proof}
+
+\begin{proposition}[\(\text{span}_{K}(S) \subset U\)]
+   Given the subset \(S \subset U\) of a vector subspace (\ref{def:vector_subspace}) \(U \subset V\)
+   \[S \subset U \implies \text{span}_{K}(S) \subset U\]
+\end{proposition}
+\begin{proof}
+   \[\forall v \in S: v \in U \implies \forall v = \sum_{s \in S} \lambda_s s \in \langle S \rangle: v \in U \implies \langle S\rangle \subset U\]
+\end{proof}
+Example: \(V = \mathbb{R}^3, S = \{e_1, e_2\}, \text{span}(\{e_2, e_1\}) = \mathbb{R}^2\)
+
+\subsection{Generator}
+\begin{definition}[Generator]\label{def:generator}
+   A subset \(S \subset V\) of a K-vector space \(V\) if
+   \[\text{span}_{K}(S) = V\]
+\end{definition}
+
+\begin{definition}[Linear Dependency]\label{def:lin_depend}
+   A subset \(S \subset V\) is linear dependent if the zero vector can only be combined trivially linear.
+   \[\exists \lambda_s \neq 0 \in K: \sum_{s \in S} \lambda_s s = 0_V\]
+   If the sum equals 0 only if \(\forall \lambda_s = 0\), \(S\) is called \textit{linear independent}.
+\end{definition}
+
+% todo numbering after def
+\begin{proposition}[\(S \subset V\) linear independent]
+   \(\forall S \subset V\) are the following statements equivalent:
+   \begin{enumerate}
+      \item \(S\) is linear independent
+      \item No vector of \(S\) is a linear combination (\ref{def:lin_comb}) of the other elements of \(S\).
+      \item Every vector of \(V\) has at most one representation as a linear combination of the elements of \(S\).
+   \end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof \(\overline{(2)} \implies \overline{(1)}\).]
+   \[\exists v \in S: v = \sum_{s \in S} \lambda_s s \implies -v + \sum_{s \in S} \lambda_s s = 0_V\]
+\end{proof}
+\begin{proof}[Proof \(\overline{(3)} \implies \overline{(2)}\).]
+   \[\exists v \in S: v = \sum_{s \in S} \lambda_s s = \sum_{s \in S} \mu_s s\]
+   \[\exists t \in S \text{ with } \lambda_t \neq 0\]
+   \[\lambda_t t = -\sum_{\substack{s \neq t\\s \in S}} \lambda_s s + \sum_{s \in S} \mu_s s \implies t = \frac{1}{\lambda_t} \left(-\sum_{\substack{s \neq t\\s \in S}} \lambda_s s + \sum_{s \in S} \mu_s s\right)\]
+   \(t\) is a linear combination of other \(v \in S\) which leads to a contradiction.
+\end{proof}
+\begin{proof}[Proof 3 \(\implies\) 1.]
+   From (3) follows that the only representation is
+   \[0_V = \sum_{s \in S} 0 \cdot s\]
+\end{proof}
+
+\subsection{Basis}
+\begin{definition}[Basis]\label{def:basis}
+   A linear independent (\ref{def:lin_depend}) generator (\ref{def:generator}) of a K-vector space \(V\).
+\end{definition}
+
+\begin{lemma}\label{lem:basis}
+   Given a linear independent (\ref{def:lin_depend}) \(S \subset V\) and \(v \notin S, v \in V\).
+   \[S \cup \{v\} \text{ linear independent } \iff v \in \langle S\rangle\]
+\end{lemma}
+\begin{proof}[Proof \(\implies\).]
+   \[0_V = \sum_{s \in S \cup \{v\}} \lambda_s s = \lambda_v v + \sum_{s \in S} \lambda_s s \text{ with } \lambda_v \neq 0\]
+   \[v = -\frac{1}{\lambda_s} \sum_{s \in S} \lambda_s s \in \langle S\rangle\]
+\end{proof}
+ % todo correct proof?
+\begin{proof}[Proof (\(\impliedby\)).]
+   \[v \in \langle S\rangle \implies v - \sum_{s \in S} \lambda_s s = 0_V\]
+\end{proof}
+
+% todo
+\begin{theorem}[Basis = Generator = \(S \subset V\)]
+   \(\forall S \subset V\) are the following statements equivalent:
+   \begin{enumerate}
+      \item \(S\) is a basis of \(V\).
+      \item \(S\) is a minimal generator (\ref{def:generator}) of \(V\).
+      \item \(S\) is a maximal, linear independent (\ref{def:lin_depend}) set.
+   \end{enumerate}
+\end{theorem}
+\begin{remark}
+   Proofs use \cref{lem:basis}
+\end{remark}
+\begin{proof}[Proof (1 \(\implies\) 2).]
+   \(S' \subset S,~\langle S\rangle = V\)
+   \[\exists w \in S: w \notin S'\]
+   \[-w + \sum_{s \in S} \lambda_s s = 0_V\]
+\end{proof}
+\begin{proof}[Proof (2 \(\implies\) 3).]
+   \(S\) is a generator \(\implies\) \(S\) is linear independent.
+   \[\forall v \in V: v = \sum' \lambda_s s\]
+   \[\forall v: S \cup \{v\} \text{ is linear dependent} \implies S \text{ is maximal linear independent set.}\]
+
+   We cannot add another vector to \(S\) without it being linear dependent.
+   This means it is a maximal linear independent set.
+\end{proof}
+\begin{proof}[Proof (3 \(\implies\) 1).]
+   \[\forall v \in V, v \notin S\]
+   \[S \cup \{v\} \text{ is linear dependent} \implies v \in \langle S\rangle \implies S \text{ is a generator} \implies S \text{ is a basis.}\]
+\end{proof}
+
+\begin{corollary}[Coordinates]
+   Given the basis \(B\) of the K-vector space \(V\)
+   \[\forall v \in V: v = \sum_{b \in B} \lambda_b b \text{ with } \lambda_b \in K\]
+   \(\{\lambda_b\}_{b \in B}\) are called \textit{coordinates} of \(v\) in basis \(B\).
+\end{corollary}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+% todo: see page 87
+\begin{theorem}
+   Given a K-vector space \(V\)
+
+   For every generator (\ref{def:generator}) \(E\) and linear independent (\ref{def:lin_depend}) set \(L \subset V\) exists a basis (\ref{def:basis}) \(B\) of \(V\) so that \(L \subset B \subset E\)
+\end{theorem}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{corollary} % todo: is a theorem in the book
+   Every K-vector space (\ref{def:vector_spaces}) \(V\) has a basis (\ref{def:basis}).
+\end{corollary}
+
+% todo: satz im buch
+\begin{corollary}
+   Every linear independent (\ref{def:lin_depend}) subset of \(V\) can be extended to be a basis (\ref{def:basis}).
+\end{corollary}
+\begin{proof}
+   If \(L\) is a maximal linear independent set \(\implies L = B\)
+
+   Else \(\exists v \in E, v \notin \langle L \rangle\)
+
+   \[L \cup \{v\} \begin{cases}\langle L \cup \{v\} \rangle = V: L \cup \{v\} = B\\ \text{else}: \text{add another}~v\end{cases}\]
+\end{proof}
+
+\begin{corollary}[Reduce Generator to Basis]
+   Every generator (\ref{def:generator}) can be reduced to a basis (\ref{def:basis}).
+\end{corollary}
+\begin{proof}
+   Assumed \(E\) is a finite generator: \(|E| < \infty\)
+
+   If \(E\) is linear independent \(\implies E = B\)
+
+   If \(E\) is linear dependent \(\implies \exists v \in E: v = \sum_{e \in E} \lambda_e e\)
+
+   \[E \setminus \{v\} \begin{cases}\text{linear independent}: E = B\\ \text{linear dependent}: \text{remove another }v\end{cases}\]
+\end{proof}
+
+\begin{definition}[Ordered Basis]
+   A basis of a K-vector space \(V\) with an order to its elements.
+\end{definition}
+\begin{remark}
+   An unordered basis is a \textit{set} of vectors: \(B = \{e_1, e_2, e_3\}\) whereas an ordered basis has a different notation: \(B' = (e_1, e_2, e_3)\).
+   Therefore holds \(B \neq B'\)
+\end{remark}
+
+\begin{proposition}
+   For every ordered tuple \(T = (v_1, \ldots, v_n)~\forall v \in V\) of a K-vector space \(V\)
+   \[\varphi_{T}: K^n \to V\]
+   \[\begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} \mapsto \sum_{i=1}^n x_i v_i\]
+
+   \begin{enumerate}
+      \item \(\varphi_T\) is injective \(\iff T\) is linear independent.
+      \item \(\varphi_T\) is surjective \(\iff T\) is a generator.
+      \item \(\varphi_T\) is an isomorphism \(\iff T\) is an ordered basis.
+   \end{enumerate}
+\end{proposition}
+
+% todo: really corollary?
+\begin{corollary}
+   Given an ordered basis \(B = (v_1, \ldots, v_n)\) of a K-vector space \(V\)
+   \[\forall v \in V~\exists! x_1, \ldots, x_n \in K: v = \sum_{i=1}^n x_i v_i\]
+   \[\varphi_{T}: V \xrightarrow{\sim} K^n\]
+   \[v \mapsto \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}\]
+\end{corollary}
+\begin{remark}
+   \(x_1, \ldots, x_n\) are called the coordinates regarding \(T\)
+\end{remark}
+
+\subsection{Dimension}
+\begin{theorem}[Kleiner Austauschsatz]\label{thm:small_exchange}
+   Given a basis \(B\) of a K-vector space \(V\)
+
+   A vector
+   \[v_0 \in V \setminus \{B \cup \{0_V\}\}\]
+   can be exchanged with a vector \(b_0 \in B\) so that
+   \[B' := \{B \setminus \{b_0\}\} \cup v_0\]
+   is a also a basis.
+\end{theorem}
+\begin{proof}[Proof (\(B'\) is linear independent).]
+   Since \(B\) is a generator, it follows that \(v_0 = \sum_{i \in I} \lambda_i b_i\) such that \(v_0 \neq 0 \implies \lambda_0 = 0\)
+   \[\mu_0 v_0 + v_{i \neq 0} = 0_V\]
+   \[\mu_0 v_0 + \sum_{\substack{i \neq 0\\i \in I}} \mu_i b_i = 0_V\]
+   \[\mu_0 \sum_{i \in I} \lambda_i b_i + \sum_{\substack{i \neq 0\\i \in I}} \mu_i b_i = 0_V\]
+
+
+   \[\mu_0 \lambda_0 + 0 = 0 \implies \mu_0 = 0 \text{ since } \lambda_0 \neq 0\]
+   \[\mu_0 \lambda_1 + \mu_1 = 0 \implies \mu_1 = 0\]
+   \[\mu_0 \lambda_2 + \mu_2 = 0 \implies \mu_2 = 0\]
+   \[\ldots\]
+\end{proof}
+\begin{proof}[Proof (\(\langle B' \rangle = V\)).]
+   \[v_0 = \sum_{i \in I} \lambda_i b_i \implies b_0 = \frac{1}{\lambda_0} \left(v_0 - \sum_{\substack{i \neq 0\\i \in I}} \lambda_i b_i\right)\]
+
+   \(\forall w \in V\)
+   \[w = \sum_{i \in I} w_i b_i = w_0 \frac{1}{\lambda_0} \left(v_0 - \sum_{\substack{i \neq 0\\i \in I}} \lambda_i b_i\right) + \sum_{\substack{i \neq 0\\i \in I}} w_i b_i\]
+
+   \[w \in \langle B' \rangle\]
+\end{proof}
+
+\begin{theorem}[Grosser Austauschsatz]\label{thm:big_exchange}
+   Given a basis \(B\) of a K-vector space \(V\) and a linear independent set \(L \subset V\)
+
+   There exists a injective linear map
+   \[i: L \xhookrightarrow{} B\]
+   so that
+   \[B' = L \sqcup (B \setminus i(L))\]
+   is also a basis of \(V\)
+\end{theorem}
+\begin{proof}
+
+   Induction Start: \(|L| = 1\)
+
+   \[\text{We use \cref{thm:small_exchange}}\]
+
+   Induction Assumption: \(|L| = m,~L = \{l_1, \ldots, l_m\}\)
+   \[b_i \in B \setminus i(L) \implies L \cup \{b_i\} = B' \text{ basis of } V\]
+
+   Induction Step: \(|L| = m + 1, L' = L \cup \{l_{m+1}\}\)
+
+   Since \(B'\) is a basis, there exists \(l_{m+1} = \lambda_0 l_1 + \ldots + \lambda_m l_m + \sum \mu_i b_i\).
+   There must be a \(\lambda_i \neq 0\), otherwise \(B\) would be linear dependent and therefore not a basis.
+   This means \(B'' = B' \setminus \{b_i\} \cup \{l_{m+1}\}~\text{is a basis.}\)
+\end{proof}
+
+\begin{corollary}
+   Given a K-vector space \(V\) with a finite basis \(B\), every basis of \(V\) is finite.
+\end{corollary}
+\begin{proof} % todo
+   Given a finite basis \(B\) and another basis \((w_i)_{i \in I}\).
+
+   Is \(I\) infinite there would be \(i_1, \ldots, i_{r+1} \in I\) so that \(w_{i_1}, \ldots, w_{i_{r+1}}\) is linear independent which would be a contradiction to \cref{thm:big_exchange}.
+\end{proof}
+
+\begin{corollary}[\(|B| = |B'|\)]
+   Given two distinct bases \(B, B'\) of a K-vectorspace \(V\)
+   \[|B| = |B'|\]
+\end{corollary}
+\begin{proof}
+   Given a generator \(E\) and a linear independent set \(L\)
+   \[|L| \leq |E|\]
+   Which means that \(|B'| \leq |B| \land |B| \leq |B'| \implies |B| = |B'|\)
+\end{proof}
+\begin{remark}
+   For every finite dimensional K-vector space \(V\), is
+   \begin{enumerate}
+      \item every generator \(E\) with \(dim(V)\) elements (which makes it a minimal generator)
+      \item every linear independent set \(L\) with \(|L| = dim(V)\)
+   \end{enumerate}
+   a basis.
+\end{remark}
+
+\begin{definition}[Dimension]
+   Given a K-vector space \(V\)
+   \[\text{dim}V = \text{dim}_{K}(V) := \begin{cases}\infty:~\text{if}~V~\text{has no finite basis.}\\r:~\text{if}~V~\text{has a basis}~B~\text{with}~|B| = r\end{cases}\]
+\end{definition}
+
+\begin{theorem}[Kernel/Image Dimension]\label{thm:dim_ker_im}
+   Given K-vector spaces  \(V, W\) with \(\text{dim}V < \infty\), a linear mapping \(f: V \to W\) and bases \(B_{K} = (v_1, \ldots, v_k)\) of \(\text{Ker}f \subset V\) and \(B_{I} = (w_1, \ldots, w_r)\) of \(\text{Im}f \subset W\),
+
+   We can construct a basis \(B\) of \(V\) from \(B_{K}\) and \(B_{I}\), so that
+   \[B = (v_1, \ldots, v_k, u_1, \ldots, u_r)~\text{where}~u_{i} := f^{-1}(w_i)~\text{for}~1\leq i \leq r\]
+
+   Thus the following holds
+   \[\text{dim}_{K}(V) = \text{dim}(\text{Ker}f) + \text{dim}(\text{Im}f)\]
+\end{theorem}
+\begin{remark}
+   From \cref{def:linmaprank} follows that
+   \[\text{dim}_{K}(V) = \text{dim}(\text{Ker}f) + \text{rank}f\]
+\end{remark}
+\begin{proof} % todo
+   \(\forall v, v' \in V\)
+   \[v = \sum_{i=1}^k \lambda_i v_i\]
+   \[v' = \sum_{i=1}^r \lambda_i u_i\]
+
+   \[f(v) = f(v') \implies v - v' \in \text{Ker}f\]
+   \[v - v' = \sum_{i=1}^k \mu_i v_i \iff v = \sum_{i=1}^k \mu_i v_i + \sum_{i=1}^r \lambda_i u_i \]
+
+   \[v = 0_{V}\]
+   \[f(v) = 0_{W}\]
+
+   \[\sum_{i=1}^k \mu_i f(v_i) + \sum_{i=1}^r \lambda_i f(u_i) = 0_{W} \implies \sum_{i=1}^r \lambda_i w_i = 0_{W} \implies \forall \lambda_i = 0\]
+   since \(w_i\) are linear independent.
+
+   This means that
+   \[\sum_{i=1}^k \mu_i v_i = 0_{V} \implies \forall \mu_i = 0\]
+   since \(v_i\) are linear independent.
+\end{proof}
+
+% todo p36 theorem 7.11
+\begin{corollary}
+   Given two K-vector spaces \(V, W\)
+   \[\exists f: V \xrightarrow{\sim} W \iff \text{dim}V = \text{dim}W\]
+\end{corollary}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{corollary}
+   Given two K-vector spaces \(V, W\)
+
+   If \(\text{dim}V = \text{dim}W < \infty\) the following statements are equivalent:
+   \begin{enumerate}
+      \item \(f\) is injective
+      \item \(f\) is surjective
+      \item \(f\) is bijective
+   \end{enumerate}
+\end{corollary}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+
+\begin{corollary}\label{cor:transmat_optimal_basis}
+   Given a linear map \(f: V \to W\) with \(n = \text{dim}V,~m = \text{dim}W\) and \(r = \text{dim Im}f\) there exist bases \(B\) of \(V\) and \(B'\) of \(W\) so that
+  \[{}_{B}M_{B'}(f) = \begin{pmatrix}I_r & 0 \\ 0 & 0\end{pmatrix}\]
+\end{corollary}
+\begin{proof}
+   Extend the basis of \(\text{Im}f\) (in \cref{thm:dim_ker_im}) to a basis \(B' = (w_1, \ldots, w_r, w_{r+1}, \ldots, w_m)\) of \(W\).
+\end{proof}

@@ -1,0 +1,142 @@
+\section{Groups}
+A group is an algebraic structure consisting of a set of elements equipped with an operation that combines any two elements to form a third element and that satisfies four conditions called the group axioms, namely closure, associativity, identity and invertibility.
+
+\begin{example}[Integers]
+   \((\mathbb{Z}, +, 0)\) is an abelian group since:
+   \begin{enumerate}
+      \item \(\mathbb{Z}\) includes the 0 as the neutral element: \(\forall a \in \mathbb{Z}: a + 0 = a\)
+      \item \(\mathbb{Z}\) includes negative numbers as inverse elements: \(\forall a \in \mathbb{Z}: a + (-a) = 0\)
+      \item addition is associative: \(\forall a, b \in \mathbb{Z}: a + b = b + a\)
+      \item addition is commutative: \(\forall a, b, c \in \mathbb{Z}: (a + b) + c = a + (b + c)\)
+   \end{enumerate}
+
+   \((\mathbb{N}_{0}, +, 0)\) however is not a group since \(\mathbb{N}_{0}\) does not include negative numbers to act as the inverse elements.
+   \(\forall a, b \in \mathbb{N}_{0}: a + b = 0\)
+\end{example}
+
+\begin{example}[Rational Numbers]
+   \((\mathbb{Z}, \cdot, 1)\) is not a group, since there are no fractions in \(\mathbb{Z}\) which could act as the inverse elements.
+
+   But \((\mathbb{Q}, \cdot, 1)\) is a abelian group since \(\mathbb{Q}\) includes fractions: \(\forall a \in \mathbb{Q}: a \cdot \frac{1}{a} = 1\)
+
+   The same group with the division \((\mathbb{Q}, /, 1)\) is not a group since the associativity is not supported: \(2 / (2 / 2) \neq (2 / 2) / 2\)
+\end{example}
+
+\begin{example}[Matrices]
+   The set of matrices is a so called \textit{additive} group \((Mat_{m}(K), +, 0_m)\) since \(A-A = 0_m\) and \(A + 0_m = A\)
+
+   \((Mat_{m}(K), \cdot, 0_m)\) is a \textit{multiplicative} group since \(A(BC)=(AB)C\) and \(AI_m = I_mA = A\) but is not abelian because matrix multiplication is not commutative \(AB \neq BA\)
+
+   An important group of matrices is the general linear group of \cref{pro:general_linear_group}.
+\end{example}
+
+\section{Rings}
+A ring is a group with an additional operation, which is compatible with the first.
+
+\section{Fields}
+A field is a ring such that the second operation also satisfies all the group properties.
+This way a field consists of an \textit{additive group} and a \textit{multiplicative group} which are compatible through the distributivity.
+
+\begin{example}[Rational Numbers]
+   \((\mathbb{R}, +, \cdot, 0, 1)\) is a field since \((\mathbb{R}, +, 0)\) forms an abelian group and \((\mathbb{R}^*, \cdot, 1)\) also forms an abelian group.
+   These two groups interact with each other through the distributivity of their interactions.
+\end{example}
+
+\section{Vector Spaces}
+A vector space (also called a linear space) is a collection of objects called vectors, which may be added together and multiplied ("scaled") by numbers, called scalars.
+Scalars are often taken to be real numbers, but there are also vector spaces with scalar multiplication by complex numbers, rational numbers, or generally any field.
+Vectors in vector spaces do not necessarily have to be arrow-like objects as they appear in the mentioned examples: vectors are regarded as abstract mathematical objects with particular properties, which in some cases can be visualized as arrows.
+
+\section{Matrices}
+\subsection{Special Cases}
+\begin{example}[Zero Matrix]
+   \[0_{3,3} = \begin{pmatrix}
+      0 & 0 & 0 \\
+      0 & 0 & 0 \\
+      0 & 0 & 0 \\
+   \end{pmatrix}\]
+\end{example}
+\begin{example}[Diagonal Matrix]
+   \[D_{3} = \begin{pmatrix}
+         a_{11} & 0 & 0 \\
+         0 & a_{22} & 0 \\
+         0 & 0 & a_{33} \\
+   \end{pmatrix}\]
+\end{example}
+\begin{example}[Identity Matrix]
+   \[I_{3} = \begin{pmatrix}
+         1 & 0 & 0 \\
+         0 & 1 & 0 \\
+         0 & 0 & 1 \\
+   \end{pmatrix}\]
+\end{example}
+\begin{example}[Single Entry Matrix]
+   \[E_{2,3} = \begin{pmatrix}
+         0 & 0 & 0 \\
+         0 & 0 & 1 \\
+         0 & 0 & 0 \\
+   \end{pmatrix}\]
+\end{example}
+
+\begin{example}[Row Echelon Form]
+   For the matrix
+   \[\begin{pmatrix}
+         0 & 2 & 0 & 4 & 6 & 0 & 5 \\
+         0 & 0 & 1 & 3 & 2 & 1 & 0 \\
+         0 & 0 & 0 & 0 & 0 & 3 & 1 \\
+         0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+   \end{pmatrix}\]
+   is \(m = 4,~n = 7,~r = 3,~j_1 = 2,~j_2 = 3,~j_3 = 6\)
+\end{example}
+
+\begin{example}[Matrix Multiplication]
+   \[\begin{pmatrix} 3 & 2 & 1 \\ 1 & 0 & 2 \end{pmatrix} \cdot \begin{pmatrix} 1 & 2 \\ 0 & 1 \\ 4 & 0 \end{pmatrix} = \begin{pmatrix} 7 & 8 \\ 9 & 2 \end{pmatrix}\]
+\end{example}
+
+\begin{example}[Triangular Matrix]
+   \[\begin{pmatrix}
+         0 & 2 & 0 & 6 \\
+         0 & 0 & 1 & 2 \\
+         0 & 0 & 0 & 3 \\
+         0 & 0 & 0 & 0 \\
+   \end{pmatrix}~\begin{pmatrix}
+         0 & 0 & 0 & 0 \\
+         0 & 0 & 0 & 0 \\
+         2 & 1 & 0 & 0 \\
+         5 & 2 & 3 & 0 \\
+   \end{pmatrix}\]
+\end{example}
+
+\begin{example}[Permutationmatrix]
+   \[\begin{pmatrix}
+         0 & 0 & 0 & 1 & 0 \\
+         0 & 1 & 0 & 0 & 0 \\
+         1 & 0 & 0 & 0 & 0 \\
+         0 & 0 & 0 & 0 & 1 \\
+         0 & 0 & 1 & 0 & 0
+   \end{pmatrix}\]
+\end{example}
+
+\begin{example}[Transposed Matrix]
+   \[\begin{pmatrix} 1 & 4 \\ 8 & -2 \\ -3 & 5\end{pmatrix}^T = \begin{pmatrix} 1 & 8 & -3 \\ 4 & -2 & 5 \end{pmatrix}\]
+\end{example}
+
+\section{Linear Equations}
+\section{Linear Maps}
+A linear map describes the relationship between distinct sets. Given two sets X and Y a linear map f is a rule that maps every \(x \in X\) uniquely to a \(f(x) \in Y\).
+\section{Mapping Spaces}
+
+\subsection{Transformation Matrix}
+We need ordere bases for transformation matrices, since the order of base-vectors defines how the calculation of the transformation matrix is carried out. a set as a bases wouldnt give us this.
+
+\section{Relations}
+Jede Äquivalenzrelation R auf einer Menge X liefert also eine zerlegung von X in disjunkte Äquivalenzklassen.
+Diese Äquivalenzklassen betrachtet man als Elemente einer neuen Menge, die mit X/R bezeichnet wird.
+Man nennt sie die Quotientenmenge von X anch der Äquivalenzrelation R
+
+\section{Basis}
+die schnittmenge einer linear unabhängige teilmenge eines vektorraums und eines erzeugendensystems desselben vektorraums ist die basis.
+
+\subsection{span}
+Das Erzeugnis ist die Menge aller vektoren eines Vektorraums, die sich aus einer endlichen Teilfamilie von \((v_i)_{i \in I}\) linear kombinieren lassen.
+die teilfamilie entsteht dadurch, dass fast alle koeffizienten der linear kombination 0 sind, ausser die derjenigen vektoren welche für die linearkombination benötigtwerden.

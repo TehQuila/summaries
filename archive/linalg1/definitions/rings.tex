@@ -1,0 +1,22 @@
+\section{Rings}
+\begin{definition}[Ring]
+   A set \(R\) with two operations
+   \[+: R \times R \to R,~(a, b) \mapsto a + b\]
+   \[\cdot: R \times R \to R,~(a, b) \mapsto a \cdot b\]
+   if the following holds:
+   \begin{enumerate}[label=(\roman*)]
+      \item \((R, +, 0)\) is an abelian group, with \(a^{-1} := -a\).
+      \item Multiplication is associative: \(\forall a, b, c \in R: (a \cdot b) \cdot c = a \cdot (b \cdot c)\)
+      \item The operations are distributive: \(\forall a, b, c \in R: a \cdot (b + c) = ab + bc \land (a + b) \cdot c = ac + bc\)
+   \end{enumerate}
+   Can be written as \((R, +, \cdot, 0, 1)\).
+\end{definition}
+
+% todo: write down rings
+\subsection{Unitary Ring}
+If the ring includes a neutral element of the multiplication it is a unitary ring (eins-ring, unitär ring).
+Ex: \((\mathbb{Z}, +, \cdot, 0, 1)\)
+
+\subsection{Examples}
+\((\mathbb{Z}, +, \cdot, 0, 1)\) is a ring since \((\mathbb{Z}, +, 0)\) is an abelian group and distributivity is given.
+\((Mat_{m}(K), +, \cdot, 0_m, I_m)\) is a unitary ring but no field (no inverse)

@@ -1,0 +1,64 @@
+\section{Fields}
+\begin{definition}[Field]\label{def:field}
+   A set \(K\) with two operations
+   \[+: K \times K \to K,~(a, b) \mapsto a + b\]
+   \[\cdot: K \times K \to K,~(a, b) \mapsto a \cdot b\]
+   if the following holds:
+   \begin{enumerate}[label=(\roman*)]
+      \item \((K, +, 0)\) is an abelian group (\ref{def:abel_group}) with \(a^{-1} := -a\).
+      \item \((K^{*}, \cdot, 1)\) is an abelian group (\ref{def:abel_group}) with \(K^{*} := K \setminus \{0\}\) and \(a^{-1} := \frac{1}{a}\).
+      \item The operations are distributive \(\forall a, b, c \in K: a \cdot (b + c) = ab + bc \land (a + b) \cdot c = ac + bc\)
+   \end{enumerate}
+   Can be written as \((K, +, \cdot, 0, 1)\)
+\end{definition}
+
+\begin{proposition}[Additive and Multiplicative Identities]
+   \[\text{A field has at least two elements}~1~\text{and}~0~\text{for which holds}~1 \neq 0\]
+\end{proposition}
+\begin{proof}
+   \[\text{From \cref{def:field} follows that}~1 \in K^{*}~\text{but}~0 \notin K^{*}\]
+\end{proof}
+
+\subsection{Additive Identity with Multiplication}
+\begin{proposition}[\(0 \cdot a = 0\)]
+   \(\forall a \in K:\)
+   \[a \cdot 0 = 0 \cdot a = 0\]
+\end{proposition}
+\begin{proof}
+   \[0 \cdot a = (0 + 0) \cdot a = 0 \cdot a + 0 \cdot a\]
+\end{proof}
+
+\begin{proposition}[\(a \cdot b = 0\)]
+   \(\forall a, b \in K:\)
+   \[a \cdot b = 0 \implies a = 0 \lor b = 0\]
+\end{proposition}
+\begin{proof}
+   \[\text{Follows from (ii) in \cref{def:field}}\]
+\end{proof}
+
+\begin{proposition}[\(x \cdot a = \tilde{x} \cdot a\)]
+   Let \(x, \tilde{x}, a \in K:\)
+   \[(x \cdot a = \tilde{x} \cdot a \land a \neq 0) \implies x = \tilde{x}\]
+\end{proposition}
+\begin{proof}
+   \[\text{Follows from (ii) in \cref{def:field}}\]
+\end{proof}
+
+\subsection{Additive Inverse with Multiplication}
+\begin{proposition}[\(a(-b) = -(ab)\)]
+   \(\forall a, b \in K:\)
+   \[a(-b) = -(ab)\]
+\end{proposition}
+\begin{proof}
+   Given \(a, b \in K\)
+   \[ab + (-a)b = (a + (-a))b = 0 \cdot b = 0\]
+\end{proof}
+
+\begin{proposition}[\((-a)(-b) = ab\)]
+   \(\forall a, b \in K:\)
+   \[(-a)(-b) = ab\]
+\end{proposition}
+\begin{proof}
+   Given \(a, b \in K\)
+   \[(-a)(-b) = -((-a)b) = -(-ab) = ab\]
+\end{proof}

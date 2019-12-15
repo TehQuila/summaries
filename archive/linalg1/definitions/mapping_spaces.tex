@@ -1,0 +1,131 @@
+\section{Mapping Spaces}
+\begin{definition}[Homomorphism Space]
+   Given K-vector spaces \(V, W\) with \(\text{dim}V = n,~\text{dim}W = m\)
+   \[\text{Hom}_K(V, W) := \{f: V \to W \mid f~\text{is linear}\}\]
+   is the space of all linear mappings \(V \to W\)
+\end{definition}
+
+% todo: actually lemma?
+\begin{lemma}
+   Given the set \(W^V\) of all mappings \(V \to W\)
+   \[\text{Hom}_K(V, W) \subset W^V\]
+   is a vector subspace.
+\end{lemma}
+% todo: missing proof
+\begin{proof}
+\end{proof}
+% todo: what is this?
+for \(f: V' \to W,~g: W \to W'\) is \(C_{g \circ f}: \text{Hom}_K(V, W) \to \text{Hom}_K(V', W'),~h \mapsto g \circ h \circ f\)
+
+\begin{lemma}
+   Given the vector space \(\text{Mat}_{m,n}(K)\) and \(\text{Hom}_K(K^n, K^m)\) there is the isomorphism
+   \[\text{Mat}_{m,n}(K) \xrightarrow{\sim} \text{Hom}_K(K^n, K^m)\]
+   \[A_{m,n} \mapsto L_A\]
+\end{lemma}
+\begin{proof}
+   The Mapping is an isomorphism because it is bijective and between vector spaces. It is bijective since it is
+
+   injective according to \cref{pro:kerf=0}
+
+   surjective according to \cref{def:surjective}
+\end{proof}
+
+\begin{lemma}
+   Given the ordered bases \(B = (v_1, \ldots, v_n)\) of \(V\) and \(B' = (w_1, \ldots, w_n)\) of \(W\)
+   \[\text{Hom}_K(V, W) \xrightarrow{\sim} \text{Mat}_{m,n}(K)\]
+   \[f \mapsto {}_{B'}M_{B}(f)\]
+\end{lemma}
+\begin{proof}
+   There exists an inverse mapping \(A \mapsto h\) where \(h(v_j) = \sum a_{ij} w_i\) which means it is bijective.
+\end{proof}
+% todo: actually prop?
+\begin{proposition}[\(\text{dim}(\text{Hom}_K(V, W)) = m \cdot n\)]\label{pro:hom_dim}
+   from those two lemmas follows that \(\text{dim}(\text{Hom}_K(V, W)) = m \cdot n\) (see def)
+\end{proposition}
+\begin{remark}
+   Dimensions of homomorphism are the same (since isomorphisms are bijective?)
+   \(\text{Hom}_K(V, W) \cong \text{Hom}_K(K^n, K^m) \cong \text{Mat}_{m,n}(K)\)
+\end{remark}
+
+\begin{definition}[Endomorphism Space]
+   The homomorphism space of a K-vector space \(V\) and itself
+   \[\text{End}_K(V) := \text{Hom}_K(V, V)\]
+\end{definition}
+\begin{remark}
+   \(\text{Hom}_K(V, V) \cong \text{Mat}_n(K)\)
+   \[(\text{End}_K(V), \circ, +, 0_V, \text{id}_V)\]
+   is the endomorphism ring of \(V\)
+\end{remark}
+
+\begin{definition}[Dual Space]
+   For a K-vector space \(V\)
+   \[V^* := \text{Hom}_K(V, K)\]
+   is its dual space.
+
+   \(l \in V^*\) is a \textit{linear form}
+\end{definition}
+\begin{remark}
+   \(\text{dim}V^* = \text{dim}V\)
+\end{remark}
+
+% todo: dual basis
+\begin{proposition}[Dual Basis]
+   Given an ordered basis \(B\) or a K-vector space \(V\) and \(l_i \in V^*~\forall 1 \leq i \leq n\) with \(l_i: V \to K,~\sum_{j=1}^n \alpha_j v_j \mapsto \alpha_i \iff l_i(v_i) = \delta_{íj}\)
+   \[B^* = (l_1, \ldots, l_n)\]
+   is the ordered Basis of \(V^*\), called the dual basis to \(B\)
+\end{proposition}
+\begin{proof}
+   It is sufficient to show that \((l_1, \ldots, l_n)\) are linear independent in order to show that \(B^*\) is a basis.
+   According to \cref{pro:hom_dim} is
+   \[\text{dim}V^* = n \cdot 1\]
+
+   Suppose \(\exists j: y_j \neq 0\)
+   \[\sum_{i=1}^n y_i l_i(v_j) = y_j \implies y_j \neq 0\]
+   which is a contradiction
+\end{proof}
+
+\begin{proposition}
+   Given ordered bases \(B, B'\) of two K-vector spaces \(V, W\)
+   \(\forall f: V \to W\)
+   \[\exists f^*: W^* \to V^*\]
+   \[l \mapsto l \circ f\]
+   is a dual map to \(f\)
+
+   \[{}_{B}M_{B'}(f^*) = {}_{B'}M_{B}^T(f)\]
+   characterises the dual map entirely
+\end{proposition}
+\begin{proof}[Proof (Matrix of \(l \circ f = \text{Mat}^T\))]
+   Given \(l \circ f \in V^*: (V \xrightarrow{f} W \xrightarrow{l} K)\)
+
+   \[{}_{B}M_{B'}(f) = (a_{ij})_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}}\]
+   \[f(v_j) = \sum_{i=1}^m a_{ij} w_i\]
+
+   \[B^* = (l_1, \ldots, l_n)~\text{of}~V^*\]
+   \[B^*' = (l_1', \ldots, l_n')~\text{of}~W^*\]
+
+   \[l_K' \circ f = \sum_{i=1}^n M_{ik} l_i\]
+   \[l_K' \circ f(v_j) = l_K'\left(\sum_{i=1}^m a_{ij} w_i \right) = a_{kj}\]
+   \[l_K' \circ f = \sum_{i=1}^n a_{ki} l_i = \sum_{i=1}^m (a^T)_{ik} l_i \implies A^T = {}_{B^*}M_{B^*'}(f^*)\]
+\end{proof}
+
+\begin{proposition}
+   \(\forall v \in V\) exists an Evaluation
+   \[w_V: V^* \to K\]A
+   \[l \mapsto l(v)\]
+
+   \[w_V \in (V^*)^*~\text{with}~\text{dim}V^{**} = \text{dim}V\]
+\end{proposition}
+
+\begin{definition}[Automorphism Set]
+   Given the K-vector space \(V\)
+   \[\text{Aut}_K(V) := \{f: V \to V \mid f~\text{is isomorphic}\}\]
+   is the set of all automorphisms of \(V\).
+\begin{lemma}
+   \(\text{Aut}_K(V)\) is a group.
+\end{lemma}
+\begin{proof}
+   \[\circ = f\]
+   \[e = \text{id}\]
+   \[\text{There exists an inverse element since}~f~\text{is an isomorphism.}\]
+\end{proof}
+
