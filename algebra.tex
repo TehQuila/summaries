@@ -1687,6 +1687,227 @@ Let \(p\) be a prime s.t. \(p \mid \lvert G\rvert\) and largest \(a \in \mathbb{
    hence \((\mathbb{Z}, +, \cdot)\) is an integral domain.
 \end{example}
 
+\subsubsection{Factorization}
+\begin{proposition}
+   Let \(a \in R \setminus (R^\times \cup \{0\})\) of an integral domain \(R\).
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\forall b \in R: a\nmid b \exists c \in R: a | cb -1\)
+      \item \(a\) is prime.
+      \item \(a\) is irreducible.
+   \end{enumerate}
+
+   If \(R\) is an integral domain, then holds \((i) \implies (ii) \implies (iii)\).
+
+   If \(R\) is a principal ideal domain, then holds \((i) \iff (ii) \iff (iii)\).
+\end{proposition}
+
+\begin{definition}[Divisor]
+   Given an integral domain \(R\), \(a \in R\) is a divisor of \(x \in R\) iff \(a | x\).
+\end{definition}
+
+\begin{definition}[Proper Divisor]
+   Given an integral domain \(R\), \(a \in R \setminus R^\times\) is a \emph{proper} divisor of \(x \in R\) iff \(a | x\) and \(a \neq ux\) with \(u \in R^\times\).
+\end{definition}
+
+\begin{lemma}
+   Let \(R\) be an integral domain satisfying the ascending chain condition on principal ideals.
+
+   Every \(a \in R \setminus R^\times: a \neq 0\) possesses an irreducible divisor.
+\end{lemma}
+\begin{remark}
+   The ascending chain condition on principal ideals is satisfied if there is no infinite strictly ascending chain of principal ideals in the ring.
+   \[a_1R \subset a_2R \subset a_3R \subset \ldots\]
+   Any principal ideal domain satisfies this property for instance.
+\end{remark}
+
+\begin{proposition}
+   Let \(R\) be an integral domain satisfying the ascending chain condition on principal ideals.
+
+   Every \(a \in R \setminus R^\times: a \neq 0\) may be expressed as a finite product of irreducible elements of \(R\).
+\end{proposition}
+
+\subsection{Euclidean Domains}
+A \emph{euclidean domain} is endowed with a \emph{euclidean function} which allows a suitable generalization of the euclidean algorithm for the division of integers or polynomials which is called \emph{euclidean division}.
+
+\begin{definition}[Euclidean Function]
+   Given an integral domain \(R\).
+   \(f: R \setminus \{0\} \to \mathbb{N}\) is a euclidean function if
+   \[\forall a, b \in R: b \neq 0~\exists q, r \in R: a = qb + r \quad\text{where}\quad r = 0 \lor f(r) < f(b)\]
+\end{definition}
+\begin{remark}
+   It will be handy require an euclidean value to fullfill
+   \begin{equation}\label{eq:extended_euclidean}
+      \forall a,b \in R \setminus \{0\}: f(a) \leq f(ab)
+   \end{equation}
+   this means that
+   \[f(a) = f(ab) \iff b \in R^{\times}\]
+   \(\impliedby\) holds because
+   \[(ab)b^{-1} = a \implies f(ab) \leq f(a) \land f(a) \leq f(ab) \implies f(a) = f(ab)\]
+   and \(\implies\) holds because
+   \[a = qab + r~\text{with}~r=0 \lor f(r) = f(a(1-qb)) < f(ab) = f(a)\]
+   is a contradiction so it must hold that \(r = 0 \implies q \in R^{\times}\).
+
+   We can always assume that an euclidean value suffices \cref{eq:extended_euclidean}, because given any euclidean value \(f_0\)
+   \[f: R \setminus \{0\} \to \mathbb{N} \quad\text{where}\quad a \mapsto \min\{f_0(ab) \mid b \in R \setminus \{0\}\}\]
+   defines a euclidean value that fullfills (\ref{eq:extended_euclidean}).
+\end{remark}
+
+\begin{definition}[Euclidean Domain]
+   An integral domain \(R\) equipped with an euclidean function.
+\end{definition}
+
+\begin{proposition}[Euclidean Function of Whole Numbers]
+   The absolute value \(|\ldots|\) on \(\mathbb{Z}\) is a euclidean value.
+   \[|a| := \begin{cases} a & \text{if}~a \geq 0\\ -a & \text{if}~a < 0\end{cases}\]
+\end{proposition}
+
+% TODO: move to foundations
+\begin{definition}[Polynomial]
+   Given a field \(K\) and a family of coefficients \((a_i)_{i \in \mathbb{N}} \in K\), where \(a_n \neq 0\) and \(\forall i > n: a_i = 0\).
+
+   A polynomial \(p(x)\) of degree \(n \in \mathbb{N}\) is
+   \[p(x) := \sum_{k=0}^n a_k \cdot x^k = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0\]
+\end{definition}
+\begin{remark}
+   A polynomial of degree \(d\) is \textit{normalized} if \(a_d = 1\).
+\end{remark}
+
+\begin{definition}[Rational Function]
+   Given two polynomials \(p(x), q(x)\)
+   \[f(x) := \frac{p(x)}{q(x)}\]
+\end{definition}
+
+\begin{proposition}[Euclidean Function of Polynomial Rings]
+   The degree of a polynomial on \(K[x]\) is an euclidean value.
+   For \(f \in K[x]: a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0\)
+   \[\deg(f) = n\]
+\end{proposition}
+
+\subsubsection{Euclidean Division}
+\begin{definition}[Greatest Common Denominator (GCD)]
+   Given an integral domain \(R\) and \(a, b \in R\), \(d \in R\) is the greatest common denominator of \(a\) and \(b\) if
+   \[d|a \land d|b \quad\text{and}\quad \forall r \in R: r|a \land r|b \implies r|d\]
+\end{definition}
+\begin{remark}
+   If \(1 \in R\) is the greatest common denominator of \(a\) and \(b\) then are \(a\) and \(b\) coprime.
+\end{remark}
+
+\begin{proposition}[GCD is Unique]\label{pro:factor_unique}
+   Given a euclidean domain \(R\) and \(a, b \in R\)
+   \[\exists s, t, u, v \in R: (s \cdot a + t \cdot b) \cdot u = a~\text{and}~(s \cdot a + t \cdot b) \cdot v = b\]
+   where \(d := s \cdot a + t \cdot b\) is unique except for multiplication with units.
+\end{proposition}
+\begin{remark}
+   In this proposition holds that \(du = a \land dv = b \implies d|a \land d|b\).
+   Since \(d\) is unique except for multiplication with units follows that all common divisors of \(a\) and \(b\) also divide \(d\), \(\forall r \in R: r|a \land r|b \implies r|d\), hence \(d\) is the GCD of \(a\) and \(b\).
+\end{remark}
+
+\begin{definition}[Euclidean Algorithm]
+   Given a euclidean domain \(R\), let \(a, b \in R: b < a\), we define \(\gcd(a, b)\) to calculate the greatest common denominator of \(a\) and \(b\).
+   \begin{enumerate}
+      \item If \(a < b\) exchange \(a\) and \(b\).
+      \item Divide \(a\) and \(b\) and get the remainder \(r\).\\
+         If \(r = 0\) then is \(b = \gcd(a, b)\).
+      \item Replace \(a\) by \(b\) and \(b\) by \(r\)\\
+         If \(f(a) \geq f(b)\) return to the previous step.
+   \end{enumerate}
+\end{definition}
+
+\begin{example}[GCD of Whole Numbers]
+   Given \(a = 210\) and \(b = 45\)
+   \begin{enumerate}
+      \item Calculate \(a / b = q_0 + r_0 \implies q_0 = 4,~r_0 = 30\)
+         \[210 = 4 \cdot 45 + 30\]
+         We see \(r_0 \neq 0\) and \(|b| \geq |r_0|\), we continue
+      \item Calculate \(b / r_0 = q_1 + r_1 \implies q_1 = 1,~r_1 = 15\)
+         \[45 = 1 \cdot 30 + 15\]
+         We see \(r_1 \neq 0\) and \(|r_0| \geq |r_1|\), we continue
+      \item Calculate \(r_0 / r_1 = q_2 + r_2 \implies q_2 = 2,~r_2 = 0\)
+         \[30 = 2 \cdot 15 + 0\]
+         We see \(r_2 = 0\) hence we're finished and \(\gcd(a, b) = 15\).
+   \end{enumerate}
+\end{example}
+
+\begin{example}[GCD of Polynomials]
+   Given the polynomials \(a, b \in \mathbb{Q}[x]\)
+   \[a(x) := 6x^4 + 3x^3 + x^2 + 1 \quad\text{and}\quad b(x) := 2x^2 + x + 1\]
+   We use the euclidean algorithm.
+
+   \begin{enumerate}
+      \item Calculate \(a / b = q_0 + r_0 \implies q_0 = 3x^2,~r_0 = -2x^2 + 1\)
+         \[6x^4 + 3x^3 + x^2 + 1 = 3x^2 (2x^2 + x + 1) + (-2x^2 + 1)\]
+         We see \(r_0 \neq 0\) and \(\deg(b) \geq \deg(r_0)\), we continue
+      \item Calculate \(b / r_0 = q_1 + r_1 \implies q_1 = -1,~r_1 = x+2\)
+         \[2x^2 + x + 1 = (-1) (-2x^2 + 1) + (x + 2)\]
+         We see \(r_1 \neq 0\) and \(\deg(r_0) \geq \deg(r_1)\), we continue
+      \item Calculate \(r_0 / r_1 = q_2 + r_2 \implies q_2 = -2x,~r_2 = 4x+1\)
+         \[-2x^2 + 1 = (-2x) (x+2) + (4x + 1)\]
+         We see \(r_2 \neq 0\) and \(\deg(r_1) \geq \deg(r_2)\), we continue
+      \item Calculate \(r_1 / r_2 = q_3 + r_3 \implies q_3 = \frac{1}{4},~r_3 = \frac{7}{4}\)
+         \[x + 2 = \frac{1}{4} (4x + 1) + \frac{7}{4}\]
+         We see \(r_3 \neq 0\) and \(\deg(r_2) \geq \deg(r_3)\), we continue
+      \item Calculate \(r_2 / r_3 = q_4 + r_4 \implies q_4 = \frac{16}{7}x,~r_4 = 1\)
+         \[4x + 1 = \left(\frac{16}{7}x\right) \frac{7}{4} + 1\]
+         We see \(r_4 = 1\) which means that \(a\) and \(b\) are coprime hence \(\gcd(a, b) = 1\), we stop.
+   \end{enumerate}
+\end{example}
+\begin{remark}
+   Lastly we could use the \textit{extended} euclidean algorithm to calculate \(s\) and \(t\) of
+   \[\gcd(a, b) = s \cdot a + t \cdot b\]
+   This is a certifying algorithm, because the \(\gcd\) is the only number that can simultaneously satisfy this equation and divide the inputs.
+   (This fact is used to prove that \(\gcd\) is unique.)
+
+   The algorihtm is particularly usefull when \(a\) and \(b\) are coprime.
+   With that provision, \(x\) is the modular multiplicative inverse of \(a \mod b\), and \(y\) is the modular multiplicative inverse of \(b \mod a\).
+\end{remark}
+
+\begin{definition}[Irreducible/Prime]
+   Given an integral domain \(R\) and \(a \in R \setminus (R^{\times} \cup \{0\})\), then is \(a\)
+
+   \emph{irreducible} if \(\forall b, c \in R: a = b \cdot c\) holds \(b \in R^{\times} \lor b' \in R^{\times}\).
+
+   \emph{prime} if \(\forall b, c \in R: a | b \cdot c \implies a | b \lor a | c\).
+\end{definition}
+\begin{remark}
+   In an integral domain every prime element is irreducible.
+   In a euclidean domain every irreducible element is prime.
+\end{remark}
+
+\begin{proposition}[Prime \(\iff\) Irreducible]\label{pro:irreducible}
+   Given a euclidean domain \(R\), let \(a \in R \setminus (R^\times \cup \{0\})\), the following statements are equivalent.
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\forall b \in R: a \nmid b \implies \exists c \in R: a | b \cdot c - 1\)
+      \item \(a\) is prime.
+      \item \(a\) is irreducible.
+   \end{enumerate}
+\end{proposition}
+\begin{remark}
+   This proposition states, that in a euclidean every irreducible element is prime.
+\end{remark}
+\begin{remark}
+   Looking at the next chapter concerning residue fields we can regard \cref{pro:irreducible} as follows
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item means that \(R_{/aR}\) is a field.
+      \item says that \(R_{/aR}\) is an integral domain.
+      \item means that \(a\) is irreducible.
+   \end{enumerate}
+\end{remark}
+
+\begin{lemma}[Prime Factorization Exists]\label{lem:factorization}
+   Let \(R\) be an euclidean domain and \(a \in R \setminus (R\times \cup \{0\})\).
+   \[\exists m \in \mathbb{N}_{>0},~p_1, \ldots, p_m \in R: a = p_1 \cdot \ldots \cdot p_m\]
+\end{lemma}
+\begin{remark}
+   We define the uniqueness of prime factors such that one representative of \(\{up \mid u \in R^\times\}\) where \(p\) is prime is chosen.
+\end{remark}
+
+\begin{proposition}[Prime Factorization is Unique]
+   Let \(R\) be an euclidean domain and \(P \subset R\) a set of prime elements which contains exactly one representative of all sets \(\{up \mid u \in R^\times\}\).
+   Then it holds that
+   \[\forall a \in R \setminus \{0\} \exists u \in R^\times, p_1, \ldots, p_m \in P: a = u \cdot p_1 \cdot \ldots \cdot p_m\]
+   where \(u\), \(m\) and \(p_1, \ldots, p_m\) are unique.
+\end{proposition}
+
 \subsection{Ideals}
 Ideals generalize certain subsets of the integers, such as the even numbers or the multiples of 3.
 Addition and subtraction of even numbers preserves evenness, and multiplying an even number by any other integer results in another even number; these closure and absorption properties are the defining properties of an ideal.
@@ -1984,63 +2205,6 @@ As a consequence, if \(R\) is Noetherian, then so is \(R_{/I}\) for any ideal \(
    If \(R\) is a PID, then any submodule \(M'\) of a finitely generated free module \(M\) is free, with \(\rk(M') \leq \rk(M)\).
    This fact, which was established for Euclidean domains, only made use of the PID property.
 \end{remark}
-
-\subsection{Euclidean Domains}
-A \emph{euclidean domain} is endowed with a \emph{euclidean function} which allows a suitable generalization of the euclidean algorithm for the division of integers or polynomials which is called \emph{euclidean division}.
-
-\begin{definition}[Euclidean Function]
-   Given an integral domain \(R\).
-   \(f: R \setminus \{0\} \to \mathbb{N}\) is a euclidean function if
-   \[\forall a, b \in R: b \neq 0~\exists q, r \in R: a = qb + r \quad\text{where}\quad r = 0 \lor f(r) < f(b)\]
-\end{definition}
-\begin{remark}
-   It will be handy require an euclidean value to fullfill
-   \begin{equation}\label{eq:extended_euclidean}
-      \forall a,b \in R \setminus \{0\}: f(a) \leq f(ab)
-   \end{equation}
-   this means that
-   \[f(a) = f(ab) \iff b \in R^{\times}\]
-   \(\impliedby\) holds because
-   \[(ab)b^{-1} = a \implies f(ab) \leq f(a) \land f(a) \leq f(ab) \implies f(a) = f(ab)\]
-   and \(\implies\) holds because
-   \[a = qab + r~\text{with}~r=0 \lor f(r) = f(a(1-qb)) < f(ab) = f(a)\]
-   is a contradiction so it must hold that \(r = 0 \implies q \in R^{\times}\).
-
-   We can always assume that an euclidean value suffices \cref{eq:extended_euclidean}, because given any euclidean value \(f_0\)
-   \[f: R \setminus \{0\} \to \mathbb{N} \quad\text{where}\quad a \mapsto \min\{f_0(ab) \mid b \in R \setminus \{0\}\}\]
-   defines a euclidean value that fullfills (\ref{eq:extended_euclidean}).
-\end{remark}
-
-\begin{definition}[Euclidean Domain]
-   An integral domain \(R\) equipped with an euclidean function.
-\end{definition}
-
-\begin{proposition}[Euclidean Function of Whole Numbers]
-   The absolute value \(|\ldots|\) on \(\mathbb{Z}\) is a euclidean value.
-   \[|a| := \begin{cases} a & \text{if}~a \geq 0\\ -a & \text{if}~a < 0\end{cases}\]
-\end{proposition}
-
-% TODO: move to foundations
-\begin{definition}[Polynomial]
-   Given a field \(K\) and a family of coefficients \((a_i)_{i \in \mathbb{N}} \in K\), where \(a_n \neq 0\) and \(\forall i > n: a_i = 0\).
-
-   A polynomial \(p(x)\) of degree \(n \in \mathbb{N}\) is
-   \[p(x) := \sum_{k=0}^n a_k \cdot x^k = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0\]
-\end{definition}
-\begin{remark}
-   A polynomial of degree \(d\) is \textit{normalized} if \(a_d = 1\).
-\end{remark}
-
-\begin{definition}[Rational Function]
-   Given two polynomials \(p(x), q(x)\)
-   \[f(x) := \frac{p(x)}{q(x)}\]
-\end{definition}
-
-\begin{proposition}[Euclidean Function of Polynomial Rings]
-   The degree of a polynomial on \(K[x]\) is an euclidean value.
-   For \(f \in K[x]: a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0\)
-   \[\deg(f) = n\]
-\end{proposition}
 
 \section{Fields}
 Rings don't have multiplicative inverses, therefor we define fields.
@@ -4380,198 +4544,6 @@ This statement holds more generally for real vector spaces and is the \emph{Mazu
    Let \(V\) be a finite-dimensional, unitary vector space and \(f \in U(V)\).
    There exists an orthonormal basis consisting of eigenvectors of \(f\) and the corresponding eigenvalues have \(|\lambda| = 1\).
 \end{proposition}
-
-\section{Factorization}
-\begin{proposition}
-   Let \(a \in R \setminus (R^\times \cup \{0\})\) of an integral domain \(R\).
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\forall b \in R: a\nmid b \exists c \in R: a | cb -1\)
-      \item \(a\) is prime.
-      \item \(a\) is irreducible.
-   \end{enumerate}
-
-   If \(R\) is an integral domain, then holds \((i) \implies (ii) \implies (iii)\).
-
-   If \(R\) is a principal ideal domain, then holds \((i) \iff (ii) \iff (iii)\).
-\end{proposition}
-
-\begin{definition}[Divisor]
-   Given an integral domain \(R\), \(a \in R\) is a divisor of \(x \in R\) iff \(a | x\).
-\end{definition}
-
-\begin{definition}[Proper Divisor]
-   Given an integral domain \(R\), \(a \in R \setminus R^\times\) is a \emph{proper} divisor of \(x \in R\) iff \(a | x\) and \(a \neq ux\) with \(u \in R^\times\).
-\end{definition}
-
-\begin{lemma}
-   Let \(R\) be an integral domain satisfying the ascending chain condition on principal ideals.
-
-   Every \(a \in R \setminus R^\times: a \neq 0\) possesses an irreducible divisor.
-\end{lemma}
-\begin{remark}
-   The ascending chain condition on principal ideals is satisfied if there is no infinite strictly ascending chain of principal ideals in the ring.
-   \[a_1R \subset a_2R \subset a_3R \subset \ldots\]
-   Any principal ideal domain satisfies this property for instance.
-\end{remark}
-
-\begin{proposition}
-   Let \(R\) be an integral domain satisfying the ascending chain condition on principal ideals.
-
-   Every \(a \in R \setminus R^\times: a \neq 0\) may be expressed as a finite product of irreducible elements of \(R\).
-\end{proposition}
-
-\subsection{Euclidean Division}
-\begin{definition}[Greatest Common Denominator (GCD)]
-   Given an integral domain \(R\) and \(a, b \in R\), \(d \in R\) is the greatest common denominator of \(a\) and \(b\) if
-   \[d|a \land d|b \quad\text{and}\quad \forall r \in R: r|a \land r|b \implies r|d\]
-\end{definition}
-\begin{remark}
-   If \(1 \in R\) is the greatest common denominator of \(a\) and \(b\) then are \(a\) and \(b\) coprime.
-\end{remark}
-
-\begin{proposition}[GCD is Unique]\label{pro:factor_unique}
-   Given a euclidean domain \(R\) and \(a, b \in R\)
-   \[\exists s, t, u, v \in R: (s \cdot a + t \cdot b) \cdot u = a~\text{and}~(s \cdot a + t \cdot b) \cdot v = b\]
-   where \(d := s \cdot a + t \cdot b\) is unique except for multiplication with units.
-\end{proposition}
-\begin{remark}
-   In this proposition holds that \(du = a \land dv = b \implies d|a \land d|b\).
-   Since \(d\) is unique except for multiplication with units follows that all common divisors of \(a\) and \(b\) also divide \(d\), \(\forall r \in R: r|a \land r|b \implies r|d\), hence \(d\) is the GCD of \(a\) and \(b\).
-\end{remark}
-
-\begin{definition}[Euclidean Algorithm]
-   Given a euclidean domain \(R\), let \(a, b \in R: b < a\), we define \(\gcd(a, b)\) to calculate the greatest common denominator of \(a\) and \(b\).
-   \begin{enumerate}
-      \item If \(a < b\) exchange \(a\) and \(b\).
-      \item Divide \(a\) and \(b\) and get the remainder \(r\).\\
-         If \(r = 0\) then is \(b = \gcd(a, b)\).
-      \item Replace \(a\) by \(b\) and \(b\) by \(r\)\\
-         If \(f(a) \geq f(b)\) return to the previous step.
-   \end{enumerate}
-\end{definition}
-
-\begin{example}[GCD of Whole Numbers]
-   Given \(a = 210\) and \(b = 45\)
-   \begin{enumerate}
-      \item Calculate \(a / b = q_0 + r_0 \implies q_0 = 4,~r_0 = 30\)
-         \[210 = 4 \cdot 45 + 30\]
-         We see \(r_0 \neq 0\) and \(|b| \geq |r_0|\), we continue
-      \item Calculate \(b / r_0 = q_1 + r_1 \implies q_1 = 1,~r_1 = 15\)
-         \[45 = 1 \cdot 30 + 15\]
-         We see \(r_1 \neq 0\) and \(|r_0| \geq |r_1|\), we continue
-      \item Calculate \(r_0 / r_1 = q_2 + r_2 \implies q_2 = 2,~r_2 = 0\)
-         \[30 = 2 \cdot 15 + 0\]
-         We see \(r_2 = 0\) hence we're finished and \(\gcd(a, b) = 15\).
-   \end{enumerate}
-\end{example}
-
-\begin{example}[GCD of Polynomials]
-   Given the polynomials \(a, b \in \mathbb{Q}[x]\)
-   \[a(x) := 6x^4 + 3x^3 + x^2 + 1 \quad\text{and}\quad b(x) := 2x^2 + x + 1\]
-   We use the euclidean algorithm.
-
-   \begin{enumerate}
-      \item Calculate \(a / b = q_0 + r_0 \implies q_0 = 3x^2,~r_0 = -2x^2 + 1\)
-         \[6x^4 + 3x^3 + x^2 + 1 = 3x^2 (2x^2 + x + 1) + (-2x^2 + 1)\]
-         We see \(r_0 \neq 0\) and \(\deg(b) \geq \deg(r_0)\), we continue
-      \item Calculate \(b / r_0 = q_1 + r_1 \implies q_1 = -1,~r_1 = x+2\)
-         \[2x^2 + x + 1 = (-1) (-2x^2 + 1) + (x + 2)\]
-         We see \(r_1 \neq 0\) and \(\deg(r_0) \geq \deg(r_1)\), we continue
-      \item Calculate \(r_0 / r_1 = q_2 + r_2 \implies q_2 = -2x,~r_2 = 4x+1\)
-         \[-2x^2 + 1 = (-2x) (x+2) + (4x + 1)\]
-         We see \(r_2 \neq 0\) and \(\deg(r_1) \geq \deg(r_2)\), we continue
-      \item Calculate \(r_1 / r_2 = q_3 + r_3 \implies q_3 = \frac{1}{4},~r_3 = \frac{7}{4}\)
-         \[x + 2 = \frac{1}{4} (4x + 1) + \frac{7}{4}\]
-         We see \(r_3 \neq 0\) and \(\deg(r_2) \geq \deg(r_3)\), we continue
-      \item Calculate \(r_2 / r_3 = q_4 + r_4 \implies q_4 = \frac{16}{7}x,~r_4 = 1\)
-         \[4x + 1 = \left(\frac{16}{7}x\right) \frac{7}{4} + 1\]
-         We see \(r_4 = 1\) which means that \(a\) and \(b\) are coprime hence \(\gcd(a, b) = 1\), we stop.
-   \end{enumerate}
-\end{example}
-\begin{remark}
-   Lastly we could use the \textit{extended} euclidean algorithm to calculate \(s\) and \(t\) of
-   \[\gcd(a, b) = s \cdot a + t \cdot b\]
-   This is a certifying algorithm, because the \(\gcd\) is the only number that can simultaneously satisfy this equation and divide the inputs.
-   (This fact is used to prove that \(\gcd\) is unique.)
-
-   The algorihtm is particularly usefull when \(a\) and \(b\) are coprime.
-   With that provision, \(x\) is the modular multiplicative inverse of \(a \mod b\), and \(y\) is the modular multiplicative inverse of \(b \mod a\).
-\end{remark}
-
-\begin{definition}[Irreducible/Prime]
-   Given an integral domain \(R\) and \(a \in R \setminus (R^{\times} \cup \{0\})\), then is \(a\)
-
-   \emph{irreducible} if \(\forall b, c \in R: a = b \cdot c\) holds \(b \in R^{\times} \lor b' \in R^{\times}\).
-
-   \emph{prime} if \(\forall b, c \in R: a | b \cdot c \implies a | b \lor a | c\).
-\end{definition}
-\begin{remark}
-   In an integral domain every prime element is irreducible.
-   In a euclidean domain every irreducible element is prime.
-\end{remark}
-
-\begin{proposition}[Prime \(\iff\) Irreducible]\label{pro:irreducible}
-   Given a euclidean domain \(R\), let \(a \in R \setminus (R^\times \cup \{0\})\), the following statements are equivalent.
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\forall b \in R: a \nmid b \implies \exists c \in R: a | b \cdot c - 1\)
-      \item \(a\) is prime.
-      \item \(a\) is irreducible.
-   \end{enumerate}
-\end{proposition}
-\begin{remark}
-   Looking at the next chapter concerning residue fields we can regard \cref{pro:irreducible} as follows
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item means that \(R_{/aR}\) is a field.
-      \item says that \(R_{/aR}\) is an integral domain.
-      \item means that \(a\) is irreducible.
-   \end{enumerate}
-\end{remark}
-
-\begin{lemma}[Prime Factorization Exists]\label{lem:factorization}
-   Let \(R\) be an euclidean domain and \(a \in R \setminus (R\times \cup \{0\})\).
-   \[\exists m \in \mathbb{N}_{>0},~p_1, \ldots, p_m \in R: a = p_1 \cdot \ldots \cdot p_m\]
-\end{lemma}
-\begin{remark}
-   We define the uniqueness of prime factors such that one representative of \(\{up \mid u \in R^\times\}\) where \(p\) is prime is chosen.
-\end{remark}
-% TODO
-\begin{proof}
-   Let \(f\) be an euclidean value for which \cref{eq:extended_euclidean} holds.
-   We prove this by induction over \(f(a)\)
-
-   \textit{IB:} If \(a\) is irreducible it follows that \(m = 1\) and \(p_1 = a\).
-
-   \textit{IH:} For some \(a \in R\) holds \(\exists m \in \mathbb{N}_{>0},~p_1, \ldots, p_m \in R: a = p_1 \cdot \ldots \cdot p_m\)
-
-   \textit{IS:} Assume IH holds.
-   Let \(b, b' \in R: a = bb'\).
-   \[b, b' \not\in R^\times \implies f(b) < f(a)~\text{and}~f(b') < f(a)\]
-   According to IH is \(b = p_1 \cdot \ldots \cdot p_m\) and \(b' = p'_1 \cdot \ldots \cdot p'_{m'}\) for some \(m, m' \in \mathbb{N}_{>0}\).
-
-   So it follows that \(a = p_1 \cdot \ldots \cdot p_m \cdot p'_1 \cdot \ldots \cdot p'_{m'}\).
-\end{proof}
-
-\begin{proposition}[Prime Factorization is Unique]
-   Let \(R\) be an euclidean domain and \(P \subset R\) a set of prime elements which contains exactly one representative of all sets \(\{up \mid u \in R^\times\}\).
-   Then it holds that
-   \[\forall a \in R \setminus \{0\} \exists u \in R^\times, p_1, \ldots, p_m \in P: a = u \cdot p_1 \cdot \ldots \cdot p_m\]
-   where \(u\), \(m\) and \(p_1, \ldots, p_m\) are unique.
-\end{proposition}
-% TODO
-\begin{proof}
-   That such a factorization exists follows from \cref{lem:factorization} and the definition of \(P\).
-   We prove the uniqueness by induction over the smallest possible number of prime factors.
-
-   \textit{IB:} \(a \in R^\times\) is trivial.
-
-   \textit{IS:} Let \(a = u \cdot p_1 \cdot \ldots \cdot p_{m + 1}\) be a factorization with the smallest number of prime factors and \(a = u' \cdot p'_1 \cdot \ldots \cdot p'_{m' + 1}\).
-   \[p_{m+1} | a \implies p_{m+1} | p_i~\text{for}~1 \leq i \leq m' + 1\]
-   According to the definition of \(P\) it follows that \(p_{m+1} | p'_i \implies p_{m+1} = p'_i\).
-   This implies that
-   \[u \cdot p_1 \cdot \ldots \cdot p_m = u' \cdot p'_1 \cdot \ldots \cdot p'_{i-1} \cdot p'_{i+1} \cdot \ldots \cdot p'_{m'+1}\]
-   According to IH we have \(u' = u\) and \(m' = m\) and the primefactors are unique except for their order.
-\end{proof}
-
 
 \section{System of Linear Equations}
 \begin{definition}[System of Linear Equations]\label{def:sys_lin_eq}
