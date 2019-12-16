@@ -789,6 +789,337 @@ Now we describe this algorithmically in the following
    where \(n_1 + \ldots + n_k = n\).
 \end{corollary}
 
+\subsection{System of Linear Equations}
+\begin{definition}[System of Linear Equations]\label{def:sys_lin_eq}
+   Consists of \(m\) equations and \(n\) variables \((x_1, \ldots, x_n)\).
+   \[a_{11} x_1 + a_{12} x_2 + \ldots + a_{1n} x_n = b_1\]
+   \[a_{21} x_1 + a_{22} x_2 + \ldots + a_{2n} x_n = b_2\]
+   \[\vdots\]
+   \[a_{m1} x_1 + a_{m2} x_2 + \ldots + a_{mn} x_n = b_m\]
+\end{definition}
+
+\begin{definition}[Homogenous System of Linear Equations]
+   A system of linear equations where
+   \[b_i = 0\]
+\end{definition}
+
+\subsubsection{Matrix Representation}
+The \textit{i}-th equation of a system of linear equations can be written as
+\[\left(\displaystyle\sum_{j=1}^n a_{ij} x_j = b_{ij}\right)_{1 \leq i \leq m}\]
+which reveals the structure of a matrix multiplication (\ref{def:matrix_mult})
+\[A_{m,n} \cdot x_{1,n} = b_{1,m}\]
+\[\begin{pmatrix} a_{11} x_1 + & \ldots & + a_{1n} x_n \\ \vdots & \ddots & \vdots \\ a_{m1} x_1 + & \ldots & + a_{mn} x_n\end{pmatrix} = \begin{pmatrix} b_1 \\ \vdots \\ b_m \end{pmatrix}\]
+
+\begin{definition}[Coefficient Matrix]
+   A matrix consisting of the coefficients of a system equations
+   \[A_{m,n} := \begin{pmatrix} a_{11} & \cdots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{m1} & \cdots & a_{mn}\end{pmatrix}\]
+\end{definition}
+
+\begin{definition}[Extended Coefficient Matrix]\label{def:extended_coefficient_matrix}
+   A coefficient matrix with the column vector of the solutions
+   \[(A, b) := \begin{pmatrix} a_{11} & \cdots & a_{1n} & b_1 \\ \vdots & \ddots & \vdots & \vdots \\ a_{m1} & \cdots & a_{mn} & b_m\end{pmatrix}\]
+\end{definition}
+
+\begin{definition}[Solution Set]
+   The solutions of a system of linear equations (\ref{def:sys_lin_eq}) is the set
+   \[L(A, b) := \{x \in K^n \mid A \cdot x = b\} \subset K^n\]
+\end{definition}
+\begin{remark}
+   Remind you that \(\ker(A) = \ker(f)\).
+   In a homogenous system of linear equations, the solution set is the set of all vectors, which multiplied with \(A\) result in the zero vector
+   This set is equivalent to all the elements which \(f\) maps mapped to 0.
+   This means that the \(L(A, b) = \ker(A) = \ker(f)\).
+
+   If \(L(A, b) = \emptyset \implies b \not\in \im(f)\).
+   \[L(A, b) \neq \emptyset \implies \exists x \in L(A, b) \implies L(A, b) = x + \ker(A)\]
+
+   Also important is that \(\ker(A)\) is again a vector subspace.
+   \[A \cdot x = b \implies A \cdot (x - x') = A \cdot x - A \cdot x' = b - b = 0 \implies x - x' \in \ker(A) \implies A \cdot x = A \cdot x' = b\]
+   because both \(x\) and \(x'\) are solutions to the same equation system are both contained in the solution set, which is a vector subspace.
+\end{remark}
+
+\subsubsection{Elementary Row Transformations}
+\begin{definition}[Single-Entry Matrix]
+   A quadratic matrix whose entry in the \textit{i}-th row and the \textit{j}-th column is 1 and all other entries are 0.
+   \[E_{ij} := (\delta_{ii'} \cdot \delta_{jj'})_{\substack{1 \leq i' \leq n \\ 1 \leq j' \leq m}}\]
+\end{definition}
+\begin{remark}
+   This means that the entry \(a_{i'j'}\) of the matrix \(E_{ij}\) is given by \(\delta_{ii'} \cdot \delta_{jj'}\) so we see that this product is 1 if and only if \(i = i' \land j = j'\) otherwise it is 0.
+   This means that exactly one entry of \(E_{ij}\) is nonzero, namely the one at row \(i\) and column \(j\).
+\end{remark}
+
+\begin{definition}[Elementary Row Transformations]\label{def:elementary_row_transformation}
+   Given \(A \in \Mat_{m, n}(K)\) and \(\lambda \in K^*\), there are three transformations
+
+   \(Z_1\): Add the \(\lambda\) multiple of \(A_{j,n}\) to the \textit{i}-th row of \(A\).
+
+   \(Z_2\): Multiply the \textit{i}-th row of \(A\) with \(\lambda\).
+
+   \(Z_3\): Switch the \textit{i}-th and the \textit{j}-th row of \(A\).
+\end{definition}
+
+\begin{definition}[Elementary Matrix]\label{def:elementary_matrix}
+   A matrix \(\in \GL_m(K)\) which differs from the identity matrix by one single elementary row operation
+   \[\text{For }Z_1: Q_{ij}(\lambda) := I_m + \lambda E_{ij} = \bordermatrix{
+      ~ &   &   &   &   &   &   \cr
+        & 1 & 0 & 0 & 0 & 0 & 0 \cr
+        & 0 & \ddots & 0 & 0 & 0 & 0 \cr
+      i & 0 & 0 & 1 & 0 & \lambda & 0 \cr
+        & 0 & 0 & 0 & 1 & 0 & 0 \cr
+      j & 0 & 0 & 0 & 0 & 1 & 0 \cr
+        & 0 & 0 & 0 & 0 & 0 & 1
+   }\]
+   \[\text{For }Z_2: S_i(\lambda) := I_m + (\lambda - 1) E_{ii} = \bordermatrix{
+      ~ &   &   &   &   &   &   \cr
+        & 1 & 0 & 0 & 0 & 0 & 0 \cr
+        & 0 & \ddots & 0 & 0 & 0 & 0 \cr
+        & 0 & 0 & 1 & 0 & 0 & 0 \cr
+      i & 0 & 0 & 0 & \lambda & 0 & 0 \cr
+        & 0 & 0 & 0 & 0 & 1 & 0 \cr
+        & 0 & 0 & 0 & 0 & 0 & 1
+   }\]
+   \[\text{For }Z_3: P_{ji} := \bordermatrix{
+      ~ &   &   &   &   &   &   \cr
+        & 1 & 0 & 0 & 0 & 0 & 0 \cr
+        & 0 & \ddots & 0 & 0 & 0 & 0 \cr
+      i & 0 & 0 & 0 & 0 & 1 & 0 \cr
+        & 0 & 0 & 0 & 1 & 0 & 0 \cr
+      j & 0 & 0 & 1 & 0 & 0 & 0 \cr
+        & 0 & 0 & 0 & 0 & 0 & 1
+   }\]
+\end{definition}
+\begin{remark}
+   To add the \(\lambda\) multiple of the \textit{j}-th row of a matrix \(A\) to its \textit{i}-th row for example we would
+   \[A' = Q_{ij}(\lambda) \cdot A\]
+   Which is exactly the same as \(Z_1\) of \cref{def:elementary_row_transformation}.
+   If we would swap the matrix multiplication as follows
+   \[A' = A \cdot Q_{ij}(\lambda)\]
+   we didn't do a row- but rather a \textit{column} transformation
+
+   In other words: lefthand multiplication results in a row transformation whereas righthand multiplication with an elementary matrix results a column transformation. (Keep in mind that for a righthand multiplication with \(P_{ji}\) its indices are swapped!)
+\end{remark}
+\begin{example}
+   Let
+   \[A = \begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 2 & -1 \\
+         1 & 5 & 0 \\
+      \end{pmatrix}
+   \]
+   we would bring \(A\) in row echelon as follows
+   \[\begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 2 & -1 \\
+         1 & 5 & 0 \\
+      \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 2 & -1 \\
+         0 & 4 & -2 \\
+      \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 2 & -1 \\
+         0 & 0 & 0 \\
+      \end{pmatrix}
+   \]
+   The first step was \(r_3 - r_1\) so we can construct an elementary matrix where \(a_{1,3} = -1\)
+   \[\begin{pmatrix}
+         1  & 0 & 0 \\
+         0  & 1 & 0 \\
+         -1 & 0 & 1 \\
+      \end{pmatrix} \cdot \begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 2 & -1 \\
+         1 & 5 & 0 \\
+      \end{pmatrix} = \begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 2 & -1 \\
+         0 & 4 & -2 \\
+      \end{pmatrix}
+   \]
+   then we do \(r_3 - 2r_2\) so we can construct an elementary matrix where \(a_{2,3} = -2\)
+   \[\begin{pmatrix}
+         1 & 0  & 0 \\
+         0 & 1  & 0 \\
+         0 & -2 & 1 \\
+     \end{pmatrix} \cdot
+         \begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 2 & -1 \\
+         0 & 4 & -2 \\
+      \end{pmatrix} = \begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 2 & -1 \\
+         0 & 0 & 0 \\
+      \end{pmatrix}
+   \]
+   and so we see that
+   \[\begin{pmatrix}
+         1  & 0 & 0 \\
+         0  & 1 & 0 \\
+         -1 & 0 & 1 \\
+      \end{pmatrix} \cdot \begin{pmatrix}
+         1 & 0  & 0 \\
+         0 & 1  & 0 \\
+         0 & -2 & 1 \\
+     \end{pmatrix}  \cdot \begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 2 & -1 \\
+         1 & 5 & 0 \\
+      \end{pmatrix} = \begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 2 & -1 \\
+         0 & 0 & 0 \\
+      \end{pmatrix}
+   \]
+   now we that \(A\) is in row echelon form we can also determine its kernel when we regard it as homogenous system of linear equations
+   \[0z = 0\]
+   \[2y - z = 0 \implies y = \frac{z}{2}\]
+   \[x + y + 2z = 0 \implies x + \frac{z}{2} + 2z = 0 \implies x = -\frac{5z}{2}\]
+
+   \[\ker(A) = \left\{\left(-\frac{5z}{2}, \frac{z}{2}, z\right): z \in \mathbb{Q}\right\}\]
+\end{example}
+
+\subsubsection{Gaussian Elimination}
+\begin{definition}[Row Echelon Form]\label{def:row_echelon}
+   \(A \in \Mat_{m,n}(K)\) is in row-echelon form if,
+
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\exists r \in \mathbb{N}: 0 \leq r \leq m\) where the rows 1 to \(r\) are non-zero and \(r+1\) to \(m\) are.
+      \item \(\forall 1 \leq i \leq r\) we regard the column index \(j_i := \min\{j \mid a_{ij} \neq 0\}\), it has to holds that
+         \[1 \leq j_1 < j_2 < \ldots < j_r \leq n\]
+   \end{enumerate}
+\end{definition}
+\begin{remark}
+   We call the column indices \textit{pivots}.
+\end{remark}
+\begin{remark}
+   We can also define a measurement of how far \(A\) is in row echelon form.
+   \[s(A) := s \in \mathbb{N}_{\leq m}\]
+   The first \(s\) rows of \(A\) are in row echelon form.
+   If \(1 \leq s < m \implies r = s\) and \(\forall s < i \leq m, 1 \leq j \leq p_s: a_{ij} = 0\).
+\end{remark}
+
+\begin{definition}[Rank of a Matrix]\label{def:mat_rank}
+   Let \(A \in \Mat_{m,n}(K)\) be a matrix in row echelon form with \(r\) pivots.
+   \[\rk(A) := r\]
+\end{definition}
+\begin{remark}
+   Differently put is the rank of a matrix its number of linear independent columns.
+\end{remark}
+
+\begin{theorem}[Gauss Elimination]
+   Every matrix \(A\) can be transformed through finite many elementary row transformations into a matrix \(\tilde{A}\) in row echelon form.
+\end{theorem}
+% TODO
+\begin{proof}
+   Let \(A \neq 0_{m,n} \in Mat_{m,n}(K)\)
+
+   We choose the collumn with the smallest index \(j_1\).
+   \[j_1 = min\{j: \exists i \text{ with } a_{ij} \neq 0\}\]
+
+   If \(a_{1j_1} \neq 0\) we can choose it, otherwise we choose an \(a_{i_1j_1} \neq 0\) and use \(Z_3\) to switch the first row with the row \(i_1\)
+   This way \(i_1\) is already the first row of \(\tilde{A}\) with \(\tilde{a}_{1j_1} = a_{i_1j_1}\).
+
+   Through transformations of \(Z_1\) we can set all entries 0 below \(\tilde{a}_{1j_1}\).
+   If \(a\) is such an entry \(a + \lambda \tilde{a}_{1j_1} = 0\) must hold, therefore we choose \(\lambda = -\frac{a}{\tilde{a}_{1j_1}}\) for \(Z_1\)
+
+   This gives us the matrix
+   \[\tilde{A}_1 = \begin{pmatrix}
+      0 & \cdots & 0 & \tilde{a}_{1j_1} & * & \cdots & * \\
+      \vdots &   & \vdots & 0 & - & - & - \\
+      \vdots &   & \vdots & \vdots & - & A_2 & - \\
+      0 & \cdots & 0 & 0 & - & - & - \\
+   \end{pmatrix}\]
+
+   Where the \(*\) are other entries.
+   The matrix \(A_2\) has \(m - 1\) rows and \(n - j_1\) columns.
+
+   In the second step we repeat it with \(A_2\).
+   We choose again the column with the smallest index, in the case of \(A_2\) it must be \(j_2 > j_1\) so that we get the next entry \(\tilde{a}_{2j_2}\).
+
+   The necessary row transformations can be applied to all rows with indexes \(2 \leq i \leq m\) without changing columns 1 to \(j_1\) since there are only 0.
+   From here on we repeat this until we have \(\tilde{A}\).
+
+   This process must come to an end because the number of rows and columns of the matrices \(A_k\) decline or \(A_k = 0_{mn}\) which also marks the end.
+
+   \[\tilde{A} = \begin{pmatrix}
+      0 & \cdots & 0 & \tilde{a}_{1j_1} & * & \cdots & * \\
+      \vdots &   & \vdots & 0 & \tilde{a}_{2j_2} & * & * \\
+      \vdots &   & \vdots & \vdots & \ddots & \ddots & \tilde{a}_{rj_r} \\
+      0 & \cdots & 0 & 0 & \cdots & \cdots & 0 \\
+   \end{pmatrix}\]
+\end{proof}
+\begin{example}
+   Given the following system of linear equations
+   \[x - y - 2z = 1\]
+   \[-2x - y + z = 0\]
+   \[x + 2y + z = -1\]
+   we have
+   \[A = \begin{pmatrix}
+         1  & -1 & -2 \\
+         -2 & -1 &  1 \\
+         1  &  2 &  1 \\
+      \end{pmatrix}
+      b = \begin{pmatrix} 1 \\ 0 \\ -1\end{pmatrix} \in \Mat_{m,n}(\mathbb{Q})
+   \]
+   we write it in the extended coefficient matrix and bring it in row echelon form with the gauss elimination
+   \[\begin{pmatrix}
+         1  & -1 & -2 &  1 \\
+         -2 & -1 &  1 &  0 \\
+         1  &  2 &  1 & -1 \\
+   \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+         1  & -1 & -2 &  1 \\
+         0 & -3 &  -3 &  2 \\
+         1  &  2 &  1 & -1 \\
+   \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+         1 & -1 & -2 &  1 \\
+         0 & -3 & -3 &  2 \\
+         0 &  3 &  3 & -2 \\
+   \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+         1 & -1 & -2 & 1 \\
+         0 & -3 & -3 & 2 \\
+         0 &  0 &  0 & 0 \\
+   \end{pmatrix}\]
+   First \(r_2 + 2 r_1\), then \(r_3 - r_1\) and last \(r_3 + r_2\).
+   Now we rewrite this row echelon form back to a system of equations
+   \[x - y - 2z = 1\]
+   \[-3y - 3z = 2\]
+   \[0x + 0y + 0z = 0\]
+   if there is a 0 row there are two possible cases
+   \[\forall i: b_i = 0 \implies L(A, b) = K^n\]
+   \[\exists i > r: b_i \neq 0 \implies L(A, b) = \emptyset\]
+   we see that the last equation is true for any value of any of the variables.
+   We use this to express the solution set of those equations regarding an arbitrary \(z\)
+   \[-3y - 3z = 2 \implies y = -\frac{2 + 3z}{3}\]
+   \[x - \left(-\frac{2 + 3z}{3}\right) - 2z = 1 \implies x + \frac{2 + 3z - 6z}{3} = 1 \implies x = 1 - \frac{2 - 3z}{3}\]
+
+   \[L(A, b) = \left\{\left(1 - \frac{2 - 3z}{3}, -\frac{2 + 3z}{3}, z\right): z \in \mathbb{Q}\right\}\]
+\end{example}
+
+\begin{definition}[Reduced Row Echelon Form]
+   A matrix \(A \in \Mat_{m,n}\) in row echelon form is in \textit{reduced} row echelon form if
+   \[\forall 1 \leq i \leq r: a_{i, j_i} = 1\]
+   \[\forall 1 \leq i < j \leq r: a_{i, j_j} = 0\]
+\end{definition}
+\begin{example}
+   \[\begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 2 & -1 \\
+         0 & 0 & 0 \\
+      \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+         1 & 1 &  2 \\
+         0 & 1 & -\frac{1}{2} \\
+         0 & 0 & 0 \\
+      \end{pmatrix} \rightsquigarrow \begin{pmatrix}
+         1 & 0 &  \frac{5}{2} \\
+         0 & 1 & -\frac{1}{2} \\
+         0 & 0 & 0 \\
+      \end{pmatrix}
+   \]
+   \[x = \frac{5}{2}z\]
+   \[y = -\frac{1}{2}z\]
+\end{example}
+
 \newpage
 
 \section{Polynomials}
@@ -835,6 +1166,16 @@ Now we describe this algorithmically in the following
 \begin{definition}[Group Table]
    Given a group \(G = \{g_1 := e, \ldots, g_n\}\) its \emph{group table} is the \(n \times n\) matrix whose \(i,j\) entry is the group element \(g_ig_j\).
 \end{definition}
+\begin{example}[\(S_3\) Group Table]
+   \[\begin{matrix}
+         \id  & (12)  & (13)  & (23)  & (123) & (132) \\
+         (12) & \id   & (132) & (123) & (23)  & (13)  \\
+         (13) & (123) & \id   & (132) & (12)  & (23)  \\
+         (23) & (132) & (123) & \id   & (13)  & (12)  \\
+         (123) & (13) & (23) & (12)   & (132) & \id   \\
+         (132) & (23) & (12) & (13)   & \id   & (123) \\
+   \end{matrix}\]
+\end{example}
 
 \begin{definition}[Order of Groups]
    The cardinality of the set \(G\).
@@ -843,15 +1184,6 @@ Now we describe this algorithmically in the following
 \begin{definition}[Finite Group]
    A group \(G\) where \(|G| = n\).
 \end{definition}
-
-\begin{definition}[Order of Group-Elements]
-   Given a group \(G\) and \(g \in G\)
-   \[|g| := n\]
-   where \(n \in \mathbb{N}\) is the smallest number s.t. \(g^n = e_G\).
-\end{definition}
-\begin{remark}[Notation]
-   If no positive power of \(g\) is the identity, we write \(|g| = \infty\).
-\end{remark}
 
 \begin{definition}[Abelian Group]\label{def:abel_group}
    A group whose operation is commutative: \(\forall a, b \in G: ab = ba\).
@@ -864,6 +1196,341 @@ Now we describe this algorithmically in the following
    There exists unique \(r, s \in \mathbb{N}\) and unique \((a_i)_{i \leq r} \subset \mathbb{Z}\) where \(\forall i \leq r: a_i | a_{i+1}\) such that
    \[G \cong \bigoplus_{i = 1}^r \mathbb{Z}_{/a_i\mathbb{Z}} \oplus \mathbb{Z}^s\]
 \end{theorem}
+
+\subsection{Important Examples}
+\subsubsection{Whole Numbers}
+\begin{proposition}[Abelian Group \(\mathbb{Z}\)]\label{pro:z_abelian}
+   \(\mathbb{Z}\) with
+   \[\dotplus: \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z} \quad\text{where}\quad \big([(m, n)], [(m', n')]\big) \mapsto [(m + m', n + n')]\]
+   is an abelian group.
+\end{proposition}
+\begin{proof}
+   Let \(x := [(x_1, x_2)]\), \(y := [(y_1, y_2)]\) and \(z := [(z_1, z_2)]\) where \(x_1, x_2, y_1, y_2, z_1, z_2 \in \mathbb{N}\).
+
+   \(\dotplus\) is associative and commutative because they are induced from \(+: \mathbb{N} \times \mathbb{N} \to \mathbb{N}\).
+   \begin{equation*}
+      \begin{split}
+         x \dotplus (y \dotplus z) & = [(x_1, x_2)] \dotplus \big([(y_1, y_2)] \dotplus [(z_1, z_2)]\big) = [(x_1, x_2)] \dotplus [(y_1 + z_1, y_2 + z_2)]\\
+                                   & = [(x_1 + (y_1 + z_1), x_2 + (y_2 + z_2))] = [((x_1 + y_1) + z_1, (x_2 + y_2) + z_2)]\\
+                                   & = [(x_1 + y_1, x_2 + y_2)] \dotplus [(z_1, z_2)] = \big([(x_1, x_2)] \dotplus [(y_1, y_2)]\big) \dotplus [(z_1, z_2)] = (x \dotplus y) \dotplus z
+      \end{split}
+   \end{equation*}
+
+   \begin{equation*}
+      \begin{split}
+         x \dotplus y & = [(x_1, x_2)] \dotplus [(y_1, y_2)] = [(x_1 + y_1, x_2 + y_2)]\\
+                      & = [(y_1 + x_1, y_2 + x_2)] = [(y_1, y_2)] \dotplus [(x_1, x_2)] = y \dotplus x
+      \end{split}
+   \end{equation*}
+
+   \(0 := [(0, 0)]\) is the neutral element.
+   \[x \dotplus 0 = [(x_1, x_2)] \dotplus [(0, 0)] = [(x_1 + 0, x_2 + 0)] = [(x_1, x_2)] = x\]
+
+   For \(x := [(x_1, x_2)]\) is \(x^{-1} := [(x_2, x_1)]\) the inverse since
+   \[x \dotplus x^{-1} = [(x_1, x_2)] \dotplus [(x_2, x_1)] = [(x_1 + x_2, x_2 + x_1)]\]
+   but since
+   \[x_1 + x_2 = x_2 + x_1 \implies (x_1, x_2) \sim (x_2, x_1) \implies (x_1 + x_2, x_2 + x_1) \in [(0, 0)]\]
+   hence \([(x_1 + x_2, x_2 + x_1)] = [(0, 0)] \implies x \dotplus x^{-1} = 0\).
+\end{proof}
+% 
+%    \begin{definition}[Whole Numbers]
+%       Given \(\sim\) on \(\mathbb{N} \times \mathbb{N}\) defined through
+%       \[(m_1, n_1) \sim (m_2, n_2) :\iff m_1 + n_2 = m_2 + n_1\]
+%       \[\mathbb{Z} := (\mathbb{N} \times \mathbb{N})/\sim\]
+%    \end{definition}
+%    \begin{remark}
+%       This way some \(n \in \mathbb{N}\) is identified through \([(n, 0)] \in \mathbb{Z}\).
+%    \end{remark}
+%    \begin{example}
+%       \((2, 1) \sim (4, 3)\) because \(2 + 3 = 4 + 1\)
+%    \end{example}
+
+\subsubsection{General Linear Group}\label{sssec:gen_lin_grp}
+\begin{proposition}
+   Given a \(K\)-vector space \(V\), the set of invertible linear maps
+   \[\GL(V) := \{f: V \to V \mid f~\text{is linear and bijective}\}\]
+   is a group \((\GL(V), \circ, \id_V)\).
+\end{proposition}
+\begin{remark}
+   As \(f\) is bijective we refer to this group more generally as the \emph{automorphism group} denoted \(\Aut(V)\).
+\end{remark}
+
+In the case where \(V\) is finite dimensional we can represent \(f\) with a matrix and as \(f\) is bijective we know that the corresponding matrix also must be invertible.
+This brings us to the group of invertible matrices.
+
+\begin{proposition}[General Linear Group]\label{pro:glm}
+   The set of invertible matrices
+   \[\GL_n(K) := \{A \in \Mat_n(K) \mid \det(A) \neq 0\}\]
+   is a group \((\GL_n(K), \cdot, I_n)\).
+\end{proposition}
+
+\subsubsection{Orthogonal Group}
+\begin{proposition}
+   Given a Euclidean vector space \(V\), the set
+   \[\OG(V) := \{f \in \GL(V) \mid f~\text{is an isometry}~V \to V\}\]
+   is a group \((\OG(V), \circ, \id_V)\).
+\end{proposition}
+
+With the rules in the remark of \cref{def:std_scal_prod} we see for \(A \in \OG(n)\) and some \(x, y \in \mathbb{R}^n\)
+\[\langle Ax, Ay\rangle = x^TA^TAy = x^Ty = \langle x, y\rangle\]
+So we define
+\[\OG(n) := \{A \in \GL_n(\mathbb{R}) \mid x \mapsto Ax~\text{is an isometry}~\mathbb{R}^n \to \mathbb{R}^n\}\]
+
+\begin{proposition}[Orthogonal Group]
+   The set of orthogonal matrices
+   \[\OG(n) := \{A \in \GL_n(K) \mid \det(A) \in \{\pm 1\}\}\]
+   is a group \((\OG(n), \cdot, I_n)\).
+\end{proposition}
+\begin{remark}
+   It is the group of distance-preserving transformations of a Euclidean space of dimension \(n\) that preserve a fixed point
+   \[\OG(2) = \SO(2) \cup \left\{\begin{pmatrix}\cos\theta & \sin\theta\\ \sin\theta & -\cos\theta\end{pmatrix} ~\middle|~ \theta \in \mathbb{R}\right\}\]
+\end{remark}
+
+\begin{proposition}
+   Let \(G < \OG(2)\), then \(G\) is generated by rotation by \(\frac{2\pi}{n}\) and we have one of the following
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(G \subset \SO(2)\) and \(n := |G|\), i.e. \(G\) is cyclic
+      \item \(G \not\subset \SO(2)\) and \(n := \frac{1}{2} \lvert G \rvert\).
+         Furthermore \(G\) is generated by an additional reflection, i.e. \(G \cong D_n\)
+   \end{enumerate}
+\end{proposition}
+
+\subsubsection{Unitary Group}
+\begin{proposition}
+   Given a unitary vector space \(V\)
+   \[\U(V) := \{f \in \GL(V) \mid f~\text{is an isometry}~V \to V\}\]
+\end{proposition}
+
+With the rules of the remark in \cref{def:compl_scal_prod} we have for \(A \in \U(n)\)
+\[\langle Az, Aw\rangle = z^TA^T\overline{A}\overline{w} = z^T \overline{w} = \langle z, w\rangle\]
+As before we define for the orthogonal group for finite dimensional unitary vector spaces
+\[\U(n) := \{A \in \GL_n(\mathbb{C}) \mid z \mapsto Az~\text{is an isometry}~\mathbb{C}^n \to \mathbb{C}^n\}\]
+\begin{proposition}[Unitary Group]
+   The set of unitary matrices
+   \[\U(n) := \{A \in \GL_n(K) \mid \det(A) \in \{\pm 1\}\}\]
+   is a group \((\OG(n), \cdot, I_n)\).
+\end{proposition}
+
+\subsubsection{Special Orthogonal Group}
+\begin{proposition}[Special Orthogonal Group]
+   \[\SO(n) := \{A \in \OG(n) \mid \det(A) = 1\}\]
+\end{proposition}
+\begin{remark}[Terminology]
+   In the cases where \(n = 2\) or \(n = 3\) we refer to \(\SO(n)\) as the \emph{rotation group}, since its elements are rotation matrices.
+   \[\SO(2) = \left\{\begin{pmatrix}\cos\theta & -\sin\theta\\ \sin\theta & \cos\theta\end{pmatrix} ~\middle|~ \theta \in \mathbb{R}\right\}\]
+\end{remark}
+
+\begin{theorem}
+   The non-trivial subgroups of \(\SO(3)\) are
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item Cyclic groups generated by \(\frac{2\pi}{n}\) rotation for \(n \geq 2\)
+      \item Dihedral groups generated by \(\frac{2\pi}{n}\) rotation for \(n \geq 2\) and a rotation by \(\pi\) where both generators have orthogonal axes of rotation.
+      \item Tetrahedral rotation group (\(\cong A_4\))
+      \item Octahedral rotation group (\(\cong S_4\))
+      \item Icosahedral rotation group (\(\cong A_5\))
+   \end{enumerate}
+\end{theorem}
+\begin{remark}
+   Cases (iii)-(v) refer to symmetry group of the platonic solids
+\end{remark}
+
+Finally, we obtain a description of \(\SO(3)\) by relating it to the special unitary group \(\SU(2)\).
+
+\begin{proposition}
+   The conjugation action of \(\SU(2)\) on trace-zero skew-Hermitian \(\Mat_2(\mathbb{C})\) induces an isomorphism
+   \[\SU(2)_{/\{\pm I_2\}} \cong \SO(3)\]
+\end{proposition}
+
+\begin{proposition}[Special Unitary Group]
+   \[\SU(n) := \{A \in \U(n) \mid \det(A) = 1\}\]
+\end{proposition}
+\begin{remark}
+   Trace-zero, skew-hermitian matrices?
+\end{remark}
+
+\subsubsection{Symmetric Group}
+\paragraph{Permutations}
+\begin{definition}[Permutation]\label{def:permutation}
+   Given a set \(X\),
+   \[\sigma: X \xrightarrow{\sim} X\]
+\end{definition}
+\begin{example}
+   Let \(X = \{1, 2, 3\}\),
+   \[\sigma_{\id} := \begin{cases}1 \mapsto 1\\ 2 \mapsto 2 \\ 3 \mapsto 3 \end{cases} \qquad \tau := \begin{cases}1 \mapsto 3\\ 2 \mapsto 2 \\ 3 \mapsto 1 \end{cases}\]
+\end{example}
+\begin{remark}[Notation]
+   We denote the set of all permutations as \(S(X)\).
+\end{remark}
+
+\begin{definition}[Symmetric Group]
+   Given a set \(X\),
+   \[\big(S(X), \circ, \sigma_{\id}\big)\]
+\end{definition}
+
+In the special case when \(X = \{1, 2, \ldots, n\}\), the symmetric group on \(X\) is denoted \(S_n\), the \emph{symmetric group of degree n}.
+
+\begin{definition}[\(n\)th Symmetric Group]
+   Given a set \(X\) with \(n\) elements,
+   \[S_n := \big(S(X), \circ, \sigma_{\id}\big)\]
+\end{definition}
+\begin{remark}[Notation]
+   We have multiple notations to write \(\tau\) from the example above.
+   \[\tau = \begin{bmatrix}
+         1 & 2 & 3\\
+         3 & 2 & 1
+   \end{bmatrix} = [3~2~1] = (1,3)(2) = (1,3)\]
+   The last equality is called \emph{cycle decomposition}.
+   A \emph{cycle} is a string of integers which represents the element of \(S_n\) which cyclically permutes these integers and fixes all others.
+   The cycle \((a_1~a_2~\ldots~a_m)\) is the permutation where
+   \[\forall 1 \leq i \leq m-1: a_i \mapsto a_{i+1} \qquad\text{and}\qquad a_m \mapsto a_1\]
+   If \(\sigma(a) = a\) we say \(a\) is a \emph{fixpoint} which we omit in cycle decomposition.
+\end{remark}
+\begin{example}
+   Let \(\sigma = (2, 5, 1)\) and \(\tau = (1, 3, 4, 2)\) be two permutations.
+   What is \(\sigma \circ \tau\)?
+      \[\sigma = \begin{bmatrix}1&2&3&4&5\\2&5&3&4&1\end{bmatrix} \qquad \tau = \begin{bmatrix}1&2&3&4&5\\3&1&4&2&5\end{bmatrix}\]
+   The following table is useful to determine the composition.
+   We start of with 1 and then follow the permutations step by step until we reach a cycle.
+   Then we take the least \(x\) we haven't covered so far (in our case 2) and repeat the process.
+   \[\begin{array}{c|c|c|c}
+         x & \tau(x) & \sigma(\tau(x)) & m \\
+         \hline
+         1 & 3 & 3 & 1\\
+         3 & 4 & 4 & 2\\
+         4 & 2 & 5 & 3\\
+         5 & 5 & 1 & 4\\
+         \hline
+         2 & 1 & 2
+      \end{array}\]
+      so we get of the first column: \(\sigma \circ \tau = (1, 3, 4, 5)(2) = (1, 3, 4, 5)\).
+\end{example}
+
+\begin{proposition}[Order of \(S_n\)]
+   Let \(X\) be a set with \(|X| = n\), then is
+   \[|S(X)| = n!\]
+\end{proposition}
+
+\paragraph{Inversions}
+\begin{definition}[Inversion]
+   Given a permutation \(\sigma \in S_n\) where \(i < j\) and \(\sigma(i) > \sigma(j)\), we call the pair \((i,j)\) an \emph{inversion} of \(\sigma\).
+\end{definition}
+\begin{remark}[Intuition]
+   An inversion of a permutation is a pair of elements whose order was changed by the permutation.
+\end{remark}
+
+\begin{definition}[Set of Inversions]
+   The set of all inversions of \(\sigma \in S_n\) is denoted \(\inv(\sigma)\).
+\end{definition}
+\begin{remark}[Terminology]
+   We call \(|\inv(\sigma)|\) the \emph{inversion number}, which is a common measure of the sortedness of a permutation.
+\end{remark}
+
+\begin{definition}[Even \& Odd Permutation]
+   Given \(\sigma \in S_n\),
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\sigma\) is \emph{even} if it performs an even number of two-element swaps.
+      \item \(\sigma\) is \emph{odd} if it performs an odd number of two-element swaps.
+   \end{enumerate}
+\end{definition}
+
+\begin{definition}[Signum of Permutations]
+   Given \(\sigma \in S_n\),
+   \[\sign(\sigma) := \begin{cases}1 & \sigma~\text{is even}\\ -1 & \sigma~\text{is odd}\end{cases}\]
+\end{definition}
+\begin{remark}
+   The map \(S_n \to \{\pm 1\}\) where \(\sigma \mapsto \sign(\sigma)\) is a group homomorphism.
+\end{remark}
+
+\begin{proposition}
+   Let \(\sigma \in S_n\), then
+   \[\sign(\sigma) = (-1)^{|\inv(\sigma)|}\]
+\end{proposition}
+\begin{example}
+   Let \(\sigma = \begin{bmatrix} 1 & 2 & 3\\ 3 & 2 & 1\end{bmatrix}\), then is
+   \[\sigma(1) > \sigma(2),\quad \sigma(1) > \sigma(3) \quad\text{and}\quad \sigma(2) > \sigma(3) \quad\text{hence}\quad \inv(\sigma) = \{(1,2), (1, 3), (2, 3)\}\]
+   and so \(\sign(\sigma) = (-1)^3 = -1\).
+\end{example}
+
+\begin{definition}[Alternating Group]
+   For \(n \geq 2\) is \(A_n\) the group of all even permutations of \(S_n\).
+\end{definition}
+
+\begin{definition}[Permutation Matrix]\label{def:perm_mat}
+   Given a field \(K\) and a permutation \(\sigma \in S_n\).
+   \[P \in \Mat_n(K)~\text{where}~\forall i \in \{1, \ldots, n\}: P_{i, \sigma(i)} = 1\]
+   and all other entries are 0.
+\end{definition}
+\begin{remark}
+   In other words, the \textit{i}th column vector of \(P\) is \(e_{\sigma(i)}\).
+   \(P_{ji}\) of \cref{def:elementary_matrix} is a special kind of permutation matrix (hence the german name ``Vertauschungsmatrix'').
+\end{remark}
+\begin{example}
+   Let \(\sigma = \begin{bmatrix}1&2&3&4&5\\2&5&1&3&4\end{bmatrix}\)
+   Then is
+   \[P_\sigma = (e_{\sigma(1)}~e_{\sigma(2)}~e_{\sigma(3)}~e_{\sigma(4)}~e_{\sigma(5)}~) = (e_2~e_5~e_1~e_3~e_4) = \begin{pmatrix}0&0&1&0&0\\1&0&0&0&0\\0&0&0&1&0\\0&0&0&0&1\\0&1&0&0&0\end{pmatrix}\]
+   So it is trivial to see that \(P_{\sigma_{\id}} = I_n\).
+\end{example}
+
+\begin{proposition}
+   Let \(P\) be a permutation matrix, then
+   \[P^{-1} = P^T\]
+\end{proposition}
+
+\subsubsection{Dihedral Group}\label{ssec:dihedral_groups}
+An important family of examples of groups is the class of groups whose elements are symmetries.
+\emph{Symmetry} is the intrinsic property of a mathematical object which causes it to remain invariant under certain classes of transformations (such as rotation, reflection, inversion, or more abstract operations).
+
+So an approachable introduction are the symmetries of geometric objects in the plane.
+For some \(n \in \mathbb{N}_{\geq 3}\) we denote the set of symmetries of a regular \(n\)-gon with \(D_{2n}\).
+So for \(n=3\) we regard the symmetries of a regular triangle i.e. a triangle with sides of equal length.
+
+We can describe its symmetries by first choosing a labelling \(1, \ldots, n\) of the \(n\) vertices.
+Then each symmetry can be describe uniquely by the corresponding permutation \(\sigma\) of \(\{1, \ldots, n\}\).
+For example if the symmetry puts vertex \(i\) in the place where vertex \(j\) was originally, then \(\sigma\) is the permutation sending \(i\) to \(j\).
+
+\begin{center}
+   \input{drawings/D3_example.tex}
+\end{center}
+
+We define for \(r,s \in D_{2n}\), \(rs\) to be the symmetry obtained by first applying \(s\) then \(r\).
+Note that we are viewing symmetries as functions on the \(n\)-gon, so \(rs\) is just function composition.
+This way we can make \(D_{2n}\) into a group.
+
+Let \(r\) be the rotation clockwise about the origin through \(\frac{2\pi}{n}\) radian.
+
+Let \(s\) be the reflection about the line of symmetry through vertex 1 and the origin.
+
+This way we get
+\[D_{2n} = \{1, r, r^2, \ldots, r^{n-1}, s, sr, sr^2, \ldots, sr^{n-1}\}\]
+i.e. each element can we written uniquely in the form \(s^kr^i\) with \(k = 0\) or 1 and \(0 \leq i \leq n-1\).
+\begin{proposition}
+   For the dihedral group \(D_{2n}\) holds the following
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(1, r, r^2, \ldots r^{n-1}\) are all distinct and \(r^n = 1\).
+      \item \(s^2 = 1\)
+      \item \(\forall 0 \leq i \leq n: s \neq r^i\)
+      \item \(\forall 0 \leq i,j \leq n-1: i \neq j \implies sr^i \neq sr^j\)
+      \item \(\forall 0 \leq i \leq n: r^is = sr^{-i}\)
+   \end{enumerate}
+\end{proposition}
+From (i), (ii) and (v) above follows that any product of two elements in the form \(s^kr^i\) can be reduced to another in the same form.
+For example if \(n = 12\)
+\[(sr^9)(sr^6) = s(r^9s)r^6 = s(sr^{-9})r^6 = s^2r^{-9+6} = 1 r^{-3} = r^9\]
+This means that all elements of \(D_{2n}\) can be represented by just 2 elements \(r, s\) and the relations (i), (ii) and (v).
+
+\subsubsection{Quaternion Group}
+\begin{definition}[Quaternion Group]
+   \[Q_8 := \{1, -1, i, -i, j, -j, k, -k\}\]
+   where
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \((-1)(-1) = 1\)
+      \item \(\forall a \in Q_8: 1a = a = a1 \quad\text{and}\quad (-1)a = -a = a(-1)\)
+      \item \(ii = jj = kk = -1\)
+      \item \(ij = k \qquad\text{and}\qquad ji = -k\)
+      \item \(jk = i \qquad\text{and}\qquad kj = -i\)
+      \item \(ki = j \qquad\text{and}\qquad ik = -j\)
+   \end{enumerate}
+\end{definition}
 
 \subsection{Group Presentation}
 Regarding \cref{ssec:dihedral_groups}, the use of the generators \(r\) and \(s\) for the dihedral group provides a simple an succinct way of computing in \(D_{2n}\).
@@ -912,6 +1579,15 @@ Every element \(g \in G\) generates the \emph{cyclic} subgroup \(\langle g \rang
 If \(\langle g \rangle \cong \mathbb{Z}_{/n\mathbb{Z}}\) for some \(n \in \mathbb{N}\), then \(n\) is the smallest positive integer for which \(g^n = e\), and \(n\) is called the \emph{order of} \(g\).
 Differently put we can also say that \(|\langle g \rangle| = n\)
 If \(\langle g \rangle \cong \mathbb{Z}\), then \(g\) is said to have \emph{infinite order}.
+
+\begin{definition}[Order of Group-Elements]
+   Given a group \(G\) and \(g \in G\)
+   \[|g| := n\]
+   where \(n \in \mathbb{N}\) is the smallest number s.t. \(g^n = e_G\).
+\end{definition}
+\begin{remark}[Notation]
+   If no positive power of \(g\) is the identity, we write \(|g| = \infty\).
+\end{remark}
 
 \subsubsection{Relations}
 Any equations in a general group \(G\) that the generators satisfy are called \emph{relations} in \(G\).
@@ -1665,6 +2341,142 @@ Let \(p\) be a prime s.t. \(p \mid \lvert G\rvert\) and largest \(a \in \mathbb{
    A subring \(Q \subset R\) where \(1 \in Q\).
 \end{definition}
 
+\begin{definition}[Quotient Ring]
+   Given a commutative ring \(R\) with an ideal \(I \subset R\), then is
+   \[R_{/I} := \{a + I \mid a \in R\}\]
+   where
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\forall a, b \in R_{/I}: (a + I) + (b + I) = (a + b) + I\)
+      \item \(\forall a, b \in R_{/I}: (a + I) \cdot (b + I) = (a \cdot b) + I\)
+   \end{enumerate}
+   a ring.
+\end{definition}
+\begin{remark}
+   \[I~\text{is maximal} \iff R_{/I}~\text{is a field}\] % TODO: residue field
+   \[I~\text{is prime} \iff R_{/I}~\text{is an integral domain}\]
+   With the remark of \cref{def:max_ideal} we also have
+   \[R_{/I}~\text{is a field} \implies R_{/I}~\text{is an integral domain}\]
+\end{remark}
+
+\subsection{Important Examples}
+\subsubsection{Group Endomorphism Ring}
+\begin{proposition}[Unitary Ring \(\End(G)\)]
+   An abelian group \(G\) with
+   \[+: \End(G) \times \End(G) \to \End(G) \quad\text{through}\quad (f + g)(a) := f(a) + g(a)\]
+   \[\circ: \End(G) \times \End(G) \to \End(G) \quad\text{through}\quad (f \circ g)(a) := f(a) \circ g(a)\]
+   is a unitary ring of endomorphisms
+\end{proposition}
+\begin{proof}
+ \((\End(G), +, \circ, \id_G)\)
+   1. We verify that \((\End(G), +, 0)\) forms an abelian group.
+
+   1.1 \(+\) is closed.
+   Let \(f, g \in \End(G)\) and \(a, b \in G\) be arbitrary, then is
+   \begin{equation*}
+      \begin{split}
+         (f + g)(a + b) & = f(a + b) + g(a + b) = f(a) + f(b) + g(a) + g(b)\\
+                        & = f(a) + g(a) + f(b) + g(b) = (f + g)(a) + (f + g)(b) \implies f + g \in \End(G)
+      \end{split}
+   \end{equation*}
+
+   1.2 \(+\) is associative.
+   Let \(f, g, h \in \End(G)\) and \(a \in G\) be arbitrary, then is
+   \begin{equation*}
+      \begin{split}
+         \big((f + g) + h\big)(a) & = (f+g)(a) + h(a) = (f(a) + g(a)) + h(a)\\
+                                  & = f(a) + (g(a) + h(a)) = f(a) + (g+h)(a) = \big(f + (g + h)\big)(a)
+      \end{split}
+   \end{equation*}
+
+   1.3 \(0_G: G \to G~\text{where}~a \mapsto 0\) is the neutral element.
+   Let \(f \in \End(G)\) and \(a \in G\) be arbitrary, then is
+   \[(f + 0_G)(a) = f(a) + 0_G(a) = f(a) + 0 = f(a)\]
+
+   1.4 \((-f)(a) := -f(a)\) is the inverse element.
+   Let \(f \in \End(G)\) and \(a \in G\) be arbitrary, then is
+   \[(f + (-f))(a) = f(a) + (-f)(a) = 0 = 0_G(a)\]
+
+   1.5 \(+\) is commutative.
+   Let \(f, g \in \End(G):\) and \(a \in G\) be arbitrary, then is
+   \[(f + g)(a) = f(a) + g(a) = g(a) + f(a) = (g + f)(a)\]
+
+   2. \(\circ\) is closed.
+   Let \(f, g \in \End(G)\) and \(a, b \in G\) be arbitrary, then is
+   \begin{equation*}
+      \begin{split}
+         (f \circ g)(a + b) & = f(g(a + b)) = f(g(a) + g(b))\\
+                            & = f(g(a)) + f(g(b)) = (f \circ g)(a) + (f \circ g)(b) \implies f \circ g \in \End(G)
+      \end{split}
+   \end{equation*}
+
+   3. We know that \(\circ\) is associative.
+
+   4. We check that \(+\) and \(\circ\) are distributive.
+   Let \(f, g, h \in \End(G)\) and \(a \in G\) be arbitrary, then is
+   \[(f \circ (g + h))(a) = f(g(a) + h(a)) = f(g(a)) + f(h(a)) = (f \circ g + f \circ h)(a)\]
+\end{proof}
+
+\subsubsection{Whole Numbers}
+\begin{proposition}[Commutative Unitary Ring \(\mathbb{Z}\)]\label{pro:ring_Z}
+   \(\mathbb{Z}\) is a commutative unitary ring
+\end{proposition}
+% TODO
+\begin{proof}
+   We write \(\mu_a\) for the unique endomorphism of \(\mathbb{Z}\) which maps 1 to \(a\).
+   This allows us to use \(\mu_a\) as multiplication with \(a\):
+   \[\cdot: \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z} \quad\text{where}\quad a \cdot b := \mu_a(b)\]
+   \[\mu_a(1) = 1 \cdot a, \quad \mu_a(2) = 2 \cdot a, \quad\ldots\]
+   The following rules apply
+   \[(\mu_b + \mu_c)(1) = \mu_{b + c}(1)\]
+   \[(\mu_a \circ \mu_b)(1) = \mu_a(\mu_b(1)) = \mu_a(b) = a \cdot b\]
+
+   From \cref{pro:z_abelian} is \((\mathbb{Z}, +, 0)\) an abelian group.
+
+   The multiplication is associative
+   \[a \cdot (b \cdot c) = \mu_a(\mu_b(c)) = (\mu_a \circ \mu_b)(c) = \mu_{a \cdot b}(c) = (a \cdot b) \cdot c\]
+
+   Distributivity holds for \(a, b, c \in \mathbb{Z}\)
+   \[a \cdot (b + c) = \mu_a \cdot (b + c) = \mu_a(b) + \mu_a(c) = a \cdot b + a \cdot c\]
+   \[(b + c) \cdot a = \mu_{b + c}(a) = (\mu_b + \mu_c)(a) = b \cdot a + c \cdot a\]
+
+   It is a unitary ring with the neutral element \(\mu_1 := \id_{\mathbb{Z}}\)
+   \[\forall a \in \mathbb{Z}: \mu_a(1) = a \implies 1 \cdot a = a = a \cdot 1\]
+
+   It is a commutative ring \(\forall m, n \in \mathbb{Z}: m \cdot n = n \cdot m\).
+   We prove this by induction over \(n\).
+
+   \textit{IB:} \(m \cdot 0 = 0 = 0 \cdot m\)
+
+   \textit{IH:} For some \(n \in \mathbb{Z}\) holds \(m \cdot n = n \cdot m\).
+
+   \textit{IS:} Assume IH holds.
+   \[m \cdot (n + 1) = m \cdot n + m = n \cdot m + m = (n + 1) \cdot m\]
+\end{proof}
+
+\subsubsection{Vector Space Endomorphism Ring}
+\begin{proposition}[Endomorphism Ring]
+   \[\End_K(K^n) := \Hom_K(K^n, K^n)\]
+   \((\End_K(K^n), +, \circ, I_n, 0_n)\) is a ring.
+\end{proposition}
+
+\subsubsection{Matrix Ring}
+\begin{proposition}[Matrix Ring]
+   \((\Mat_n(K), +, \cdot, I_n, 0_n)\) is a ring.
+\end{proposition}
+\begin{remark}
+   The endomorphism which is represented by \(I_n\) is \(\id_{K^n}\).
+\end{remark}
+
+\subsubsection{Polynomial Ring}
+\begin{example}[Polynomial Rings]
+   Given a field \(K\) we define
+   \[K[x] := \{p(x) \mid \text{polynomials with coefficients in}~K\}\]
+   Then is \((K[x], +, \cdot, 0_K, 1_K)\) an integral domain, where we define
+   \[+: K[x] \times K[x] \to K[x] \quad\text{through}\quad (p, q) \mapsto \sum_{i=0}^n p_i \cdot x^i + \sum_{j=0}^m q_j \cdot x^j = \sum_{k=0}^{\max(m,n)} (p_k + q_k) \cdot x^k\]
+   \[\cdot: K[x] \times K[x] \to K[x] \quad\text{through}\quad (p, q) \mapsto \sum_{i=0}^n p_i \cdot x^i \cdot \sum_{j=0}^m q_j \cdot x^j = \sum_{k=0}^{m+n} \left(\sum_{i=0}^k (p_i \cdot q_{k-i}) \cdot x^k\right)\]
+   It holds that \(K[x]^{\times} = K^{\times}\).
+\end{example}
+
 \subsection{Integral Domains}
 \begin{definition}[Integral Domain]\label{def:integral_domain}
    A commutative unitary ring \(R\) for which holds
@@ -2253,6 +3065,183 @@ Then two possibilities arise: eigher all elements \(n \cdot 1\) are distinct or 
 Given two fields \(K, L\) it follows from the field definition, that ring homomorphisms \(f: K \to L\) are injective (see remark of \cref{def:ring_homo}).
 \[\forall \alpha \in K^\times: \big(f(\alpha) \cdot f(\alpha^{-1}) = f(\alpha \cdot \alpha^{-1}) = f(1) = 1 \implies f(\alpha) \neq 0\big)\]
 
+\subsection{Residue Fields}
+% TODO: Include Field of Fractions
+\begin{definition}[Quotient Field]
+   Given an integral domain (\ref{def:integral_domain}) \(R\), the quotient field of \(R\) is the set \(K := R \times (R \setminus \{0\})/\sim\) where \(\sim\) is defined as in \cref{def:rat_num}
+   with the operations as in \cref{pro:Q_field}
+   \[[(a_1, b_1)] + [(a_2, b_2)] := [(a_1b_2 + a_2b_1, b_1b_2)]\]
+   \[[(a_1, b_1)] \cdot [(a_2, b_2)] := [(a_1a_2, b_1b_2)]\]
+\end{definition}
+\begin{remark}
+   \(K\) is also called \emph{field of fractions} and satisfies the universal property of quotient fields.
+\end{remark}
+
+\begin{definition}[Residue Field]
+   Given a eucliean domain \(R\) and a prime element \(p\), \(R_{/pR}\) is a residue field.
+\end{definition}
+\begin{remark}
+   There exists and epimorphism \(R \twoheadrightarrow R_{/pR}\).
+\end{remark}
+
+\begin{definition}[Prime Field]
+   Given the euclidean domain \(R = \mathbb{Z}\) and any prime element \(p \in \mathbb{Z}\)
+   \[\mathbb{F}_p := \mathbb{Z}_{/p\mathbb{Z}}\]
+   is a field.
+\end{definition}
+
+% TODO
+For an \(n \in \mathbb{N}\) are \(a, b \in \mathbb{Z}\) called \textit{congruent modulo n}, if
+\[a \equiv b \mod n\]
+which means that \(n\) divides \(a - b\).
+Or differently put, there exists \(k \in \mathbb{Z}\) such that
+\[\frac{a - b}{n} = k \implies a - b = k \cdot n\]
+It can be shown that this relation forms an equivalence relation
+\[a \sim b :\iff a - b \in nR\]
+where \(nR\) denotes the set of all multiples of \(n\).
+The equivalence classes of the equvalence relation are called congruence classes modulo n or \textit{residue classes modulo n}.
+\[\bar{a} = \{\ldots, (a-2n), (a-n), a, (a+n), (a+2n), \ldots\}\]
+\[\bar{a} = \bar{b} \implies n | (a - b)\]
+
+Integer division is only is possible in an euclidean domain.
+So given a euclidean domain \(R\) we can construct such residue classes as follows.
+We have the set of all multiples of \(n\) in \(R\).
+\[nR := \{nb \mid b \in R\}\]
+which we then add to \(a \in R\)
+\[\bar{a} = a + nR\]
+
+The set of all such residue classes is a quotient set \(R_{/\sim}\) denoted as \(R_{/nR}\) since \(\sim\) depends on \(n\).
+From \cref{pro:irreducible} follows that \(R_{/nR}\) is a field \(\iff n \in R\) is prime, hence we can add, subtract, multiply and divide with remainder.
+
+\begin{example}
+   Lets look at the residue field \(\mathbb{Z}_{/2\mathbb{Z}}\).
+   \[2\mathbb{Z} = \{\ldots, -6, -4, -2, 0, 2, 4, 6, \ldots\}\]
+   So we look at what residue classes there are.
+   \[\bar{0} = 0 + 2\mathbb{Z} = 2\mathbb{Z} = \{\ldots, -6, -4 -2, 0, 2, 4, 6, \ldots\}\]
+   \begin{equation*}
+      \begin{split}
+   \bar{1} & = \{\ldots, (1+(-6)), (1+(-4)), (1+(-2)), (1+0), (1+2), (1+4), (1+6), \ldots\} \\
+                & = \{\ldots, -5, -3 -1, 1, 3, 5, \ldots\}
+      \end{split}
+   \end{equation*}
+   \begin{equation*}
+      \begin{split}
+         \bar{2} &= \{\ldots, (2+(-6)), (2+(-4)), (2+(-2)), (2+0), (2+2), (2+4), (2+6), \ldots\} \\
+                      &= \{\ldots, -4, -2, 0, 2, 4, 6, 8, \ldots\} = \bar{0}
+      \end{split}
+   \end{equation*}
+   \begin{equation*}
+      \begin{split}
+         \bar{3} &= \{\ldots, (3+(-6)), (3+(-4)), (3+(-2)), (3+0), (3+2), (3+4), (3+6), \ldots\} \\
+                      &= \{\ldots, -3, -1, 1, 3, 5, 7, 9, \ldots\} = \bar{1}
+      \end{split}
+   \end{equation*}
+   So the quotient set contains only two residue classes
+   \[\mathbb{Z}_{/2\mathbb{Z}} = \{\bar{0}, \bar{1}\}\]
+   which can be equipped with two operations to form a field.
+
+   \begin{center}
+      \renewcommand\arraystretch{1.3}
+      \begin{tabular}{c|c c}
+         +   & 0   & 1 \\ \hline
+         0   & 0   & 1 \\
+         1   & 1   & 0 \\
+      \end{tabular}
+      \quad
+      \begin{tabular}{c|c c}
+         \(\cdot\) & 0   & 1 \\ \hline
+         0         & 0   & 0 \\
+         1         & 0   & 1 \\
+      \end{tabular}
+   \end{center}
+   Note that we cannot produce another element as \(0\) or \(1\) since we are restricted by the modulo operation.
+   \[\bar{1} + \bar{1} = \bar{2} = \bar{0}\]
+\end{example}
+
+In a next step we can use \(\mathbb{F}_2\) to define a polynomial ring \(\mathbb{F}_2 [x]\) of polynomials with coefficients 0 or 1.
+Its prime elements are \(T\), \(T+1\) and \(T^2 + T + 1\).
+
+When we now take \(R = (\mathbb{Z}_{/2\mathbb{Z}})[x]\) and choose a prime element \(n = x^2 + x + 1\) we can define a new residue field of polynomials.
+When we use the euclidean algorithm to divide with remainder we use the euclidean value \(\deg\) to determine if the remainder is small enough, that is, if we have found a proper quotient such that \(\deg(r) < \deg(b)\).
+Since we chose \(x^2 + x + 1\) as prime element we know that all remainders must have a degree less than 2 and because of how \(R\) is define we also know that the remainders coefficients can only be 1 or 0.
+\[R_{/nR} = \{\bar{0}, \bar{1}, \bar{x}, \bar{x+1}\}\]
+
+\begin{center}
+   \begin{tabular}{c|c c c c}
+      \(+\)   & \(0\)   & \(1\)   & \(x\)   & \(x+1\) \\ \hline
+      \(0\)   & \(0\)   & \(1\)   & \(x\)   & \(x+1\) \\
+      \(1\)   & \(1\)   & \(0\)   & \(x+1\) & \(x\)   \\
+      \(x\)   & \(x\)   & \(x+1\) & \(0\)   & \(1\)   \\
+      \(x+1\) & \(x+1\) & \(x\)   & \(1\)   & \(0\)   \\
+   \end{tabular}
+   \quad
+   \begin{tabular}{c|c c c c}
+      \(\cdot\) & \(0\) & \(1\)   & \(x\)   & \(x+1\) \\ \hline
+      \(0\)     & \(0\) & \(0\)   & \(0\)   & \(0\)   \\
+      \(1\)     & \(0\) & \(1\)   & \(x\)   & \(x+1\) \\
+      \(x\)     & \(0\) & \(x\)   & \(x+1\) & \(1\)   \\
+      \(x+1\)   & \(0\) & \(x+1\) & \(1\)   & \(x\)   \\
+   \end{tabular}
+\end{center}
+Keeping in mind that there are only coefficients with 0 or 1 we can see easily that for example
+\[x + x = 2x = 0 \quad\text{and}\quad  (x+1) + 1 = x + 2 = x \quad\text{and}\quad x + (x+1) = 2x + 1 = 1\]
+With the multiplication we write down a polynomial division with remainder of the prime element.
+\[x \cdot x = x^2 = 1 \cdot (x^2 + x + 1) + (x+1)\]
+so we see that
+\[\bar{x} \cdot \bar{x} = \bar{x^2} = \bar{x+1}\]
+which is essentially the same as above where \(\bar{2} = \bar{0}\).
+
+\begin{proposition}[\(\mathbb{Z}\) Homomorphism]
+   Let \(R\) be a unitary ring.
+   \[\exists! f: \mathbb{Z} \to R\]
+   a homomorphism of unitary rings (\ref{def:ring_homo}).
+\end{proposition}
+
+\begin{proposition}
+   Let \(K\) be a field and \(f: \mathbb{Z} \to K\) the homomorphism of unitary rings.
+
+   If \(f\) is not injective, the smallest positive whole number \(p \in \ker\) is prime.
+   Further induces \(f\) a field embedding \(\mathbb{F}_p \to K\).
+   \[\ker(f) = p\mathbb{Z}\]
+
+   Is \(f\) injective it follows that \(p = 0\), which means that \(\ker(f)\) is trivial.
+   Also there exists a unique extension to a field embedding \(\mathbb{Q} \to K\).
+\end{proposition}
+
+
+\subsection{Important Examples}
+% TODO this is Field of Fractions of Z
+\subsubsection{Field of Fractions}
+\begin{proposition}[\((\mathbb{Q}, +, \cdot)\) is a Field]\label{pro:Q_field}
+   With the operations
+   \[+: \mathbb{Q} \times \mathbb{Q} \to \mathbb{Q}\]
+   \begin{equation}\label{eq:Q_add}
+      \big([(a, b)], [(c, d)]\big) \mapsto \frac{a}{b} + \frac{c}{d} := \frac{a \cdot d + c \cdot b}{b \cdot d}
+   \end{equation}
+   and
+   \[\cdot: \mathbb{Q} \times \mathbb{Q} \to \mathbb{Q}\]
+   \begin{equation}\label{eq:Q_mult}
+      \big([(a, b)], [(c, d)]\big) \mapsto \frac{a}{b} \cdot \frac{c}{d} := \frac{a \cdot c}{b \cdot d}
+   \end{equation}
+   is \(\mathbb{Q}\) a field.
+\end{proposition}
+% TODO
+\begin{proof}
+   Let \(a_1, b_1, a_2, b_2 \in \mathbb{Z}\) with \(b_1, b_2 \neq 0\) and \((a_1, b_1) \sim (a_2, b_2)\)
+   \[a_1 \cdot b_2 = a_2 \cdot b_1 \implies \frac{a_1}{b_1} = \frac{a_2}{b_2} \implies \frac{a_1}{b_1} + \frac{a'}{b'} = \frac{a_2}{b_2} + \frac{a'}{b'} \implies \frac{a_1 \cdot b' + a' \cdot b_1}{b_1 \cdot b'} = \frac{a_2 \cdot b' + a' \cdot b_2}{b_2 \cdot b'} \implies\]
+   \(\implies +~\text{is well-defined}\), the process would be similar to prove the same for \(\cdot\).
+   From the operation definitions \cref{eq:Q_add}, \cref{eq:Q_mult} follows that \(\cdot, +\) are associative, commutative and also distributive.
+   They also produce the additive neutral element
+   \[0_{\mathbb{Q}} := \frac{0}{b} \forall b \in \mathbb{Z} \setminus \{0\}\]
+
+   and the multiplicative neutral and inverse
+   \[1_{\mathbb{Q}} := \frac{1}{1}\]
+   \[\forall a, b \in \mathbb{Z} \setminus \{0\}: \frac{a}{b} \cdot \frac{1}{1} = \frac{a}{b} \implies \frac{a}{b} \cdot \frac{b}{a} = \frac{1}{1}\]
+   from which follows that
+   \[\mathbb{Q}^{\times} = \mathbb{Q} \setminus \{0\} \implies \frac{a}{b} \in \mathbb{Q}: \frac{a}{b} \in \mathbb{Q}^{\times} \iff \frac{a}{b} \neq 0 \iff a \neq 0\]
+\end{proof}
+
+\subsection{Field Embeddings}
 \begin{definition}[Field Embedding]
    Given two fields \(L\) and \(K\) with a ring homomorphism \(K \hookrightarrow L\), we say \(K\) is a field embedding in \(L\).
 \end{definition}
@@ -2371,6 +3360,45 @@ As an application, we describe polynomials, whose roots are sums respectively po
       \item Distributivity: \(\forall \lambda, \mu \in K~v, w \in V: (\lambda + \mu) v = \lambda v \dotplus \mu v \quad\text{and}\quad \lambda (v \dotplus w) = \lambda v \dotplus \lambda w\)
    \end{enumerate}
 \end{definition}
+
+\begin{definition}[Quotient Vector Space]
+   Given a K-vector space \(V\), a subspace \(U \subset V\) and \(\sim\) on \(V\) defined as
+   \[v_1 \sim v_2 :\iff v_1 - v_2 \in U\]
+   the set \(V_{/U} = \{[v] \mid v \in V\}\) forms the quotient vector space where
+   \[[v_1] + [v_2] := [v_1 + v_2] \quad\text{and}\quad \lambda [v] := [\lambda v]\]
+\end{definition}
+\begin{example}
+   Let \(V\) be the K-vector space over \(\mathbb{R}\) which is spanned by \(v_1 := \begin{pmatrix}0\\1\\0\end{pmatrix}\) and \(v_2 := \begin{pmatrix}1\\1\\0\end{pmatrix}\).
+
+   \(V\) corresponds to the xy-plane in \(\mathbb{R}^3\) and we want now to find a subspace.
+   We can do this by choosing any vector of the plane, e.g. \(w := \begin{pmatrix}1\\2\\0\end{pmatrix}\) so we get
+   \[U := \spanv\{w\} = \{\alpha \cdot w \in \mathbb{R}^3 \mid \alpha \in \mathbb{R}\}\]
+\end{example}
+
+\subsection{Important Examples}
+\begin{example}
+   \(K^n = \{(a_1, \ldots, a_n) \mid a_1, \ldots, a_n \in K\) is a K-vector space where
+   \[(a_1, \ldots, a_n) + (b_1, \ldots, b_n) = (a_1 + b_1, \ldots, a_n + b_n)\]
+   \[\lambda \cdot (a_1, \ldots, a_n) = (\lambda \cdot a_1, \ldots, \lambda \cdot a_n)\]
+\end{example}
+
+\begin{example}
+   \(V := (\Mat_{m,n}(K), +, \cdot, 0_{m,n}, 1_K)\) is a K-vector space.
+   Vector addition is just matrix addition and scalar multiplication is defined in the obvious way (by multiplying each entry by the same scalar).
+   \[\lambda \cdot_V A := \lambda (a_{ij}) = (\lambda \cdot_K a_{ij})\]
+   \[A + B := (a_{ij}) +_V (b_{íj}) = (a_{ij} +_K b_{ij})\]
+   \[A - B := (a_{ij}) +_V (-1)(b_{ij}) = (a_{ij} -_K b_{ij})\]
+
+   \[\dim(V) = m \cdot n\]
+   When m = n the matrix is square and matrix multiplication of two such matrices produces a third.
+   This vector space of dimension \(n^2\) forms an \textit{algebra over a field}.
+   One possible choice of basis are the permutation matrices (\ref{def:perm_mat}).
+\end{example}
+
+\begin{example}
+   % todo: elaborate
+   \(K[x]\) is an infinite dimensional K-vector space.
+\end{example}
 
 \subsection{Subspaces}
 \begin{definition}[Vector Subspace]\label{def:vector_subspace}
@@ -2815,6 +3843,57 @@ which makes \(V\) a \emph{metric space}.
 Again we see intuitively how far apart two vectors (points) are
 \[d\left(\begin{pmatrix}1\\0\end{pmatrix}, \begin{pmatrix}3\\0\end{pmatrix}\right) = \sqrt{(3 - 1)^2 + (0 - 0)^2} = 2\]
 
+\subsection{Important Examples}
+\subsubsection{\(K^n\) Vector Space}
+For \(x \in K^n\) we define
+\begin{definition}[\(l^\infty\) Norm]
+   \[\|x\|_\infty := \max_{1 \leq k \leq n} |x_k|\]
+\end{definition}
+
+\begin{definition}[\(l^1\) Norm]
+   \[\|x\|_1 := \sum_{k=0}^n |x_k|\]
+\end{definition}
+
+\begin{definition}[\(l^2\) Norm]
+   \[\|x\|_2 := \sqrt{\sum_{k=0}^n |x_k|^2}\]
+\end{definition}
+
+We see that the following estimations hold
+\[\|x\|_\infty \leq \|x\|_1 \leq m \cdot \|x\|_\infty\]
+\[\|x\|_\infty \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_\infty\]
+\[\frac{1}{\sqrt{m}}\|x\|_1 \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_1\]
+
+\subsubsection{Sequence Spaces}
+Given a field \(K\) and a set of sequences \((x_n)_{n \in \mathbb{N}}\) with the operations
+\[+: \big((x_n), (y_n)\big) \mapsto (x_n + y_n)\]
+\[\cdot: \big(\lambda, (x_n)\big) \mapsto (\lambda \cdot x_n)\]
+and the 0-sequence \((0, 0, \ldots)\) as identity element, we can build the sequence spaces \(l^p\) which are special cases of \(L^p\) Lebesgue spaces.
+
+\begin{definition}[Sequences]
+   \[K^{\mathbb{N}} := \{(x_n)_{n \in \mathbb{N}} \mid \forall n \in \mathbb{N}: x_n \in K\}\]
+\end{definition}
+
+\begin{definition}[Bounded Sequences]
+   \[l^\infty := \{(x_n)_{n \in \mathbb{N}} \mid \|(x_n)\|_\infty < \infty\}\]
+\end{definition}
+\begin{remark}
+   \[\|(x_n)_{n \in \mathbb{N}}\|_\infty := \sup_{n \in \mathbb{N}} |x_n|\]
+\end{remark}
+
+\begin{definition}[Sequences with convergent Series]
+   \[l^1 := \left\{(x_n)_{n \in \mathbb{N}} \mid \|(x_n)\|_1 < \infty\right\}\]
+\end{definition}
+\begin{remark}
+   \[\|(x_n)_{n \in \mathbb{N}}\|_1 := \sum_{n=0}^\infty |x_n|\]
+\end{remark}
+
+\begin{definition}[Sequences with convergent Series]
+   \[l^2 := \left\{(x_n)_{n \in \mathbb{N}} \mid \|(x_n)\|_2 < \infty\right\}\]
+\end{definition}
+\begin{remark}
+   \[\|(x_n)_{n \in \mathbb{N}}\|_2 := \sqrt{\sum_{n=0}^\infty |x_n|^2}\]
+\end{remark}
+
 \subsection{Scalar Product Spaces}
 \begin{definition}[Scalar Product]\label{def:scalar_product}
    A positive definite bilinear form, which we denote
@@ -3219,6 +4298,16 @@ Even those that do need not have a unique \emph{rank} (analogue to the dimension
    However, if a finite field is considered as a module over the same finite field taken as a ring, it is a vector space and does have a basis.
 \end{example}
 
+\begin{definition}[Quotient Module]
+   Given a module \(M\), a subspace \(N \subset M\) and \(\sim\) on \(M\) defined as
+   \[m_1 \sim m_2 :\iff m_1 - m_2 \in N\]
+   the set \(M_{/N} = \{[m] \mid m \in M\}\) forms the quotient vector space where
+   \[[m_1] + [m_2] := [m_1 + m_2] \quad\text{and}\quad \lambda [m] := [\lambda m]\]
+\end{definition}
+\begin{remark}
+   We call the map \(m \mapsto [m]\) a \emph{canonical homomorphism}.
+\end{remark}
+
 \subsection{Sequences of Moduln}
 % TODO
 \begin{definition}[Sequence of R-Modules]
@@ -3419,189 +4508,426 @@ To introduce this we also need some background.
    \[\big(|\det(f)| \neq 0 \iff |\coker(f)| < \infty\big) \implies |\coker(f)| = |\det(f)|\]
 \end{corollary}
 
-\section{Quotient Structures}
-\begin{definition}[Quotient Ring]
-   Given a commutative ring \(R\) with an ideal \(I \subset R\), then is
-   \[R_{/I} := \{a + I \mid a \in R\}\]
-   where
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\forall a, b \in R_{/I}: (a + I) + (b + I) = (a + b) + I\)
-      \item \(\forall a, b \in R_{/I}: (a + I) \cdot (b + I) = (a \cdot b) + I\)
-   \end{enumerate}
-   a ring.
+\section{Homomorphisms}
+A \emph{homomorphism} is a \emph{structure-preserving} map (meaning it preserves the operations of the structures) between two algebraic structures of the same type (e.g. two groups).
+
+This means a map \(f: A \to B\) between two sets \(A, B\) equipped with the same structure such that, if \(\ast\) is an operation of the structure (supposed here, for simplification, to be a binary operation), then
+\[f(x\ast y) = f(x) \ast f(y),~\forall x,y \in A\]
+We say that \(f\) \emph{preserves} the operation or is \emph{compatible} with the operation.
+
+\subsection{Definition \& Terminology}
+\begin{definition}[Homomorphism Kernel]
+   Given a homomorphism \(f\)
+   \[\ker(f) = f^{-1}(0) := \{v \in V \mid f(v) = 0_W\}\]
 \end{definition}
-\begin{remark}
-   \[I~\text{is maximal} \iff R_{/I}~\text{is a field}\] % TODO: residue field
-   \[I~\text{is prime} \iff R_{/I}~\text{is an integral domain}\]
-   With the remark of \cref{def:max_ideal} we also have
-   \[R_{/I}~\text{is a field} \implies R_{/I}~\text{is an integral domain}\]
+\begin{remark}[Intuition]
+   The kernel of a homomorphism measures the degree to which the homomorphism fails to be injective.
+   \[f~\text{injective} \iff \ker(f) = \{0\}\]
+   This is to say the kernel is \emph{trivial} i.e. only contains the identity element.
+   The kernel of a matrix is
+   \[\ker(A) := \{v \in K^n \mid A \cdot v = 0\}\]
 \end{remark}
 
-\begin{definition}[Quotient Field]
-   Given an integral domain (\ref{def:integral_domain}) \(R\), the quotient field of \(R\) is the set \(K := R \times (R \setminus \{0\})/\sim\) where \(\sim\) is defined as in \cref{def:rat_num}
-   with the operations as in \cref{pro:Q_field}
-   \[[(a_1, b_1)] + [(a_2, b_2)] := [(a_1b_2 + a_2b_1, b_1b_2)]\]
-   \[[(a_1, b_1)] \cdot [(a_2, b_2)] := [(a_1a_2, b_1b_2)]\]
+\begin{definition}[Monomorphism]
+   An injective homomorphism.
 \end{definition}
-\begin{remark}
-   \(K\) is also called \emph{field of fractions} and satisfies the universal property of quotient fields.
-\end{remark}
 
-\begin{definition}[Quotient Vector Space]
-   Given a K-vector space \(V\), a subspace \(U \subset V\) and \(\sim\) on \(V\) defined as
-   \[v_1 \sim v_2 :\iff v_1 - v_2 \in U\]
-   the set \(V_{/U} = \{[v] \mid v \in V\}\) forms the quotient vector space where
-   \[[v_1] + [v_2] := [v_1 + v_2] \quad\text{and}\quad \lambda [v] := [\lambda v]\]
+\begin{definition}[Epimorphism]
+   A surjective homomorphism.
 \end{definition}
+
+\begin{definition}[Isomorphism]
+   A bijective homomorphism.
+\end{definition}
+
+\begin{definition}[Endomorphism]
+   A homomorphism, mapping a structure onto itself.
+\end{definition}
+\begin{remark}[Notation]
+   \(f: A \xrightarrow{\simeq} A\)
+\end{remark}
 \begin{example}
-   Let \(V\) be the K-vector space over \(\mathbb{R}\) which is spanned by \(v_1 := \begin{pmatrix}0\\1\\0\end{pmatrix}\) and \(v_2 := \begin{pmatrix}1\\1\\0\end{pmatrix}\).
-
-   \(V\) corresponds to the xy-plane in \(\mathbb{R}^3\) and we want now to find a subspace.
-   We can do this by choosing any vector of the plane, e.g. \(w := \begin{pmatrix}1\\2\\0\end{pmatrix}\) so we get
-   \[U := \spanv\{w\} = \{\alpha \cdot w \in \mathbb{R}^3 \mid \alpha \in \mathbb{R}\}\]
+   Let \(G\) be a group, then is \(\id_G: G \xrightarrow{\simeq} G\) an endomorphism.
 \end{example}
 
-\begin{definition}[Quotient Module]
-   Given a module \(M\), a subspace \(N \subset M\) and \(\sim\) on \(M\) defined as
-   \[m_1 \sim m_2 :\iff m_1 - m_2 \in N\]
-   the set \(M_{/N} = \{[m] \mid m \in M\}\) forms the quotient vector space where
-   \[[m_1] + [m_2] := [m_1 + m_2] \quad\text{and}\quad \lambda [m] := [\lambda m]\]
+\begin{definition}[Automorphism]
+   A bijective endomorphism.
 \end{definition}
-\begin{remark}
-   We call the map \(m \mapsto [m]\) a \emph{canonical homomorphism}.
+\begin{remark}[Notation]
+   \(f: A \xrightarrow{\cong} A\)
 \end{remark}
 
-\subsection{Residue Fields}
-\begin{definition}[Residue Field]
-   Given a eucliean domain \(R\) and a prime element \(p\), \(R_{/pR}\) is a residue field.
+\subsection{Homomorphisms of Algebraic Structures}
+\begin{definition}[Group Homomorphism]
+   Given the groups \(G, H\)
+   \[f: G \to H :\iff \forall a, b \in G: f(a) \ast_H f(b) = f(a \ast_G b)\]
 \end{definition}
 \begin{remark}
-   There exists and epimorphism \(R \twoheadrightarrow R_{/pR}\).
+   \(\ker(f)\) is a subgroup of \(G\) and \(\im(f)\) is a subgroup of \(H\).
+\end{remark}
+\begin{remark}
+   From the definition follows directly that
+   \[f(e_G) = f(e_G +_G e_G) = f(e_G) +_H f(e_G) \implies f(e_G) = e_H\]
+   \[f(a^{-1}) = \big(f(a)\big)^{-1}\]
 \end{remark}
 
-\begin{definition}[Prime Field]
-   Given the euclidean domain \(R = \mathbb{Z}\) and any prime element \(p \in \mathbb{Z}\)
-   \[\mathbb{F}_p := \mathbb{Z}_{/p\mathbb{Z}}\]
-   is a field.
+\begin{definition}[Ring Homomorphism]\label{def:ring_homo}
+   Given the rings \(R, S\)
+   \[f: R \to S :\iff \begin{cases}
+            \forall a, b \in R: f(a +_R b) = f(a) +_S f(b) \\
+            \forall a, b \in R: f(a \cdot_R b) = f(a) \cdot_S f(b)
+      \end{cases}\]
 \end{definition}
-
-% TODO
-For an \(n \in \mathbb{N}\) are \(a, b \in \mathbb{Z}\) called \textit{congruent modulo n}, if
-\[a \equiv b \mod n\]
-which means that \(n\) divides \(a - b\).
-Or differently put, there exists \(k \in \mathbb{Z}\) such that
-\[\frac{a - b}{n} = k \implies a - b = k \cdot n\]
-It can be shown that this relation forms an equivalence relation
-\[a \sim b :\iff a - b \in nR\]
-where \(nR\) denotes the set of all multiples of \(n\).
-The equivalence classes of the equvalence relation are called congruence classes modulo n or \textit{residue classes modulo n}.
-\[\bar{a} = \{\ldots, (a-2n), (a-n), a, (a+n), (a+2n), \ldots\}\]
-\[\bar{a} = \bar{b} \implies n | (a - b)\]
-
-Integer division is only is possible in an euclidean domain.
-So given a euclidean domain \(R\) we can construct such residue classes as follows.
-We have the set of all multiples of \(n\) in \(R\).
-\[nR := \{nb \mid b \in R\}\]
-which we then add to \(a \in R\)
-\[\bar{a} = a + nR\]
-
-The set of all such residue classes is a quotient set \(R_{/\sim}\) denoted as \(R_{/nR}\) since \(\sim\) depends on \(n\).
-From \cref{pro:irreducible} follows that \(R_{/nR}\) is a field \(\iff n \in R\) is prime, hence we can add, subtract, multiply and divide with remainder.
-
+\begin{remark}
+   For unitary rings must additionally hold that \(f(1_R) = 1_S\).
+\end{remark}
+\begin{remark}
+   Given two fields \(K\) and \(L\), every ring homomorphism \(K \to L\) is injective.
+\end{remark}
 \begin{example}
-   Lets look at the residue field \(\mathbb{Z}_{/2\mathbb{Z}}\).
-   \[2\mathbb{Z} = \{\ldots, -6, -4, -2, 0, 2, 4, 6, \ldots\}\]
-   So we look at what residue classes there are.
-   \[\bar{0} = 0 + 2\mathbb{Z} = 2\mathbb{Z} = \{\ldots, -6, -4 -2, 0, 2, 4, 6, \ldots\}\]
-   \begin{equation*}
-      \begin{split}
-   \bar{1} & = \{\ldots, (1+(-6)), (1+(-4)), (1+(-2)), (1+0), (1+2), (1+4), (1+6), \ldots\} \\
-                & = \{\ldots, -5, -3 -1, 1, 3, 5, \ldots\}
-      \end{split}
-   \end{equation*}
-   \begin{equation*}
-      \begin{split}
-         \bar{2} &= \{\ldots, (2+(-6)), (2+(-4)), (2+(-2)), (2+0), (2+2), (2+4), (2+6), \ldots\} \\
-                      &= \{\ldots, -4, -2, 0, 2, 4, 6, 8, \ldots\} = \bar{0}
-      \end{split}
-   \end{equation*}
-   \begin{equation*}
-      \begin{split}
-         \bar{3} &= \{\ldots, (3+(-6)), (3+(-4)), (3+(-2)), (3+0), (3+2), (3+4), (3+6), \ldots\} \\
-                      &= \{\ldots, -3, -1, 1, 3, 5, 7, 9, \ldots\} = \bar{1}
-      \end{split}
-   \end{equation*}
-   So the quotient set contains only two residue classes
-   \[\mathbb{Z}_{/2\mathbb{Z}} = \{\bar{0}, \bar{1}\}\]
-   which can be equipped with two operations to form a field.
-
-   \begin{center}
-      \renewcommand\arraystretch{1.3}
-      \begin{tabular}{c|c c}
-         +   & 0   & 1 \\ \hline
-         0   & 0   & 1 \\
-         1   & 1   & 0 \\
-      \end{tabular}
-      \quad
-      \begin{tabular}{c|c c}
-         \(\cdot\) & 0   & 1 \\ \hline
-         0         & 0   & 0 \\
-         1         & 0   & 1 \\
-      \end{tabular}
-   \end{center}
-   Note that we cannot produce another element as \(0\) or \(1\) since we are restricted by the modulo operation.
-   \[\bar{1} + \bar{1} = \bar{2} = \bar{0}\]
+   \(\forall n \in \mathbb{Z}\) is
+   \[\varphi_n: \mathbb{Z} \to \mathbb{Z}/_{n\mathbb{Z}}\]
+   a homomorphism of unitary rings which is always surjective.
 \end{example}
 
-In a next step we can use \(\mathbb{F}_2\) to define a polynomial ring \(\mathbb{F}_2 [x]\) of polynomials with coefficients 0 or 1.
-Its prime elements are \(T\), \(T+1\) and \(T^2 + T + 1\).
+\begin{definition}[Module Homomorphism]
+   Given \(R\)-modules \(M, N\)
+   \[f: M \to N :\iff \begin{cases}
+         \forall a, b \in M: f(a +_M b) = f(a) +_N f(b) \\
+         \forall r \in R, a \in M: f(r \cdot_M a) = r \cdot_N f(a)
+      \end{cases}\]
+\end{definition}
 
-When we now take \(R = (\mathbb{Z}_{/2\mathbb{Z}})[x]\) and choose a prime element \(n = x^2 + x + 1\) we can define a new residue field of polynomials.
-When we use the euclidean algorithm to divide with remainder we use the euclidean value \(\deg\) to determine if the remainder is small enough, that is, if we have found a proper quotient such that \(\deg(r) < \deg(b)\).
-Since we chose \(x^2 + x + 1\) as prime element we know that all remainders must have a degree less than 2 and because of how \(R\) is define we also know that the remainders coefficients can only be 1 or 0.
-\[R_{/nR} = \{\bar{0}, \bar{1}, \bar{x}, \bar{x+1}\}\]
+\subsection{Linear Maps}
+\begin{definition}[Linear Map]
+   Given \(K\)-vector spaces \(V, W\)
+   \[f: V \to W :\iff \begin{cases}
+         \forall v, w \in V: f(v +_V w) = f(v) +_W f(w) \\
+         \forall \lambda \in K,~v \in V: f(\lambda \cdot_V v) = \lambda \cdot_W f(v)
+      \end{cases}\]
+\end{definition}
+\begin{remark}
+   A linear map is a homomorphism of K-vector spaces.
+   As with other homomorphisms holds \(\ker(f) = \{0\} \iff f~\text{is injective}\).
+\end{remark}
+\begin{remark}
+   It holds that
+   \[\im(f) := \{w \in W \mid \exists v \in V: f(v) = w\} \subset W\]
+   \[\ker(f) := \{v \in V \mid f(v) = 0\} \subset V\]
+   are vector subspaces as well as
+   \[f(U) = \{w \in W \mid \exists v \in U: f(v) = w\} \subset W\]
+   \[f(Z)^{-1} = \{v \in V \mid f(v) \in Z\} \subset V\]
+   where \(U\) is a subspace of \(V\) and \(Z\) of \(W\).
+\end{remark}
 
-\begin{center}
-   \begin{tabular}{c|c c c c}
-      \(+\)   & \(0\)   & \(1\)   & \(x\)   & \(x+1\) \\ \hline
-      \(0\)   & \(0\)   & \(1\)   & \(x\)   & \(x+1\) \\
-      \(1\)   & \(1\)   & \(0\)   & \(x+1\) & \(x\)   \\
-      \(x\)   & \(x\)   & \(x+1\) & \(0\)   & \(1\)   \\
-      \(x+1\) & \(x+1\) & \(x\)   & \(1\)   & \(0\)   \\
-   \end{tabular}
-   \quad
-   \begin{tabular}{c|c c c c}
-      \(\cdot\) & \(0\) & \(1\)   & \(x\)   & \(x+1\) \\ \hline
-      \(0\)     & \(0\) & \(0\)   & \(0\)   & \(0\)   \\
-      \(1\)     & \(0\) & \(1\)   & \(x\)   & \(x+1\) \\
-      \(x\)     & \(0\) & \(x\)   & \(x+1\) & \(1\)   \\
-      \(x+1\)   & \(0\) & \(x+1\) & \(1\)   & \(x\)   \\
-   \end{tabular}
-\end{center}
-Keeping in mind that there are only coefficients with 0 or 1 we can see easily that for example
-\[x + x = 2x = 0 \quad\text{and}\quad  (x+1) + 1 = x + 2 = x \quad\text{and}\quad x + (x+1) = 2x + 1 = 1\]
-With the multiplication we write down a polynomial division with remainder of the prime element.
-\[x \cdot x = x^2 = 1 \cdot (x^2 + x + 1) + (x+1)\]
-so we see that
-\[\bar{x} \cdot \bar{x} = \bar{x^2} = \bar{x+1}\]
-which is essentially the same as above where \(\bar{2} = \bar{0}\).
+\begin{definition}[Rank of Linear Maps]\label{def:linmaprank}
+   Given a linear map \(f: V \to W\)
+   \[\rk(f) := \dim(\im(f))\]
+\end{definition}
 
-\begin{proposition}[\(\mathbb{Z}\) Homomorphism]
-   Let \(R\) be a unitary ring.
-   \[\exists! f: \mathbb{Z} \to R\]
-   a homomorphism of unitary rings (\ref{def:ring_homo}).
+\subsubsection{Linear Transformations as Matrices}
+Given the vector spaces \(K^n, K^m\) we can regard the linear maps \(f: K^n \to K^m\) between them.
+Such a linear map is uniquely identified through the images of the standard basis vectors \(e_i \in K^n\).
+\[e_i = \bordermatrix{
+      ~ &   \cr
+        & 0 \cr
+      i & 1 \cr
+        & 0 \cr
+        & \vdots} \rightsquigarrow f(e_i)\]
+\(e_i\) regarded as a matrix is a
+\begin{definition}[Column Vector]
+   A matrix where \(n = 1\)
+   \[A_{m,1} = \begin{pmatrix} a_1 \\ \vdots \\ a_m \end{pmatrix}\]
+\end{definition}
+analogous we also have the
+\begin{definition}[Row Vector]
+   A matrix where \(m = 1\)
+   \[A_{1,n} = (a_1, \ldots, a_n)\]
+\end{definition}
+
+To illustrate the point above let \(v = (v_1, \ldots, v_m) \in K^n\)
+\[v = v_1 \cdot e_1 + v_2 \cdot e_2 + \ldots + v_m \cdot e_m\]
+\[v_1 \cdot e_1 = (v_1, 0, \ldots, 0)\]
+\[v_2 \cdot e_2 = (0, v_2, \ldots, 0)\]
+\[\ldots\]
+\[f(v) = f(v_1 e_1) + f(v_2 e_2) + \ldots + f(v_m e_m) = v_1 f(e_1) + v_2 f(e_2) + \ldots + v_m f(e_m)\]
+
+As we will see in \cref{def:matrix_mult} is the resulting vector \(f(v) \in K^m\) a product of matrices \(A \cdot v\).
+To create such a matrix \(A\) we write the images of all \(e_i\) as column vectors side by side in an \(n\)-tuple of elements in \(K^m\).
+Then we can regard \(f\) through the following
+
+\begin{definition}[\(L_A\)]\label{def:left_mat_mult}
+   Given \(A \in \Mat_{m,n}(K)\) and the column vector \(x \in \Mat_{m,1}(K)\)
+   \[L_{A} := \Mat_{m,1}(K) \to \Mat_{1,n}(K) \quad\text{where}\quad x \mapsto A \cdot x\]
+\end{definition}
+\begin{remark}
+   It can be proven that
+   \[\forall f: K^n \to K^m~\exists A \in \Mat_{m,n}(K): f(x) = A \cdot x = L_{A}(x)\]
+   This means that every linear map \(f: K^n \to K^m\) can be represented by a matrix \(A\).
+   In the case of a \textit{linear transformation} \(f: \mathbb{R}^n \to \mathbb{R}^m\) we call \(A\) a \textit{transformation matrix}.
+\end{remark}
+
+\begin{proposition}[\(\Hom_K(K^n, K^m) \cong \Mat_{m,n}(K)\)]\label{pro:linmap_mat_iso}
+   Let \(K\) be a field and \(m, n \in \mathbb{N}\).
+
+   The evaluation of \(f: K^n \to K^m\) at \(e_1, \ldots, e_n \in K^n\) results in an isomorphism of K-vector spaces
+   \[\Hom_K(K^n, K^m) \xrightarrow{\sim} \Mat_{m,n}(K)\]
 \end{proposition}
+\begin{remark}
+   Because this isomorphism exists we say that the set of linear maps and matrices are isomorphic.
+   \[\Hom_K(K^n, K^m) \cong \Mat_{m,n}(K)\]
+   Two isomorphic objects (in our case a linear map and a matrix) cannot be distinguished by using only the properties used to define morphisms; thus isomorphic objects may be considered the same.
+   This leads us to the following definitions
+   \[\im(A) := \im(L_A) \qquad\text{and}\qquad \ker(A) := \ker(L_A)\]
+\end{remark}
+
+Now we can use \cref{pro:linmap_mat_iso} to see how the matrix multiplication is defined.
+We can regard it as the composition of two linear maps \(f\) and \(g\) which correspond to two matrices \(A\) and \(B\).
+The following linear map
+\[\Hom_K(K^n, K^m) \times \Hom_K(K^l, K^n) \to \Hom_K(K^l, K^m)\]
+\[(f, g) \mapsto f \circ g\]
+\[K^l \xrightarrow{g} K^n \xrightarrow{f} K^m\]
+represents the matrix multiplication of two matrices \(A\) and \(B\)
+\[\Mat_{m,n}(K) \times \Mat_{n,l}(K) \to \Mat_{m,l}(K)\]
+\[(A, B) \mapsto A \cdot B\]
+to illustrate:
+\[f \in \Hom_K(K^n, K^m) \cong \Mat_{m,n}(K) \ni A\]
+\[g \in \Hom_K(K^l, K^n) \cong \Mat_{n,l}(K) \ni B\]
+\[g \circ f \in \Hom_K(K^l, K^m) \cong \Mat_{m,l}(K) \ni A \cdot B\]
+
+\begin{example}
+   Let \(f: \mathbb{R}^2 \to \mathbb{R}^2\) be defined as \(f(x, y) := (x - y, y - x)\).
+   We construct the corresponding matrix \(A\).
+   \[f(e_1) = f(1, 0) = (1, -1)\]
+   \[f(e_2) = f(0, 1) = (-1, 1)\]
+   \[A = \bordermatrix{
+         ~ & f(e_1)  & f(e_2) \cr
+           & 1       & -1     \cr
+           & -1      & 1      \cr
+   }\]
+
+   If we now take \(x = (2, 5) \in \mathbb{R}^2\) we see that
+   \[f(x) = (2 - 5, 5 - 2) = (-3, 3)\]
+   \[A \cdot x = \begin{pmatrix} 1 & -1 \\ -1 & 1\end{pmatrix} \cdot \begin{pmatrix}2 \\ 5\end{pmatrix} = \begin{pmatrix}2 + (-5) \\ (-2) + 5\end{pmatrix} = \begin{pmatrix}-3 \\ 3\end{pmatrix}\]
+
+   Now let \(g: \mathbb{R}^3 \to \mathbb{R}^2\) be defined as \(g(x, y, z) := (x, z)\) the corresponding matrix
+   \[B = \bordermatrix{
+         ~ & g(e_1) & g(e_2) & g(e_3) \cr
+           & 1      & 0      & 0      \cr
+           & 0      & 0      & 1      \cr
+   }\]
+   Now we have first to calculate \(A \cdot B\)
+   \[A \cdot B = \begin{pmatrix}1 & -1 \\ -1 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\ 0 & 0 & 1\end{pmatrix} = \begin{pmatrix}1 & 0 & -1\\ -1 & 0 & 1\end{pmatrix}\]
+
+   To illustrate the main point we take \(x = (2, 3, 5) \in \mathbb{R}^3\)
+   \[(f \circ g)(x) = f(g(2, 3, 5)) = f(2, 5) = (-3, 3)\]
+   \[(A \cdot B) \cdot x = \begin{pmatrix}1 & 0 & -1\\ -1 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}2 & 3 & 5\end{pmatrix} = \begin{pmatrix}-3\\3\end{pmatrix}\]
+\end{example}
+
+\begin{theorem}[\(\rk(A) = \rk(L_A)\)]
+   Given a matrix \(A \in \Mat_{m,n}(K)\) and the linear map \(L_{A}: K^n \to K^m\) (\ref{def:left_mat_mult})
+   \[\rk(A) = \rk(L_A)\]
+\end{theorem}
+\begin{proof}
+   \(\im(L_{A}) = \spanv_K(A \cdot e_1, \ldots, A \cdot e_n)\)
+   \[\rk(A) = \dim(\SR(A)) = \dim(\spanv_K(Ae_1, \ldots, Ae_n)) = \dim(\im(L_{A})) = \rk(L_{A})\]
+\end{proof}
+
+\subsection{Isometries - Linear Maps of Metric Spaces}
+An isometry is a distance preserving transformation between metric spaces.
+\begin{definition}[Isometry]
+   Given two metric spaces \(X, Y\)
+   \[f: X \xrightarrow{\sim} Y :\iff \forall a, b \in X: d_X(a, b) = d_Y\big(f(a), f(y)\big)\]
+\end{definition}
+\begin{remark}
+   As we've seen before, this applies to normed spaces aswell since we can always define a metric based on a norm, hence for \(f: V \to W\) we write
+   \[\|v - w\|_V = \|f(v) - f(w)\|_W\]
+   Important to note however is that every isometry on a euclidean vector space also preserves angles.
+\end{remark}
+\begin{remark}
+   An isometry is always injective.
+\end{remark}
+\begin{example}
+   Any reflection, translation and rotation is a global isometry on Euclidean spaces.
+   Suppose we regard a translation
+   \[f: V \to W \qquad\text{where}\qquad v \mapsto v + v_0\]
+   we see that
+   \[\|f(v) - f(w)\|_W = \|(v + v_0) - (w + v_0)\|_V = \|v - w\|_V\]
+   Note, however, that \(f\) is not a linear map since it doesn't leave the origin in place.
+\end{example}
+
+Every isometry between Euclidean spaces where \(0_V \mapsto 0_W\) is linear.
+This statement holds more generally for real vector spaces and is the \emph{Mazur-Ulam theorem}.
+
+\begin{proposition}\label{pro:orth_group}
+   Let \(V\) be a finite-dimensional, Euclidean vector space and \(f \in \OG(V)\).
+
+   There exists an orthonormal basis of \(V\), such that \(f\) can be represented through a matrix
+   \[
+      \begin{pmatrix}
+         I_r    & 0      & \cdots & \cdots & 0\\
+         0      & -I_s   & \ddots &        & \vdots \\
+         \vdots & \ddots & R_1    & \ddots & \vdots \\
+         \vdots &        & \ddots & \ddots & 0\\
+         0      & \cdots & \cdots & 0      & R_t\\
+      \end{pmatrix} \qquad\text{where}\qquad R_i := \begin{pmatrix}
+         \cos(\theta_i) & -\sin(\theta_i)\\
+         \sin(\theta_i) & \cos(\theta_i)
+      \end{pmatrix}
+   \]
+   with \(r, s, t \in \mathbb{R}\) and \(\theta_i \in (0; \pi)\).
+\end{proposition}
+% TODO: process?
+\begin{remark}
+   To summarize: We know that we can represent a transformation \(f\) as a matrix \(A\).
+   Then we can regard this transformation in terms of a different basis, which is represented by \(A'\).
+   We can determine \(A'\) through a transformation matrix for the change of basis \(B\).
+   \[B^{-1}AB = A'\]
+   We get \(B\) by writing the basis vectors of the other basis as columns in \(B\).
+   Note, however, that since we choose an orthonormal basis that \(B \in \OG(n)\) so
+   \[B^TAB = A'\]
+   The proposition states that if we do this, \(A'\) is in the form shown above.
+\end{remark}
+\begin{example}
+   Suppose we have the isometry \(f: \mathbb{R}^3 \to \mathbb{R}^3\) given through
+   \[A := \frac{1}{9}\begin{pmatrix}-4&1&8\\4&8&1\\-7&4&-4\end{pmatrix}\]
+   First we check if \(A\) is indeed orthogonal, i.e. the columns of \(A\) are orthogonal
+   \[\begin{pmatrix}-\frac{4}{9}&\frac{4}{9}&-\frac{7}{9}\end{pmatrix} \cdot \begin{pmatrix}\frac{1}{9}\\\frac{8}{9}\\\frac{4}{9}\end{pmatrix} = -\frac{4}{81} + \frac{32}{81} - \frac{28}{81} = 0\]
+   \[\begin{pmatrix}-\frac{4}{9}&\frac{4}{9}&-\frac{7}{9}\end{pmatrix} \cdot \begin{pmatrix}\frac{8}{9}\\\frac{1}{9}\\-\frac{4}{9}\end{pmatrix} = -\frac{32}{81} + \frac{4}{81} + \frac{28}{81} = 0\]
+   \[\begin{pmatrix}\frac{1}{9}&\frac{8}{9}&\frac{4}{9}\end{pmatrix} \cdot \begin{pmatrix}\frac{8}{9}\\\frac{1}{9}\\-\frac{4}{9}\end{pmatrix} = \frac{8}{81} + \frac{8}{81} - \frac{16}{81} = 0\]
+   Hence \(A \in \OG(3)\).
+
+   Next we determine an orthonormal basis of \(\mathbb{R}^3\) with the eigenvectors of \(A\).
+   \[P_A = \det(A - \lambda I_3) = x^3 - 1\]
+   \[(A - 1 \cdot I_3)v =
+      \begin{pmatrix}
+         -\frac{13}{9} & \frac{1}{9} & \frac{8}{9}\\
+         \frac{4}{9} & -\frac{1}{9} & \frac{1}{9}\\
+         -\frac{7}{9} & \frac{4}{9} & -\frac{13}{9}
+         \end{pmatrix} \begin{pmatrix}v_1\\v_2\\v_3\end{pmatrix} = 0 \implies v_1 = \begin{pmatrix}1\\5\\3\end{pmatrix} \rightsquigarrow b_1 := \frac{v_1}{\|v_1\|} = \frac{1}{3\sqrt{3}}v_1
+   \]
+   % TODO: why?
+   Since we only have one eigenvector we choose two vectors such that all three are orthogonal
+   \[v_2 = \begin{pmatrix}1\\0\\-1\end{pmatrix} \rightsquigarrow b_2 := \frac{v_2}{\|v_2\|} = \frac{1}{\sqrt{2}}v_2 \qquad v_3 = \begin{pmatrix}5\\-2\\5\end{pmatrix} \rightsquigarrow b_3 := \frac{v_3}{\|v_3\|} = \frac{1}{3\sqrt{6}}v_3\]
+   Hence we have the orthonormal basis \(\{b_1, b_3, b_2\}\) this gives us
+   \[B = \begin{pmatrix}
+         \frac{1}{3\sqrt{3}} & \frac{5}{3\sqrt{6}} & \frac{1}{\sqrt{2}}\\
+         \frac{5}{3\sqrt{3}} & -\frac{2}{3\sqrt{6}} & 0\\
+         \frac{1}{3\sqrt{3}} & \frac{5}{3\sqrt{6}} & -\frac{1}{\sqrt{2}}
+   \end{pmatrix}\]
+   so we can calculate \(B^TAB\)
+   \[
+      \begin{pmatrix}
+         \frac{1}{3\sqrt{3}} & \frac{5}{3\sqrt{3}}  & \frac{1}{3\sqrt{3}}\\
+         \frac{5}{3\sqrt{6}} & -\frac{2}{3\sqrt{6}} & \frac{5}{3\sqrt{6}}\\
+         \frac{1}{\sqrt{2}}  & 0                    & -\frac{1}{\sqrt{2}}
+      \end{pmatrix} \cdot
+      \begin{pmatrix}
+         -\frac{4}{9} & \frac{1}{9} & \frac{8}{9}\\
+         \frac{4}{9} & \frac{8}{9} & \frac{1}{9}\\
+         -\frac{7}{9} & \frac{4}{9} & -\frac{4}{9}
+      \end{pmatrix} \cdot
+      \begin{pmatrix}
+         \frac{1}{3\sqrt{3}} & \frac{5}{3\sqrt{6}} & \frac{1}{\sqrt{2}}\\
+         \frac{5}{3\sqrt{3}} & -\frac{2}{3\sqrt{6}} & 0\\
+         \frac{1}{3\sqrt{3}} & \frac{5}{3\sqrt{6}} & -\frac{1}{\sqrt{2}}
+      \end{pmatrix} =
+      \begin{pmatrix}
+         1 & 0 & 0\\
+         0 & -\frac{1}{2} & -\frac{\sqrt{3}}{2}\\
+         0 & \frac{\sqrt{3}}{2} & \frac{1}{2}
+      \end{pmatrix}
+   \]
+   where we see the form from above:
+   \[
+      \begin{pmatrix}
+         1 & 0 & 0\\
+         0 & \cos\left(\frac{2\pi}{3}\right) & \sin\left(\frac{2\pi}{3}\right) \\
+         0 & -\sin\left(\frac{2\pi}{3}\right) & \cos\left(\frac{2\pi}{3}\right)
+      \end{pmatrix}
+   \]
+\end{example}
+
+\begin{proposition}\label{pro:eigenbasis}
+   Let \(V\) be a finite-dimensional, unitary vector space and \(f \in U(V)\).
+   There exists an orthonormal basis consisting of eigenvectors of \(f\) and the corresponding eigenvalues have \(|\lambda| = 1\).
+\end{proposition}
+
+\subsection{Dual Space}
+% TODO: duplicated
+\begin{definition}[Dual Space]
+   Given a K-vector space \(V\)
+   \[V^* := \Hom_K(V, K)\]
+\end{definition}
+\begin{example}
+   \[\Hom_K(V, W) := \{f: V \to W \mid f~\text{is linear}\}\]
+   with the operations
+   \[f \dotplus g := v \mapsto f(v) \dotplus g(v)\]
+   \[\lambda \cdot f := v \mapsto \lambda \cdot f(v)\]
+   is again a K-vector space.
+\end{example}
+\begin{remark}
+   \(\dim(V^*) = \dim(V)\)
+\end{remark}
+\begin{remark}
+   If \(V = K^n\) then has \(V^*\) also a standard basis \((e_{i}^*)_{i \in I}\) which is defined as
+   \[e_j^*: K^n \to K~\text{through}~ e_i \mapsto \delta_{ij} \implies
+      e^*_j(e_i) := \begin{cases}
+         1:& i = j\\
+         0:& i \neq j
+   \end{cases}\]
+   Now, given a linear map \(f: K^n \to K^m\) represented by \(A \in \Mat_{m,n}(K)\), the to \(f^*: K^{n*} \to K^{m*}\) corresponding matrix is \(A^T\).
+\end{remark}
+
+\begin{definition}[Dual Space Basis]
+   Given a \(K\)-vector space \(V\) with a basis \((b_i)_{1 \leq i \leq n}\)
+   \[b_i^\ast: V \to K \qquad\text{where}\qquad b_i^\ast(b_j) := \delta_{ij}\]
+   forms a basis \((b_i^\ast)_{1 \leq i \leq n}\) of \(V^\ast\).
+\end{definition}
+\begin{remark}
+   In the finite dimensional case we have \(V \cong V^\ast\).
+\end{remark}
+\begin{example}
+   A linear map \(a: K^n \to K\) can always be written in matrix form, let \(x \in K^n\)
+   \[a(x) = (a_1~\ldots~a_n)\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix} = \sum_{i=1}^n a_ix_i\]
+   which gives us the isomrphism
+   \[(K^n)^\ast \to K^{1 \times n} \qquad\text{where}\qquad a \mapsto (a_1~\ldots~a_n)\]
+\end{example}
+
+\begin{definition}[Dual Map]
+   Given a linear map \(f: V \to W\) between \(K\)-vector spaces
+   \[f^\ast: W^\ast \to V^\ast \qquad\text{where}\qquad f^\ast(a) := a \circ f \in V^\ast\]
+\end{definition}
+\begin{example}
+   \(A \in \Mat_{m,n}(K)\) defines the linear map \(f: K^n \to K^m\) through \(x \mapsto Ax\).
+   So we have
+   \[f^\ast: (K^m)^\ast \to (K^n)^\ast \quad\text{where}\quad (x \in K^m \mapsto (a_1~\ldots~a_m)x) \mapsto (y \in K^n \mapsto (a_1~\ldots~a_m)Ay)\]
+   Hence we have \((K^n)^\ast \cong \Mat_{1,n}(K)\) and \((K^m)^\ast \cong \Mat_{1,m}(K)\).
+   This means our dual map is
+   \[\Mat_{1,n}(K) \to \Mat_{1,m}(K) \qquad\text{where}\qquad (a_1~\ldots~a_n) \mapsto (a_1~\ldots~a_n)A\]
+   Thus the representation matrix of \(f^\ast: (K^n)^\ast \to (K^m)^\ast\) is \(A^T\).
+\end{example}
+
+\begin{definition}[Bi-Dual Space]
+   The dual space of \(V^\ast\).
+\end{definition}
+\begin{remark}
+   Through \(v \mapsto \big((f: V \to K) \mapsto f(v)\big)\) we have a linear map \(V \to V^{\ast\ast}\).
+\end{remark}
 
 \begin{proposition}
-   Let \(K\) be a field and \(f: \mathbb{Z} \to K\) the homomorphism of unitary rings.
-
-   If \(f\) is not injective, the smallest positive whole number \(p \in \ker\) is prime.
-   Further induces \(f\) a field embedding \(\mathbb{F}_p \to K\).
-   \[\ker(f) = p\mathbb{Z}\]
-
-   Is \(f\) injective it follows that \(p = 0\), which means that \(\ker(f)\) is trivial.
-   Also there exists a unique extension to a field embedding \(\mathbb{Q} \to K\).
+   Given a \(K\)-vector space \(V\), the linear map \(V \to V^\ast\) is injective.
 \end{proposition}
+\begin{remark}
+   This comes natural: suppose \(W\) is another vector space an \(f: V \to W\) linear, then we have
+   \begin{center}
+      \begin{tikzcd}
+         V \arrow{d} \arrow{r}{f} & W \arrow{d}\\
+         V^{\ast\ast} \arrow{r}{f^{\ast\ast}} & W^{\ast\ast}\\
+      \end{tikzcd}
+   \end{center}
+\end{remark}
+
 
 \section{Multilinear Algebra}
 \subsection{Multilinear Maps}
@@ -4124,1317 +5450,3 @@ Since the construction would be isomorphic if we changed the basis, our choice o
    There is a natural map (i.e. compatible with \(A' \to A\)) \(A \to A^{\ast\ast}\) to the bidual, sending \(a \in A\) to the evaluation map at \(a\).
    When this is an isomorphism we say that \(A\) is a \emph{reflexive} \(R\)-module.
 \end{example}
-
-\newpage
-
-\section{Homomorphisms}
-A \emph{homomorphism} is a \emph{structure-preserving} map (meaning it preserves the operations of the structures) between two algebraic structures of the same type (e.g. two groups).
-
-This means a map \(f: A \to B\) between two sets \(A, B\) equipped with the same structure such that, if \(\cdot\) is an operation of the structure (supposed here, for simplification, to be a binary operation), then
-\[f(x\cdot y) = f(x) \cdot f(y),~\forall x,y \in A\]
-We say that \(f\) \emph{preserves} the operation or is \emph{compatible} with the operation.
-
-\subsection{Definition \& Terminology}
-\begin{definition}[Homomorphism Kernel]
-   Given a homomorphism \(f\)
-   \[\ker(f) = f^{-1}(0) := \{v \in V \mid f(v) = 0_W\}\]
-\end{definition}
-\begin{remark}
-   The kernel of a homomorphism measures the degree to which the homomorphism fails to be injective.
-   \[f~\text{injective} \iff \ker(f) = \{0\}\]
-   This is to say the kernel is \emph{trivial} i.e. only contains the identity element.
-   The kernel of a matrix is
-   \[\ker(A) := \{v \in K^n \mid A \cdot v = 0\}\]
-\end{remark}
-
-\begin{definition}[Monomorphism]
-   An injective homomorphism.
-\end{definition}
-
-\begin{definition}[Epimorphism]
-   A surjective homomorphism.
-\end{definition}
-
-\begin{definition}[Isomorphism]
-   A bijective homomorphism.
-\end{definition}
-
-\begin{definition}[Endomorphism]
-   A homomorphism, mapping a structure onto itself.
-\end{definition}
-\begin{remark}[Notation]
-   \(f: A \xrightarrow{\simeq} A\)
-\end{remark}
-\begin{example}
-   Let \(G\) be a group, then is \(\id_G: G \xrightarrow{\simeq} G\) an endomorphism.
-\end{example}
-
-\begin{definition}[Automorphism]
-   A bijective endomorphism.
-\end{definition}
-\begin{remark}[Notation]
-   \(f: A \xrightarrow{\cong} A\)
-\end{remark}
-
-\subsection{Homomorphisms of Algebraic Structures}
-\begin{definition}[Group Homomorphism]
-   Given the groups \(G, H\), \(f: G \to H\) is a group homomorphism iff
-   \[\forall a, b \in G: f(a) +_H f(b) = f(a +_G b)\]
-\end{definition}
-\begin{remark}
-   \(\ker(f)\) is a subgroup of \(G\) and \(\im(f)\) is a subgroup of \(H\).
-\end{remark}
-\begin{remark}
-   From the definition follows directly that
-   \[f(e_G) = f(e_G +_G e_G) = f(e_G) +_H f(e_G) \implies f(e_G) = e_H\]
-   \[f(a^{-1}) = \big(f(a)\big)^{-1}\]
-\end{remark}
-
-\begin{definition}[Ring Homomorphism]\label{def:ring_homo}
-   Given the rings \(R, S\), \(f: R \to S\) is a ring homomorphism iff
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\forall a, b \in R: f(a +_R b) = f(a) +_S f(b)\)
-      \item \(\forall a, b \in R: f(a \cdot_R b) = f(a) \cdot_S f(b)\)
-   \end{enumerate}
-\end{definition}
-\begin{remark}
-   For unitary rings must additionally hold that \(f(1_R) = 1_S\).
-\end{remark}
-\begin{remark}
-   Given two fields \(K\) and \(L\), every ring homomorphism \(K \to L\) is injective.
-\end{remark}
-\begin{example}
-   \(\forall n \in \mathbb{Z}\) is
-   \[\varphi_n: \mathbb{Z} \to \mathbb{Z}/_{n\mathbb{Z}}\]
-   a homomorphism of unitary rings which is always surjective.
-\end{example}
-
-\begin{definition}[Module Homomorphism]
-   Given \(R\)-modules \(M\) and \(N\), \(f: M \to N\) is a module homomorphism iff
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\forall a, b \in M: f(a + b) = f(a) + f(b)\)
-      \item \(\forall r \in R, a \in M: f(r \cdot a) = r \cdot f(a)\)
-   \end{enumerate}
-\end{definition}
-
-\subsection{Linear Maps}
-\begin{definition}[Linear Map]
-   Given \(K\)-vector spaces \(V\) and \(W\), \(f: V \to W\) is a linear map iff
-   \[\forall v, w \in V: f(v +_V w) = f(v) +_W f(w)\]
-   \[\forall \lambda \in K,~v \in V: f(\lambda \cdot_V v) = \lambda \cdot_W f(v)\]
-\end{definition}
-\begin{remark}
-   A linear map is a homomorphism of K-vector spaces.
-   As with other homomorphisms holds \(\ker(f) = \{0\} \iff f~\text{is injective}\).
-\end{remark}
-\begin{remark}
-   It holds that
-   \[\im(f) := \{w \in W \mid \exists v \in V: f(v) = w\} \subset W\]
-   \[\ker(f) := \{v \in V \mid f(v) = 0\} \subset V\]
-   are vector subspaces as well as
-   \[f(U) = \{w \in W \mid \exists v \in U: f(v) = w\} \subset W\]
-   \[f(Z)^{-1} = \{v \in V \mid f(v) \in Z\} \subset V\]
-   where \(U\) is a subspace of \(V\) and \(Z\) of \(W\).
-\end{remark}
-
-\begin{definition}[Rank of Linear Maps]\label{def:linmaprank}
-   Given a linear map \(f: V \to W\)
-   \[\rk(f) := \dim(\im(f))\]
-\end{definition}
-
-\subsection{Linear Transformations as Matrices}
-Given the vector spaces \(K^n, K^m\) we can regard the linear maps \(f: K^n \to K^m\) between them.
-Such a linear map is uniquely identified through the images of the standard basis vectors \(e_i \in K^n\).
-\[e_i = \bordermatrix{
-      ~ &   \cr
-        & 0 \cr
-      i & 1 \cr
-        & 0 \cr
-        & \vdots} \rightsquigarrow f(e_i)\]
-\(e_i\) regarded as a matrix is a
-\begin{definition}[Column Vector]
-   A matrix where \(n = 1\)
-   \[A_{m,1} = \begin{pmatrix} a_1 \\ \vdots \\ a_m \end{pmatrix}\]
-\end{definition}
-analogous we also have the
-\begin{definition}[Row Vector]
-   A matrix where \(m = 1\)
-   \[A_{1,n} = (a_1, \ldots, a_n)\]
-\end{definition}
-
-To illustrate the point above let \(v = (v_1, \ldots, v_m) \in K^n\)
-\[v = v_1 \cdot e_1 + v_2 \cdot e_2 + \ldots + v_m \cdot e_m\]
-\[v_1 \cdot e_1 = (v_1, 0, \ldots, 0)\]
-\[v_2 \cdot e_2 = (0, v_2, \ldots, 0)\]
-\[\ldots\]
-\[f(v) = f(v_1 e_1) + f(v_2 e_2) + \ldots + f(v_m e_m) = v_1 f(e_1) + v_2 f(e_2) + \ldots + v_m f(e_m)\]
-
-As we will see in \cref{def:matrix_mult} is the resulting vector \(f(v) \in K^m\) a product of matrices \(A \cdot v\).
-To create such a matrix \(A\) we write the images of all \(e_i\) as column vectors side by side in an \(n\)-tuple of elements in \(K^m\).
-Then we can regard \(f\) through the following
-
-\begin{definition}[\(L_A\)]\label{def:left_mat_mult}
-   Given \(A \in \Mat_{m,n}(K)\) and the column vector \(x \in \Mat_{m,1}(K)\)
-   \[L_{A} := \Mat_{m,1}(K) \to \Mat_{1,n}(K) \quad\text{where}\quad x \mapsto A \cdot x\]
-\end{definition}
-\begin{remark}
-   It can be proven that
-   \[\forall f: K^n \to K^m~\exists A \in \Mat_{m,n}(K): f(x) = A \cdot x = L_{A}(x)\]
-   This means that every linear map \(f: K^n \to K^m\) can be represented by a matrix \(A\).
-   In the case of a \textit{linear transformation} \(f: \mathbb{R}^n \to \mathbb{R}^m\) we call \(A\) a \textit{transformation matrix}.
-\end{remark}
-
-\begin{proposition}[\(\Hom_K(K^n, K^m) \cong \Mat_{m,n}(K)\)]\label{pro:linmap_mat_iso}
-   Let \(K\) be a field and \(m, n \in \mathbb{N}\).
-
-   The evaluation of \(f: K^n \to K^m\) at \(e_1, \ldots, e_n \in K^n\) results in an isomorphism of K-vector spaces
-   \[\Hom_K(K^n, K^m) \xrightarrow{\sim} \Mat_{m,n}(K)\]
-\end{proposition}
-\begin{remark}
-   Because this isomorphism exists we say that the set of linear maps and matrices are isomorphic.
-   \[\Hom_K(K^n, K^m) \cong \Mat_{m,n}(K)\]
-   Two isomorphic objects (in our case a linear map and a matrix) cannot be distinguished by using only the properties used to define morphisms; thus isomorphic objects may be considered the same.
-   This leads us to the following definitions
-   \[\im(A) := \im(L_A) \qquad\text{and}\qquad \ker(A) := \ker(L_A)\]
-\end{remark}
-
-Now we can use \cref{pro:linmap_mat_iso} to see how the matrix multiplication is defined.
-We can regard it as the composition of two linear maps \(f\) and \(g\) which correspond to two matrices \(A\) and \(B\).
-The following linear map
-\[\Hom_K(K^n, K^m) \times \Hom_K(K^l, K^n) \to \Hom_K(K^l, K^m)\]
-\[(f, g) \mapsto f \circ g\]
-\[K^l \xrightarrow{g} K^n \xrightarrow{f} K^m\]
-represents the matrix multiplication of two matrices \(A\) and \(B\)
-\[\Mat_{m,n}(K) \times \Mat_{n,l}(K) \to \Mat_{m,l}(K)\]
-\[(A, B) \mapsto A \cdot B\]
-to illustrate:
-\[f \in \Hom_K(K^n, K^m) \cong \Mat_{m,n}(K) \ni A\]
-\[g \in \Hom_K(K^l, K^n) \cong \Mat_{n,l}(K) \ni B\]
-\[g \circ f \in \Hom_K(K^l, K^m) \cong \Mat_{m,l}(K) \ni A \cdot B\]
-
-\begin{example}
-   Let \(f: \mathbb{R}^2 \to \mathbb{R}^2\) be defined as \(f(x, y) := (x - y, y - x)\).
-   We construct the corresponding matrix \(A\).
-   \[f(e_1) = f(1, 0) = (1, -1)\]
-   \[f(e_2) = f(0, 1) = (-1, 1)\]
-   \[A = \bordermatrix{
-         ~ & f(e_1)  & f(e_2) \cr
-           & 1       & -1     \cr
-           & -1      & 1      \cr
-   }\]
-
-   If we now take \(x = (2, 5) \in \mathbb{R}^2\) we see that
-   \[f(x) = (2 - 5, 5 - 2) = (-3, 3)\]
-   \[A \cdot x = \begin{pmatrix} 1 & -1 \\ -1 & 1\end{pmatrix} \cdot \begin{pmatrix}2 \\ 5\end{pmatrix} = \begin{pmatrix}2 + (-5) \\ (-2) + 5\end{pmatrix} = \begin{pmatrix}-3 \\ 3\end{pmatrix}\]
-
-   Now let \(g: \mathbb{R}^3 \to \mathbb{R}^2\) be defined as \(g(x, y, z) := (x, z)\) the corresponding matrix
-   \[B = \bordermatrix{
-         ~ & g(e_1) & g(e_2) & g(e_3) \cr
-           & 1      & 0      & 0      \cr
-           & 0      & 0      & 1      \cr
-   }\]
-   Now we have first to calculate \(A \cdot B\)
-   \[A \cdot B = \begin{pmatrix}1 & -1 \\ -1 & 1\end{pmatrix} \cdot \begin{pmatrix}1 & 0 & 0\\ 0 & 0 & 1\end{pmatrix} = \begin{pmatrix}1 & 0 & -1\\ -1 & 0 & 1\end{pmatrix}\]
-
-   To illustrate the main point we take \(x = (2, 3, 5) \in \mathbb{R}^3\)
-   \[(f \circ g)(x) = f(g(2, 3, 5)) = f(2, 5) = (-3, 3)\]
-   \[(A \cdot B) \cdot x = \begin{pmatrix}1 & 0 & -1\\ -1 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix}2 & 3 & 5\end{pmatrix} = \begin{pmatrix}-3\\3\end{pmatrix}\]
-\end{example}
-
-\begin{theorem}[\(\rk(A) = \rk(L_A)\)]
-   Given a matrix \(A \in \Mat_{m,n}(K)\) and the linear map \(L_{A}: K^n \to K^m\) (\ref{def:left_mat_mult})
-   \[\rk(A) = \rk(L_A)\]
-\end{theorem}
-\begin{proof}
-   \(\im(L_{A}) = \spanv_K(A \cdot e_1, \ldots, A \cdot e_n)\)
-   \[\rk(A) = \dim(\SR(A)) = \dim(\spanv_K(Ae_1, \ldots, Ae_n)) = \dim(\im(L_{A})) = \rk(L_{A})\]
-\end{proof}
-
-\subsection{Dual Space}
-% TODO: duplicated
-\begin{definition}[Dual Space]
-   Given a K-vector space \(V\)
-   \[V^* := \Hom_K(V, K)\]
-\end{definition}
-\begin{example}
-   \[\Hom_K(V, W) := \{f: V \to W \mid f~\text{is linear}\}\]
-   with the operations
-   \[f \dotplus g := v \mapsto f(v) \dotplus g(v)\]
-   \[\lambda \cdot f := v \mapsto \lambda \cdot f(v)\]
-   is again a K-vector space.
-\end{example}
-\begin{remark}
-   \(\dim(V^*) = \dim(V)\)
-\end{remark}
-\begin{remark}
-   If \(V = K^n\) then has \(V^*\) also a standard basis \((e_{i}^*)_{i \in I}\) which is defined as
-   \[e_j^*: K^n \to K~\text{through}~ e_i \mapsto \delta_{ij} \implies
-      e^*_j(e_i) := \begin{cases}
-         1:& i = j\\
-         0:& i \neq j
-   \end{cases}\]
-   Now, given a linear map \(f: K^n \to K^m\) represented by \(A \in \Mat_{m,n}(K)\), the to \(f^*: K^{n*} \to K^{m*}\) corresponding matrix is \(A^T\).
-\end{remark}
-
-\begin{definition}[Dual Space Basis]
-   Given a \(K\)-vector space \(V\) with a basis \((b_i)_{1 \leq i \leq n}\)
-   \[b_i^\ast: V \to K \qquad\text{where}\qquad b_i^\ast(b_j) := \delta_{ij}\]
-   forms a basis \((b_i^\ast)_{1 \leq i \leq n}\) of \(V^\ast\).
-\end{definition}
-\begin{remark}
-   In the finite dimensional case we have \(V \cong V^\ast\).
-\end{remark}
-\begin{example}
-   A linear map \(a: K^n \to K\) can always be written in matrix form, let \(x \in K^n\)
-   \[a(x) = (a_1~\ldots~a_n)\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix} = \sum_{i=1}^n a_ix_i\]
-   which gives us the isomrphism
-   \[(K^n)^\ast \to K^{1 \times n} \qquad\text{where}\qquad a \mapsto (a_1~\ldots~a_n)\]
-\end{example}
-
-\begin{definition}[Dual Map]
-   Given a linear map \(f: V \to W\) between \(K\)-vector spaces
-   \[f^\ast: W^\ast \to V^\ast \qquad\text{where}\qquad f^\ast(a) := a \circ f \in V^\ast\]
-\end{definition}
-\begin{example}
-   \(A \in \Mat_{m,n}(K)\) defines the linear map \(f: K^n \to K^m\) through \(x \mapsto Ax\).
-   So we have
-   \[f^\ast: (K^m)^\ast \to (K^n)^\ast \quad\text{where}\quad (x \in K^m \mapsto (a_1~\ldots~a_m)x) \mapsto (y \in K^n \mapsto (a_1~\ldots~a_m)Ay)\]
-   Hence we have \((K^n)^\ast \cong \Mat_{1,n}(K)\) and \((K^m)^\ast \cong \Mat_{1,m}(K)\).
-   This means our dual map is
-   \[\Mat_{1,n}(K) \to \Mat_{1,m}(K) \qquad\text{where}\qquad (a_1~\ldots~a_n) \mapsto (a_1~\ldots~a_n)A\]
-   Thus the representation matrix of \(f^\ast: (K^n)^\ast \to (K^m)^\ast\) is \(A^T\).
-\end{example}
-
-\begin{definition}[Bi-Dual Space]
-   The dual space of \(V^\ast\).
-\end{definition}
-\begin{remark}
-   Through \(v \mapsto \big((f: V \to K) \mapsto f(v)\big)\) we have a linear map \(V \to V^{\ast\ast}\).
-\end{remark}
-
-\begin{proposition}
-   Given a \(K\)-vector space \(V\), the linear map \(V \to V^\ast\) is injective.
-\end{proposition}
-\begin{remark}
-   This comes natural: suppose \(W\) is another vector space an \(f: V \to W\) linear, then we have
-   \begin{center}
-      \begin{tikzcd}
-         V \arrow{d} \arrow{r}{f} & W \arrow{d}\\
-         V^{\ast\ast} \arrow{r}{f^{\ast\ast}} & W^{\ast\ast}\\
-      \end{tikzcd}
-   \end{center}
-\end{remark}
-
-\subsection{Isometries}
-An isometry is a distance preserving transformation between metric spaces.
-\begin{definition}[Isometry]
-   Given two metric spaces \(X\) and \(Y\), \(f: X \xrightarrow{\sim} Y\) is an isometry iff
-   \[\forall a, b \in X: d_X(a, b) = d_Y\big(f(a), f(y)\big)\]
-\end{definition}
-\begin{remark}
-   As we've seen before, this applies to normed spaces aswell since we can always define a metric based on a norm, hence for \(f: V \to W\) we write
-   \[\|v - w\|_V = \|f(v) - f(w)\|_W\]
-   Important to note however is that every isometry on a euclidean vector space also preserves angles.
-\end{remark}
-\begin{remark}
-   An isometry is always injective.
-\end{remark}
-\begin{example}
-   Any reflection, translation and rotation is a global isometry on Euclidean spaces.
-   Suppose we regard a translation
-   \[f: V \to W \qquad\text{where}\qquad v \mapsto v + v_0\]
-   we see that
-   \[\|f(v) - f(w)\|_W = \|(v + v_0) - (w + v_0)\|_V = \|v - w\|_V\]
-   Note, however, that \(f\) is not a linear map since it doesn't leave the origin in place.
-\end{example}
-
-Every isometry between Euclidean spaces where \(0_V \mapsto 0_W\) is linear.
-This statement holds more generally for real vector spaces and is the \emph{Mazur-Ulam theorem}.
-
-\begin{proposition}\label{pro:orth_group}
-   Let \(V\) be a finite-dimensional, Euclidean vector space and \(f \in \OG(V)\).
-
-   There exists an orthonormal basis of \(V\), such that \(f\) can be represented through a matrix
-   \[
-      \begin{pmatrix}
-         I_r    & 0      & \cdots & \cdots & 0\\
-         0      & -I_s   & \ddots &        & \vdots \\
-         \vdots & \ddots & R_1    & \ddots & \vdots \\
-         \vdots &        & \ddots & \ddots & 0\\
-         0      & \cdots & \cdots & 0      & R_t\\
-      \end{pmatrix} \qquad\text{where}\qquad R_i := \begin{pmatrix}
-         \cos(\theta_i) & -\sin(\theta_i)\\
-         \sin(\theta_i) & \cos(\theta_i)
-      \end{pmatrix}
-   \]
-   with \(r, s, t \in \mathbb{R}\) and \(\theta_i \in (0; \pi)\).
-\end{proposition}
-% TODO: process?
-\begin{remark}
-   To summarize: We know that we can represent a transformation \(f\) as a matrix \(A\).
-   Then we can regard this transformation in terms of a different basis, which is represented by \(A'\).
-   We can determine \(A'\) through a transformation matrix for the change of basis \(B\).
-   \[B^{-1}AB = A'\]
-   We get \(B\) by writing the basis vectors of the other basis as columns in \(B\).
-   Note, however, that since we choose an orthonormal basis that \(B \in \OG(n)\) so
-   \[B^TAB = A'\]
-   The proposition states that if we do this, \(A'\) is in the form shown above.
-\end{remark}
-\begin{example}
-   Suppose we have the isometry \(f: \mathbb{R}^3 \to \mathbb{R}^3\) given through
-   \[A := \frac{1}{9}\begin{pmatrix}-4&1&8\\4&8&1\\-7&4&-4\end{pmatrix}\]
-   First we check if \(A\) is indeed orthogonal, i.e. the columns of \(A\) are orthogonal
-   \[\begin{pmatrix}-\frac{4}{9}&\frac{4}{9}&-\frac{7}{9}\end{pmatrix} \cdot \begin{pmatrix}\frac{1}{9}\\\frac{8}{9}\\\frac{4}{9}\end{pmatrix} = -\frac{4}{81} + \frac{32}{81} - \frac{28}{81} = 0\]
-   \[\begin{pmatrix}-\frac{4}{9}&\frac{4}{9}&-\frac{7}{9}\end{pmatrix} \cdot \begin{pmatrix}\frac{8}{9}\\\frac{1}{9}\\-\frac{4}{9}\end{pmatrix} = -\frac{32}{81} + \frac{4}{81} + \frac{28}{81} = 0\]
-   \[\begin{pmatrix}\frac{1}{9}&\frac{8}{9}&\frac{4}{9}\end{pmatrix} \cdot \begin{pmatrix}\frac{8}{9}\\\frac{1}{9}\\-\frac{4}{9}\end{pmatrix} = \frac{8}{81} + \frac{8}{81} - \frac{16}{81} = 0\]
-   Hence \(A \in \OG(3)\).
-
-   Next we determine an orthonormal basis of \(\mathbb{R}^3\) with the eigenvectors of \(A\).
-   \[P_A = \det(A - \lambda I_3) = x^3 - 1\]
-   \[(A - 1 \cdot I_3)v =
-      \begin{pmatrix}
-         -\frac{13}{9} & \frac{1}{9} & \frac{8}{9}\\
-         \frac{4}{9} & -\frac{1}{9} & \frac{1}{9}\\
-         -\frac{7}{9} & \frac{4}{9} & -\frac{13}{9}
-         \end{pmatrix} \begin{pmatrix}v_1\\v_2\\v_3\end{pmatrix} = 0 \implies v_1 = \begin{pmatrix}1\\5\\3\end{pmatrix} \rightsquigarrow b_1 := \frac{v_1}{\|v_1\|} = \frac{1}{3\sqrt{3}}v_1
-   \]
-   % TODO: why?
-   Since we only have one eigenvector we choose two vectors such that all three are orthogonal
-   \[v_2 = \begin{pmatrix}1\\0\\-1\end{pmatrix} \rightsquigarrow b_2 := \frac{v_2}{\|v_2\|} = \frac{1}{\sqrt{2}}v_2 \qquad v_3 = \begin{pmatrix}5\\-2\\5\end{pmatrix} \rightsquigarrow b_3 := \frac{v_3}{\|v_3\|} = \frac{1}{3\sqrt{6}}v_3\]
-   Hence we have the orthonormal basis \(\{b_1, b_3, b_2\}\) this gives us
-   \[B = \begin{pmatrix}
-         \frac{1}{3\sqrt{3}} & \frac{5}{3\sqrt{6}} & \frac{1}{\sqrt{2}}\\
-         \frac{5}{3\sqrt{3}} & -\frac{2}{3\sqrt{6}} & 0\\
-         \frac{1}{3\sqrt{3}} & \frac{5}{3\sqrt{6}} & -\frac{1}{\sqrt{2}}
-   \end{pmatrix}\]
-   so we can calculate \(B^TAB\)
-   \[
-      \begin{pmatrix}
-         \frac{1}{3\sqrt{3}} & \frac{5}{3\sqrt{3}}  & \frac{1}{3\sqrt{3}}\\
-         \frac{5}{3\sqrt{6}} & -\frac{2}{3\sqrt{6}} & \frac{5}{3\sqrt{6}}\\
-         \frac{1}{\sqrt{2}}  & 0                    & -\frac{1}{\sqrt{2}}
-      \end{pmatrix} \cdot
-      \begin{pmatrix}
-         -\frac{4}{9} & \frac{1}{9} & \frac{8}{9}\\
-         \frac{4}{9} & \frac{8}{9} & \frac{1}{9}\\
-         -\frac{7}{9} & \frac{4}{9} & -\frac{4}{9}
-      \end{pmatrix} \cdot
-      \begin{pmatrix}
-         \frac{1}{3\sqrt{3}} & \frac{5}{3\sqrt{6}} & \frac{1}{\sqrt{2}}\\
-         \frac{5}{3\sqrt{3}} & -\frac{2}{3\sqrt{6}} & 0\\
-         \frac{1}{3\sqrt{3}} & \frac{5}{3\sqrt{6}} & -\frac{1}{\sqrt{2}}
-      \end{pmatrix} =
-      \begin{pmatrix}
-         1 & 0 & 0\\
-         0 & -\frac{1}{2} & -\frac{\sqrt{3}}{2}\\
-         0 & \frac{\sqrt{3}}{2} & \frac{1}{2}
-      \end{pmatrix}
-   \]
-   where we see the form from above:
-   \[
-      \begin{pmatrix}
-         1 & 0 & 0\\
-         0 & \cos\left(\frac{2\pi}{3}\right) & \sin\left(\frac{2\pi}{3}\right) \\
-         0 & -\sin\left(\frac{2\pi}{3}\right) & \cos\left(\frac{2\pi}{3}\right)
-      \end{pmatrix}
-   \]
-\end{example}
-
-\begin{proposition}\label{pro:eigenbasis}
-   Let \(V\) be a finite-dimensional, unitary vector space and \(f \in U(V)\).
-   There exists an orthonormal basis consisting of eigenvectors of \(f\) and the corresponding eigenvalues have \(|\lambda| = 1\).
-\end{proposition}
-
-\section{System of Linear Equations}
-\begin{definition}[System of Linear Equations]\label{def:sys_lin_eq}
-   Consists of \(m\) equations and \(n\) variables \((x_1, \ldots, x_n)\).
-   \[a_{11} x_1 + a_{12} x_2 + \ldots + a_{1n} x_n = b_1\]
-   \[a_{21} x_1 + a_{22} x_2 + \ldots + a_{2n} x_n = b_2\]
-   \[\vdots\]
-   \[a_{m1} x_1 + a_{m2} x_2 + \ldots + a_{mn} x_n = b_m\]
-\end{definition}
-
-\begin{definition}[Homogenous System of Linear Equations]
-   A system of linear equations where
-   \[b_i = 0\]
-\end{definition}
-
-\subsection{Matrix Representation}
-The \textit{i}-th equation of a system of linear equations can be written as
-\[\left(\displaystyle\sum_{j=1}^n a_{ij} x_j = b_{ij}\right)_{1 \leq i \leq m}\]
-which reveals the structure of a matrix multiplication (\ref{def:matrix_mult})
-\[A_{m,n} \cdot x_{1,n} = b_{1,m}\]
-\[\begin{pmatrix} a_{11} x_1 + & \ldots & + a_{1n} x_n \\ \vdots & \ddots & \vdots \\ a_{m1} x_1 + & \ldots & + a_{mn} x_n\end{pmatrix} = \begin{pmatrix} b_1 \\ \vdots \\ b_m \end{pmatrix}\]
-
-\begin{definition}[Coefficient Matrix]
-   A matrix consisting of the coefficients of a system equations
-   \[A_{m,n} := \begin{pmatrix} a_{11} & \cdots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{m1} & \cdots & a_{mn}\end{pmatrix}\]
-\end{definition}
-
-\begin{definition}[Extended Coefficient Matrix]\label{def:extended_coefficient_matrix}
-   A coefficient matrix with the column vector of the solutions
-   \[(A, b) := \begin{pmatrix} a_{11} & \cdots & a_{1n} & b_1 \\ \vdots & \ddots & \vdots & \vdots \\ a_{m1} & \cdots & a_{mn} & b_m\end{pmatrix}\]
-\end{definition}
-
-\begin{definition}[Solution Set]
-   The solutions of a system of linear equations (\ref{def:sys_lin_eq}) is the set
-   \[L(A, b) := \{x \in K^n \mid A \cdot x = b\} \subset K^n\]
-\end{definition}
-\begin{remark}
-   Remind you that \(\ker(A) = \ker(f)\).
-   In a homogenous system of linear equations, the solution set is the set of all vectors, which multiplied with \(A\) result in the zero vector
-   This set is equivalent to all the elements which \(f\) maps mapped to 0.
-   This means that the \(L(A, b) = \ker(A) = \ker(f)\).
-
-   If \(L(A, b) = \emptyset \implies b \not\in \im(f)\).
-   \[L(A, b) \neq \emptyset \implies \exists x \in L(A, b) \implies L(A, b) = x + \ker(A)\]
-
-   Also important is that \(\ker(A)\) is again a vector subspace.
-   \[A \cdot x = b \implies A \cdot (x - x') = A \cdot x - A \cdot x' = b - b = 0 \implies x - x' \in \ker(A) \implies A \cdot x = A \cdot x' = b\]
-   because both \(x\) and \(x'\) are solutions to the same equation system are both contained in the solution set, which is a vector subspace.
-\end{remark}
-
-\subsection{Elementary Row Transformations}
-\begin{definition}[Single-Entry Matrix]
-   A quadratic matrix whose entry in the \textit{i}-th row and the \textit{j}-th column is 1 and all other entries are 0.
-   \[E_{ij} := (\delta_{ii'} \cdot \delta_{jj'})_{\substack{1 \leq i' \leq n \\ 1 \leq j' \leq m}}\]
-\end{definition}
-\begin{remark}
-   This means that the entry \(a_{i'j'}\) of the matrix \(E_{ij}\) is given by \(\delta_{ii'} \cdot \delta_{jj'}\) so we see that this product is 1 if and only if \(i = i' \land j = j'\) otherwise it is 0.
-   This means that exactly one entry of \(E_{ij}\) is nonzero, namely the one at row \(i\) and column \(j\).
-\end{remark}
-
-\begin{definition}[Elementary Row Transformations]\label{def:elementary_row_transformation}
-   Given \(A \in \Mat_{m, n}(K)\) and \(\lambda \in K^*\), there are three transformations
-
-   \(Z_1\): Add the \(\lambda\) multiple of \(A_{j,n}\) to the \textit{i}-th row of \(A\).
-
-   \(Z_2\): Multiply the \textit{i}-th row of \(A\) with \(\lambda\).
-
-   \(Z_3\): Switch the \textit{i}-th and the \textit{j}-th row of \(A\).
-\end{definition}
-
-\begin{definition}[Elementary Matrix]\label{def:elementary_matrix}
-   A matrix \(\in \GL_m(K)\) which differs from the identity matrix by one single elementary row operation
-   \[\text{For }Z_1: Q_{ij}(\lambda) := I_m + \lambda E_{ij} = \bordermatrix{
-      ~ &   &   &   &   &   &   \cr
-        & 1 & 0 & 0 & 0 & 0 & 0 \cr
-        & 0 & \ddots & 0 & 0 & 0 & 0 \cr
-      i & 0 & 0 & 1 & 0 & \lambda & 0 \cr
-        & 0 & 0 & 0 & 1 & 0 & 0 \cr
-      j & 0 & 0 & 0 & 0 & 1 & 0 \cr
-        & 0 & 0 & 0 & 0 & 0 & 1
-   }\]
-   \[\text{For }Z_2: S_i(\lambda) := I_m + (\lambda - 1) E_{ii} = \bordermatrix{
-      ~ &   &   &   &   &   &   \cr
-        & 1 & 0 & 0 & 0 & 0 & 0 \cr
-        & 0 & \ddots & 0 & 0 & 0 & 0 \cr
-        & 0 & 0 & 1 & 0 & 0 & 0 \cr
-      i & 0 & 0 & 0 & \lambda & 0 & 0 \cr
-        & 0 & 0 & 0 & 0 & 1 & 0 \cr
-        & 0 & 0 & 0 & 0 & 0 & 1
-   }\]
-   \[\text{For }Z_3: P_{ji} := \bordermatrix{
-      ~ &   &   &   &   &   &   \cr
-        & 1 & 0 & 0 & 0 & 0 & 0 \cr
-        & 0 & \ddots & 0 & 0 & 0 & 0 \cr
-      i & 0 & 0 & 0 & 0 & 1 & 0 \cr
-        & 0 & 0 & 0 & 1 & 0 & 0 \cr
-      j & 0 & 0 & 1 & 0 & 0 & 0 \cr
-        & 0 & 0 & 0 & 0 & 0 & 1
-   }\]
-\end{definition}
-\begin{remark}
-   To add the \(\lambda\) multiple of the \textit{j}-th row of a matrix \(A\) to its \textit{i}-th row for example we would
-   \[A' = Q_{ij}(\lambda) \cdot A\]
-   Which is exactly the same as \(Z_1\) of \cref{def:elementary_row_transformation}.
-   If we would swap the matrix multiplication as follows
-   \[A' = A \cdot Q_{ij}(\lambda)\]
-   we didn't do a row- but rather a \textit{column} transformation
-
-   In other words: lefthand multiplication results in a row transformation whereas righthand multiplication with an elementary matrix results a column transformation. (Keep in mind that for a righthand multiplication with \(P_{ji}\) its indices are swapped!)
-\end{remark}
-\begin{example}
-   Let
-   \[A = \begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 2 & -1 \\
-         1 & 5 & 0 \\
-      \end{pmatrix}
-   \]
-   we would bring \(A\) in row echelon as follows
-   \[\begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 2 & -1 \\
-         1 & 5 & 0 \\
-      \end{pmatrix} \rightsquigarrow \begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 2 & -1 \\
-         0 & 4 & -2 \\
-      \end{pmatrix} \rightsquigarrow \begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 2 & -1 \\
-         0 & 0 & 0 \\
-      \end{pmatrix}
-   \]
-   The first step was \(r_3 - r_1\) so we can construct an elementary matrix where \(a_{1,3} = -1\)
-   \[\begin{pmatrix}
-         1  & 0 & 0 \\
-         0  & 1 & 0 \\
-         -1 & 0 & 1 \\
-      \end{pmatrix} \cdot \begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 2 & -1 \\
-         1 & 5 & 0 \\
-      \end{pmatrix} = \begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 2 & -1 \\
-         0 & 4 & -2 \\
-      \end{pmatrix}
-   \]
-   then we do \(r_3 - 2r_2\) so we can construct an elementary matrix where \(a_{2,3} = -2\)
-   \[\begin{pmatrix}
-         1 & 0  & 0 \\
-         0 & 1  & 0 \\
-         0 & -2 & 1 \\
-     \end{pmatrix} \cdot
-         \begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 2 & -1 \\
-         0 & 4 & -2 \\
-      \end{pmatrix} = \begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 2 & -1 \\
-         0 & 0 & 0 \\
-      \end{pmatrix}
-   \]
-   and so we see that
-   \[\begin{pmatrix}
-         1  & 0 & 0 \\
-         0  & 1 & 0 \\
-         -1 & 0 & 1 \\
-      \end{pmatrix} \cdot \begin{pmatrix}
-         1 & 0  & 0 \\
-         0 & 1  & 0 \\
-         0 & -2 & 1 \\
-     \end{pmatrix}  \cdot \begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 2 & -1 \\
-         1 & 5 & 0 \\
-      \end{pmatrix} = \begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 2 & -1 \\
-         0 & 0 & 0 \\
-      \end{pmatrix}
-   \]
-   now we that \(A\) is in row echelon form we can also determine its kernel when we regard it as homogenous system of linear equations
-   \[0z = 0\]
-   \[2y - z = 0 \implies y = \frac{z}{2}\]
-   \[x + y + 2z = 0 \implies x + \frac{z}{2} + 2z = 0 \implies x = -\frac{5z}{2}\]
-
-   \[\ker(A) = \left\{\left(-\frac{5z}{2}, \frac{z}{2}, z\right): z \in \mathbb{Q}\right\}\]
-\end{example}
-
-\subsection{Gaussian Elimination}
-\begin{definition}[Row Echelon Form]\label{def:row_echelon}
-   \(A \in \Mat_{m,n}(K)\) is in row-echelon form if,
-
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\exists r \in \mathbb{N}: 0 \leq r \leq m\) where the rows 1 to \(r\) are non-zero and \(r+1\) to \(m\) are.
-      \item \(\forall 1 \leq i \leq r\) we regard the column index \(j_i := \min\{j \mid a_{ij} \neq 0\}\), it has to holds that
-         \[1 \leq j_1 < j_2 < \ldots < j_r \leq n\]
-   \end{enumerate}
-\end{definition}
-\begin{remark}
-   We call the column indices \textit{pivots}.
-\end{remark}
-\begin{remark}
-   We can also define a measurement of how far \(A\) is in row echelon form.
-   \[s(A) := s \in \mathbb{N}_{\leq m}\]
-   The first \(s\) rows of \(A\) are in row echelon form.
-   If \(1 \leq s < m \implies r = s\) and \(\forall s < i \leq m, 1 \leq j \leq p_s: a_{ij} = 0\).
-\end{remark}
-
-\begin{definition}[Rank of a Matrix]\label{def:mat_rank}
-   Let \(A \in \Mat_{m,n}(K)\) be a matrix in row echelon form with \(r\) pivots.
-   \[\rk(A) := r\]
-\end{definition}
-\begin{remark}
-   Differently put is the rank of a matrix its number of linear independent columns.
-\end{remark}
-
-\begin{theorem}[Gauss Elimination]
-   Every matrix \(A\) can be transformed through finite many elementary row transformations into a matrix \(\tilde{A}\) in row echelon form.
-\end{theorem}
-% TODO
-\begin{proof}
-   Let \(A \neq 0_{m,n} \in Mat_{m,n}(K)\)
-
-   We choose the collumn with the smallest index \(j_1\).
-   \[j_1 = min\{j: \exists i \text{ with } a_{ij} \neq 0\}\]
-
-   If \(a_{1j_1} \neq 0\) we can choose it, otherwise we choose an \(a_{i_1j_1} \neq 0\) and use \(Z_3\) to switch the first row with the row \(i_1\)
-   This way \(i_1\) is already the first row of \(\tilde{A}\) with \(\tilde{a}_{1j_1} = a_{i_1j_1}\).
-
-   Through transformations of \(Z_1\) we can set all entries 0 below \(\tilde{a}_{1j_1}\).
-   If \(a\) is such an entry \(a + \lambda \tilde{a}_{1j_1} = 0\) must hold, therefore we choose \(\lambda = -\frac{a}{\tilde{a}_{1j_1}}\) for \(Z_1\)
-
-   This gives us the matrix
-   \[\tilde{A}_1 = \begin{pmatrix}
-      0 & \cdots & 0 & \tilde{a}_{1j_1} & * & \cdots & * \\
-      \vdots &   & \vdots & 0 & - & - & - \\
-      \vdots &   & \vdots & \vdots & - & A_2 & - \\
-      0 & \cdots & 0 & 0 & - & - & - \\
-   \end{pmatrix}\]
-
-   Where the \(*\) are other entries.
-   The matrix \(A_2\) has \(m - 1\) rows and \(n - j_1\) columns.
-
-   In the second step we repeat it with \(A_2\).
-   We choose again the column with the smallest index, in the case of \(A_2\) it must be \(j_2 > j_1\) so that we get the next entry \(\tilde{a}_{2j_2}\).
-
-   The necessary row transformations can be applied to all rows with indexes \(2 \leq i \leq m\) without changing columns 1 to \(j_1\) since there are only 0.
-   From here on we repeat this until we have \(\tilde{A}\).
-
-   This process must come to an end because the number of rows and columns of the matrices \(A_k\) decline or \(A_k = 0_{mn}\) which also marks the end.
-
-   \[\tilde{A} = \begin{pmatrix}
-      0 & \cdots & 0 & \tilde{a}_{1j_1} & * & \cdots & * \\
-      \vdots &   & \vdots & 0 & \tilde{a}_{2j_2} & * & * \\
-      \vdots &   & \vdots & \vdots & \ddots & \ddots & \tilde{a}_{rj_r} \\
-      0 & \cdots & 0 & 0 & \cdots & \cdots & 0 \\
-   \end{pmatrix}\]
-\end{proof}
-\begin{example}
-   Given the following system of linear equations
-   \[x - y - 2z = 1\]
-   \[-2x - y + z = 0\]
-   \[x + 2y + z = -1\]
-   we have
-   \[A = \begin{pmatrix}
-         1  & -1 & -2 \\
-         -2 & -1 &  1 \\
-         1  &  2 &  1 \\
-      \end{pmatrix}
-      b = \begin{pmatrix} 1 \\ 0 \\ -1\end{pmatrix} \in \Mat_{m,n}(\mathbb{Q})
-   \]
-   we write it in the extended coefficient matrix and bring it in row echelon form with the gauss elimination
-   \[\begin{pmatrix}
-         1  & -1 & -2 &  1 \\
-         -2 & -1 &  1 &  0 \\
-         1  &  2 &  1 & -1 \\
-   \end{pmatrix} \rightsquigarrow \begin{pmatrix}
-         1  & -1 & -2 &  1 \\
-         0 & -3 &  -3 &  2 \\
-         1  &  2 &  1 & -1 \\
-   \end{pmatrix} \rightsquigarrow \begin{pmatrix}
-         1 & -1 & -2 &  1 \\
-         0 & -3 & -3 &  2 \\
-         0 &  3 &  3 & -2 \\
-   \end{pmatrix} \rightsquigarrow \begin{pmatrix}
-         1 & -1 & -2 & 1 \\
-         0 & -3 & -3 & 2 \\
-         0 &  0 &  0 & 0 \\
-   \end{pmatrix}\]
-   First \(r_2 + 2 r_1\), then \(r_3 - r_1\) and last \(r_3 + r_2\).
-   Now we rewrite this row echelon form back to a system of equations
-   \[x - y - 2z = 1\]
-   \[-3y - 3z = 2\]
-   \[0x + 0y + 0z = 0\]
-   if there is a 0 row there are two possible cases
-   \[\forall i: b_i = 0 \implies L(A, b) = K^n\]
-   \[\exists i > r: b_i \neq 0 \implies L(A, b) = \emptyset\]
-   we see that the last equation is true for any value of any of the variables.
-   We use this to express the solution set of those equations regarding an arbitrary \(z\)
-   \[-3y - 3z = 2 \implies y = -\frac{2 + 3z}{3}\]
-   \[x - \left(-\frac{2 + 3z}{3}\right) - 2z = 1 \implies x + \frac{2 + 3z - 6z}{3} = 1 \implies x = 1 - \frac{2 - 3z}{3}\]
-
-   \[L(A, b) = \left\{\left(1 - \frac{2 - 3z}{3}, -\frac{2 + 3z}{3}, z\right): z \in \mathbb{Q}\right\}\]
-\end{example}
-
-\begin{definition}[Reduced Row Echelon Form]
-   A matrix \(A \in \Mat_{m,n}\) in row echelon form is in \textit{reduced} row echelon form if
-   \[\forall 1 \leq i \leq r: a_{i, j_i} = 1\]
-   \[\forall 1 \leq i < j \leq r: a_{i, j_j} = 0\]
-\end{definition}
-\begin{example}
-   \[\begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 2 & -1 \\
-         0 & 0 & 0 \\
-      \end{pmatrix} \rightsquigarrow \begin{pmatrix}
-         1 & 1 &  2 \\
-         0 & 1 & -\frac{1}{2} \\
-         0 & 0 & 0 \\
-      \end{pmatrix} \rightsquigarrow \begin{pmatrix}
-         1 & 0 &  \frac{5}{2} \\
-         0 & 1 & -\frac{1}{2} \\
-         0 & 0 & 0 \\
-      \end{pmatrix}
-   \]
-   \[x = \frac{5}{2}z\]
-   \[y = -\frac{1}{2}z\]
-\end{example}
-
-\newpage
-
-\section{Groups}
-\subsection{Whole Numbers}
-\begin{proposition}[Abelian Group \(\mathbb{Z}\)]\label{pro:z_abelian}
-   \(\mathbb{Z}\) with
-   \[\dotplus: \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z} \quad\text{where}\quad \big([(m, n)], [(m', n')]\big) \mapsto [(m + m', n + n')]\]
-   is an abelian group.
-\end{proposition}
-\begin{proof}
-   Let \(x := [(x_1, x_2)]\), \(y := [(y_1, y_2)]\) and \(z := [(z_1, z_2)]\) where \(x_1, x_2, y_1, y_2, z_1, z_2 \in \mathbb{N}\).
-
-   \(\dotplus\) is associative and commutative because they are induced from \(+: \mathbb{N} \times \mathbb{N} \to \mathbb{N}\).
-   \begin{equation*}
-      \begin{split}
-         x \dotplus (y \dotplus z) & = [(x_1, x_2)] \dotplus \big([(y_1, y_2)] \dotplus [(z_1, z_2)]\big) = [(x_1, x_2)] \dotplus [(y_1 + z_1, y_2 + z_2)]\\
-                                   & = [(x_1 + (y_1 + z_1), x_2 + (y_2 + z_2))] = [((x_1 + y_1) + z_1, (x_2 + y_2) + z_2)]\\
-                                   & = [(x_1 + y_1, x_2 + y_2)] \dotplus [(z_1, z_2)] = \big([(x_1, x_2)] \dotplus [(y_1, y_2)]\big) \dotplus [(z_1, z_2)] = (x \dotplus y) \dotplus z
-      \end{split}
-   \end{equation*}
-
-   \begin{equation*}
-      \begin{split}
-         x \dotplus y & = [(x_1, x_2)] \dotplus [(y_1, y_2)] = [(x_1 + y_1, x_2 + y_2)]\\
-                      & = [(y_1 + x_1, y_2 + x_2)] = [(y_1, y_2)] \dotplus [(x_1, x_2)] = y \dotplus x
-      \end{split}
-   \end{equation*}
-
-   \(0 := [(0, 0)]\) is the neutral element.
-   \[x \dotplus 0 = [(x_1, x_2)] \dotplus [(0, 0)] = [(x_1 + 0, x_2 + 0)] = [(x_1, x_2)] = x\]
-
-   For \(x := [(x_1, x_2)]\) is \(x^{-1} := [(x_2, x_1)]\) the inverse since
-   \[x \dotplus x^{-1} = [(x_1, x_2)] \dotplus [(x_2, x_1)] = [(x_1 + x_2, x_2 + x_1)]\]
-   but since
-   \[x_1 + x_2 = x_2 + x_1 \implies (x_1, x_2) \sim (x_2, x_1) \implies (x_1 + x_2, x_2 + x_1) \in [(0, 0)]\]
-   hence \([(x_1 + x_2, x_2 + x_1)] = [(0, 0)] \implies x \dotplus x^{-1} = 0\).
-\end{proof}
-% 
-%    \begin{definition}[Whole Numbers]
-%       Given \(\sim\) on \(\mathbb{N} \times \mathbb{N}\) defined through
-%       \[(m_1, n_1) \sim (m_2, n_2) :\iff m_1 + n_2 = m_2 + n_1\]
-%       \[\mathbb{Z} := (\mathbb{N} \times \mathbb{N})/\sim\]
-%    \end{definition}
-%    \begin{remark}
-%       This way some \(n \in \mathbb{N}\) is identified through \([(n, 0)] \in \mathbb{Z}\).
-%    \end{remark}
-%    \begin{example}
-%       \((2, 1) \sim (4, 3)\) because \(2 + 3 = 4 + 1\)
-%    \end{example}
-
-\subsection{Matrix Groups}
-\subsubsection{General Linear Group}\label{sssec:gen_lin_grp}
-\begin{proposition}
-   Given a \(K\)-vector space \(V\), the set of invertible linear maps
-   \[\GL(V) := \{f: V \to V \mid f~\text{is linear and bijective}\}\]
-   is a group \((\GL(V), \circ, \id_V)\).
-\end{proposition}
-\begin{remark}
-   As \(f\) is bijective we refer to this group more generally as the \emph{automorphism group} denoted \(\Aut(V)\).
-\end{remark}
-
-In the case where \(V\) is finite dimensional we can represent \(f\) with a matrix and as \(f\) is bijective we know that the corresponding matrix also must be invertible.
-This brings us to the group of invertible matrices.
-
-\begin{proposition}[General Linear Group]\label{pro:glm}
-   The set of invertible matrices
-   \[\GL_n(K) := \{A \in \Mat_n(K) \mid \det(A) \neq 0\}\]
-   is a group \((\GL_n(K), \cdot, I_n)\).
-\end{proposition}
-
-\subsubsection{Orthogonal Group}
-\begin{proposition}
-   Given a Euclidean vector space \(V\), the set
-   \[\OG(V) := \{f \in \GL(V) \mid f~\text{is an isometry}~V \to V\}\]
-   is a group \((\OG(V), \circ, \id_V)\).
-\end{proposition}
-
-With the rules in the remark of \cref{def:std_scal_prod} we see for \(A \in \OG(n)\) and some \(x, y \in \mathbb{R}^n\)
-\[\langle Ax, Ay\rangle = x^TA^TAy = x^Ty = \langle x, y\rangle\]
-So we define
-\[\OG(n) := \{A \in \GL_n(\mathbb{R}) \mid x \mapsto Ax~\text{is an isometry}~\mathbb{R}^n \to \mathbb{R}^n\}\]
-
-\begin{proposition}[Orthogonal Group]
-   The set of orthogonal matrices
-   \[\OG(n) := \{A \in \GL_n(K) \mid \det(A) \in \{\pm 1\}\}\]
-   is a group \((\OG(n), \cdot, I_n)\).
-\end{proposition}
-\begin{remark}
-   It is the group of distance-preserving transformations of a Euclidean space of dimension \(n\) that preserve a fixed point
-   \[\OG(2) = \SO(2) \cup \left\{\begin{pmatrix}\cos\theta & \sin\theta\\ \sin\theta & -\cos\theta\end{pmatrix} ~\middle|~ \theta \in \mathbb{R}\right\}\]
-\end{remark}
-
-\begin{proposition}
-   Let \(G < \OG(2)\), then \(G\) is generated by rotation by \(\frac{2\pi}{n}\) and we have one of the following
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(G \subset \SO(2)\) and \(n := |G|\), i.e. \(G\) is cyclic
-      \item \(G \not\subset \SO(2)\) and \(n := \frac{1}{2} \lvert G \rvert\).
-         Furthermore \(G\) is generated by an additional reflection, i.e. \(G \cong D_n\)
-   \end{enumerate}
-\end{proposition}
-
-\subsubsection{Unitary Group}
-\begin{proposition}
-   Given a unitary vector space \(V\)
-   \[\U(V) := \{f \in \GL(V) \mid f~\text{is an isometry}~V \to V\}\]
-\end{proposition}
-
-With the rules of the remark in \cref{def:compl_scal_prod} we have for \(A \in \U(n)\)
-\[\langle Az, Aw\rangle = z^TA^T\overline{A}\overline{w} = z^T \overline{w} = \langle z, w\rangle\]
-As before we define for the orthogonal group for finite dimensional unitary vector spaces
-\[\U(n) := \{A \in \GL_n(\mathbb{C}) \mid z \mapsto Az~\text{is an isometry}~\mathbb{C}^n \to \mathbb{C}^n\}\]
-\begin{proposition}[Unitary Group]
-   The set of unitary matrices
-   \[\U(n) := \{A \in \GL_n(K) \mid \det(A) \in \{\pm 1\}\}\]
-   is a group \((\OG(n), \cdot, I_n)\).
-\end{proposition}
-
-\subsubsection{Special Orthogonal Group}
-\begin{proposition}[Special Orthogonal Group]
-   \[\SO(n) := \{A \in \OG(n) \mid \det(A) = 1\}\]
-\end{proposition}
-\begin{remark}[Terminology]
-   In the cases where \(n = 2\) or \(n = 3\) we refer to \(\SO(n)\) as the \emph{rotation group}, since its elements are rotation matrices.
-   \[\SO(2) = \left\{\begin{pmatrix}\cos\theta & -\sin\theta\\ \sin\theta & \cos\theta\end{pmatrix} ~\middle|~ \theta \in \mathbb{R}\right\}\]
-\end{remark}
-
-\begin{theorem}
-   The non-trivial subgroups of \(\SO(3)\) are
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item Cyclic groups generated by \(\frac{2\pi}{n}\) rotation for \(n \geq 2\)
-      \item Dihedral groups generated by \(\frac{2\pi}{n}\) rotation for \(n \geq 2\) and a rotation by \(\pi\) where both generators have orthogonal axes of rotation.
-      \item Tetrahedral rotation group (\(\cong A_4\))
-      \item Octahedral rotation group (\(\cong S_4\))
-      \item Icosahedral rotation group (\(\cong A_5\))
-   \end{enumerate}
-\end{theorem}
-\begin{remark}
-   Cases (iii)-(v) refer to symmetry group of the platonic solids
-\end{remark}
-
-Finally, we obtain a description of \(\SO(3)\) by relating it to the special unitary group \(\SU(2)\).
-
-\begin{proposition}
-   The conjugation action of \(\SU(2)\) on trace-zero skew-Hermitian \(\Mat_2(\mathbb{C})\) induces an isomorphism
-   \[\SU(2)_{/\{\pm I_2\}} \cong \SO(3)\]
-\end{proposition}
-
-\begin{proposition}[Special Unitary Group]
-   \[\SU(n) := \{A \in \U(n) \mid \det(A) = 1\}\]
-\end{proposition}
-\begin{remark}
-   Trace-zero, skew-hermitian matrices?
-\end{remark}
-
-\subsection{Symmetric Groups}
-\subsubsection{Permutations}
-\begin{definition}[Permutation]\label{def:permutation}
-   Given a set \(X\),
-   \[\sigma: X \xrightarrow{\sim} X\]
-\end{definition}
-\begin{example}
-   Let \(X = \{1, 2, 3\}\),
-   \[\sigma_{\id} := \begin{cases}1 \mapsto 1\\ 2 \mapsto 2 \\ 3 \mapsto 3 \end{cases} \qquad \tau := \begin{cases}1 \mapsto 3\\ 2 \mapsto 2 \\ 3 \mapsto 1 \end{cases}\]
-\end{example}
-\begin{remark}[Notation]
-   We denote the set of all permutations as \(S(X)\).
-\end{remark}
-
-\begin{definition}[Symmetric Group]
-   Given a set \(X\),
-   \[\big(S(X), \circ, \sigma_{\id}\big)\]
-\end{definition}
-
-In the special case when \(X = \{1, 2, \ldots, n\}\), the symmetric group on \(X\) is denoted \(S_n\), the \emph{symmetric group of degree n}.
-
-\begin{definition}[\(n\)th Symmetric Group]
-   Given a set \(X\) with \(n\) elements,
-   \[S_n := \big(S(X), \circ, \sigma_{\id}\big)\]
-\end{definition}
-\begin{remark}[Notation]
-   We have multiple notations to write \(\tau\) from the example above.
-   \[\tau = \begin{bmatrix}
-         1 & 2 & 3\\
-         3 & 2 & 1
-   \end{bmatrix} = [3~2~1] = (1,3)(2) = (1,3)\]
-   The last equality is called \emph{cycle decomposition}.
-   A \emph{cycle} is a string of integers which represents the element of \(S_n\) which cyclically permutes these integers and fixes all others.
-   The cycle \((a_1~a_2~\ldots~a_m)\) is the permutation where
-   \[\forall 1 \leq i \leq m-1: a_i \mapsto a_{i+1} \qquad\text{and}\qquad a_m \mapsto a_1\]
-   If \(\sigma(a) = a\) we say \(a\) is a \emph{fixpoint} which we omit in cycle decomposition.
-\end{remark}
-\begin{example}
-   Let \(\sigma = (2, 5, 1)\) and \(\tau = (1, 3, 4, 2)\) be two permutations.
-   What is \(\sigma \circ \tau\)?
-      \[\sigma = \begin{bmatrix}1&2&3&4&5\\2&5&3&4&1\end{bmatrix} \qquad \tau = \begin{bmatrix}1&2&3&4&5\\3&1&4&2&5\end{bmatrix}\]
-   The following table is useful to determine the composition.
-   We start of with 1 and then follow the permutations step by step until we reach a cycle.
-   Then we take the least \(x\) we haven't covered so far (in our case 2) and repeat the process.
-   \[\begin{array}{c|c|c|c}
-         x & \tau(x) & \sigma(\tau(x)) & m \\
-         \hline
-         1 & 3 & 3 & 1\\
-         3 & 4 & 4 & 2\\
-         4 & 2 & 5 & 3\\
-         5 & 5 & 1 & 4\\
-         \hline
-         2 & 1 & 2
-      \end{array}\]
-      so we get of the first column: \(\sigma \circ \tau = (1, 3, 4, 5)(2) = (1, 3, 4, 5)\).
-\end{example}
-
-\begin{proposition}[Order of \(S_n\)]
-   Let \(X\) be a set with \(|X| = n\), then is
-   \[|S(X)| = n!\]
-\end{proposition}
-
-\subsubsection{Inversions}
-\begin{definition}[Inversion]
-   Given a permutation \(\sigma \in S_n\) where \(i < j\) and \(\sigma(i) > \sigma(j)\), we call the pair \((i,j)\) an \emph{inversion} of \(\sigma\).
-\end{definition}
-\begin{remark}[Intuition]
-   An inversion of a permutation is a pair of elements whose order was changed by the permutation.
-\end{remark}
-
-\begin{definition}[Set of Inversions]
-   The set of all inversions of \(\sigma \in S_n\) is denoted \(\inv(\sigma)\).
-\end{definition}
-\begin{remark}[Terminology]
-   We call \(|\inv(\sigma)|\) the \emph{inversion number}, which is a common measure of the sortedness of a permutation.
-\end{remark}
-
-\begin{definition}[Even \& Odd Permutation]
-   Given \(\sigma \in S_n\),
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\sigma\) is \emph{even} if it performs an even number of two-element swaps.
-      \item \(\sigma\) is \emph{odd} if it performs an odd number of two-element swaps.
-   \end{enumerate}
-\end{definition}
-
-\begin{definition}[Signum of Permutations]
-   Given \(\sigma \in S_n\),
-   \[\sign(\sigma) := \begin{cases}1 & \sigma~\text{is even}\\ -1 & \sigma~\text{is odd}\end{cases}\]
-\end{definition}
-\begin{remark}
-   The map \(S_n \to \{\pm 1\}\) where \(\sigma \mapsto \sign(\sigma)\) is a group homomorphism.
-\end{remark}
-
-\begin{proposition}
-   Let \(\sigma \in S_n\), then
-   \[\sign(\sigma) = (-1)^{|\inv(\sigma)|}\]
-\end{proposition}
-\begin{example}
-   Let \(\sigma = \begin{bmatrix} 1 & 2 & 3\\ 3 & 2 & 1\end{bmatrix}\), then is
-   \[\sigma(1) > \sigma(2),\quad \sigma(1) > \sigma(3) \quad\text{and}\quad \sigma(2) > \sigma(3) \quad\text{hence}\quad \inv(\sigma) = \{(1,2), (1, 3), (2, 3)\}\]
-   and so \(\sign(\sigma) = (-1)^3 = -1\).
-\end{example}
-
-\begin{definition}[Alternating Group]
-   For \(n \geq 2\) is \(A_n\) the group of all even permutations of \(S_n\).
-\end{definition}
-
-\begin{definition}[Permutation Matrix]\label{def:perm_mat}
-   Given a field \(K\) and a permutation \(\sigma \in S_n\).
-   \[P \in \Mat_n(K)~\text{where}~\forall i \in \{1, \ldots, n\}: P_{i, \sigma(i)} = 1\]
-   and all other entries are 0.
-\end{definition}
-\begin{remark}
-   In other words, the \textit{i}th column vector of \(P\) is \(e_{\sigma(i)}\).
-   \(P_{ji}\) of \cref{def:elementary_matrix} is a special kind of permutation matrix (hence the german name ``Vertauschungsmatrix'').
-\end{remark}
-\begin{example}
-   Let \(\sigma = \begin{bmatrix}1&2&3&4&5\\2&5&1&3&4\end{bmatrix}\)
-   Then is
-   \[P_\sigma = (e_{\sigma(1)}~e_{\sigma(2)}~e_{\sigma(3)}~e_{\sigma(4)}~e_{\sigma(5)}~) = (e_2~e_5~e_1~e_3~e_4) = \begin{pmatrix}0&0&1&0&0\\1&0&0&0&0\\0&0&0&1&0\\0&0&0&0&1\\0&1&0&0&0\end{pmatrix}\]
-   So it is trivial to see that \(P_{\sigma_{\id}} = I_n\).
-\end{example}
-
-\begin{proposition}
-   Let \(P\) be a permutation matrix, then
-   \[P^{-1} = P^T\]
-\end{proposition}
-
-\subsection{Dihedral Groups}\label{ssec:dihedral_groups}
-An important family of examples of groups is the class of groups whose elements are symmetries.
-\emph{Symmetry} is the intrinsic property of a mathematical object which causes it to remain invariant under certain classes of transformations (such as rotation, reflection, inversion, or more abstract operations).
-
-So an approachable introduction are the symmetries of geometric objects in the plane.
-For some \(n \in \mathbb{N}_{\geq 3}\) we denote the set of symmetries of a regular \(n\)-gon with \(D_{2n}\).
-So for \(n=3\) we regard the symmetries of a regular triangle i.e. a triangle with sides of equal length.
-
-We can describe its symmetries by first choosing a labelling \(1, \ldots, n\) of the \(n\) vertices.
-Then each symmetry can be describe uniquely by the corresponding permutation \(\sigma\) of \(\{1, \ldots, n\}\).
-For example if the symmetry puts vertex \(i\) in the place where vertex \(j\) was originally, then \(\sigma\) is the permutation sending \(i\) to \(j\).
-
-\begin{center}
-   \input{drawings/D3_example.tex}
-\end{center}
-
-We define for \(r,s \in D_{2n}\), \(rs\) to be the symmetry obtained by first applying \(s\) then \(r\).
-Note that we are viewing symmetries as functions on the \(n\)-gon, so \(rs\) is just function composition.
-This way we can make \(D_{2n}\) into a group.
-
-Let \(r\) be the rotation clockwise about the origin through \(\frac{2\pi}{n}\) radian.
-
-Let \(s\) be the reflection about the line of symmetry through vertex 1 and the origin.
-
-This way we get
-\[D_{2n} = \{1, r, r^2, \ldots, r^{n-1}, s, sr, sr^2, \ldots, sr^{n-1}\}\]
-i.e. each element can we written uniquely in the form \(s^kr^i\) with \(k = 0\) or 1 and \(0 \leq i \leq n-1\).
-\begin{proposition}
-   For the dihedral group \(D_{2n}\) holds the following
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(1, r, r^2, \ldots r^{n-1}\) are all distinct and \(r^n = 1\).
-      \item \(s^2 = 1\)
-      \item \(\forall 0 \leq i \leq n: s \neq r^i\)
-      \item \(\forall 0 \leq i,j \leq n-1: i \neq j \implies sr^i \neq sr^j\)
-      \item \(\forall 0 \leq i \leq n: r^is = sr^{-i}\)
-   \end{enumerate}
-\end{proposition}
-From (i), (ii) and (v) above follows that any product of two elements in the form \(s^kr^i\) can be reduced to another in the same form.
-For example if \(n = 12\)
-\[(sr^9)(sr^6) = s(r^9s)r^6 = s(sr^{-9})r^6 = s^2r^{-9+6} = 1 r^{-3} = r^9\]
-This means that all elements of \(D_{2n}\) can be represented by just 2 elements \(r, s\) and the relations (i), (ii) and (v).
-
-\subsection{Quaternion Group}
-\begin{definition}[Quaternion Group]
-   \[Q_8 := \{1, -1, i, -i, j, -j, k, -k\}\]
-   where
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \((-1)(-1) = 1\)
-      \item \(\forall a \in Q_8: 1a = a = a1 \quad\text{and}\quad (-1)a = -a = a(-1)\)
-      \item \(ii = jj = kk = -1\)
-      \item \(ij = k \qquad\text{and}\qquad ji = -k\)
-      \item \(jk = i \qquad\text{and}\qquad kj = -i\)
-      \item \(ki = j \qquad\text{and}\qquad ik = -j\)
-   \end{enumerate}
-\end{definition}
-
-\section{Rings}
-\subsection{Group Endomorphism Ring}
-\begin{proposition}[Unitary Ring \(\End(G)\)]
-   An abelian group \(G\) with
-   \[+: \End(G) \times \End(G) \to \End(G) \quad\text{through}\quad (f + g)(a) := f(a) + g(a)\]
-   \[\circ: \End(G) \times \End(G) \to \End(G) \quad\text{through}\quad (f \circ g)(a) := f(a) \circ g(a)\]
-   is a unitary ring of endomorphisms
-\end{proposition}
-\begin{proof}
- \((\End(G), +, \circ, \id_G)\)
-   1. We verify that \((\End(G), +, 0)\) forms an abelian group.
-
-   1.1 \(+\) is closed.
-   Let \(f, g \in \End(G)\) and \(a, b \in G\) be arbitrary, then is
-   \begin{equation*}
-      \begin{split}
-         (f + g)(a + b) & = f(a + b) + g(a + b) = f(a) + f(b) + g(a) + g(b)\\
-                        & = f(a) + g(a) + f(b) + g(b) = (f + g)(a) + (f + g)(b) \implies f + g \in \End(G)
-      \end{split}
-   \end{equation*}
-
-   1.2 \(+\) is associative.
-   Let \(f, g, h \in \End(G)\) and \(a \in G\) be arbitrary, then is
-   \begin{equation*}
-      \begin{split}
-         \big((f + g) + h\big)(a) & = (f+g)(a) + h(a) = (f(a) + g(a)) + h(a)\\
-                                  & = f(a) + (g(a) + h(a)) = f(a) + (g+h)(a) = \big(f + (g + h)\big)(a)
-      \end{split}
-   \end{equation*}
-
-   1.3 \(0_G: G \to G~\text{where}~a \mapsto 0\) is the neutral element.
-   Let \(f \in \End(G)\) and \(a \in G\) be arbitrary, then is
-   \[(f + 0_G)(a) = f(a) + 0_G(a) = f(a) + 0 = f(a)\]
-
-   1.4 \((-f)(a) := -f(a)\) is the inverse element.
-   Let \(f \in \End(G)\) and \(a \in G\) be arbitrary, then is
-   \[(f + (-f))(a) = f(a) + (-f)(a) = 0 = 0_G(a)\]
-
-   1.5 \(+\) is commutative.
-   Let \(f, g \in \End(G):\) and \(a \in G\) be arbitrary, then is
-   \[(f + g)(a) = f(a) + g(a) = g(a) + f(a) = (g + f)(a)\]
-
-   2. \(\circ\) is closed.
-   Let \(f, g \in \End(G)\) and \(a, b \in G\) be arbitrary, then is
-   \begin{equation*}
-      \begin{split}
-         (f \circ g)(a + b) & = f(g(a + b)) = f(g(a) + g(b))\\
-                            & = f(g(a)) + f(g(b)) = (f \circ g)(a) + (f \circ g)(b) \implies f \circ g \in \End(G)
-      \end{split}
-   \end{equation*}
-
-   3. We know that \(\circ\) is associative.
-
-   4. We check that \(+\) and \(\circ\) are distributive.
-   Let \(f, g, h \in \End(G)\) and \(a \in G\) be arbitrary, then is
-   \[(f \circ (g + h))(a) = f(g(a) + h(a)) = f(g(a)) + f(h(a)) = (f \circ g + f \circ h)(a)\]
-\end{proof}
-
-\subsection{Whole Numbers}
-\begin{proposition}[Commutative Unitary Ring \(\mathbb{Z}\)]\label{pro:ring_Z}
-   \(\mathbb{Z}\) is a commutative unitary ring
-\end{proposition}
-% TODO
-\begin{proof}
-   We write \(\mu_a\) for the unique endomorphism of \(\mathbb{Z}\) which maps 1 to \(a\).
-   This allows us to use \(\mu_a\) as multiplication with \(a\):
-   \[\cdot: \mathbb{Z} \times \mathbb{Z} \to \mathbb{Z} \quad\text{where}\quad a \cdot b := \mu_a(b)\]
-   \[\mu_a(1) = 1 \cdot a, \quad \mu_a(2) = 2 \cdot a, \quad\ldots\]
-   The following rules apply
-   \[(\mu_b + \mu_c)(1) = \mu_{b + c}(1)\]
-   \[(\mu_a \circ \mu_b)(1) = \mu_a(\mu_b(1)) = \mu_a(b) = a \cdot b\]
-
-   From \cref{pro:z_abelian} is \((\mathbb{Z}, +, 0)\) an abelian group.
-
-   The multiplication is associative
-   \[a \cdot (b \cdot c) = \mu_a(\mu_b(c)) = (\mu_a \circ \mu_b)(c) = \mu_{a \cdot b}(c) = (a \cdot b) \cdot c\]
-
-   Distributivity holds for \(a, b, c \in \mathbb{Z}\)
-   \[a \cdot (b + c) = \mu_a \cdot (b + c) = \mu_a(b) + \mu_a(c) = a \cdot b + a \cdot c\]
-   \[(b + c) \cdot a = \mu_{b + c}(a) = (\mu_b + \mu_c)(a) = b \cdot a + c \cdot a\]
-
-   It is a unitary ring with the neutral element \(\mu_1 := \id_{\mathbb{Z}}\)
-   \[\forall a \in \mathbb{Z}: \mu_a(1) = a \implies 1 \cdot a = a = a \cdot 1\]
-
-   It is a commutative ring \(\forall m, n \in \mathbb{Z}: m \cdot n = n \cdot m\).
-   We prove this by induction over \(n\).
-
-   \textit{IB:} \(m \cdot 0 = 0 = 0 \cdot m\)
-
-   \textit{IH:} For some \(n \in \mathbb{Z}\) holds \(m \cdot n = n \cdot m\).
-
-   \textit{IS:} Assume IH holds.
-   \[m \cdot (n + 1) = m \cdot n + m = n \cdot m + m = (n + 1) \cdot m\]
-\end{proof}
-
-\subsection{Vector Space Endomorphism Ring}
-\begin{proposition}[Endomorphism Ring]
-   \[\End_K(K^n) := \Hom_K(K^n, K^n)\]
-   \((\End_K(K^n), +, \circ, I_n, 0_n)\) is a ring.
-\end{proposition}
-
-\subsection{Matrix Ring}
-\begin{proposition}[Matrix Ring]
-   \((\Mat_n(K), +, \cdot, I_n, 0_n)\) is a ring.
-\end{proposition}
-\begin{remark}
-   The endomorphism which is represented by \(I_n\) is \(\id_{K^n}\).
-\end{remark}
-
-\subsection{Polynomial Ring}
-\begin{example}[Polynomial Rings]
-   Given a field \(K\) we define
-   \[K[x] := \{p(x) \mid \text{polynomials with coefficients in}~K\}\]
-   Then is \((K[x], +, \cdot, 0_K, 1_K)\) an integral domain, where we define
-   \[+: K[x] \times K[x] \to K[x] \quad\text{through}\quad (p, q) \mapsto \sum_{i=0}^n p_i \cdot x^i + \sum_{j=0}^m q_j \cdot x^j = \sum_{k=0}^{\max(m,n)} (p_k + q_k) \cdot x^k\]
-   \[\cdot: K[x] \times K[x] \to K[x] \quad\text{through}\quad (p, q) \mapsto \sum_{i=0}^n p_i \cdot x^i \cdot \sum_{j=0}^m q_j \cdot x^j = \sum_{k=0}^{m+n} \left(\sum_{i=0}^k (p_i \cdot q_{k-i}) \cdot x^k\right)\]
-   It holds that \(K[x]^{\times} = K^{\times}\).
-\end{example}
-
-\section{Fields}
-\begin{proposition}[\((\mathbb{Q}, +, \cdot)\) is a Field]\label{pro:Q_field}
-   With the operations
-   \[+: \mathbb{Q} \times \mathbb{Q} \to \mathbb{Q}\]
-   \begin{equation}\label{eq:Q_add}
-      \big([(a, b)], [(c, d)]\big) \mapsto \frac{a}{b} + \frac{c}{d} := \frac{a \cdot d + c \cdot b}{b \cdot d}
-   \end{equation}
-   and
-   \[\cdot: \mathbb{Q} \times \mathbb{Q} \to \mathbb{Q}\]
-   \begin{equation}\label{eq:Q_mult}
-      \big([(a, b)], [(c, d)]\big) \mapsto \frac{a}{b} \cdot \frac{c}{d} := \frac{a \cdot c}{b \cdot d}
-   \end{equation}
-   is \(\mathbb{Q}\) a field.
-\end{proposition}
-% TODO
-\begin{proof}
-   Let \(a_1, b_1, a_2, b_2 \in \mathbb{Z}\) with \(b_1, b_2 \neq 0\) and \((a_1, b_1) \sim (a_2, b_2)\)
-   \[a_1 \cdot b_2 = a_2 \cdot b_1 \implies \frac{a_1}{b_1} = \frac{a_2}{b_2} \implies \frac{a_1}{b_1} + \frac{a'}{b'} = \frac{a_2}{b_2} + \frac{a'}{b'} \implies \frac{a_1 \cdot b' + a' \cdot b_1}{b_1 \cdot b'} = \frac{a_2 \cdot b' + a' \cdot b_2}{b_2 \cdot b'} \implies\]
-   \(\implies +~\text{is well-defined}\), the process would be similar to prove the same for \(\cdot\).
-   From the operation definitions \cref{eq:Q_add}, \cref{eq:Q_mult} follows that \(\cdot, +\) are associative, commutative and also distributive.
-   They also produce the additive neutral element
-   \[0_{\mathbb{Q}} := \frac{0}{b} \forall b \in \mathbb{Z} \setminus \{0\}\]
-
-   and the multiplicative neutral and inverse
-   \[1_{\mathbb{Q}} := \frac{1}{1}\]
-   \[\forall a, b \in \mathbb{Z} \setminus \{0\}: \frac{a}{b} \cdot \frac{1}{1} = \frac{a}{b} \implies \frac{a}{b} \cdot \frac{b}{a} = \frac{1}{1}\]
-   from which follows that
-   \[\mathbb{Q}^{\times} = \mathbb{Q} \setminus \{0\} \implies \frac{a}{b} \in \mathbb{Q}: \frac{a}{b} \in \mathbb{Q}^{\times} \iff \frac{a}{b} \neq 0 \iff a \neq 0\]
-\end{proof}
-
-\section{Vector Spaces}
-\begin{example}
-   \(K^n = \{(a_1, \ldots, a_n) \mid a_1, \ldots, a_n \in K\) is a K-vector space where
-   \[(a_1, \ldots, a_n) + (b_1, \ldots, b_n) = (a_1 + b_1, \ldots, a_n + b_n)\]
-   \[\lambda \cdot (a_1, \ldots, a_n) = (\lambda \cdot a_1, \ldots, \lambda \cdot a_n)\]
-\end{example}
-
-\begin{example}
-   \(V := (\Mat_{m,n}(K), +, \cdot, 0_{m,n}, 1_K)\) is a K-vector space.
-   Vector addition is just matrix addition and scalar multiplication is defined in the obvious way (by multiplying each entry by the same scalar).
-   \[\lambda \cdot_V A := \lambda (a_{ij}) = (\lambda \cdot_K a_{ij})\]
-   \[A + B := (a_{ij}) +_V (b_{íj}) = (a_{ij} +_K b_{ij})\]
-   \[A - B := (a_{ij}) +_V (-1)(b_{ij}) = (a_{ij} -_K b_{ij})\]
-
-   \[\dim(V) = m \cdot n\]
-   When m = n the matrix is square and matrix multiplication of two such matrices produces a third.
-   This vector space of dimension \(n^2\) forms an \textit{algebra over a field}.
-   One possible choice of basis are the permutation matrices (\ref{def:perm_mat}).
-\end{example}
-
-\begin{example}
-   % todo: elaborate
-   \(K[x]\) is an infinite dimensional K-vector space.
-\end{example}
-
-\section{Normed Vector Spaces}
-\subsection{\(K^n\) Vector Space}
-For \(x \in K^n\) we define
-\begin{definition}[\(l^\infty\) Norm]
-   \[\|x\|_\infty := \max_{1 \leq k \leq n} |x_k|\]
-\end{definition}
-
-\begin{definition}[\(l^1\) Norm]
-   \[\|x\|_1 := \sum_{k=0}^n |x_k|\]
-\end{definition}
-
-\begin{definition}[\(l^2\) Norm]
-   \[\|x\|_2 := \sqrt{\sum_{k=0}^n |x_k|^2}\]
-\end{definition}
-
-We see that the following estimations hold
-\[\|x\|_\infty \leq \|x\|_1 \leq m \cdot \|x\|_\infty\]
-\[\|x\|_\infty \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_\infty\]
-\[\frac{1}{\sqrt{m}}\|x\|_1 \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_1\]
-
-\subsection{Sequence Spaces}
-Given a field \(K\) and a set of sequences \((x_n)_{n \in \mathbb{N}}\) with the operations
-\[+: \big((x_n), (y_n)\big) \mapsto (x_n + y_n)\]
-\[\cdot: \big(\lambda, (x_n)\big) \mapsto (\lambda \cdot x_n)\]
-and the 0-sequence \((0, 0, \ldots)\) as identity element, we can build the sequence spaces \(l^p\) which are special cases of \(L^p\) Lebesgue spaces.
-
-\begin{definition}[Sequences]
-   \[K^{\mathbb{N}} := \{(x_n)_{n \in \mathbb{N}} \mid \forall n \in \mathbb{N}: x_n \in K\}\]
-\end{definition}
-
-\begin{definition}[Bounded Sequences]
-   \[l^\infty := \{(x_n)_{n \in \mathbb{N}} \mid \|(x_n)\|_\infty < \infty\}\]
-\end{definition}
-\begin{remark}
-   \[\|(x_n)_{n \in \mathbb{N}}\|_\infty := \sup_{n \in \mathbb{N}} |x_n|\]
-\end{remark}
-
-\begin{definition}[Sequences with convergent Series]
-   \[l^1 := \left\{(x_n)_{n \in \mathbb{N}} \mid \|(x_n)\|_1 < \infty\right\}\]
-\end{definition}
-\begin{remark}
-   \[\|(x_n)_{n \in \mathbb{N}}\|_1 := \sum_{n=0}^\infty |x_n|\]
-\end{remark}
-
-\begin{definition}[Sequences with convergent Series]
-   \[l^2 := \left\{(x_n)_{n \in \mathbb{N}} \mid \|(x_n)\|_2 < \infty\right\}\]
-\end{definition}
-\begin{remark}
-   \[\|(x_n)_{n \in \mathbb{N}}\|_2 := \sqrt{\sum_{n=0}^\infty |x_n|^2}\]
-\end{remark}
