@@ -21,12 +21,12 @@
 \end{remark}
 
 \subsubsection{Matrix Shapes}
-\begin{definition}[Diagonal Matrix]
-   A quadratic matrix where all entries \(a_{ij} \in K\) with \(i \neq j\) are \(0\)
-\end{definition}
-
 \begin{definition}[Quadratic Matrix]
    An \(m \times n\) matrix where \(m = n\).
+\end{definition}
+
+\begin{definition}[Diagonal Matrix]
+   A quadratic matrix where all entries \(a_{ij} \in K\) with \(i \neq j\) are \(0\)
 \end{definition}
 
 \begin{definition}[Triangular Matrix]\label{def:triangular_matrix}
@@ -52,7 +52,7 @@
 \end{definition}
 
 \begin{definition}[Identity Matrix]
-   A quadratic matrix whose diagonal entries are 1.
+   A diagonal matrix whose entries are 1.
    \[I_m := (\delta_{ij})\]
 \end{definition}
 \begin{remark}
@@ -1011,44 +1011,6 @@ which reveals the structure of a matrix multiplication (\ref{def:matrix_mult})
    Every matrix \(A\) can be transformed through finite many elementary row transformations into a matrix \(\tilde{A}\) in row echelon form.
 \end{theorem}
 % TODO
-\begin{proof}
-   Let \(A \neq 0_{m,n} \in Mat_{m,n}(K)\)
-
-   We choose the collumn with the smallest index \(j_1\).
-   \[j_1 = min\{j: \exists i \text{ with } a_{ij} \neq 0\}\]
-
-   If \(a_{1j_1} \neq 0\) we can choose it, otherwise we choose an \(a_{i_1j_1} \neq 0\) and use \(Z_3\) to switch the first row with the row \(i_1\)
-   This way \(i_1\) is already the first row of \(\tilde{A}\) with \(\tilde{a}_{1j_1} = a_{i_1j_1}\).
-
-   Through transformations of \(Z_1\) we can set all entries 0 below \(\tilde{a}_{1j_1}\).
-   If \(a\) is such an entry \(a + \lambda \tilde{a}_{1j_1} = 0\) must hold, therefore we choose \(\lambda = -\frac{a}{\tilde{a}_{1j_1}}\) for \(Z_1\)
-
-   This gives us the matrix
-   \[\tilde{A}_1 = \begin{pmatrix}
-      0 & \cdots & 0 & \tilde{a}_{1j_1} & * & \cdots & * \\
-      \vdots &   & \vdots & 0 & - & - & - \\
-      \vdots &   & \vdots & \vdots & - & A_2 & - \\
-      0 & \cdots & 0 & 0 & - & - & - \\
-   \end{pmatrix}\]
-
-   Where the \(*\) are other entries.
-   The matrix \(A_2\) has \(m - 1\) rows and \(n - j_1\) columns.
-
-   In the second step we repeat it with \(A_2\).
-   We choose again the column with the smallest index, in the case of \(A_2\) it must be \(j_2 > j_1\) so that we get the next entry \(\tilde{a}_{2j_2}\).
-
-   The necessary row transformations can be applied to all rows with indexes \(2 \leq i \leq m\) without changing columns 1 to \(j_1\) since there are only 0.
-   From here on we repeat this until we have \(\tilde{A}\).
-
-   This process must come to an end because the number of rows and columns of the matrices \(A_k\) decline or \(A_k = 0_{mn}\) which also marks the end.
-
-   \[\tilde{A} = \begin{pmatrix}
-      0 & \cdots & 0 & \tilde{a}_{1j_1} & * & \cdots & * \\
-      \vdots &   & \vdots & 0 & \tilde{a}_{2j_2} & * & * \\
-      \vdots &   & \vdots & \vdots & \ddots & \ddots & \tilde{a}_{rj_r} \\
-      0 & \cdots & 0 & 0 & \cdots & \cdots & 0 \\
-   \end{pmatrix}\]
-\end{proof}
 \begin{example}
    Given the following system of linear equations
    \[x - y - 2z = 1\]
@@ -1123,7 +1085,20 @@ which reveals the structure of a matrix multiplication (\ref{def:matrix_mult})
 \newpage
 
 \section{Polynomials}
-% TODO
+\begin{definition}[Polynomial]
+   Given a field \(K\) and a family of coefficients \((a_i)_{i \in \mathbb{N}} \in K\), where \(a_n \neq 0\) and \(\forall i > n: a_i = 0\).
+
+   A polynomial \(p(x)\) of degree \(n \in \mathbb{N}\) is
+   \[p(x) := \sum_{k=0}^n a_k \cdot x^k = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0\]
+\end{definition}
+\begin{remark}
+   A polynomial of degree \(d\) is \textit{normalized} if \(a_d = 1\).
+\end{remark}
+
+\begin{definition}[Rational Function]
+   Given two polynomials \(p(x), q(x)\)
+   \[f(x) := \frac{p(x)}{q(x)}\]
+\end{definition}
 
 \newpage
 
@@ -1779,9 +1754,6 @@ More generally if \(S \subset G\) generates \(G\) then there is a unique surject
    Suppose \(G\) from above is finite.
    \[|G| = |\im(f)| \cdot |\ker(f)|\]
 \end{corollary}
-\begin{proof}
-   Follows by combining \cref{pro:index_formula} with the first isomorphism theorem.
-\end{proof}
 
 \begin{proposition}
    Let \(G, G'\) be groups, \(H' < G'\) and \(f: G \to G'\) a homomorphism, then is
@@ -1995,12 +1967,6 @@ This means that \(G\) is cyclic for every \(g\).
       \item \(G\) is abelian
    \end{enumerate}
 \end{proposition}
-\begin{proof}
-   Let \(G\) be as specified, i.e. \(\forall g \in G: g^2 = e_G\) and \(g, h \in G\).
-   \[g^2 = e_G \implies g = g^{-1} \qquad\text{and}\qquad h^2 = e_G \implies h = h^{-1}\]
-   \[(gh)^2 = e_G \implies (gh)(gh) = e_G \implies (gh) = (gh)^{-1}\]
-   But since \((gh)^{-1} = h^{-1}g^{-1}\), we must have commutativity such that \((gh)^2 = e_G\).
-\end{proof}
 
 This means that every group of order 4 is abelian.
 
@@ -2359,63 +2325,6 @@ Let \(p\) be a prime s.t. \(p \mid \lvert G\rvert\) and largest \(a \in \mathbb{
 \end{remark}
 
 \subsection{Important Examples}
-\subsubsection{Group Endomorphism Ring}
-\begin{proposition}[Unitary Ring \(\End(G)\)]
-   An abelian group \(G\) with
-   \[+: \End(G) \times \End(G) \to \End(G) \quad\text{through}\quad (f + g)(a) := f(a) + g(a)\]
-   \[\circ: \End(G) \times \End(G) \to \End(G) \quad\text{through}\quad (f \circ g)(a) := f(a) \circ g(a)\]
-   is a unitary ring of endomorphisms
-\end{proposition}
-\begin{proof}
- \((\End(G), +, \circ, \id_G)\)
-   1. We verify that \((\End(G), +, 0)\) forms an abelian group.
-
-   1.1 \(+\) is closed.
-   Let \(f, g \in \End(G)\) and \(a, b \in G\) be arbitrary, then is
-   \begin{equation*}
-      \begin{split}
-         (f + g)(a + b) & = f(a + b) + g(a + b) = f(a) + f(b) + g(a) + g(b)\\
-                        & = f(a) + g(a) + f(b) + g(b) = (f + g)(a) + (f + g)(b) \implies f + g \in \End(G)
-      \end{split}
-   \end{equation*}
-
-   1.2 \(+\) is associative.
-   Let \(f, g, h \in \End(G)\) and \(a \in G\) be arbitrary, then is
-   \begin{equation*}
-      \begin{split}
-         \big((f + g) + h\big)(a) & = (f+g)(a) + h(a) = (f(a) + g(a)) + h(a)\\
-                                  & = f(a) + (g(a) + h(a)) = f(a) + (g+h)(a) = \big(f + (g + h)\big)(a)
-      \end{split}
-   \end{equation*}
-
-   1.3 \(0_G: G \to G~\text{where}~a \mapsto 0\) is the neutral element.
-   Let \(f \in \End(G)\) and \(a \in G\) be arbitrary, then is
-   \[(f + 0_G)(a) = f(a) + 0_G(a) = f(a) + 0 = f(a)\]
-
-   1.4 \((-f)(a) := -f(a)\) is the inverse element.
-   Let \(f \in \End(G)\) and \(a \in G\) be arbitrary, then is
-   \[(f + (-f))(a) = f(a) + (-f)(a) = 0 = 0_G(a)\]
-
-   1.5 \(+\) is commutative.
-   Let \(f, g \in \End(G):\) and \(a \in G\) be arbitrary, then is
-   \[(f + g)(a) = f(a) + g(a) = g(a) + f(a) = (g + f)(a)\]
-
-   2. \(\circ\) is closed.
-   Let \(f, g \in \End(G)\) and \(a, b \in G\) be arbitrary, then is
-   \begin{equation*}
-      \begin{split}
-         (f \circ g)(a + b) & = f(g(a + b)) = f(g(a) + g(b))\\
-                            & = f(g(a)) + f(g(b)) = (f \circ g)(a) + (f \circ g)(b) \implies f \circ g \in \End(G)
-      \end{split}
-   \end{equation*}
-
-   3. We know that \(\circ\) is associative.
-
-   4. We check that \(+\) and \(\circ\) are distributive.
-   Let \(f, g, h \in \End(G)\) and \(a \in G\) be arbitrary, then is
-   \[(f \circ (g + h))(a) = f(g(a) + h(a)) = f(g(a)) + f(h(a)) = (f \circ g + f \circ h)(a)\]
-\end{proof}
-
 \subsubsection{Whole Numbers}
 \begin{proposition}[Commutative Unitary Ring \(\mathbb{Z}\)]\label{pro:ring_Z}
    \(\mathbb{Z}\) is a commutative unitary ring
@@ -2452,12 +2361,6 @@ Let \(p\) be a prime s.t. \(p \mid \lvert G\rvert\) and largest \(a \in \mathbb{
    \textit{IS:} Assume IH holds.
    \[m \cdot (n + 1) = m \cdot n + m = n \cdot m + m = (n + 1) \cdot m\]
 \end{proof}
-
-\subsubsection{Vector Space Endomorphism Ring}
-\begin{proposition}[Endomorphism Ring]
-   \[\End_K(K^n) := \Hom_K(K^n, K^n)\]
-   \((\End_K(K^n), +, \circ, I_n, 0_n)\) is a ring.
-\end{proposition}
 
 \subsubsection{Matrix Ring}
 \begin{proposition}[Matrix Ring]
@@ -2573,21 +2476,6 @@ A \emph{euclidean domain} is endowed with a \emph{euclidean function} which allo
    \[|a| := \begin{cases} a & \text{if}~a \geq 0\\ -a & \text{if}~a < 0\end{cases}\]
 \end{proposition}
 
-% TODO: move to foundations
-\begin{definition}[Polynomial]
-   Given a field \(K\) and a family of coefficients \((a_i)_{i \in \mathbb{N}} \in K\), where \(a_n \neq 0\) and \(\forall i > n: a_i = 0\).
-
-   A polynomial \(p(x)\) of degree \(n \in \mathbb{N}\) is
-   \[p(x) := \sum_{k=0}^n a_k \cdot x^k = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0\]
-\end{definition}
-\begin{remark}
-   A polynomial of degree \(d\) is \textit{normalized} if \(a_d = 1\).
-\end{remark}
-
-\begin{definition}[Rational Function]
-   Given two polynomials \(p(x), q(x)\)
-   \[f(x) := \frac{p(x)}{q(x)}\]
-\end{definition}
 
 \begin{proposition}[Euclidean Function of Polynomial Rings]
    The degree of a polynomial on \(K[x]\) is an euclidean value.
@@ -2991,9 +2879,6 @@ In the previous section we have seen that ascending chain condition on principal
 \begin{theorem}[Hilbert Basis Theorem]
    Given a neotherian ring \(R\), \(R[x]\) is also noetherian.
 \end{theorem}
-\begin{proof}
-   % TODO
-\end{proof}
 \begin{example}
    For any \(n \in \mathbb{N}\) the rings \(\mathbb{Z}[x_1, \ldots, x_n]\) and \(K[x_1, \ldots, x_n]\) for any field \(K\) are Noetherian.
 \end{example}
@@ -3414,17 +3299,6 @@ As an application, we describe polynomials, whose roots are sums respectively po
 \begin{theorem}[Subspace = Vector Space]\label{thm:subspace=vecspace}
    A vector subspace \(U \subset V\) is with the induced addition and scalar multiplication also a vector space.
 \end{theorem}
-\begin{proof}
-   We would show that \((U, \dotplus, 0_V)\) is an abelian group.
-
-   From (i) in \cref{def:vector_subspace} follows that \(U \neq \emptyset \implies \exists u \in U\).
-
-   With (ii) follows that there is a neutral element \(0_K u = 0_V \in U\).
-
-   Also from (ii) follows that there is an inverse element \(\forall u \in U: (-1)u = -u \in U\)
-
-   The commutativity and associativity in (ii) of \cref{def:vector_spaces} hold in \(U\) since they hold in \(V\).
-\end{proof}
 
 \begin{definition}[Sum of Subspaces]\label{def:subspace_sum}
    Given vector subspaces (\ref{def:vector_subspace}) \(U_1, U_2\) of a K-vectorspace \(V\)
@@ -3516,22 +3390,6 @@ As an application, we describe polynomials, whose roots are sums respectively po
    Let \(V\) be a K-vector space.
    \[(b_i)_{i \in I} \subset V~\text{is a basis of}~V \iff \forall v \in V~\exists! (\lambda_i)_{i \in I} \subset K: v = \sum_{i \in I} \lambda_i b_i\]
 \end{proposition}
-% TODO
-\begin{proof}[Proof (\(\implies\))]
-   Let \((b_i)_{i \in I}\) be a basis of \(V\).
-   As the family is a generator there exists by definition \((\lambda_i)_{i \in I}\) for a \(v \in V\).
-   Now we need to show that it's unique, so let \((\lambda_i')_{i \in I}\) be another such family.
-   Then it holds that
-   \[\sum_{i \in I} (\lambda_i - \lambda_i') b_i = 0 \implies \forall i \in I: \lambda_i = \lambda_i'\]
-   since \((v_i)\) is linear independent.
-\end{proof}
-\begin{proof}[Proof (\(\impliedby\))]
-   Let \((\lambda_i)_{i \in I}\) such that \(\forall v \in V: v = \sum_{i \in I} \lambda_i b_i\).
-   It follows that
-   \[\sum_{i \in I} \lambda_i b_i = 0 = \sum_{i \in I} 0 b_i \implies \forall i \in I: \lambda_i = 0\]
-   which means that \((b_i)\) is linear independent.
-   \(\forall v \in V~\exists (\lambda_i)_{i \in I}: v = \sum_{i \in I} \lambda_i b_i\), which means that \((b_i)\) is a generator.
-\end{proof}
 \begin{remark}
    This proposition states that a basis of a K-vector space \(V\) represents all vectors of \(V\) as a linear combination of the basis vectors.
    Differently put corresponds \((b_i)_{i \in I}\) to the linear map
@@ -3559,19 +3417,6 @@ As an application, we describe polynomials, whose roots are sums respectively po
    \[\tilde{v_i} := \begin{cases} v & i = j\\ b_i & i \neq j\end{cases}\]
    then is \((\tilde{v_i})_{i \in I}\) a basis, where we exchanged a \(b_i\) with \(v\).
 \end{lemma}
-% TODO
-\begin{proof}
-   Through \((b_i)_{i \in I}\) we have
-   \[f: \bigoplus_{i \in I} K \xrightarrow{\sim} V\]
-   Now let
-   \[g, h: \bigoplus_{i \in I} K \to \bigoplus_{i \in I} K\]
-   be defined through \(g(e_i) := e_i\) and \(h(e_i) := e_i\) for \(i \neq j\) and
-   \[g(e_j) := (\lambda_i)_{i \in I}\]
-   \[h(e_j) := \frac{1}{\lambda_j} e_j - \sum_{i \in I \setminus \{j\}} \frac{\lambda_i}{\lambda_j} e_i\]
-   We would verify that \(g \circ h = \text{id}_{\oplus K} = h \circ g\) which means that \(g\) is an isomorphism and hence
-   \[f \circ g: \bigoplus_{i \in I} K \xrightarrow{\sim} V\]
-   The corresponding basis is \((\tilde{v_i})_{i \in I}\).
-\end{proof}
 
 \subsubsection{Vector Space Dimension}
 \begin{definition}[Dimension of Vector Space]
@@ -4074,28 +3919,6 @@ So we can define
    Let \(V\) be a Euclidean vector space with \(\dim(V) = n\).
    Any orthonormal family \((v_i)_{1 \leq i \leq m} \subset V\) can be extended to an orthonormal basis \((v_i)_{1 \leq i \leq n}\) of \(V\).
 \end{proposition}
-\begin{proof}
-   According to the remark of \cref{def:orthog_fam} is \((v_i)_{1 \leq i \leq m}\) linear independent.
-
-   Now let \(W := \spanv\big((v_i)_{1 \leq i \leq m}\big)\).
-   We prove the statement by induction over \(n-m\), so it suffices to show that there exists an extension of \(m+1\) vectors.
-
-   \textit{IB:} \(n - m = 0 \implies V = W\) hence the family is a normed basis.
-
-   \textit{IH:} Suppose the statement holds for some \((v_i)_{1 \leq i \leq m}\).
-
-   \textit{IS:} \(n - m > 0 \implies W \subset V \implies \exists w \in V\setminus W\), so we claim that \(W^\perp \neq \emptyset\).
-
-   We define
-   \[w'' := w - w' \qquad\text{where}\qquad w' := \langle w, v_1 \rangle v_1 + \ldots + \langle w, v_m \rangle v_m\]
-   Then holds \(w = w' + w''\) with \(w' \in W\) and
-   \[\forall i \in [1; m]: \langle w', v_i \rangle = \langle w, v_i\rangle \langle v_i, v_i \rangle = \langle w, v_i \rangle \implies \langle w'', v_i \rangle = 0 \implies w'' \in W^\perp\]
-   \(w'\) and \(w''\) are unique with these properties.
-
-   Now let \(\lambda := \|w''\|\), then is \(\lambda^{-1} w'' \in W^\perp\) with \(\|\lambda^{-1}w''\| = 1\).
-   Then we set \(v_{m+1} = \lambda^{-1}w''\) hence \((v_i)_{1 \leq i \leq m+1}\) isan orthonormal family.
-   So according to IH we were able to extend the family to an orthonormal basis of \(V\).
-\end{proof}
 \begin{example}[Abstract Algorithm]
    For convenience we define the following projection operator
    \[\proj_u(v) := \frac{\langle v, u\rangle}{\langle u, u\rangle} u\]
@@ -4437,69 +4260,12 @@ To introduce this we also need some background.
    Then we have the isomorphism
    \[R_{/abR} \xrightarrow{\sim} R_{/aR} \oplus R_{/bR} \quad\text{where}\quad [c] \mapsto ([c], [c])\]
 \end{lemma}
-\begin{proof}
-   First we note that since \(a, b\) are coprime holds
-   \[\gcd(a, b) = 1 \implies \exists r, s \in R: 1 = ra + sb\]
-   Now we define
-   \[R_{/aR} \oplus R_{/bR} \to R_{/abR} \quad\text{through}\quad ([u], [v]) \mapsto sb[u] + ra[v]\]
-   which is the inverse of the above.
-   % TODO: finish proof
-\end{proof}
 
 \begin{theorem}[Fundamental Theorem for R-Moduln]\label{thm:fund_thm_mod}
    Let \(R\) be a Euclidean domain and \(M\) an R-module.
    \(\exists! r, s \in \mathbb{N}_0\) and \((a_i)_{i=1}^r \subset R^\times: (\forall i: a_i | a_{i+1})\) (which are unique except for multiplication with units) such that
    \[M \cong \bigoplus_{i=1}^r R_{/a_iR} \oplus R^s\]
 \end{theorem}
-\begin{proof}
-   Let \(P \subset R\) be a set of prime elements where
-   \[\forall p \in P: |\{u \in R^\times \mid up \in P\}| = 1\]
-   This means that for \(a \in R: a \neq 0\) there exists a unique \(u \in R^\times\), primefactors \((p_i)_{i \leq t} \subset P\) and \((c_i)_{i \leq t} \subset \mathbb{Z}^+\) such that
-   \[a = \prod_{i = 1}^t u \cdot p_i^{c_i}\]
-   So according to \cref{lem:chin_remainder} is
-   \[R_{/aR} \cong \bigoplus_{i = 1}^t R_{/p_i^{c_i} R}\]
-   Now let \((m_i)_{i \leq n} \subset M\) be a generator of \(M\) with minimal \(n\).
-   This gives us
-   \[f: R^n \twoheadrightarrow M\]
-   % TODO: kernel of what?
-   According to \cref{pro:fin_gen_mod} is \(\ker(f) \cong R^r\) where \(r \in \mathbb{N}: r \leq n\), hence \(R^r \subset R^n\).
-   We replace \((m_i)_{i \leq n}\) with another \(n\)-element generator and choose an appropriate basis of \(\ker(f)\).
-   Then can \(M\) be represented as follows
-   \[M \cong \coker(A) \quad\text{for}\quad A \in \Mat_{n, r}(R)\]
-   For this matrix holds according to \cref{thm:smith-normalform}.
-   \[SAT = \begin{pmatrix}a_1 & & 0\\ & \ddots & \\ 0 & & a_r\\0 & \cdots & 0\\\end{pmatrix}\]
-   where \(S\) is the transformation matrix of \(f\) and \(T\) are the vectors of the kernel-basis.
-   \begin{equation}\label{eq:struct_thm}
-      M \cong \bigoplus_{i = 1}^r R_{/a_iR} \oplus R^{n - r}
-   \end{equation}
-   where
-   \[M_{\tors} \cong \bigoplus_{i = 1}^r R_{/a_iR} \qquad\text{and}\qquad M_{/M_{\tors}} \cong R^{n-r}\]
-   Now we need to show that \((a_i)_{i \leq r}\) are unique, so we show that
-   \[a = u \cdot \prod_{p \in P} p^{c(p)}\]
-   is unique.
-
-   Let \((p_i)_{i \leq t} \subset P\) be the prime factors of \(a_r\), \((u_i)_{i=1}^r \subset R^\times\) and \((c_{ij})_{\substack{1 \leq i \leq r\\1 \leq j \leq t}} \subset \mathbb{N}\), then we can write
-   \begin{equation}\label{eq:a_repr}
-      a_1 = u_1 \cdot \prod_{i = 1}^t p_1^{c_{1t}} \quad\ldots\quad a_r = u_r \cdot \prod_{i=1}^t p_i^{c_{ri}}
-   \end{equation}
-   It holds that
-   \[\forall i: a_i | a_{i+1} \implies \forall j: c_{1j} \leq c_{2j} \leq \ldots \leq c_{rj}\]
-   Now from \cref{eq:struct_thm} and the fact that
-   \[R_{/a_iR} \cong \bigoplus_{j=1}^t R_{/p_j^{c_{ij}}R}\]
-   follows that
-   \begin{equation}\label{eq:prim_tors}
-      \forall j \in [1; t]: M(p_j) \cong \bigoplus_{i=1}^r R_{/p_j^{c_{ij}}R}
-   \end{equation}
-   where \(\forall p \in P \setminus \{p_1, \ldots, p_t\}: M(p) = 0\).
-
-   We note that
-   \[\forall j \in [1; t], l \in \mathbb{N}^+: \dim_{k_j}\Big(M[p_j^l]_{/M[p_j^{l-1}]}\Big) = |\{i \mid c_{ij} \geq l\}|\]
-   With this we see that the isomorphism-type of \(M\) determines \((p_i)_{i=1}^t\) uniquely and furthermore determines for every \(p_j\) the sequence \(c_{1j} \leq \ldots \leq c_{rj}\) uniquely.
-   This means that \((a_i)_{i\leq r}\) in \cref{eq:a_repr} is uniquely determined, except for the units \((u_i)_{i \leq r}\).
-
-   \(r\) is uniquely determined since \(r = \max\{\dim_{k_1}(M[p_1]), \ldots, \dim_{k_t}(M[p_t])\}\).
-   \(s\) is uniquely determined since \(s = \rk(M_{/M_{\tors}})\).
-\end{proof}
 
 \begin{corollary}
    Let \(f: M \to N\) be a homomorphism of \(\mathbb{Z}\)-moduln, then is
@@ -4559,8 +4325,8 @@ We say that \(f\) \emph{preserves} the operation or is \emph{compatible} with th
 
 \subsection{Homomorphisms of Algebraic Structures}
 \begin{definition}[Group Homomorphism]
-   Given the groups \(G, H\)
-   \[f: G \to H :\iff \forall a, b \in G: f(a) \ast_H f(b) = f(a \ast_G b)\]
+   Given groups \(G, H\), a map \(f: G \to H\) where
+   \[\forall a, b \in G: f(a) \ast_H f(b) = f(a \ast_G b)\]
 \end{definition}
 \begin{remark}
    \(\ker(f)\) is a subgroup of \(G\) and \(\im(f)\) is a subgroup of \(H\).
@@ -4572,11 +4338,9 @@ We say that \(f\) \emph{preserves} the operation or is \emph{compatible} with th
 \end{remark}
 
 \begin{definition}[Ring Homomorphism]\label{def:ring_homo}
-   Given the rings \(R, S\)
-   \[f: R \to S :\iff \begin{cases}
-            \forall a, b \in R: f(a +_R b) = f(a) +_S f(b) \\
-            \forall a, b \in R: f(a \cdot_R b) = f(a) \cdot_S f(b)
-      \end{cases}\]
+   Given rings \(R, S\), a map \(f: R \to S\) where
+   \[\forall a, b \in R: f(a +_R b) = f(a) +_S f(b)\]
+   \[\forall a, b \in R: f(a \cdot_R b) = f(a) \cdot_S f(b)\]
 \end{definition}
 \begin{remark}
    For unitary rings must additionally hold that \(f(1_R) = 1_S\).
@@ -4591,20 +4355,16 @@ We say that \(f\) \emph{preserves} the operation or is \emph{compatible} with th
 \end{example}
 
 \begin{definition}[Module Homomorphism]
-   Given \(R\)-modules \(M, N\)
-   \[f: M \to N :\iff \begin{cases}
-         \forall a, b \in M: f(a +_M b) = f(a) +_N f(b) \\
-         \forall r \in R, a \in M: f(r \cdot_M a) = r \cdot_N f(a)
-      \end{cases}\]
+   Given \(R\)-modules \(M, N\), a map \(f: M \to N\) where
+   \[\forall a, b \in M: f(a +_M b) = f(a) +_N f(b)\]
+   \[\forall r \in R, a \in M: f(r \cdot_M a) = r \cdot_N f(a)\]
 \end{definition}
 
 \subsection{Linear Maps}
 \begin{definition}[Linear Map]
-   Given \(K\)-vector spaces \(V, W\)
-   \[f: V \to W :\iff \begin{cases}
-         \forall v, w \in V: f(v +_V w) = f(v) +_W f(w) \\
-         \forall \lambda \in K,~v \in V: f(\lambda \cdot_V v) = \lambda \cdot_W f(v)
-      \end{cases}\]
+   Given \(K\)-vector spaces \(V, W\), a map \(f: V \to W\) where
+   \[\forall v, w \in V: f(v +_V w) = f(v) +_W f(w)\]
+   \[\forall \lambda \in K,~v \in V: f(\lambda \cdot_V v) = \lambda \cdot_W f(v)\]
 \end{definition}
 \begin{remark}
    A linear map is a homomorphism of K-vector spaces.
@@ -4728,16 +4488,12 @@ to illustrate:
    Given a matrix \(A \in \Mat_{m,n}(K)\) and the linear map \(L_{A}: K^n \to K^m\) (\ref{def:left_mat_mult})
    \[\rk(A) = \rk(L_A)\]
 \end{theorem}
-\begin{proof}
-   \(\im(L_{A}) = \spanv_K(A \cdot e_1, \ldots, A \cdot e_n)\)
-   \[\rk(A) = \dim(\SR(A)) = \dim(\spanv_K(Ae_1, \ldots, Ae_n)) = \dim(\im(L_{A})) = \rk(L_{A})\]
-\end{proof}
 
-\subsection{Isometries - Linear Maps of Metric Spaces}
+\subsection{Isometries}
 An isometry is a distance preserving transformation between metric spaces.
 \begin{definition}[Isometry]
-   Given two metric spaces \(X, Y\)
-   \[f: X \xrightarrow{\sim} Y :\iff \forall a, b \in X: d_X(a, b) = d_Y\big(f(a), f(y)\big)\]
+   Given metric spaces \(X, Y\), a map \(f: X \xrightarrow{\sim} Y\) where
+   \[\forall a, b \in X: d_X(a, b) = d_Y\big(f(a), f(y)\big)\]
 \end{definition}
 \begin{remark}
    As we've seen before, this applies to normed spaces aswell since we can always define a metric based on a norm, hence for \(f: V \to W\) we write
@@ -5167,19 +4923,6 @@ In the case where \(W\) is spanned by \((b_i)_{1 \leq i \leq m}\) with \(m \leq 
    the \emph{Sylvester signature} of \(s\).
    If \(s\) is non-degenerate i.e. \(n_0 = 0\) then we write \(\sigma(s) = (n_+, n_-)\).
 \end{remark}
-\begin{proof}
-   It is sufficient to assume that \(s\) is non-degenerate.
-   Let \(n := \dim(V)\).
-   From \cref{pro:diag_repr_mat} follows that such a basis \((b_i)_{1 \leq i \leq n}\) exists.
-   Then we can compute \(\forall i: \lambda \cdot b_i\) for \(\lambda \in \mathbb{R}^\times\) i.e. multiply every diagonal entry with \(\lambda^2\).
-   This way the positive diagonal entries result in 1 and the negative in -1.
-
-   Then there exist \(V_+, V_- \subset V\) with \(\dim(V_+) = n_+\) and \(\dim(V_-) = n_-\) such that \(s\rvert_{V_+}\) is positive definite and \(s\rvert_{V_-}\) is negative definite.
-
-   Given \(U_+ \subset V\) where \(s\rvert_{U_+}\) is positive definite we have
-   \[U_+ \cap U_- = \{0\}\]
-   This means that \(\dim(U_+) + \dim(U_-) \leq n\) and thus \(\dim(U_+) \leq n - n_- = n_+\).
-\end{proof}
 
 \subsection{Universal Properties}
 A \emph{universal property} is a method in mathematics, especially in abstract algebra, to arrive at a desired structure, without a concrete construction.
