@@ -1,3 +1,5 @@
+% TODO: look for all uses of \mod and replace them with \bmod or \pmod
+
 \section{Matrices}
 \subsection{Definition \& Terminology}
 \begin{definition}[Matrix]
@@ -1084,6 +1086,7 @@ which reveals the structure of a matrix multiplication (\ref{def:matrix_mult})
 
 \newpage
 
+% TODO: merge with polynomial ring
 \section{Polynomials}
 \begin{definition}[Polynomial]
    Given a field \(K\) and a family of coefficients \((a_i)_{i \in \mathbb{N}} \in K\), where \(a_n \neq 0\) and \(\forall i > n: a_i = 0\).
@@ -2445,6 +2448,8 @@ As we don't like to list all necessary axioms (closure, associativity, inverse, 
 \end{remark}
 
 \subsubsection{Polynomial Ring}
+Let \(R\) be a unitary commutative ring and \(x\) be an indeterminate.
+
 \begin{example}[Polynomial Rings]
    Given a field \(K\) we define
    \[K[x] := \{p(x) \mid \text{polynomials with coefficients in}~K\}\]
@@ -2984,6 +2989,35 @@ We can say that a field is a commutative unitary ring \(R\) in which every non-z
 which is to say that the units (\ref{def:units_ring}) of \(R\) is all of \(R\) except for the additive identity
 \[R^\times = R\setminus\{0\}\]
 This is summarized in axiom (ii) as a multiplicative abelian group.
+% TODO: this would actually be
+% \begin{definition}[Division Ring]
+%    Given a unitary ring \(R\) where
+%    \[\forall a \in R \exists b \in R: ab = ba = 1\]
+% \end{definition}
+% \begin{remark}
+%    A commutative division ring is called a field.
+%    Equivalently we could say that
+%    \[R^\times = R\setminus\{0\}\]
+% \end{remark}
+% 
+% \begin{definition}[Unit of a Ring]
+%    Given a ring \(R\), \(u \in R\) if \(\exists v \in R: uv = vu = 1\).
+% \end{definition}
+% \begin{remark}[Notation]
+%    The \emph{set of units} of \(R\) is denoted \(R^\times\)
+% \end{remark}
+% 
+% \begin{definition}[Zero-Divisor of a Ring]
+%    Given a ring \(R\), \(a \in R\) if \(\exists b \in R\setminus\{0\}: ab = 0 \lor ba = 0\).
+% \end{definition}
+% \begin{remark}
+%    A zero-divisor can never be a unit.
+%    Suppose that \(a \in R^\times\) and \(b \in R \setminus \{0\}\) such that \(ab = 0\).
+%    Then \(va = 1\) for some \(v \in R\), so
+%    \[b = 1b = (va)b = v(ab) = v0 = 0\]
+%    is a contradiction.
+%    This shows in particular that field contain no zero-divisors.
+% \end{remark}
 
 \begin{definition}[Field]\label{def:field}
    Given a set \(K\) with two operations
@@ -3026,13 +3060,17 @@ Then two possibilities arise: eigher all elements \(n \cdot 1\) are distinct or 
    Given a field \(K\), the subset \(L \subset K\) where \(L\) is a field in respect to the field operations of \(K\).
 \end{definition}
 
-Given two fields \(K, L\) it follows from the field definition, that ring homomorphisms \(f: K \to L\) are injective (see remark of \cref{def:ring_homo}).
-% TODO: what?
-\[\forall \alpha \in K^\times: \big(f(\alpha) \cdot f(\alpha^{-1}) = f(\alpha \cdot \alpha^{-1}) = f(1) = 1 \implies f(\alpha) \neq 0\big)\]
-
 \subsection{Important Examples}
 % TODO this is Field of Fractions of Z
 \subsubsection{Field of Fractions}
+The ring of fractions of an integral domain is always a field.
+Let \(R\) be an integral domain, we define the set \(K = R \times R\).
+In order to ensure that equivalent
+with the equivalence relation
+\[(n, d) \sim (m, b) :\iff n \cdot b = m \cdot d\]
+modeled on the property of rational
+
+
 \begin{proposition}[\((\mathbb{Q}, +, \cdot)\) is a Field]\label{pro:Q_field}
    With the operations
    \[+: \mathbb{Q} \times \mathbb{Q} \to \mathbb{Q}\]
@@ -3071,13 +3109,12 @@ When some object \(X\) is said to be embedded in another object \(Y\), the embed
 \end{definition}
 \begin{remark}[Terminology]
    We say \(f\) is an \emph{embedding} of \(K\) in \(L\) or \(K\) is \emph{embedded} in \(L\).
-   %TODO: does this actually mean that every field is embedded in every other field somehow?
-   As we know from the remark of \ref{def:ring_homo} every ring homomorphism is injective.
 \end{remark}
 
 When we speak of a \emph{field extension} we mean that an embedding of fields has been fixed.
 As \(K\) is a field we know that \(\im(f)\) is a subfield of \(L\) as the embedding is an injective homomorphism.
 This way we can identify \(K\) with a subfield of \(L\).
+%TODO: As every ring homomorphism is injective, does this actually mean that every field is embedded in every other field somehow?
 
 \begin{definition}[Field Extension]
    The superfield \(L\) of a subfield \(K \subset L\), denoted \(L/K\).
@@ -3086,49 +3123,95 @@ This way we can identify \(K\) with a subfield of \(L\).
    \(L\) is an \emph{extension field} or simply \emph{extension} of \(K\) and this pair of fields is a \emph{field extension}.
 \end{remark}
 
-\(L\) acquires a structure of \(K\)-vector space, i.e. elements of \(L\) can be viewed as vectors and elements in \(K\) as scalars.
+If \(L/K\) is any extension of fields, then the multiplication defined in \(L\) makes \(L\) into a \(K\)-vector space, i.e. elements of \(L\) can be viewed as vectors and elements in \(K\) as scalars.
 So it makes sense to ask if \(L\) is finite-dimensional as \(K\)-vector space.
 
 \begin{definition}[Degree of Field Extension]
    Given a field extension \(L/K\), its \emph{degree} is
    \[[L:K] := \dim_K(L)\]
 \end{definition}
+\begin{remark}
+   \([L:K] = 1 \iff L = K\)
+\end{remark}
 \begin{remark}[Terminology]
-   The extension is said to be \emph{finite} if \([L:K]\) is finite.
+   A \emph{finite} extension is an extension that has a finite degree.
+   Extensions of degree 2 and 3 are called \emph{quadratic} and \emph{cubic} extensions, respectively.
 \end{remark}
 
-% TODO !!!!!!!!!!!!!!!!!!!!!!!!!
+% TODO: use these examples throughout the whole section.
 % https://en.wikipedia.org/wiki/Field_extension#Examples
+\begin{example}
+   An important class of field extensions are those obtained by trying to solve equations over a given field \(K\).
+   For example if \(K = \mathbb{R}\), then the simple equation \(x^2 + 1 = 0\) does not have a solution in \(K\), as the function \(x^2\) only takes positive values.
+   The question arises whether there is some larger field \(L\) containing \(\mathbb{R}\) in which this equation does have a solution.
+   This leads us to the fact that \(\mathbb{C}\) is an extension of \(\mathbb{R}\).
+   As we know \(\mathbb{C}\) is the complex plane consisting of a real and an imaginary part.
+   That is \(\{1, i\}\) is a basis of \(\mathbb{C}\), when viewed as \(\mathbb{R}\)-vector space.
+   Hence we know that \(\dim_\mathbb{R}(\mathbb{C}) = 2\) and so \([C:R] = 2\).
+   Which means \(\mathbb{C}/\mathbb{R}\) is a finite extension.
+\end{example}
 
-\subsubsection{Algebraic and Transcendental Field Extensions}
-We will add the field \(\mathbb{Q} \subset \overline{\mathbb{Q}} \subset \mathbb{C}\), neither contained in nor containing \(\mathbb{R}\).
-This is the field consisting of all roots of polynomials with rational coefficients.
-This means that \(\overline{\mathbb{Q}}\) is the field of \emph{algebraic numbers} and \(\mathbb{C} \setminus \overline{\mathbb{Q}}\) the field of \emph{transcendental numbers}.
+Given any field \(K\) and any polynomial \(p(x) \in K[x]\) one can ask a similar question: does there exist and extension \(L\) of \(K\) containing a solution to the equation \(p(x) = 0\), i.e. containing a \emph{root} of \(p(x)\)?
+Note that we may assume here that \(p(x)\) is irreducible in \(K[x]\) since a root of any factor of \(p(x)\) is certainly a root of \(p(x)\) itself.
 
-\begin{definition}[Algebraic/Transcendental Field Element]
-   Given a field extension \(L/K\), \(l \in L\) is \emph{algebraic} over \(K\) iff
-   \[\exists p(x) \in K[x]: p(x) \neq 0 \land p(k) = 0\]
-   otherwise we say \(k\) is \emph{transcendental} over \(K\).
+Recall the remark of \cref{def:ring_homo}.
+We can go even further and show that a homomorphism of fields \(f: K \to L\) is either 0 or injective, so that \(\im(f) = 0\) or \(\im(f) \cong K\).
+
+This allows us to prove that for a given field \(K\) and an irreducible \(p(x) \in K[x]\) there exists a field \(L\) containing an isomorphic copy of \(K\) in which \(p(x)\) has a root.
+Specifically, that given a field \(K\), we can construct a field (a unitary quotient ring)
+\[L := K[x]_{/p(x)}\]
+where \(f: K \to L\) is injective and thus from above \(K \cong \im(f)\).
+Identifying \(K\) with this isomorphic copy shows that there exists an extension of \(K\) in which \(p(x)\) has a root.
+
+\begin{example}
+   \(K = \mathbb{R}\) does not contain an element \(x\) with \(x^2 + 1 = 0\); i.e. \(p(x) = x^2 + 1\) has no root in \(\mathbb{R}\).
+   So we define the field
+   \[L := \mathbb{R}[x]_{/x^2 + 1}\]
+   where we know that it contains a root of \(p\) from above.
+   To get a feel for the elements of \(L\) we note, that with
+   \[\theta := x \bmod (x^2 + 1)\]
+   \(L\) has the basis \(\{\theta^0 = 1, \theta, \theta^2, \ldots, \theta^{n-1}\}\).
+   Hence elements of \(L\) are polnymomials of with degree \(< n\) in \(\theta \in L\) where \(p(\theta) = 0\).
+   So we recognize our familiar elements \(x + \theta y\).
+   Now
+   \[p(\theta) = 0 \implies \theta^2 + 1 = 0 \implies \theta^2 = -1 \quad\rightsquigarrow\quad i := \sqrt{-1}\]
+   Differently put, the map
+   \[f: \mathbb{R}[x]_{/x^2 + 1} \to \mathbb{C} \qquad\text{where}\qquad a + bx \mapsto a+bi\]
+   is an isomorphism.
+\end{example}
+
+
+\subsubsection{Generators}
+Suppose \(K\) is a subfield of \(L\) and let \(\alpha \in L\).
+There is a unique minimal subfield of \(L\) containing both \(K\) and \(\alpha\), which is the intersection of all subfields with this property.
+
+\begin{definition}[Generated Field]
+   Let \(L/K\) and \(S := \{\alpha, \beta, \ldots\} \subset L\)
+   The smallest subfield of \(L\) containing both \(K\) and \(S\), is called the field \emph{generated} by \(S\) \emph{over} \(K\).
 \end{definition}
-\begin{remark}
-   Given an algebraic element \(l \in L\), then is the set of polynomials \(p\) above a nonzero ideal of \(K[x]\), generated by a monic \(q \in K[x]\).
-   \(q\) is necessarily irreducible and the \emph{minimal polynomial} of \(l\).
-   We call \(d := \deg(q)\) the \emph{degree} of \(l\).
+\begin{remark}[Notation]
+   The subfield of \(L\) generated over \(K\) by \(S \subset L\) is denoted by \(K(S)\).
 \end{remark}
 
-\begin{definition}[Algebraic/Transcendental Field Extension]
-   An extension \(L/K\) is \emph{algebraic} iff every element of \(L\) is algebraic over \(K\), otherwise we call \(L/K\) \emph{transcendental}.
+\begin{definition}[Simple Extension]
+   A field \(L\) is a \emph{simple extension} of \(K\) iff
+   \[\exists \alpha \in L: L = K(\alpha)\]
 \end{definition}
-\begin{remark}
-   Every finite extension is algebraic.
-   Indeed if \([L:K] = d\) then for \(l \in L\) there must be a linear dependence amonge \(1, x, \ldots, x^d\), which shows that \(l\) is algebraic over \(K\) of degree at most \(d\).
+\begin{remark}[Terminology]
+   In words, an extension is simple if it is generated by a single element \(\alpha\).
+   We call \(\alpha\) \emph{primitive} or \emph{generating} element and say that \(L\) is \emph{generated over \(K\) by \(\alpha\)}.
 \end{remark}
 
+   If \(x \in L\) is algebraic then \(K(x) = K[x]\).
+   Indeed \(K[x]\) is already a field.
+   If \(x\) is transcendental, then \(K[x] \cong K[T]\) and \(K(x) \cong K[T]\).
+
+\subsubsection{Algebraic Closure}
 \begin{definition}[Algebraically Closed Field]
    A field \(K\) where every non-constant polynomial in \(K[x]\) has a root in \(K\).
 \end{definition}
 \begin{remark}
-   Equivalently, a field \(K\) is algebraically closed if every irreducible polynomial in \(K[x]\) is linear or alternatively if the only algebraic elements of \(L\) are the elements of \(K\) itself.
+   Equivalently, a field \(K\) where every irreducible polynomial in \(K[x]\) is linear.
 \end{remark}
 
 \begin{definition}[Algebraic Closure of a Field]
@@ -3136,14 +3219,14 @@ This means that \(\overline{\mathbb{Q}}\) is the field of \emph{algebraic number
 \end{definition}
 \begin{remark}[Intuition]
    The algebraic closure of \(K\) is the set of algebraic elements of \(L\).
+   The relation between the notion of algebraically closed and algebraic closure in an extension field is that \(K\) is algebraically closed iff \(K\) is algebraically closed in every extension field.
+   Also a field \(K\) is algebraically closed in \(L\) if the only algebraic elements of \(L\) are the elements of \(K\) itself.
 \end{remark}
 
-We may also speak of an algebraic closure of \(K\) without mentioning any extension field \(L\).
-In that case we mean an algebraically closed, algebraic extension \(\overline{K}\).
-One of the tasks of a more comprehensive treatment of fields is to prove that every field admits an algebraic closure, and any pair of such are isomorphic to each other.
-Given \(L/K\) where \(L\) is algebraically closed, then \(\overline{K}\) is an algebraic closure of \(K\).
+\begin{proposition}
+   Let \(L/K\) be a field extension where \(L\) is algebraically closed, then \(\overline{K}\) is an algebraic closure of \(K\).
+\end{proposition}
 
-% TODO: really proposition?
 \begin{proposition}
    Let \(\overline{K}\) be an algebraic closure of \(K\).
    For every finite field extension \(K'/K\) there exists an embedding \(K' \hookrightarrow K\).
@@ -3159,6 +3242,119 @@ Given \(L/K\) where \(L\) is algebraically closed, then \(\overline{K}\) is an a
    Then \(M/K\) is also a finite field extension and
    \[[M:K] = [L:K] \cdot [M:L]\]
 \end{proposition}
+
+We may also speak of an algebraic closure of \(K\) without mentioning any extension field \(L\).
+In that case we mean an algebraically closed, algebraic extension \(\overline{K}\).
+One of the tasks of a more comprehensive treatment of fields is to prove that every field admits an algebraic closure, and any pair of such are isomorphic to each other.
+The main example of algebraic closure for us is \(\overline{\mathbb{Q}}\), the \emph{field of algebraic numbers}, consisting of all complex numbers that are algebraic over \(\mathbb{Q}\).
+
+\subsubsection{Algebraic Field Extensions}
+We will add the field \(\mathbb{Q} \subset \overline{\mathbb{Q}} \subset \mathbb{C}\), neither contained in nor containing \(\mathbb{R}\).
+This is the field consisting of all roots of polynomials with rational coefficients.
+This means that \(\overline{\mathbb{Q}}\) is the field of \emph{algebraic numbers} and \(\mathbb{C} \setminus \overline{\mathbb{Q}}\) the field of \emph{transcendental numbers}.
+
+\begin{definition}[Algebraic Element]
+   Given a field extension \(L/K\), \(l \in L\) is \emph{algebraic} over \(K\) iff
+   \[\exists p(x) \in K[x] \setminus \{0\}: p(l) = 0\]
+\end{definition}
+\begin{remark}[Terminology]
+   If \(l\) is not algebraic we say \(l\) is \emph{transcendental}.
+\end{remark}
+
+Given an algebraic element \(l \in L\), the set of polynomials \(p(x)\) above is a nonzero ideal of \(K[x]\), generated by a monic polynomial \(q(x) \in K[x]\).
+\(q\) is necessarily irreducible and called the \emph{minimal polynomial} of \(l\), furthermore we call \(d := \deg(q)\) the \emph{degree} of \(l\).
+
+\begin{definition}[Algebraic Field Extension]
+   A field extension \(L/K\) where every element of \(L\) is algebraic over \(K\).
+\end{definition}
+\begin{remark}[Terminology]
+   If \(L/K\) is not algebraic we say \(L/K\) is \emph{transcendental}.
+\end{remark}
+\begin{remark}
+   Indeed if \([L:K] = d\) then for \(l \in L\) there must be a linear dependence amonge \(1, x, \ldots, x^d\), which shows that \(l\) is algebraic over \(K\) of degree at most \(d\).
+\end{remark}
+
+\begin{proposition}
+   Let \(L/K\) and \(M/L\) be field extensions, then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\forall s \in S: s~\text{is algebraic} \implies K(S)~\text{is an algebraic extension of}~K\)
+      \item If \(L/K, M/L\) are algebraic, then \(M/K\) is also algebraic.
+   \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+   Let \(L/K\) be a field extension where \(L\) is algebraically closed.
+   Then the algebraic closure \(\overline{K}\) of \(K\) in \(L\) is an algebraic closure of \(K\).
+\end{proposition}
+
+\begin{lemma}
+   Let \(L/K\) be a field extension, and \(x, y \in L\) where \(y\) is transcendental over \(K\).
+   If \(L\) is algebraic over \(K(x)\), then \(L\) is algebraic over \(K(y)\).
+\end{lemma}
+
+\subsubsection{Transcendence Bases}
+\begin{definition}[Algebraic Dependent]
+   \((x_s)_{s \in S} \subset L\) is algebraically dependent over \(K\) iff there exists \(n\) pairwise distinct elements in \(S\) and a non-zero \(f \in K[x_1, \ldots, x_n]\) such that
+   \[f(x_{s_1}, \ldots, x_{s_n}) = 0\]
+   otherwise we say \((x_s)\) is algebraically independent over \(K\)
+\end{definition}
+
+\begin{definition}[Transcendence Basis]
+   An algebraically independent collection \(S\) such that \(L\) is algebraic over \(K(S)\).
+\end{definition}
+\begin{remark}
+   Given \(S\) algebraically independent over \(K\), then \(y \in L\) is transcendental over \(K(S)\) if and only if adjoining \(y\) to \(S\) yields an algebraically independent collection.
+\end{remark}
+In complete analogy with linear independent collections of elements in a vector space there is a straightforward argument using Zorn's lemma for the existence of transcendence bases for general field extensions.
+\begin{proposition}
+   Let \(L/K\) be a field extension.
+   Then any algebraically independent collection of elements of \(L\) over \(K\) may be extended to a transcendence basis of \(L/K\).
+\end{proposition}
+
+\begin{lemma}[Exchange Lemma]
+   Let \((x_s)_{s \in S}\) be a transcendence basis for \(L/K\) and \(y \in L\) be transcendental over \(K((x_s)_{s \in S\setminus\{s_0\}})\) for some \(s_0 \in S\), define
+   \[\tilde{x_s} := \begin{cases}y & \text{if}~s = s_0\\x_s & \text{otherwise}\end{cases}\]
+   Then \((\tilde{x_s})_{s \in S}\) is a transcendence basis for \(L/K\).
+\end{lemma}
+
+\begin{proposition}
+   Let \(L/K\) be a field extension.
+   If \((x_s)_{s \in S}\) and \((y_t)_{t \in T}\) are transcendence bases for \(L/K\) then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(S\) is finitf iff \(T\) is finite
+      \item If \(S, T\) are finite then \(|S| = |T|\)
+   \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Transcendence Degree]
+   If \(L\) as a finite transcendence basis over \(K\) then we call the number of elements in any transcendence basis of \(L/K\) the transcendence degree of \(L/K\), denoted by \(\trdeg_K(L)\).
+\end{definition}
+
+\begin{lemma}
+   Let \(L/K\) be an algebraic field extension, then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(L(x)/K(x)\) is algebraic
+      \item If \(L/K\) is finite and \([L:K] = d\) then \(L(x)/K(x)\) is finite and \(\big[L(x):K(x)\big] = d\), and any basis of \(L\) as \(K\)-vector space is also a basis of \(L(x)\) as \(K(x)\)-vector space.
+   \end{enumerate}
+\end{lemma}
+
+\begin{proposition}
+   If \(L/K\) and \(M/L\) are field extensions of finite transcendence degree, then \(M\) has finite transcendence degree over \(K\) and
+   \[\trdeg_K(M) = \trdeg_K(L) + \trdeg_L(M)\]
+   Specifically, the union of a transcendence basis of \(L/K\) and a transcendence basis of \(M/L\) is a transcendence basis of \(M/K\).
+\end{proposition}
+
+\begin{remark}
+   Working with extensions of commutative rings rather than fields, a natural notion analogous to the definition of algebraic closure in an extension field is that of integral closure.
+   Given commutative ring \(R \subset S\), we say that \(x \in S\) is integral over \(R\) if there exists a monic polynomial \(f \in R[T]\) such that \(f(x) = 0\).
+   The integral closure of \(R\) in \(S\) is the set of elements of \(S\) integral over \(R\); we may see that this is a subring of \(S\).
+   We say that \(R\) is integrally closed in \(S\) if the integral closure is just \(R\).
+   An interesting cas for us will be the ring of algebraic integers, which is the integral closure of \(\mathbb{Z}\) in \(\overline{\mathbb{Q}}\).
+   By Gauss's lemma , an algebraic number is integral over \(\mathbb{Z}\) iff its minimal polynomial has integer coefficients.
+\end{remark}
+
+\subsubsection{Finite Extensions}
+   Every finite extension is algebraic.
 
 \subsection{Residue Fields}
 % TODO: Include Field of Fractions --> field of fractions = quotient field
@@ -4418,13 +4614,21 @@ We say that \(f\) \emph{preserves} the operation or is \emph{compatible} with th
 \begin{remark}[Unitary Rings]
    For unitary rings must additionally hold that \(f(1_R) = 1_S\).
 \end{remark}
-\begin{remark}
-   Given two fields \(K\) and \(L\), every ring homomorphism \(K \to L\) is injective.
+\begin{remark}[Field Homomorphism]
+   As fields are rings with multiplicative inverses a \emph{field homomorphism} suffices the same axioms as a ring homomorphism.
+\end{remark}
+\begin{remark}[Injective Fields]
+   Let \(K\) and \(L\) be fields, any ring homomorphism \(f: K \to L\) is injective.
+   Let \(k_1, k_2 \in K: f(k_1) = f(k_2)\), then
+   \begin{equation*}
+      \begin{split}
+         f(k_1) = f(k_2) & \implies f(k_1) +_L \big(-f(k_2)\big) = 0_L \\
+                         & \implies f\big(k_1 +_K (-k_2)\big) = 0_L \implies k_1 +_K (-k_2) = 0_K \implies k_1 = k_2
+      \end{split}
+   \end{equation*}
 \end{remark}
 \begin{example}
-   \(\forall n \in \mathbb{Z}\) is
-   \[\varphi_n: \mathbb{Z} \to \mathbb{Z}/_{n\mathbb{Z}}\]
-   a homomorphism of unitary rings which is always surjective.
+   \(\forall n \in \mathbb{Z}\) is \(\varphi_n: \mathbb{Z} \to \mathbb{Z}/_{n\mathbb{Z}}\) a homomorphism of unitary rings which is always surjective.
 \end{example}
 
 \begin{definition}[Module Homomorphism]
@@ -4434,6 +4638,8 @@ We say that \(f\) \emph{preserves} the operation or is \emph{compatible} with th
 \end{definition}
 
 \subsection{Linear Maps}
+A \emph{linear map} is a homomorphism of \(K\)-vector spaces.
+
 \begin{definition}[Linear Map]
    Given \(K\)-vector spaces \(V, W\), a map \(f: V \to W\) where
    \[\forall v, w \in V: f(v +_V w) = f(v) +_W f(w)\]
