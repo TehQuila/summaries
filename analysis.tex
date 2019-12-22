@@ -1,4 +1,3 @@
-% TODO: color-code remarks and examples
 \section{Sequences}
 In this section we use the notation \(\mathbb{K}\) to represent the field of \(\mathbb{R}\) respectively \(\mathbb{C}\).
 
@@ -372,12 +371,6 @@ A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index 
 \begin{theorem}[Cauchy\(\implies\)Bounded]\label{thm:cauchy_bound}
    Every Cauchy-sequence is bounded.
 \end{theorem}
-% \begin{proof}
-%    According to the definition
-%    \[\exists n_1 \in \mathbb{N}: (\forall n,m > n_1: |x_n - x_m| < 1)\]
-%    Let \(C := \max\{|x_n| + 1 \mid n > n_1\}\), then \(n \leq n_1: |x_n| \leq C\) and
-%    \[n > n_1: |x_n| = |x_n - x_{n_1} + x_{n_1}| \leq |x_n - x_{n_1}| + |x_{n_1}| < 1 + |x_{n_1} \leq C\]
-% \end{proof}
 
 \begin{theorem}[Cauchy\(\iff\)Convergent]\label{thm:cauchy_crit_seq}
    \[(x_n)_{n \in \mathbb{N}}~\text{is convergent} \iff (x_n)_{n \in \mathbb{N}}~\text{is a cauchy sequence}\]
@@ -385,21 +378,6 @@ A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index 
 \begin{remark}
    Only holds on order complete fields.
 \end{remark}
-% \begin{proof}
-%    First we show ,,\(\implies\)``, so suppose \((x_n) \to x\) and let \(\varepsilon > 0\), then
-%    \[\exists n_\varepsilon \in \mathbb{N}: \left(\forall n > n_\varepsilon: |x_n - x| < \frac{\varepsilon}{2}\right)\]
-%    For \(n, m > n_\varepsilon\) follows
-%    \[|x_n - x_m| = |(x_n - x) + (x_m - x)| \leq |x_n - x| + |x_m - x| < \varepsilon\]
-
-%    Now we show ,,\(\impliedby\)``.
-%    According to \cref{thm:bolzano} and \cref{thm:cauchy_bound} follows that \((x_n)\) has a accumulation point \(x\).
-%    Now Let \(\varepsilon > 0\), then
-%    \[\exists n_\varepsilon \in \mathbb{N}: \left(\forall n,m > n_\varepsilon: |x_n - x_m| < \frac{\varepsilon}{2}\right)\]
-%    Furthermore
-%    \[\exists k_\varepsilon \geq n_\varepsilon: |x - x_{k_\varepsilon}| < \frac{\varepsilon}{2}\]
-%    Then follows
-%    \[\forall n > n_\varepsilon: |x_n - x| = |x_n - x_{k_\varepsilon} + x_{k_\varepsilon} - x| \leq |x_n - x_{k_\varepsilon}| + |x_{k_\varepsilon} - x| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\]
-% \end{proof}
 
 \subsection{Improper Convergence}
 \begin{definition}[Extended Real Numbers]
@@ -644,33 +622,6 @@ They define conditions for sequences and tell you whether their series converges
    hence \(a_k\) is majorante for the series 
 \end{example}
 
-% TODO: english name
-% \begin{proposition}[Limit Comparison Test]\label{pro:vergleichskriterium}
-%    Let \((a_n)_{n \in \mathbb{N}}\) and \((b_n)_{n \in \mathbb{N}}\) where for almost all \(n \in \mathbb{N}: 0 < a_n, b_n\).
-%    \begin{equation}\label{eq:bn_convergent}
-%       \left(\limsup_{n \to \infty} \frac{b_n}{a_n} < \infty \quad\text{and}\quad \sum_{n=0}^\infty a_n~\text{convergent}\right) \implies \sum b_n~\text{convergent}
-%    \end{equation}
-%    \begin{equation}\label{eq:bn_divergent}
-%       \left(\liminf_{n \to \infty} \frac{b_n}{a_n} > 0 \quad\text{and}\quad \sum a_n~\text{divergent}\right) \implies \sum b_n~\text{divergent}
-%    \end{equation}
-% \end{proposition}
-% \begin{remark}
-%    Usefull for sequences with complicated fractions with dominant parts.
-% \end{remark}
-% \begin{example}
-%    We regard the series
-%    \[\sum_{n=0}^\infty \frac{n^2 + 3n + \sin(n) + \cos(n)}{n^6 + 3n^4 + \sqrt{n}}\]
-%    The dominant parts of this fraction are \(n^2\) and \(n^6\), so we use \(b_n = \frac{1}{n^4}\).
-%    \[\limsup_{n \to \infty} \left(\frac{b_n}{a_n}\right) = \lim_{n \to \infty} \frac{n^4 \big(n^2 + 3n + \sin(n) + \cos(n)\big)}{n^6 + 3n^4 + \sqrt{n}} = 1 < \infty \implies \text{series converges}\]
-% \end{example}
-% \begin{example}
-%    We regard the series
-%    \[\sum_{j=0}^\infty \frac{1}{\sqrt{j^2 + 1}}\]
-%    where we want to compare the sequences \(b_n = \frac{1}{\sqrt{n^2 + 1}}\) and \(a_n = \frac{1}{n}\)
-%    \[\frac{b_n}{a_n} = \frac{\frac{1}{\sqrt{n^2 + 1}}}{\frac{1}{n}} = \frac{n}{\sqrt{n^2 + 1}} = \frac{1}{\sqrt{1 + \frac{1}{n^2}}} \to 1 \implies \liminf_{n \to \infty} \frac{b_n}{a_n} = 1 > 0 \implies \sum_{n=1}^\infty \frac{1}{\sqrt{n^2 + 1}} = \infty\]
-%    Since \(\sum a_n\) diverges has \(\sum b_n\) to diverge as well.
-% \end{example}
-
 \begin{proposition}[Root Test]\label{pro:root_test}
    Let \((x_n)_{n \in \mathbb{N}}\) with \(\alpha = \limsup_{n \to \infty} \sqrt[n]{|x_n|}\)
    \[\alpha < 1 \implies \sum_{n=0}^\infty x_n~\text{absolute convergent}\]
@@ -700,72 +651,6 @@ They define conditions for sequences and tell you whether their series converges
    \[\sum_{n=0}^\infty \frac{5 + n}{10^n}\]
    \[\lim_{n \to \infty} \left|\frac{5 + n + 1}{10^{n+1}} \cdot \frac{10^n}{5 + n}\right| = \lim_{n \to \infty} \frac{6+n}{5+n} \cdot \frac{1}{10} = \frac{1}{10} < 1 \implies \text{series absolute convergent}\]
 \end{example}
-
-% TODO: needed?
-% \begin{proposition}[Telescoping Sum]\label{pro:telesc_sum}
-%    Let \((a_n)_{n \in \mathbb{N}} \subset \mathbb{R}\), then holds
-%    \[\sum_{n=1}^\infty (a_n - a_{n-1})~\text{converges} \iff a_n~\text{converges, in which case holds}~\sum_{n=1}^\infty a_n = \lim_{n \to \infty} a_n - a_0\]
-% \end{proposition}
-% \begin{example}
-%    Let \(a_n = -\frac{1}{n+1}\)
-%    \[a_n - a_{n-1} = -\frac{1}{n+1} + \frac{1}{n} = \frac{1}{n(n+1)}\]
-%    \[a_n \to 0 \implies \sum_{n=1}^\infty a_n \to a\]
-%    From \cref{pro:vergleichskriterium} follows
-%    \[\sum_{n=1}^\infty \frac{1}{n(n+1)} = 1 \implies \sum_{n=1}^\infty \frac{1}{n^2} < \infty\]
-% \end{example}
-
-% TODO: needed?
-% \begin{proposition}[Cauchy Condensation Test]\label{pro:cauchy_condens}
-%    Let \((a_n)_{n \in \mathbb{N}}\) with \(\forall n \in \mathbb{N}: 0 \leq a_n\) be a decreasing sequence, then holds
-%    \[\sum_{n=0}^\infty a_n~\text{converges} \iff \sum_{n=0}^\infty 2^n \cdot a_{2^n}~\text{converges}\]
-% \end{proposition}
-% \begin{remark}
-%    Especially usefull for \(\log\) since for example \(\log(2^k) = k \cdot \log(2)\) the \(\log\) is constant.
-% \end{remark}
-% \begin{example}
-%    \[\sum_{n=2}^\infty \frac{1}{\log(n)^{\log(n)}}\]
-%    We regard
-%    \[\sum_{n=2}^\infty \frac{2^n}{(n \cdot \log(2))^{n \cdot \log(2)}} = \sum_{n=2}^\infty \left(\frac{2}{(n \cdot \log(2))^{\log(2)}}\right)^n\]
-%    now we can use the root test (\ref{pro:root_test}).
-%    \[\lim_{n \to \infty} \frac{2}{(n \cdot \log(2))^{\log(2)}} = 0 < 1 \implies \text{series converges absolute}\]
-% \end{example}
-% \begin{example}
-%    Let \(\alpha = \frac{p}{q}\) with \(p, q \in \mathbb{N} \setminus \{0\}\) and we regard the series
-%    \[\sum_{n=0}^\infty \frac{1}{n^\alpha}\]
-%    We know that the series diverges for \(\alpha = 1\) and converges for \(\alpha = 2\).
-%    According to the condensation test
-%    \[\sum \frac{1}{n^\alpha}~\text{converges} \iff \sum_{n=1}^\infty 2^n \frac{1}{2^{\alpha n}} = \sum_{n=1}^\infty \left(\frac{1}{2^{\alpha - 1}}\right)^n~\text{converges}\]
-%    which is the case iff
-%    \[\frac{1}{2^{\alpha -1}} < 1 \iff 2^{\alpha - 1} > 1 \iff \alpha > 1\]
-%    Hence we showed that \(\sum \frac{1}{n^\alpha}\) converges iff \(\alpha > 1\).
-% \end{example}
-
-% TODO: needed?
-% \begin{proposition}[Integral Test]\label{pro:integral_test}
-%    Let \(f\) be positive decreasing on \([1; \infty)\), then is
-%    \[\sum_{n=1}^\infty f(n)~\text{convergent} \iff \int_1^\infty f(x) dx~\text{exists}\]
-% \end{proposition}
-
-% TODO: needed?
-% \begin{proposition}[Generalized Triangle Inequality]\label{pro:gener_triang_ineq}
-%    \[\left|\sum_{n = 0}^\infty a_n \right| \leq \sum_{n = 0}^\infty |a_n|\]
-% \end{proposition}
-% \begin{proposition}[Cauchy-Schwarz Inequality]\label{pro:cauchy-schwarz_ineq}
-%    Let \(a_n, b_n \in \mathbb{R}\) be sequences where
-%    \[\sum_{n=0}^\infty a_n^2~\text{and}~\sum_{n=0}^\infty b_n^2~\text{converge, then is} \qquad \sum_{n=0}^\infty |(a_n \cdot b_n)| < \infty\]
-%    and with the scalar product is
-%    \[\left|\sum_{n=0}^\infty a_nb_n\right| = \sum_{n = 0}^\infty |a_n||b_n| \leq \sqrt{\sum_{n=0}^\infty a_n^2} \cdot \sqrt{\sum_{n=0}^\infty b_n^2}\]
-%    the product of normed \(a_n\) and \(b_n\).
-% \end{proposition}
-% \begin{remark}
-%    Let \((a_n)_{n \in \mathbb{N}} \in \mathbb{C}\) be a sequence.
-%    \(\sum a_n\) converges if \(s_n = \sum_j^n a_j\) converges.
-%    In this case we define
-%    \[\sum_{j=0}^\infty a_j = \lim_{n \to \infty} s_n\]
-%    It holds just as in \(\mathbb{R}\), is the series \(a_n\) absolute convergent \(\sum |a_j| < \infty\) then is the series \(a_n\) convergent.
-%    The absolute value means that all complex parts of the sequence are removed.
-%    This means that all criterion that we introduced (except for Leibnitz) for series in \(\mathbb{R}\) also hold for series in \(\mathbb{C}\) with absolute convergence.
-% \end{remark}
 
 \subsection{Important Examples}
 \begin{proposition}[Harmonic Series]
@@ -934,7 +819,7 @@ They are typically defined as a sum, product, and/or composition of finitely man
 
 Let \(z \in \mathbb{C}\), we see that
 \[\exp(z) = \exp(x + iy) = \exp(x) \cdot \exp(iy)\]
-which means that the complex \(\exp\) function is characterized by
+ which means that the complex \(\exp\) function is characterized by
 \[\exp: \mathbb{R} \to \mathbb{R} \qquad\text{and}\qquad \exp: i\mathbb{R} \to \mathbb{R}\]
 
 \subsubsection{Logarithm}
@@ -1033,12 +918,8 @@ and for \(p \in \mathbb{Z}\), \(q \in \mathbb{N}_{>0}\)
 \end{proposition}
 
 \subsubsection{Connecting Exponential and Trigonometric}
-In this section we regard \(\exp: i\mathbb{R} \to \mathbb{R}\).
-
-\begin{proposition}
-   Let \(z \in \mathbb{C}\), then
-   \[\cos(z) = \frac{\exp(iz) + \exp(-iz)}{2} \qquad\text{and}\qquad \sin(z) = \frac{\exp(iz) - \exp(-iz)}{2i}\]
-\end{proposition}
+In this section we regard the imaginary part of the exponential function, for simplicity sake we define
+\[\ixp: \mathbb{R} \to \mathbb{C} \qquad\text{by}\qquad \ixp(x) := \exp(ix)\]
 
 \begin{proposition}
    Let \(\exp: i\mathbb{R} \to \mathbb{R}\) and \(x \in \mathbb{R}\), then
@@ -1049,8 +930,10 @@ In this section we regard \(\exp: i\mathbb{R} \to \mathbb{R}\).
    \end{enumerate}
 \end{proposition}
 
-For simplicity sake we define
-\[\ixp: \mathbb{R} \to \mathbb{C} \qquad\text{where}\qquad x \mapsto \exp(ix)\]
+\begin{proposition}
+   Let \(z \in \mathbb{C}\), then
+   \[\cos(z) = \frac{\exp(iz) + \exp(-iz)}{2} \qquad\text{and}\qquad \sin(z) = \frac{\exp(iz) - \exp(-iz)}{2i}\]
+\end{proposition}
 
 \begin{theorem}[Unit Circle]
    \(\im(\ixp) = S^1 := \{z \in \mathbb{C} \mid \lvert z\rvert = 1\}\)
@@ -1078,15 +961,11 @@ For simplicity sake we define
    \[\exp(z) = -1 \iff z = (2k + 1)\pi i\]
 \end{theorem}
 \begin{remark}
-   It follows that for \(k \in \mathbb{Z}\)
-   \[\exp(z) = \exp(z + 2k\pi i)\]
-   i.e. \(\exp\) is \(2\pi i\)-periodic.
+   It follows that for \(k \in \mathbb{Z}\) holds \(\exp(z) = \exp(z + 2k\pi i)\) i.e. \(\exp\) is \(2\pi i\)-periodic.
 \end{remark}
 
 \begin{theorem}
-   For \(x \in \mathbb{R}\) is
-   \[\ixp: [x; x + 2\pi) \to S^1\]
-   bijective.
+   For \(x \in \mathbb{R}\) is \(\ixp: [x; x + 2\pi) \to S^1\) bijective.
 \end{theorem}
 
 \begin{proposition}[Properties]
@@ -1108,9 +987,7 @@ For simplicity sake we define
 \end{proposition}
 
 \begin{theorem}
-   For \(x \in \mathbb{R}\) is
-   \[\exp: \mathbb{R} + i[x; x + 2\pi) \to \mathbb{C}\setminus\{0\}\]
-   bijective.
+   For \(x \in \mathbb{R}\) is \(\exp: \mathbb{R} + i[x; x + 2\pi) \to \mathbb{C}\setminus\{0\}\) bijective.
 \end{theorem}
 \begin{remark}
    From this are polar coordinates of complex numbers derived.
@@ -1444,3 +1321,37 @@ In contrast, uniform continuity is a global property of \(f\), in the sense that
    Therefor we have an inverse which is continuous and strictly increasing
    \[\sqrt[n]{x} := f^{-1}(x)\]
 \end{example}
+
+\section{Differential Calculus}
+\subsection{Definition \& Basic Properties}
+\begin{definition}[Derivative]
+   \(f: (a;b) \to \mathbb{R}\) is differentiable at \(x_0 \in (a; b)\) if
+   \[\frac{df}{dx} (x_0) = f'(x_0) := \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h} = \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}\]
+   exists.
+\end{definition}
+\begin{remark}
+   We call \(f'(x_0)\) the \textit{derivative} of \(f\) at \(x_0\).
+   \(f\) is differentiable on \((a; b)\) if \(\forall x_0 \in (a;b): f~\text{is differentiable at}~x_0\).
+\end{remark}
+\begin{remark}
+   When we differentiate a function \(f\) we want to calculate the slope of \(f\) at \(x_0\), which is the tangent to the function graph at \(x_0\).
+   To do this we start of by calculating the slope of the secant from \(\big(x_0, f(x_0)\big)\) to \(\big(x_0 + h, f(x_0) + h\big)\) through.
+   \[\frac{f(x_0 + h) - f(x_0)}{h}\]
+   Then we let \(h \to 0\) which makes the point \(\big(x_0 + h, f(x_0) + h\big)\) move along the function graph until it coincides with \(\big(x_0, f(x_0)\big)\).
+   At this point the secant coincides (never but close enough) the tangent, then the fraction above gives us the slope of the tangent.
+\end{remark}
+\begin{remark}[Differential]
+   Given a function \(y = f(x)\) we call \(dy\) and \(dx\) differentials and the relationship between them is given by
+   \[dy = f'(x)dx\]
+   Note that if we are just given \(f(x)\) then the differentials are \(df\) and \(dx\) and we compute them in the same manner.
+   \[df = f'(x)dx \implies f'(x) = \frac{df}{dx}\]
+\end{remark}
+% TODO: add for vector space?
+
+\begin{center}
+   \input{drawings/derivative.tex}
+\end{center}
+
+\begin{proposition}[Derivative \(\implies\) Continuity]\label{pro:deri_impl_cont}
+   If \(f: (a; b) \to \mathbb{R}\) is differentiable at \(x_0 \in (a; b)\) then is \(f\) also continuous at \(x_0\).
+\end{proposition}
