@@ -1,0 +1,43 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+   x=1.95cm,y=1.95cm,
+   axis lines=middle,
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xmin=-0.9, xmax=6.9,
+   ymin=-0.9, ymax=2.5,
+   xtick={-1,0,...,9},
+   ytick={-1,0,...,5},]
+
+      \fill[line width=2pt,color=grey,fill=grey,fill opacity=0.3] (1.992250618110671,0.689264963553256) -- (6.004283509389274,1.792473132741205) -- (6.0042835093893,0.6892649635533) -- cycle;
+
+      \draw[line width=3pt,color=black,smooth,samples=100,domain=0.3:7] plot(\x,{ln((\x))});
+
+      \draw [line width=1.2pt,dashed] (6.004283509389274,1.792473132741205)-- (0,1.7979325541006292);
+      \draw [line width=1.2pt,dashed] (1.992250618110671,0.689264963553256)-- (0,0.6865550452377207);
+      \draw [line width=1.2pt,dashed] (1.9922506,0)-- (1.992250618110671,0.689264963553256);
+      \draw [line width=1.2pt,dashed] (6.0042835093893,0)-- (6.004283509389274,1.792473132741205);
+
+      \draw [line width=2pt,color=green,domain=-2.7782759088017714:9.763751218410293] plot(\x,{(--0.5674865476121775--1.103208169187949*\x)/4.0120328912786025});
+      \draw [line width=2pt,color=blue,domain=-2.7782759088017714:9.763751218410293] plot(\x,{(-0.31073503644674405--0.5019448812862405*\x)/1});
+      \draw (5.6, 2.3) node {\(f'(x_0)\)};
+
+      \draw [->,line width=1pt] (5.76,-0.3156320939175) -- (2.1362418130313,-0.3156320939175);
+      \draw [->,line width=1pt] (-0.4544428683875,1.6857552136163) -- (-0.4544428683875,0.7962497436013);
+
+      \draw [fill=blue] (0, 1.7979325541006292) circle (2.5pt);
+      \draw (-0.45, 1.8) node {\(f(x_0 + h)\)};
+      \draw [fill=blue] (0,0.6865550452377207) circle (2.5pt);
+      \draw (-0.4, 0.7) node {\(f(x_0)\)};
+
+      \draw [fill=blue] (1.9922506,0) circle (2.5pt);
+      \draw (2, -0.35) node {\(x_0\)};
+      \draw [fill=blue] (6.0042835093893,0) circle (2.5pt);
+      \draw (6.050065881097502,-0.3) node {\(x_0 + h\)};
+
+      \draw [fill=red] (1.992250618110671, 0.689264963553256) circle (2.5pt);
+      \draw [fill=red] (6.004283509389274,1.792473132741205) circle (2.5pt);
+      \draw (4.204342030816293,-0.4101420501065896) node {\(h \to 0\)};
+      \draw (-0.6, 1.346631253173085) node {\rotatebox{90}{\(h \to 0\)}};
+   \end{axis}
+\end{tikzpicture}

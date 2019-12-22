@@ -1,0 +1,42 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+      x=1.3cm,y=1cm,
+      axis lines=middle,
+      ymajorgrids=true,
+      xmajorgrids=true,
+      xmin=-1,
+      xmax=8.9,
+      ymin=-1,
+      ymax=4.9,
+      xtick={0,1,...,9},
+      ytick={0,1,...,5}]
+
+   \draw[color=blue] (0.7, 2.2) node {\(b\)};
+   \draw [line width=2pt,color=blue] (0, 2) -- (9, 2);
+
+   \draw[color=orange] (0.7, 4.2) node {\(a\)};
+   \draw [line width=2pt,color=orange] (0, 4) -- (9, 4);
+
+   \draw[color=black] (0.7, 3.2) node {\(\varepsilon\)};
+   \draw [line width=1pt,dashed] (0, 3) -- (9, 3);
+
+   \draw [fill=blue] (1, 0.7) circle (2.5pt);
+   \draw [fill=blue] (2, 1.2) circle (2.5pt);
+   \draw [fill=blue] (3 ,2) circle (2.5pt);
+   \draw [fill=blue] (4, 2.3) circle (2.5pt);
+   \draw [fill=blue] (5, 2) circle (2.5pt);
+   \draw [fill=blue] (6 ,2.25) circle (2.5pt);
+   \draw [fill=blue] (7, 2.1) circle (2.5pt);
+   \draw [fill=blue] (8, 2) circle (2.5pt);
+
+   \draw [fill=orange] (1, 1.5) circle (2.5pt);
+   \draw [fill=orange] (2, 2) circle (2.5pt);
+   \draw [fill=orange] (3, 3.2) circle (2.5pt);
+   \draw [fill=orange] (4, 3.8) circle (2.5pt);
+   \draw [fill=orange] (5, 3.6) circle (2.5pt);
+   \draw [fill=orange] (6, 3.75) circle (2.5pt);
+   \draw [fill=orange] (7, 3.8) circle (2.5pt);
+   \draw [fill=orange] (8, 4) circle (2.5pt);
+
+   \end{axis}
+\end{tikzpicture}

@@ -1,0 +1,56 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+\begin{axis}[
+   x=12cm,y=12cm,
+   axis lines=middle,
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xmin=-0.1, xmax=1.01,
+   ymin=-0.1, ymax=1.01,
+   xtick={0,0.1,...,1},
+   ytick={0,0.1,...,1},]
+
+   \draw[line width=2pt,color=red,smooth,samples=100,domain=0:1] plot(\x,{(\x)});
+   \draw[line width=2pt,color=orange,smooth,samples=100,domain=0:1] plot(\x,{(\x)^(2)});
+   \draw[line width=2pt,color=yellow,smooth,samples=100,domain=0:1] plot(\x,{(\x)^(3)});
+   \draw[line width=2pt,color=green,smooth,samples=100,domain=0:1] plot(\x,{(\x)^(4)});
+   \draw[line width=2pt,color=cyan,smooth,samples=100,domain=0:1] plot(\x,{(\x)^(5)});
+   \draw[line width=2pt,color=blue,smooth,samples=100,domain=0:1] plot(\x,{(\x)^(6)});
+   \draw[line width=2pt,color=purple,smooth,samples=100,domain=0:1] plot(\x,{(\x)^(7)});
+   \draw[line width=2pt,color=brown,smooth,samples=100,domain=0:1] plot(\x,{(\x)^(8)});
+   \draw[line width=2pt,color=grey,smooth,samples=100,domain=0:1] plot(\x,{(\x)^(9)});
+   \draw [line width=2pt, color=black] (0,0) -- (0.99,0);
+   \draw [fill=black] (1,1) circle (2.5pt);
+
+   \draw (0.1, 0.9) node {\(f_1 = x\)};
+   \filldraw[color=red] (0.16, 0.89) rectangle ++(5pt,5pt);
+   \draw (0.1, 0.86) node {\(f_2 = x^2\)};
+   \filldraw[color=orange] (0.16, 0.85) rectangle ++(5pt,5pt);
+   \draw (0.1, 0.82) node {\(f_3 = x^3\)};
+   \filldraw[color=yellow] (0.16, 0.81) rectangle ++(5pt,5pt);
+   \draw (0.1, 0.78) node {\(f_4 = x^4\)};
+   \filldraw[color=green] (0.16, 0.77) rectangle ++(5pt,5pt);
+   \draw (0.1, 0.74) node {\(f_5 = x^5\)};
+   \filldraw[color=cyan] (0.16, 0.73) rectangle ++(5pt,5pt);
+   \draw (0.1, 0.70) node {\(f_6 = x^6\)};
+   \filldraw[color=blue] (0.16, 0.69) rectangle ++(5pt,5pt);
+   \draw (0.1, 0.66) node {\(f_7 = x^7\)};
+   \filldraw[color=purple] (0.16, 0.65) rectangle ++(5pt,5pt);
+   \draw (0.1, 0.62) node {\(f_8 = x^8\)};
+   \filldraw[color=brown] (0.16, 0.61) rectangle ++(5pt,5pt);
+   \draw (0.1, 0.58) node {\(f_9 = x^9\)};
+   \filldraw[color=gray] (0.16, 0.57) rectangle ++(5pt,5pt);
+   \draw (0.1, 0.54) node {\(f(x)\)};
+   \filldraw[color=black] (0.16, 0.53) rectangle ++(5pt,5pt);
+
+   \draw [line width=0.5pt,dashed] (0.5,0) -- (0.5,1);
+   \draw [fill=grey] (0.5,0.5) circle (2.5pt);
+   \draw [fill=grey] (0.5,0.25) circle (2.5pt);
+   \draw [fill=grey] (0.5,0.125) circle (2.5pt);
+   \draw [fill=grey] (0.5,0.0625) circle (2.5pt);
+   \draw [fill=grey] (0.5,0.0625) circle (2.5pt);
+   \draw [fill=grey] (0.5,0.03125) circle (2.5pt);
+   \draw [fill=grey] (0.5,0.015625) circle (2.5pt);
+   \draw [fill=grey] (0.5,0) circle (2.5pt);
+   \draw (0.5, -0.07) node {\(x\)};
+   \end{axis}
+\end{tikzpicture}

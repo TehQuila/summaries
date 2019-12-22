@@ -1,0 +1,44 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+   x=2cm,y=2cm,
+   axis lines=middle,
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xmin=-0.9, xmax=4.9,
+   ymin=-0.9, ymax=3.9,
+   xtick={-1,0,...,8},
+   ytick={-1,0,...,5},]
+
+      \draw[line width=2pt,color=black,smooth,samples=100,domain=0.36:4] plot(\x,{ln((\x))+2});
+
+      \draw [line width=2pt,color=green,domain=-2:5] plot(\x,{(--2.7573527493500425--2.385168241636624*\x)/3.6317060492725224});
+      \draw [line width=2pt,color=red,domain=-2:5] plot(\x,{(--5.158273859205579--2.385168241636624*\x)/3.6317060492725224});
+
+      \draw [line width=1.2pt, dashed] (0.3682939507274774,1.0011261194832666)-- (0.3682939507274774,0);
+      \draw [line width=1.2pt, dashed] (4,3.386294361119891)-- (4,0);
+      \draw [line width=1.2pt, dashed] (1.502473495262215,2.407112746847149)-- (1.5020554512845232,0);
+      \draw [line width=1.2pt, dashed] (0.3682939507274774,1.0011261194832666)-- (0,1);
+      \draw [line width=1.2pt, dashed] (1.502473495262215,2.407112746847149)-- (0,2.4065499918014557);
+      \draw [line width=1.2pt, dashed] (4,3.386294361119891)-- (0,3.386267787117416);
+
+      \draw [fill=blue] (0.3682939507274774,1.0011261194832666) circle (2.5pt);
+      \draw [fill=blue] (4,3.386294361119891) circle (2.5pt);
+      \draw [fill=blue] (1.502473495262215,2.407112746847149) circle (2.5pt);
+
+      \draw (3.2, 3.7) node {\(f'(\xi)\)};
+
+      \draw [fill=blue] (0.3682939507274774,0) circle (2.5pt);
+      \draw (0.36, -0.3) node {\(a\)};
+      \draw [fill=blue] (1.5020554512845232,0) circle (2.5pt);
+      \draw (1.5, -0.3) node {\(\xi\)};
+      \draw [fill=blue] (4,0) circle (2.5pt);
+      \draw (4, -0.3) node {\(b\)};
+
+      \draw [fill=blue] (0,1) circle (2.5pt);
+      \draw (-0.3, 1) node {\(f(a)\)};
+      \draw [fill=blue] (0,2.4065499918014557) circle (2.5pt);
+      \draw (-0.3, 2.4) node {\(f(\xi)\)};
+      \draw [fill=blue] (0,3.386267787117416) circle (2.5pt);
+      \draw (-0.3, 3.4) node {\(f(b)\)};
+   \end{axis}
+\end{tikzpicture}

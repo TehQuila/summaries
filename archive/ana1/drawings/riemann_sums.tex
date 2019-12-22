@@ -1,0 +1,85 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+      ticks=none,
+      x=3cm,y=3cm,
+      axis lines=middle,
+      ymajorgrids=true,
+      xmajorgrids=true,
+      xmin=-2.4, xmax=2.4,
+      ymin=-0.3, ymax=3.4,]
+
+      \draw[line width=4pt,color=green,smooth,samples=100,domain=-3.035521966081091:3.181639604487395] plot(\x,{1/2*(\x)^(2)+1});
+
+      \fill[line width=2pt,color=blue,fill=blue,fill opacity=0.10000000149011612] (-2,0) -- (-2,3) -- (-1.5,3) -- (-1.5,0) -- cycle;
+      \fill[line width=2pt,color=blue,fill=blue,fill opacity=0.10000000149011612] (-1.5,0) -- (-1.5,2.125) -- (-1.000492193985458,2.124719018243788) -- (-1,0) -- cycle;
+      \fill[line width=2pt,color=blue,fill=blue,fill opacity=0.10000000149011612] (-1,0) -- (-1.0003475575204508,1.5003476179185657) -- (-0.5,1.5) -- (-0.5,0) -- cycle;
+      \fill[line width=2pt,color=blue,fill=blue,fill opacity=0.10000000149011612] (-0.5,0) -- (-0.5,1.125) -- (0,1.124425296538493) -- (0,0) -- cycle;
+      \fill[line width=2pt,color=blue,fill=blue,fill opacity=0.10000000149011612] (2,0) -- (2,3) -- (1.5,3) -- (1.5,0) -- cycle;
+      \fill[line width=2pt,color=blue,fill=blue,fill opacity=0.10000000149011612] (0,1.124425296538493) -- (0.5,1.125) -- (0.5,0) -- (0,0) -- cycle;
+
+      \fill[line width=2pt,color=red,fill=red,fill opacity=0.2] (-2,0) -- (-1.5,0) -- (-1.5,2.125) -- (-2,2.125464867600505) -- cycle;
+      \fill[line width=2pt,color=red,fill=red,fill opacity=0.2] (-1.5,0) -- (-1,0) -- (-1.0003475575204508,1.5003476179185657) -- (-1.5,1.5) -- cycle;
+      \fill[line width=2pt,color=red,fill=red,fill opacity=0.2] (-1,0) -- (-0.5,0) -- (-0.5,1.125) -- (-1.000260570435978,1.1248389400761278) -- cycle;
+      \fill[line width=2pt,color=red,fill=red,fill opacity=0.2] (-0.5,0) -- (0,0) -- (0,1) -- (-0.5,1) -- cycle;
+      \fill[line width=2pt,color=blue,fill=blue,fill opacity=0.10000000149011612] (1,0) -- (0.5,0) -- (0.5,1.5) -- (1.000347557520451,1.5003476179185655) -- cycle;
+      \fill[line width=2pt,color=blue,fill=blue,fill opacity=0.10000000149011612] (1.5,0) -- (1.5,2.125) -- (1.0004921939854583,2.124719018243788) -- (1,0) -- cycle;
+      \fill[line width=2pt,color=red,fill=red,fill opacity=0.2] (0,1) -- (0.5,1) -- (0.5,0) -- (0,0) -- cycle;
+      \fill[line width=2pt,color=red,fill=red,fill opacity=0.2] (0.5,1.125) -- (1.0002605704359782,1.1248389400761276) -- (1,0) -- (0.5,0) -- cycle;
+      \fill[line width=2pt,color=red,fill=red,fill opacity=0.2] (1.000347557520451,1.5003476179185655) -- (1.5,1.5) -- (1.5,0) -- (1,0) -- cycle;
+      \fill[line width=2pt,color=red,fill=red,fill opacity=0.2] (1.5,2.125) -- (2,2.1254648676005043) -- (2,0) -- (1.5,0) -- cycle;
+
+      \draw [line width=1pt,color=grey] (2,0)-- (2,3);
+      \draw [line width=1pt,color=grey] (0,0)-- (0,1.124425296538493);
+      \draw [line width=1pt,color=grey] (0.5,0)-- (0.5,1.5);
+      \draw [line width=1pt,color=grey] (1.0004921939854583,2.124719018243788)-- (1,0);
+      \draw [line width=1pt,color=grey] (1.5,3)-- (1.5,0);
+      \draw [line width=1pt,color=grey] (-1.000492193985458,2.124719018243788)-- (-1,0);
+      \draw [line width=1pt,color=grey] (-2,0)-- (-2,3);
+      \draw [line width=1pt,color=grey] (-1.5,3)-- (-1.5,0);
+      \draw [line width=1pt,color=grey] (-0.5,1.5)-- (-0.5,0);
+      \draw [line width=2pt,color=blue] (-2,3)-- (-1.5,3);
+      \draw [line width=2pt,color=blue] (-1.5,2.125)-- (-1.000492193985458,2.124719018243788);
+      \draw [line width=2pt,color=blue] (-1.0003475575204508,1.5003476179185657)-- (-0.5,1.5);
+      \draw [line width=2pt,color=blue] (-0.5,1.125)-- (0,1.124425296538493);
+      \draw [line width=2pt,color=blue] (2,3)-- (1.5,3);
+      \draw [line width=2pt,color=blue] (0,1.124425296538493)-- (0.5,1.125);
+      \draw [line width=2pt,color=red] (-1.5,2.125)-- (-2,2.125464867600505);
+      \draw [line width=2pt,color=red] (-1.0003475575204508,1.5003476179185657)-- (-1.5,1.5);
+      \draw [line width=2pt,color=red] (-0.5,1.125)-- (-1.000260570435978,1.1248389400761278);
+      \draw [line width=2pt,color=red] (0,1)-- (-0.5,1);
+      \draw [line width=2pt,color=blue] (0.5,1.5)-- (1.000347557520451,1.5003476179185655);
+      \draw [line width=2pt,color=blue] (1.5,2.125)-- (1.0004921939854583,2.124719018243788);
+      \draw [line width=2pt,color=red] (0,1)-- (0.5,1);
+      \draw [line width=2pt,color=red] (0.5,1.125)-- (1.0002605704359782,1.1248389400761276);
+      \draw [line width=2pt,color=red] (1.000347557520451,1.5003476179185655)-- (1.5,1.5);
+      \draw [line width=2pt,color=red] (1.5,2.125)-- (2,2.1254648676005043);
+
+      \draw (-1.9, 3.15) node {$\sup\{f(x) \mid x \in I_1\}$};
+      \draw (-1.2, 2.25) node {$\inf\{f(x) \mid x \in I_1\} = \sup\{f(x) \mid x \in I_2\}$};
+      \draw (1, 1.64) node {$\sup\{f(x) \mid x \in I_6\} = \inf\{f(x) \mid x \in I_7\}$};
+
+      \draw [fill=blue] (-2,0) circle (2.5pt);
+      \draw (-2,-0.1) node {$a = x_0$};
+      \draw [fill=grey] (-2,3) circle (2.5pt);
+      \draw [fill=blue] (-1.5,0) circle (2.5pt);
+      \draw (-1.5, -0.1) node {$x_1$};
+      \draw [fill=grey] (-1.5,2.125) circle (2.5pt);
+      \draw [fill=blue] (-1,0) circle (2.5pt);
+      \draw (-1, -0.1) node {$x_2$};
+      \draw [fill=grey] (-1.0003475575204508,1.5003476179185657) circle (2.5pt);
+      \draw [fill=grey] (-0.5,1.125) circle (2.5pt);
+      \draw [fill=grey] (2,3) circle (2.5pt);
+      \draw [fill=blue] (1.5,0) circle (2.5pt);
+      \draw (1.5, -0.1) node {$x_7$};
+      \draw [fill=grey] (1.5,2.125) circle (2.5pt);
+      \draw [fill=blue] (1,0) circle (2.5pt);
+      \draw (1, -0.1) node {$x_6$};
+      \draw [fill=grey] (1.000347557520451,1.5003476179185655) circle (2.5pt);
+      \draw [fill=grey] (0.5,1.125) circle (2.5pt);
+      \draw [fill=grey] (0,1) circle (2.5pt);
+      \draw (-1.75, 0.2) node {$I_1$};
+      \draw (-1.25, 0.2) node {$I_2$};
+      \draw (0.75, 0.2) node {$I_6$};
+      \draw (1.5, 0.2) node {$I_7 = [x_6; x_7]$};
+   \end{axis}
+\end{tikzpicture}

@@ -1,0 +1,36 @@
+\begin{tikzpicture}[line cap=round, line join=round,>=triangle 45]
+   \begin{axis}[
+      x=2cm,y=2.5cm,
+      axis lines=middle,
+      ymajorgrids=true,
+      xmajorgrids=true,
+      xmin=-0.7,
+      xmax=5.9,
+      ymin=-0.3,
+      ymax=1.5,
+      xtick={0,1,...,5},
+      ytick={0,1,...,2},
+   ]
+
+      \draw (-0.3,0.4) node {$\varepsilon = 0.3$};
+      \draw [line width=2pt,color=red] (-1, 0.3) -- (5.5, 0.3);
+
+      \draw (-0.3,0.1) node {$a = 0$};
+      \draw [line width=2pt,color=blue] (-1, 0) -- (5.5, 0);
+
+      \draw [fill=blue] (1,1) circle (2.5pt);
+      \draw (1,1.1) node {$a_1$};
+
+      \draw [fill=blue] (2,0.5) circle (2.5pt);
+      \draw (2.,0.6) node {$a_2$};
+
+      \draw [fill=blue] (3,0.33) circle (2.5pt);
+      \draw (3.,0.43) node {$a_3$};
+
+      \draw [fill=blue] (4,0.25) circle (2.5pt);
+      \draw (4,0.35) node {$a_4$};
+
+      \draw [fill=blue] (5,0.2) circle (2.5pt);
+      \draw (5,0.3) node {$a_5$};
+   \end{axis}
+\end{tikzpicture}

@@ -1,0 +1,32 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+   ticks=none,
+   x=1cm,y=1cm,
+   axis lines=middle,
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xmin=-0.3, xmax=6.5,
+   ymin=-0.3, ymax=3.9,]
+
+      \fill[line width=2pt,color=blue,fill=blue,fill opacity=0.2] (1,2.999973327619512) -- (6,3) -- (6,0) -- (1,0) -- cycle;
+      \fill[line width=2pt,color=red,fill=red,fill opacity=0.2] (1,1.000016437920306) -- (6,1) -- (6,0) -- (1,0) -- cycle;
+
+      \draw[line width=2pt,color=green,smooth,samples=100,domain=-2.4605421282524333:9.895360332465595] plot(\x,{cos(((\x)+1)*180/pi)+2});
+
+      \draw [line width=1pt,dashed] (1,-2.181083167331856) -- (1,5.429583726646621);
+      \draw [line width=1pt,dashed] (6,-2.181083167331856) -- (6,5.429583726646621);
+      \draw [line width=1.5pt,color=black] (0,3)-- (6,3);
+      \draw [line width=1.5pt,color=black] (0,1)-- (6,1);
+
+      \draw [fill=blue] (1,0) circle (2.5pt);
+      \draw (0.7,-0.2) node {\(a\)};
+      \draw [fill=blue] (6,0) circle (2.5pt);
+      \draw (6.2,-0.2) node {\(b\)};
+      \draw [fill=blue] (0,3) circle (2.5pt);
+      \draw (0.2, 3.3) node {\(M\)};
+      \draw [fill=blue] (5.3,2.999858636383415) circle (2.5pt);
+      \draw [fill=blue] (0,1) circle (2.5pt);
+      \draw (0.2, 1.3) node {\(m\)};
+      \draw [fill=blue] (2.15,1.000035341528658) circle (2.5pt);
+   \end{axis}
+\end{tikzpicture}

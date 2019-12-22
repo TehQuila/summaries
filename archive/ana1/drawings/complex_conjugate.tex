@@ -1,0 +1,32 @@
+\begin{figure}[h]
+   \centering
+   \begin{tikzpicture}
+      % coords
+      \coordinate (OR) at (0, 0);
+      \coordinate (LX) at (-0.5, 0);
+      \coordinate (RX) at (4, 0);
+      \coordinate (TY) at (0, 3);
+      \coordinate (BY) at (0, -3);
+
+      % coordinate system
+      \draw[->][line width=1.00pt] (LX) -- (RX) node[anchor=north west] {\(\Re(z)\)};
+      \draw[->][line width=1.00pt] (BY) -- (TY) node[anchor=south east] {\(\Im(z)\)};
+
+      \coordinate (z) at (3, 2);
+      \coordinate (y) at (0, 2);
+      \coordinate (x) at (3, 0);
+
+      \draw[fill] (z) node[anchor=west]{\(z = x + iy\)} circle [radius=0.05];
+      \draw[dashed] (x) node[anchor=north west]{\(x\)} -- (z);
+      \draw[dashed] (y) node[anchor=east]{\(y\)} -- (z);
+      \draw[-{latex}, blue] (OR) -- (z) node [midway, above, sloped, black] (TextNode) {\(r = |z|\)};
+      \pic[draw, -, "\(\varphi\)", angle eccentricity=1.5] {angle=x--OR--z};
+
+      \coordinate (conjz) at (3, -2);
+      \coordinate (-y) at (0, -2);
+      \draw[fill] (conjz) node[anchor=west]{\(\overline{z} = x - iy\)} circle [radius=0.05];
+      \draw[dashed] (x) -- (conjz);
+      \draw[dashed] (-y) node[anchor=east]{\(-y\)} -- (conjz);
+      \draw[-{latex}, blue] (OR) -- (conjz);
+   \end{tikzpicture}
+\end{figure}
