@@ -5,26 +5,23 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \begin{definition}[Sequence]
    A sequence \((x_n)_{n \in \mathbb{N}}\) on \(\mathbb{K}\) is an enumerated collection
    \[(x_n)_{n \in \mathbb{N}} := \{x_1, x_2, \ldots, x_n\}\]
+   with elements \(x_i \in \mathbb{K}\).
 \end{definition}
 \begin{remark}[Notation]
-   For conciseness we denote ''\((x_n)_{n \in \mathbb{N}}\) is a sequence on \(\mathbb{K}\)`` as \((x_n) \in \mathbb{K}^\mathbb{N}\).
+   For conciseness we denote ''\((x_n)_{n \in \mathbb{N}}\) is a sequence on \(\mathbb{K}\)`` as \(x_n \in \mathbb{K}^\mathbb{N}\).
 \end{remark}
 \begin{remark}
    Formally we define a sequence as a map \(x: \mathbb{N} \to \mathbb{K}\).
 \end{remark}
 
-\begin{definition}[Zero Sequence]
-   A sequence \((x_n)_{n \in \mathbb{N}}\) where \(x_n \xrightarrow{n \to \infty} 0\).
-\end{definition}
-
 \begin{definition}[Bounded Sequence]
-   A sequence \((x_n)_{n \in \mathbb{N}}\) is
-   \[\text{bounded below if} \quad \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: b \leq x_n)\]
-   \[\text{bounded above if} \quad \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: x_n \leq b)\]
-   \[\text{bounded if} \quad \exists b \in \mathbb{R}_{>0}: (\forall n \in \mathbb{N}: |x_n| < b)\]
+   \(x_n \in \mathbb{K}^\mathbb{N}\) is
+   \[\text{bounded below} :\iff \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: b \leq x_n)\]
+   \[\text{bounded above} :\iff \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: x_n \leq b)\]
+   \[\text{bounded} :\iff \exists b \in \mathbb{R}_{>0}: (\forall n \in \mathbb{N}: |x_n| < b)\]
 \end{definition}
 \begin{remark}
-   \((x_n)\) is bounded if it is bounded above and below.
+   In words, \(x_n\) is \emph{bounded} if it is bounded above and below.
 \end{remark}
 
 \begin{theorem}[Convergent \(\implies\) Bounded]\label{thm:conv_bound}
@@ -35,12 +32,12 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{remark}
 
 \begin{definition}[Monotonic Sequence]
-   A sequence \((x_n)_{n \in \mathbb{N}}\) is
-   \[\text{increasing if} \quad \forall n \in \mathbb{N}: x_n \leq x_{n+1}\]
-   \[\text{decreasing if} \quad \forall n \in \mathbb{N}: x_n \geq x_{n+1}\]
+   \(x_n \in \mathbb{K}^\mathbb{N}\) is
+   \[\text{increasing} :\iff \forall n \in \mathbb{N}: x_n \leq x_{n+1}\]
+   \[\text{decreasing} :\iff \forall n \in \mathbb{N}: x_n \geq x_{n+1}\]
 \end{definition}
 \begin{remark}[Terminology]
-   If instead we have \(<\) or \(>\), we say \((x_n)\) is \emph{strictly} increasing respectively decreasing.
+   If instead we have \(<\) or \(>\), we say \(x_n\) is \emph{strictly} increasing respectively decreasing.
 \end{remark}
 \begin{remark}[Intuition]
    To prove that a sequence is increasing, respectively decreasing we have the following options
@@ -54,7 +51,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
 \subsection{Accumulation Points}
 \begin{definition}[Accumulation Point]
-   \(x \in \mathbb{K}\) is a \emph{accumulation point} of \((x_n) \in \mathbb{K}^\mathbb{N}\) iff
+   \(x \in \mathbb{K}\) is a \emph{accumulation point} of \(x_n \in \mathbb{K}^\mathbb{N}\) iff
    \[\forall \varepsilon > 0: \exists~\text{an infinite}~N_{\varepsilon} \subset \mathbb{N}: (\forall n \in N_\varepsilon: |x_n - x| < \varepsilon)\]
 \end{definition}
 \begin{example}
@@ -120,25 +117,24 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 % \end{proof}
 
 \begin{theorem}
-   Let \((x_n) \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\), then is
-   \[x~\text{an accumulation point of}~(x_n) \iff \forall \varepsilon > 0: (\forall n \in \mathbb{N}~\exists m \geq n: |x_m - x| < \varepsilon)\]
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\), then is
+   \[x~\text{an accumulation point of}~x_n \iff \forall \varepsilon > 0: (\forall n \in \mathbb{N}~\exists m \geq n: |x_m - x| < \varepsilon)\]
 \end{theorem}
 
 \begin{theorem}
-   Let \((x_n) \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\) such that \(\lim_{n \to \infty} x_n = x\), then \(x\) is the only accumulation point of \((x_n)\).
-   In particular, \(x\) is unique.
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\) such that \(\lim_{n \to \infty} x_n = x\), then is \(x\) the only accumulation point of \(x_n\) and unique.
 \end{theorem}
 
 \subsection{Convergence}
 \begin{definition}[Convergent Sequence]\label{def:conv_seq}
-   \((x_n) \in \mathbb{K}^\mathbb{N}\) converges to \(x \in \mathbb{K}\) iff
+   \(x_n \in \mathbb{K}^\mathbb{N}\) \emph{converges to} \(x \in \mathbb{K}\) iff
    \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n > n_\varepsilon: |x_n - x| < \varepsilon)\]
 \end{definition}
 \begin{remark}[Intuition]
-   A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index \(n_\varepsilon\) \emph{all} following \(x_n\) are closer to \(x\) than an arbitrarily chosen error margin \(\varepsilon\).
+   \(x_n\) converges to \(x\), if after some index \(n_\varepsilon\) \emph{all} following \(x_n\) are closer to \(x\) than an arbitrarily chosen error margin \(\varepsilon\).
 \end{remark}
 \begin{remark}[Notation]
-   If \((x_n)_{n \in \mathbb{N}}\) converges to \(x\) we write
+   If \(x_n\) converges to \(x\) we write
    \[x_n \xrightarrow{n \to \infty} x \qquad\text{or}\qquad \lim_{n \to \infty} x_n = x\]
 \end{remark}
 \begin{example}
@@ -155,7 +151,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{example}
 
 \begin{theorem}[Monotonic \& Bounded\(\implies\)Convergent]\label{thm:incr_bound_conv}
-   If \((x_n) \in \mathbb{K}^\mathbb{N}\) is
+   If \(x_n \in \mathbb{K}^\mathbb{N}\) is
    \[\text{increasing and bounded above, then is} \quad \lim_{n \to \infty} x_n = \sup\{x_n \mid n \in \mathbb{N}\}\]
    \[\text{decreasing and bounded below, then is} \quad \lim_{n \to \infty} x_n = \inf\{x_n \mid n \in \mathbb{N}\}\]
 \end{theorem}
@@ -185,8 +181,12 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{example}
 
 \subsubsection{Calculation Rules}
-\begin{lemma}[Zero Sequences]\label{lem:zero_seq}
-   Let \((x_n) \in \mathbb{K}^\mathbb{N}\) and \((r_n) \in \mathbb{K}^\mathbb{N}\) be a zero sequence.
+\begin{definition}[Zero Sequence]
+   \(x_n \in \mathbb{K}^\mathbb{N}\) where \(\lim_{n \to \infty} x_n = 0\).
+\end{definition}
+
+\begin{lemma}[Zero Sequence Convergence ]\label{lem:zero_seq}
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(r_n \in \mathbb{K}^\mathbb{N}\) be a zero sequence.
    \begin{enumerate}[label=\roman*, align=Center]
       \item \[\lim_{n \to \infty} x_n = 0 \implies \lim_{n \to \infty} \lvert x_n\rvert = 0\]
       \item \[\lim_{n \to \infty} x_n = x \implies \lim_{n \to \infty} (x_n - x) = 0\]
@@ -195,7 +195,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{lemma}
 
 \begin{proposition}[Sequence Limits]
-   Let \(\alpha \in \mathbb{K}\) and suppose \(x_n \to x\), \(y_n \to y\), then
+   Let \(\alpha \in \mathbb{K}\) and suppose \(\lim_{n \to \infty} x_n = x\), \(\lim_{n \to \infty} y_n = y\), then
    \begin{enumerate}[label=\roman*, align=Center]
       \item \[\lim_{n \to \infty} \lvert x_n\rvert = \lvert x \rvert\]
       \item \[\lim_{n \to \infty} (\alpha \cdot x_n) = \alpha \cdot x\]
@@ -218,9 +218,8 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    \[x_n = (a_n + b_n)^k \xrightarrow{n \to \infty} (1+0)^k = 1\]
 \end{example}
 
-\subsubsection{Comparing Convergence}
 \begin{proposition}\label{pro:limit_comp}
-   Let \((x_n)_{n \in \mathbb{N}}\) and \((y_n)_{n \in \mathbb{N}}\) where for infinite \(n \in \mathbb{N}: x_n \leq y_n\), then is
+   Let \(x_n, y_n \in \mathbb{K}^\mathbb{N}\) where for infinite \(n \in \mathbb{N}: x_n \leq y_n\).
    \[\lim_{n \to \infty} x_n \leq \lim_{n \to \infty} y_n\]
 \end{proposition}
 \begin{remark}
@@ -228,7 +227,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{remark}
 
 \begin{proposition}[Sandwich Sequence]\label{pro:sandwich_seq}
-   Let \((x_n)_{n \in \mathbb{N}}\), \((y_n)_{n \in \mathbb{N}}\) and \((z_n)_{n \in \mathbb{N}}\) be sequences with \(\lim_{n \to \infty} x_n = \lim_{n \to \infty} z_n = y\), then
+   Let \(x_n, y_n, z_n \in \mathbb{K}^\mathbb{N}\) with \(\lim_{n \to \infty} x_n = \lim_{n \to \infty} z_n = y\).
    \[\exists n_0 \in \mathbb{N}~\forall n > n_0: x_n \leq y_n \leq z_n \implies \lim_{n \to \infty} y_n = y\]
 \end{proposition}
 \begin{example}
@@ -240,12 +239,34 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{example}
 
 \subsubsection{Important Sequences}
-\begin{proposition}[Sequence \(x^n\)]
-      \[|x| < 1 \implies \lim_{n \to \infty} x^n = 0\]
-      \[x = 1 \implies \lim_{n \to \infty} x^n = 1\]
-      \[|x| \geq 1 \land x \neq 1 \implies \lim_{n \to \infty} x^n = \pm\infty\]
+% TODO: finish
+\begin{proposition}[Important Examples]
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(x_n := x^n\)
+         \[\lim_{n \to \infty} x_n = \begin{cases}
+               0 & x \in (-1; 1)\\
+               1 & x = 1\\
+               \pm\infty & x \in \mathbb{R}\setminus (-1;1)
+         \end{cases}\]
+      \item Let \(|x| < 1\) and \(r \in \mathbb{N}\)
+         \[\lim_{n \to \infty} n^r \cdot x^n = 0\]
+      \item \[\lim_{n \to \infty} \sqrt[n]{n} = 1\]
+      \item \(\forall r \in \mathbb{R}_{>0}\)
+         \[\lim_{n \to \infty} \sqrt[n]{r} = 1\]
+      \item \(\forall s \in \mathbb{R}_{>0}\)
+         \[\lim_{n \to \infty} \sqrt[n]{n^s} = 1\]
+      \item
+         \[\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e\]
+      \item \(\forall z \in \mathbb{C}\)
+         \[\lim_{n \to \infty} \left(1 + \frac{z}{n}\right)^n = e^z\]
+      \item
+         \[\lim_{n \to \infty} \frac{n!}{n^n} = 0\]
+   \end{enumerate}
 \end{proposition}
-\begin{proof}
+\begin{remark}
+   (ii) means that the sequence \(x^n\) converges faster to 0 than any other power of \(n\).
+\end{remark}
+\begin{proof}[Proof (i)]
    Suppose \((x_n)\) converges, i.e. \(\lim_{n \to \infty} x^n = \tilde{x}\), then is
    \[\tilde{x} = \lim_{n \to \infty} x^n = \lim_{n \to \infty} x^{(n+1)} = \lim_{n \to \infty} (x \cdot x^n) = x \cdot \lim_{n \to \infty} x^n = x \cdot \tilde{x}\]
    where \(\tilde{x} = x \cdot \tilde{x}\) gives us two cases.
@@ -269,15 +290,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: \left(\forall n > n_\varepsilon: \frac{1}{|x^n|} < \varepsilon\right)\]
    hence \((x_n)\) is unbounded below and thus diverges according to \cref{thm:conv_bound}.
 \end{proof}
-
-\begin{proposition}
-   Let \(|x| < 1\) and \(r \in \mathbb{N}\)
-   \[\lim_{n \to \infty} n^r \cdot x^n = 0\]
-\end{proposition}
-\begin{remark}
-   This means that the sequence \(x^n\) converges faster to 0 than any other power of \(n\).
-\end{remark}
-\begin{proof}
+\begin{proof}[Proof (ii)]
    The case where \(x = 0\) is trivial, so assume w.l.o.g. \(x \neq 1\).
    We regard \(x_n := n^r \cdot |x|^n\), then \(x_n > 0\) and
    \[\frac{x_{n+1}}{x_n} = \frac{(n+1)^r \cdot |x|^{n+1}}{n^r \cdot |x|^n} = |x| \left(\frac{n+1}{n}\right)^r = |x| \left(1 + \frac{1}{n}\right)^r \xrightarrow{n \to \infty} |x|\]
@@ -290,36 +303,9 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    So according to \cref{lem:zero_seq} (iii) is \(n^rx^n \to 0\).
 \end{proof}
 
-% TODO: finish
-\begin{proposition}
-   \[\lim_{n \to \infty} \sqrt[n]{n} = 1\]
-\end{proposition}
-\begin{proof}
-\end{proof}
-
-\begin{proposition}
-   \[\forall r \in \mathbb{R}_{>0}: \lim_{n \to \infty} \sqrt[n]{r} = 1\]
-\end{proposition}
-
-\begin{proposition}
-   \[\forall s \in \mathbb{R}_{>0}: \lim_{n \to \infty} \sqrt[n]{n^s} = 1\]
-\end{proposition}
-
-\begin{proposition}
-   \[\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e\]
-\end{proposition}
-
-\begin{proposition}
-   \[\forall z \in \mathbb{C}: \lim_{n \to \infty} \left(1 + \frac{z}{n}\right)^n = e^z\]
-\end{proposition}
-
-\begin{proposition}
-   \[\lim_{n \to \infty} \frac{n!}{n^n} = 0\]
-\end{proposition}
-
 \subsection{Subsequences}
 \begin{definition}[Subsequence]
-   Given \((x_n) \mathbb{K}^\mathbb{N}\) and a strictly increasing \(\phi: \mathbb{N} \to \mathbb{N}\)
+   Given \(x_n \in \mathbb{K}^\mathbb{N}\) and \(\phi: \mathbb{N} \to \mathbb{N}\) strictly increasing
    \[(x_{n_k})_{k \in \mathbb{N}} := (x_{\phi(k)})_{k \in \mathbb{N}}\]
 \end{definition}
 \begin{example}
@@ -335,18 +321,18 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{example}
 
 \begin{theorem}\label{thm:all_subseq_conv}
-   Let \((x_n) \in \mathbb{K}^\mathbb{N}\), then
-   \[\lim_{n \to \infty} x_n = x \iff \forall (x_{n_k}): \lim_{k \to \infty} x_{n_k} = x\]
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\).
+   \[\lim_{n \to \infty} x_n = x \iff \forall x_{n_k} \in \mathbb{K}^\mathbb{N}: \lim_{k \to \infty} x_{n_k} = x\]
 \end{theorem}
 
 \begin{theorem}\label{thm:cp_iff_subseq}
-   Let \((x_n)_{n \in \mathbb{N}}\) and \(x \in \mathbb{K}\)
-   \[x~\text{is accumulation point of}~(x_n) \iff \exists (x_{n_k}): \lim_{k \to \infty} x_{n_k} = x\]
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\)
+   \[x~\text{is accumulation point of}~x_n \iff \exists x_{n_k} \in \mathbb{K}^\mathbb{N}: \lim_{k \to \infty} x_{n_k} = x\]
 \end{theorem}
 
 \subsection{Cauchy Sequences}
 \begin{definition}[Cauchy Sequence]
-   Given a sequence \(x_n\) where
+   A sequence \(x_n \in \mathbb{K}^\mathbb{N}\) where
    \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall m, n > n_\varepsilon: |x_m - x_n| < \varepsilon)\]
 \end{definition}
 \begin{remark}
@@ -364,70 +350,52 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{theorem}
 
 \begin{theorem}[Cauchy\(\iff\)Convergent]\label{thm:cauchy_crit_seq}
-   \[(x_n)_{n \in \mathbb{N}}~\text{is convergent} \iff (x_n)_{n \in \mathbb{N}}~\text{is a cauchy sequence}\]
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\).
+   \[x_n~\text{is convergent} \iff x_n~\text{is a cauchy sequence}\]
 \end{theorem}
 \begin{remark}
    Only holds on order complete fields.
 \end{remark}
 
 \subsection{Improper Convergence}
-\begin{definition}[Extended Real Numbers]
-   \(\overline{\mathbb{R}} := \mathbb{R} \cup \{-\infty, +\infty\}\)
-\end{definition}
-\begin{remark}[Infinity Rules]
-   We define the symbols \(-\infty\) and \(\infty\) by the following characteristics
-   \[\forall x \in \mathbb{R}: -\infty < x < \infty\]
-   \[\sup(\emptyset) := -\infty \qquad \inf(\emptyset) := \infty\]
-   % TODO: defined in foundations --> merge
-   For \(M \subset \mathbb{R}\setminus \emptyset\)
-   \[\inf(M) := -\infty \iff M~\text{boundless below} \qquad \sup(M) := \infty \iff M~\text{boundless above}\]
-   It follows that every \(M \subset \mathbb{R}\) has an infimum respectively supremum.
-
-   We define the arithmetic operations of \(\overline{\mathbb{R}}\)
-   \[\forall x > -\infty: x + \infty := +\infty \qquad \forall x < \infty: x - \infty := -\infty\]
-   \[x \cdot \infty := \begin{cases}+\infty & x > 0\\ -\infty & x < 0\end{cases} \qquad x \cdot (-\infty) := -x \cdot \infty \qquad \forall x \in \mathbb{R}: \frac{x}{\infty} = \frac{x}{-\infty} := 0 \qquad \frac{x}{0} := \begin{cases}\infty & x > 0\\-\infty & x < 0\end{cases}\]
-\end{remark}
-
-\begin{remark}[Infinite Pitfalls]
-   Since \(\overline{\mathbb{R}}\) is not a field, some operations are not defined
-   \[\frac{\infty}{\infty} \quad \frac{\infty}{-\infty} \quad \frac{-\infty}{\infty} \quad \frac{-\infty}{-\infty} \qquad -\infty + \infty \quad \infty - \infty \qquad 0 \cdot \infty \quad 0 \cdot (-\infty)\]
-   If we reach such expressions while solving a problem, we have start over and rearrange in a way that circumvents those statements.
-\end{remark}
-
 \begin{definition}[Improper Convergence]
-   Given \((x_n)_{n \in \mathbb{N}} \in \overline{\mathbb{R}}\).
-   \[(x_n)~\text{diverges to}~+\infty~\text{if}~\forall M \in \mathbb{R}~\exists n_0 \in \mathbb{N}: (\forall n > n_0: x_n \geq M)\]
-   \[(x_n)~\text{diverges to}~-\infty~\text{if}~\forall M \in \mathbb{R}~\exists n_0 \in \mathbb{N}: (\forall n > n_0: x_n \leq M)\]
+   Given \(x_n \in \mathbb{R}^\mathbb{N}\).
+   \[\lim_{n \to \infty} = \infty :\iff \forall M \in \mathbb{R}_{\geq 0}~\exists n_M \in \mathbb{N}: (\forall n \geq n_M: x_n > M)\]
+   \[\lim_{n \to \infty} = -\infty :\iff \forall M \in \mathbb{R}_{\geq 0}~\exists n_M \in \mathbb{N}: (\forall n \geq n_M: x_n < M)\]
 \end{definition}
+\begin{remark}
+   \[\infty~\text{is an accumulation point of}~(x_n) :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} > M\]
+   \[-\infty~\text{is an accumulation point of}~(x_n) :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} < -M\]
+\end{remark}
 
 \begin{theorem}[Rules for Improper Convergence]
-   Let \((x_n)_{n \in \mathbb{N}} \in \mathbb{R}\)
+   Let \(x_n \in \mathbb{R}^\mathbb{N}\)
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \[x_n \to \pm\infty \implies \frac{1}{x_n} \to 0\]
-      \item \[x_n \to 0~\text{and}~x_n > 0~\text{for almost all}~n \implies \frac{1}{x_n} \to \infty\]
-      \item \[x_n \to 0~\text{and}~x_n < 0~\text{for almost all}~n \implies \frac{1}{x_n} \to -\infty\]
+      \item \[\lim_{n \to \infty} x_n = \pm\infty \implies \lim_{n \to \infty} \frac{1}{x_n} = 0\]
+      \item \[\lim_{n \to \infty} x_n = 0~\text{and}~x_n > 0~\text{for almost all}~n \implies \lim_{n \to \infty} \frac{1}{x_n} = \infty\]
+      \item \[\lim_{n \to \infty} x_n = 0~\text{and}~x_n < 0~\text{for almost all}~n \implies \lim_{n \to \infty} \frac{1}{x_n} = -\infty\]
    \end{enumerate}
 \end{theorem}
 
 \begin{theorem}[Improper Limit]\label{thm:improper_limits}
-   Every monotonic sequence in \(\overline{\mathbb{R}}\) converges and
-   \[(x_n)~\text{increasing}~\implies \lim_{n \to \infty} x_n = \sup\{x_n \mid n \in \mathbb{N}\}\]
-   \[(x_n)~\text{decreasing}~\implies \lim_{n \to \infty} x_n = \inf\{x_n \mid n \in \mathbb{N}\}\]
+   Every monotonic \(x_n \in \overline{\mathbb{R}}^\mathbb{N}\) converges and
+   \[x_n~\text{increasing}~\implies \lim_{n \to \infty} x_n = \sup\{x_n \mid n \in \mathbb{N}\}\]
+   \[x_n~\text{decreasing}~\implies \lim_{n \to \infty} x_n = \inf\{x_n \mid n \in \mathbb{N}\}\]
 \end{theorem}
 \begin{remark}
-   Important to note here is that in contrast to \cref{thm:incr_bound_conv} we don't require \((x_n)\) to be bounded.
+   Important to note here is that in contrast to \cref{thm:incr_bound_conv} we don't require \(x_n\) to be bounded.
 \end{remark}
 
 \subsection{Limessuperior \& Limesinferior}
-Let \((x_n)_{n \in \mathbb{N}}\) be a bounded sequence: \(\forall n \in \mathbb{N}: |x_n| \leq b\).
+Let \(x_n \in \mathbb{R}^\mathbb{N}\) be bounded, i.e. \(\forall n \in \mathbb{N}: |x_n| \leq b\).
 We define
-\[(\overline{x}_n) := \sup\{x_k \mid k \geq n\} \qquad\text{and}\qquad (\underline{x}_n) := \inf\{x_k \mid k \geq n\}\]
-Since \((x_n)\) is bounded holds \(\forall n \in \mathbb{N}: -b \leq \underline{x}_n \leq \overline{x}_n \leq b\) which means that they both are bounded.
-Furthermore follows from their definitions that \((\overline{x}_n)\) is increasing and \((\underline{x}_n)\) is decreasing.
+\[\overline{x}_n := \sup\{x_k \mid k \geq n\} \qquad\text{and}\qquad \underline{x}_n := \inf\{x_k \mid k \geq n\}\]
+Since \(x_n\) is bounded holds \(\forall n \in \mathbb{N}: -b \leq \underline{x}_n \leq \overline{x}_n \leq b\) which means that they both are bounded.
+Furthermore follows from their definitions that \(\overline{x}_n\) is increasing and \(\underline{x}_n\) is decreasing.
 Hence they are convergent according to \cref{thm:improper_limits}.
 
 \begin{definition}[Limessuperior \& -inferior]
-   Given a bounded sequence \((x_n)_{n \in \mathbb{N}}\).
+   Given a bounded \(x_n \in \mathbb{R}^\mathbb{N}\).
    \[\limsup_{n \to \infty}(x_n) := \lim_{n \to \infty} \overline{x}_n\]
    \[\liminf_{n \to \infty}(x_n) := \lim_{n \to \infty} \underline{x}_n\]
 \end{definition}
@@ -447,8 +415,8 @@ Hence they are convergent according to \cref{thm:improper_limits}.
 \end{example}
 
 \begin{theorem}
-   Let \((x_n)_{n \in \mathbb{N}} \in \mathbb{R}\), then is
-   \[\limsup_{n \to \infty}(x_n)~\text{the largest and}~\liminf_{n \to \infty}(x_n)~\text{the smallest accumulation point of}~(x_n)~\text{in}~\overline{\mathbb{R}}\]
+   Let \(x_n \in \mathbb{R}^\mathbb{N}\), then is
+   \[\limsup_{n \to \infty}(x_n)~\text{the largest and}~\liminf_{n \to \infty}(x_n)~\text{the smallest accumulation point of}~x_n~\text{in}~\overline{\mathbb{R}}\]
 \end{theorem}
 
 From \cref{pro:limit_comp} follows that
@@ -471,19 +439,11 @@ From \cref{pro:limit_comp} follows that
    \end{drcases} \implies \liminf_{n \to \infty}(x_n) = 0 = \limsup_{n \to \infty}(x_n) \implies x_n~\text{converges}\]
 \end{example}
 
-% TODO: 
-\begin{remark}
-   It is important to remember the \(e^{\log}\) trick.
-   \[\lim_{x \to x_0} f(x)^{g(x)} = \lim_{x \to x_0} e^{\log(f(x)^{g(x)})} = \lim_{x \to x_0} e^{g(x) \cdot \log(f(x))} \overset{e~\text{cont.}}{=} \exp \left(\lim_{x \to x_0} g(x) \cdot log(f(x))\right)\]
-   is sometimes easier to calculate.
-\end{remark}
-
-
 \newpage
 
 \section{Series}
 \begin{definition}[Series]
-   Given a sequence \((x_n)_{n \in \mathbb{N}}\).
+   Given a sequence \(x_n \mathbb{K}^\mathbb{N}\).
    \[\sum_{n=0}^{\infty} x_n = x_0 + x_1 + \ldots\]
 \end{definition}
 \begin{remark}[Notation]
@@ -499,12 +459,14 @@ From \cref{pro:limit_comp} follows that
    We say \((s_k)_{k \in \mathbb{N}}\) is the \emph{sequence of partial sums}.
    From the definition we see that \(s_k =  s_{k-1} + x_k\).
 \end{remark}
-
 \begin{example}
-   \[\sum_{n = 1}^\infty \frac{1}{n^2}\]
-   \[s_k = \sum_{n=0}^k \frac{1}{n^2}\]
+   \[\sum_{n = 1}^\infty \frac{1}{n^2} \rightsquigarrow s_k = \sum_{n=0}^k \frac{1}{n^2} \rightsquigarrow 1 + \frac{1}{4} + \frac{1}{9} + \ldots\]
    \((s_k)\) is increasing, now we show that it is bounded. We regard the first term seperately since we would divide by 0.
-   \[s_k = \frac{1}{1} + \sum_{n=2}^k \frac{1}{n^2} \leq 1 + \sum_{n=2}^k \frac{1}{n(n-1)} = 1 + \sum (\frac{1}{n-1} - \frac{1}{n} = 1 + \sum \frac{1}{n-1} - \sum \frac{1}{n} = 1 + \sum_{n=1}^{k-1} \frac{1}{n} - \sum_{n=2}^k \frac{1}{n} = 1 + 1 + \sum_{n=2}^{k-1} \frac{1}{n} - \sum_{n=2}^{k-1}\frac{1}{n} - \frac{1}{k} = 2 - \frac{1}{k} \leq 2\]
+   \begin{equation*}
+      \begin{split}
+         s_k & = \frac{1}{1} + \sum_{n=2}^k \frac{1}{n^2} \leq 1 + \sum_{n=2}^k \frac{1}{n(n-1)} = 1 + \sum_{n=2}^k \left(\frac{1}{n-1} - \frac{1}{n} = 1 + \sum \frac{1}{n-1} - \sum \frac{1}{n} = 1 + \sum_{n=1}^{k-1} \frac{1}{n} - \sum_{n=2}^k \frac{1}{n} = 1 + 1 + \sum_{n=2}^{k-1} \frac{1}{n} - \sum_{n=2}^{k-1}\frac{1}{n} - \frac{1}{k} = 2 - \frac{1}{k} \leq 2
+      \end{split}
+   \end{equation*}
 \end{example}
 
 \begin{definition}[Convergent Series]\label{def:series_convergence}
@@ -1075,6 +1037,12 @@ as \(\exp\) is continuous, we can pull the limit into the argument.
 \begin{example}
    We want to find \(\lim_{x \to 0} x^{\sin(x)}\)
 \end{example}
+
+\begin{remark}
+   It is important to remember the \(e^{\log}\) trick.
+   \[\lim_{x \to x_0} f(x)^{g(x)} = \lim_{x \to x_0} e^{\log(f(x)^{g(x)})} = \lim_{x \to x_0} e^{g(x) \cdot \log(f(x))} \overset{e~\text{cont.}}{=} \exp \left(\lim_{x \to x_0} g(x) \cdot log(f(x))\right)\]
+   is sometimes easier to calculate.
+\end{remark}
 
 \subsection{One-Sided Limits}
 \begin{definition}[One-Sided Limit]\label{def:one-sided_limit}

@@ -668,7 +668,7 @@ and show that it is an equivalence relation.
 \end{definition}
 % TODO: merge with analysis
 \begin{remark}[Notation]
-   If \(A\) is unbounded (not bounded above or below) we define
+   We define \(\inf(\emptyset) := \infty\) and \(\sup(\emptyset) := -\infty\) as well as if \(A\) is unbounded (not bounded above or below)
    \[\sup(A) := \infty \qquad\text{and}\qquad \inf(A) := -\infty\]
 \end{remark}
 \begin{remark}[Intuition]
@@ -1695,6 +1695,28 @@ With this procedure we can produce a number with \(n\) decimals.
 \begin{proposition}[\(|\mathbb{R}| = \infty\)]\label{pro:R_uncountable}
    \(\mathbb{R}\) is uncountably infinite.
 \end{proposition}
+
+\subsubsection{Extended Real Numbers}
+\begin{definition}[Extended Real Numbers]
+   \(\overline{\mathbb{R}} := \mathbb{R} \cup \{-\infty, +\infty\}\)
+\end{definition}
+\begin{remark}[Infinity Rules]
+   It follows that every \(M \subset \mathbb{R}\) has an infimum respectively supremum.
+\end{remark}
+
+\begin{definition}[Infinity Arithmetic]
+   We define the arithmetic operations of \(\overline{\mathbb{R}}\)
+   \[\forall x \in (-\infty; \infty]: x + \infty := +\infty \qquad\qquad \forall x \in [-\infty; \infty): x - \infty := -\infty\]
+   \[\forall x \in (0; \infty]: x \cdot \pm\infty := \pm\infty \qquad\qquad \forall x \in [-\infty; 0): x \cdot \pm\infty = \mp\infty\]
+   \[\forall x \in \mathbb{R}: \frac{x}{\pm\infty} := 0 \qquad \forall x \in (0; \infty) \frac{\pm\infty}{x} = \pm\infty \qquad \forall x \in (-\infty; 0) \frac{\pm\infty}{x} = \mp\infty\]
+   \[\forall x \in (0; \infty): \frac{x}{0} := \infty \qquad \forall x \in (-\infty; 0): \frac{x}{0} := -\infty\]
+\end{definition}
+
+\begin{remark}[Infinite Pitfalls]
+   Since \(\overline{\mathbb{R}}\) is not a field, some operations are not defined
+   \[\frac{\infty}{\infty} \quad \frac{\infty}{-\infty} \quad \frac{-\infty}{\infty} \quad \frac{-\infty}{-\infty} \qquad -\infty + \infty \quad \infty - \infty \qquad 0 \cdot \infty \quad 0 \cdot (-\infty)\]
+   If we reach such expressions while solving a problem, we have start over and rearrange in a way that circumvents those statements.
+\end{remark}
 
 \subsection{Complex Numbers - \texorpdfstring{\(\mathbb{C}\)}{C}}
 We have a similar problem with \(\mathbb{R}\) as the one we solved when introducing real numbers.
