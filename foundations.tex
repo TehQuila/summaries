@@ -36,21 +36,19 @@ Mathematical logic revolves around statements i.e. sentences, which we can (uniq
 \end{remark}
 
 \subsection{Methods of Proofs}
-A \textit{direct proof} is a way of showing the truth or falsehood of a given statement by a straightforward combination of established facts, usually axioms, existing lemmas and theorems, without making any further assumptions.
-In contrast, an \textit{indirect proof} may begin with certain hypothetical scenarios and then proceed to eliminate the uncertainties in each of these scenarios until an inescapable conclusion is forced.
-
-For example
-\paragraph{Proof by Contradiction:} In proof by contradiction (also known as ''reductio ad absurdum``), it is shown that if some statement were true, a logical contradiction occurs, hence the statement must be false.
-\paragraph{Proof by Contraposition:} Proof by contraposition infers the conclusion ''if A then B`` from the premise ''if not B then not A``.
-The statement ''if not B then not A`` is called the \textit{contrapositive}.
-
-An example for a direct proof would be
+A \emph{direct proof} is a way of showing the truth or falsehood of a given statement by a straightforward combination of established facts, usually axioms, existing lemmas and theorems, without making any further assumptions.
+An important example of a direct proof is a
 \paragraph{Proof by Induction:} In proof by mathematical induction, a single ''base case`` is proved, and an ''induction rule`` is proved that establishes that any arbitrary case implies the next case.
 Since in principle the induction rule can be applied repeatedly starting from the proved base case, we see that all (usually infinitely many) cases are provable.
 This avoids having to prove each case individually.
 
-\subsection{Logical Connective}
-In logic, a logical connective (or logical operator) is a symbol or word used to connect two or more sentences in a grammatically valid way, such that the value of the compound sentence produced depends only on that of the original sentences and on the meaning of the connective.
+In contrast, an \emph{indirect proof} may begin with certain hypothetical scenarios and then proceed to eliminate the uncertainties in each of these scenarios until an inescapable conclusion is forced.
+\paragraph{Proof by Contradiction:} In proof by contradiction (also known as ''reductio ad absurdum``), it is shown that if some statement were true, a logical contradiction occurs, hence the statement must be false.
+\paragraph{Proof by Contraposition:} Proof by contraposition infers the conclusion ''if A then B`` from the premise ''if not B then not A``.
+The statement ''if not B then not A`` is called the \textit{contrapositive}.
+
+\subsection{Logical Connectives}
+In logic, a \emph{logical connective} (or \emph{logical operator}) is a symbol or word used to connect two or more sentences in a grammatically valid way, such that the value of the compound sentence produced depends only on that of the original sentences and on the meaning of the connective.
 
 We can define such operators through \textit{truth tables} where specify for each combination of true/false statements, what the result will be.
 
@@ -182,12 +180,13 @@ It describes the aspects of mathematical sets familiar in discrete mathematics (
 \end{definition}
 
 \begin{definition}[Equivalent Sets]
+   Given sets \(A\) and \(B\),
    \[A = B \iff A \subset B \land B \subset A\]
 \end{definition}
 
 \begin{definition}[Subset]
-   Given sets \(A\) and \(B\)
-   \[A \subset B := \forall a \in A: a \in B\]
+   Given sets \(A\) and \(B\),
+   \[A \subset B :\iff \forall a \in A: a \in B\]
 \end{definition}
 \begin{remark}
    If we write \(A \supset B\) then is \(B\) the \emph{superset} of \(A\).
@@ -212,6 +211,34 @@ It describes the aspects of mathematical sets familiar in discrete mathematics (
    \[\mathcal{P}(\emptyset) = \{\emptyset\}\]
    \[\mathcal{P}\big(\{x, y\}\big) = \big\{\emptyset, \{x\}, \{y\}, \{x, y\}\big\}\]
 \end{example}
+
+\subsubsection{Intervalls}
+Intervalls are special subsets of \(\mathbb{R}\).
+
+\begin{definition}[Closed Intervall]
+   Given \(a, b \in \mathbb{R}: a < b\),
+   \[[a; b] := \{x \in \mathbb{R}: a \leq x \leq b\}\]
+\end{definition}
+
+\begin{definition}[Open Intervall]
+   Given \(a, b \in \mathbb{R}: a < b\),
+   \[(a; b) := \{x \in \mathbb{R}: a < x < b\}\]
+\end{definition}
+\begin{remark}[Notation]
+   Sometimes also denoted \(]a;b[\).
+\end{remark}
+
+\begin{definition}[Half-Open Intervall]
+   Given \(a, b \in \mathbb{R}: a < b\),
+   \[(a; b] := \{x \in \mathbb{R}: a < x \leq b\}\]
+   \[[a; b) := \{x \in \mathbb{R}: a \leq x < b\}\]
+\end{definition}
+\begin{remark}[Intuition]
+   With this notation we now can write
+   \[(-\infty; b] = \{x \in \mathbb{R}: x \leq b\}\]
+   \[(a; \infty) = \{x \in \mathbb{R}: a < x\}\]
+   \[\mathbb{R} = (-\infty; \infty)\]
+\end{remark}
 
 \subsection{Intersection \& Union}
 \begin{definition}[Intersection]
@@ -268,18 +295,13 @@ It describes the aspects of mathematical sets familiar in discrete mathematics (
    Given the sets \(A, B\)
    \[A \times B := \{(a, b) \mid a \in A, b \in B\}\]
 \end{definition}
-\begin{remark}
-   The set of all ordered pairs of \(A\) and \(B\).
-   \[(a, b) = (a', b') \iff a = a' \land b = b'\]
-\end{remark}
-\begin{remark}
-   Given sets \(X_1, \ldots, X_n\)
-   \[\bigtimes_{i=1}^n X_i = \{(x_1, \ldots, x_n) \mid x_1 \in X_1, \ldots, x_n \in X_n\}\]
-   Regarding notation we write \(X^n\) for \(X \times \ldots \times X\).
+\begin{remark}[Notation]
+   For a set \(X\) we can also write \(X^n := X \times \ldots \times X\) and for given sets \(X_1, \ldots, X_n\)
+   \[\bigtimes_{i=1}^n X_i = \big\{(x_1, \ldots, x_n) \mid x_1 \in X_1, \ldots, x_n \in X_n\big\}\]
 \end{remark}
 
 \begin{proposition}[Rules for Cartesian Products]
-   Let \(A, B\) be sets, then holds the following
+   Let \(A\) and \(B\) be sets, then
    \begin{enumerate}[label=\roman*, align=Center]
       \item \(A \times B = \emptyset \iff A = \emptyset \lor B = \emptyset\)
       \item \((A \times B = B \times A) \iff A = B\) for \(A, B \neq \emptyset\)
@@ -400,13 +422,13 @@ The fact that an \(n \in \mathbb{N}\) is a set itself containing all \(x \in n: 
 
 \section{Relations}
 \subsection{Definition \& Terminology}
-\begin{definition}[(Binary) Relation]
+\begin{definition}[Binary Relation]
    Given a set \(X\)
    \[R \subset X \times X\]
 \end{definition}
-\begin{remark}
-   For two elements \(x, y \in X\) we say \(x\) is in relation \(R\) to \(y\), written as
-   \[(x, y) \in R \quad\text{or}\quad xRy \quad\text{or}\quad x \sim_R y\]
+\begin{remark}[Terminology]
+   For two elements \(x, y \in X\) we say \(x\) \emph{is in relation \(R\) to \(y\)}, denoted as
+   \[(x, y) \in R \qquad\text{or}\qquad xRy \qquad\text{or}\qquad x \sim_R y\]
 \end{remark}
 \begin{example}
    The graph of a function \(f: M \to M\) is a relation with the property that \(\forall x \in M \exists! y \in M: (x, y) \in \mathcal{G}(f)\).
@@ -417,19 +439,14 @@ The fact that an \(n \in \mathbb{N}\) is a set itself containing all \(x \in n: 
    \[\forall x \in X: xRx\]
 \end{definition}
 
-\begin{definition}[Diagonal Relation]
-   A solely reflexive relation
-   \[\Delta_X = \{(x, x) \mid x \in X\}\]
-\end{definition}
-\begin{example}
-   Let \(X = \{1, 2, 3\}\), in this case
-   \(\Delta_X = \{(1, 1), (2, 2), (3, 3)\}\)
-   would even be an equivalence relation (\ref{def:equivalence_relation}).
-\end{example}
-
-\begin{definition}[Symmetrical Relation]
+\begin{definition}[Symmetric Relation]
    A relation \(R\) where
    \[\forall x, y \in X: xRy \implies yRx\]
+\end{definition}
+
+\begin{definition}[Antisymmetric Relation]
+   A relation \(R\) where
+   \[\forall x, y \in X: (xRy \land yRx) \implies x = y\]
 \end{definition}
 
 \begin{definition}[Transitive Relation]
@@ -442,14 +459,19 @@ The fact that an \(n \in \mathbb{N}\) is a set itself containing all \(x \in n: 
    however it is not reflexive or symmetrical.
 \end{example}
 
+\begin{definition}[Total Relation]
+   A relation \(R\) where
+   \[\forall x, y \in X: xRy \lor yRx\]
+\end{definition}
+
 \subsection{Equivalence Relations}
 The idea of an equivalence relation is to group elements of a set together by some property.
 \begin{definition}[Equivalence Relation]\label{def:equivalence_relation}
    A relation \(\sim\) on a set \(X\) which is
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \textit{reflexive}: \(\forall x \in X: x \sim x\)
-      \item \textit{symmetrical}: \(\forall x, y \in X: x \sim y \implies y \sim x\)
-      \item \textit{transitive}: \(\forall x, y, z \in X: (x \sim y \land y \sim z) \implies x \sim z\)
+      \item \emph{reflexive}: \(\forall x \in X: x \sim x\)
+      \item \emph{symmetric}: \(\forall x, y \in X: x \sim y \implies y \sim x\)
+      \item \emph{transitive}: \(\forall x, y, z \in X: (x \sim y \land y \sim z) \implies x \sim z\)
    \end{enumerate}
 \end{definition}
 If two elements both satisfy this property they belong to the same \emph{equivalence class}.
@@ -457,7 +479,7 @@ If two elements both satisfy this property they belong to the same \emph{equival
    Given an equivalence relation \(\sim\) on a set \(X\) and \(x \in X\)
    \[[x] := \{x' \mid x' \sim x\} \subset X\]
 \end{definition}
-\begin{remark}
+\begin{remark}[Terminology]
    An element of \([x]\) is a \emph{representative} of this particular equivalence class.
 \end{remark}
 So every equivalence class is a set of elements which are equivlant in some sense.
@@ -478,7 +500,7 @@ Hence \(X_{/\sim}\) is a \emph{partition} of \(X\), defining what elements belon
    Given a set \(X\), the subset \(\mathbb{X} \subset \big(\mathcal{P}(X) \setminus \{\emptyset\}\big)\) is a partition of \(X\) iff
    \[\forall x \in X: \big(\exists! \mathcal{X} \in \mathbb{X}: x \in \mathcal{X}\big)\]
 \end{definition}
-\begin{remark}
+\begin{remark}[Intuition]
    In words: a partition \emph{partitions} a set \(X\) into multiple subsets \(\mathcal{X}\)
    Those subsets \(\mathcal{X}\) are formed such that every element of \(X\) belongs to exactly one such subset.
    All those \(\mathcal{X}\) are grouped into \(\mathbb{X}\) such that
@@ -532,29 +554,22 @@ and show that it is an equivalence relation.
    \end{split}
 \end{equation*}
 
-
 \subsection{Order Relations}
-\begin{definition}[Antisymmetrical Relation]
-   A relation \(R\) where
-   \[\forall x, y \in X: (xRy \land yRx) \implies x = y\]
-\end{definition}
-
-\begin{definition}[(Partial) Order]
+\subsubsection{Definition \& Terminology}
+\begin{definition}[Partial Order]
    A relation \(\preceq\) on a set \(X\), which is
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \textit{reflexive}: \(\forall x \in X: x \preceq x\)
-      \item \textit{antisymetrical}: \(\forall x, y \in X: (x \preceq y \land y \preceq x) \implies x = y\)
-      \item \textit{transitive}: \(\forall x, y, z \in X: (x \preceq y \land y \preceq z) \implies x \preceq z\)
+      \item \emph{reflexive}: \(\forall x \in X: x \preceq x\)
+      \item \emph{antisymetric}: \(\forall x, y \in X: (x \preceq y \land y \preceq x) \implies x = y\)
+      \item \emph{transitive}: \(\forall x, y, z \in X: (x \preceq y \land y \preceq z) \implies x \preceq z\)
    \end{enumerate}
 \end{definition}
-
-\begin{definition}[Total Relation]
-   A relation \(R\) where
-   \[\forall x, y \in X: xRy \lor yRx\]
-\end{definition}
+\begin{remark}[Terminology]
+   If we only write \emph{order} we usually refer to a partial order as in \(X\) is an ordered set instead of \(X\) is a partially ordered set.
+\end{remark}
 
 \begin{definition}[Total Order]
-   A partial order \(\preceq\) on a set \(X\), where \(\preceq\) is a total relation
+   A partial order \(\preceq\), where \(\preceq\) is a total relation
    \[\forall x, y \in X: x \preceq y \lor y \preceq x\]
 \end{definition}
 \begin{example}
@@ -573,8 +588,8 @@ and show that it is an equivalence relation.
    It is however not well-ordered forwards, since it has not a greatest element
 \end{example}
 
-\subsection{Ordered Sets}
-\begin{definition}[(Partially) Ordered Set]
+\subsubsection{Ordered Sets}
+\begin{definition}[Partially Ordered Set]
    A set \(X\) with an order relation \(\preceq\) denoted as \((X, \preceq)\).
 \end{definition}
 \begin{example}
@@ -589,44 +604,30 @@ and show that it is an equivalence relation.
    \((\mathbb{N}, <)\) and \((\mathbb{R}, \leq)\).
 \end{example}
 
-\begin{proposition}[Property of Totally Ordered Sets]
-   Let \((X, \preceq)\) be a totally ordered set, then only one of the following holds
-   \[\forall x, y \in X: (x < y) \lor (x = y) \lor (x > y)\]
+\begin{proposition}
+   Let \(X\) be totally ordered, then \(\forall x, y \in X\) only one of the following holds
+   \[x < y \qquad\text{or}\qquad x = y \qquad\text{or}\qquad x > y\]
 \end{proposition}
-\begin{proof}
-   Since \(\preceq\) is total, at least one of the above must hold, but since it's antisymmetrical no more than one can hold.
-\end{proof}
 
 \begin{definition}[Order Complete Set]
-   A totally ordered set \((M, \preceq)\) is order complete if the following holds.
-
-   Given the subsets \(A, B \neq \emptyset \subset M\) with \(\forall a \in A, \forall b \in B: a \preceq b\)
-   \[\exists c \in M: (\forall a \in A: a \preceq c) \land (\forall b \in B: c \preceq b)\]
+   A totally ordered set \(X\) where for \(A, B \subset X\) with \(\forall a \in A, b \in B: a \preceq b\) holds that
+   \[\exists c \in X: (\forall a \in A: a \preceq c) \land (\forall b \in B: c \preceq b)\]
 \end{definition}
-\begin{remark}
-   \(\mathbb{Q}\) is a totally ordered set but not order complete. Given
+\begin{example}
+   \(\mathbb{R}\) is order complete.
+   \(\mathbb{Q}\) is a totally ordered set but not order complete.
+   Given
    \[A = \{x \in \mathbb{Q}^+: 0 < x \land x^2 < 2\}\]
    \[B = \{x \in \mathbb{Q}^+: 0 < x \land x^2 > 2\}\]
    \[\not\exists c \in \mathbb{Q}: a \leq c \leq b~\forall a \in A, \forall b \in B\]
    Would there exists such a \(c\) it would be \(\sqrt{2}\)
-\end{remark}
+\end{example}
 
-\begin{definition}[Bounded Below Set]
-   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
-   \[A~\text{is bounded below if}~\exists b \in X: (\forall a \in A: b \preceq a)\]
-\end{definition}
-
-\begin{definition}[Bounded Above Set]
-   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
-   \[A~\text{is bounded above if}~\exists b \in X: (\forall a \in A: a \preceq b)\]
-\end{definition}
-\begin{remark}
-   We say \(A\) is \textit{bounded} if it is bounded above and below.
-\end{remark}
-
-\begin{definition}[Lower Bound]
-   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
-   \[b \in X~\text{is a lower bound if}~\forall a \in A: b \preceq a\]
+\subsubsection{Bounded Sets}
+\begin{definition}[Upper/Lower Bound]
+   Given an ordered set \((X, \preceq)\) and \(A \subset X\), \(b \in X\) is
+   \[\text{an upper bound of}~A~\text{if}~\forall a \in A: a \preceq b\]
+   \[\text{a lower bound of}~A~\text{if}~\forall a \in A: b \preceq a\]
 \end{definition}
 \begin{example}
    Let \(A = [0;1) = \{x \in A \mid 0 \leq x < 1\}\).
@@ -635,89 +636,94 @@ and show that it is an equivalence relation.
    \([0;\infty)\) however is only bounded below and not above.
 \end{example}
 
-\begin{definition}[Upper Bound]
-   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
-   \[b \in X~\text{is an upper bound if}~\forall a \in A: a \preceq b\]
+\begin{definition}[Bounded Above/Below Set]
+   Given an ordered set \((X, \preceq)\), \(A \subset X\) is bounded
+   \[\text{above if there exists an upper bound.}\]
+   \[\text{below if there exists a lower bound.}\]
 \end{definition}
-
-\begin{definition}[Minimal Element]
-   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
-   \[m \in A~\text{is minimal if}~(a \in A) \land (a \preceq m) \implies a = m\]
-\end{definition}
-
-\begin{definition}[Maximal Element]
-   Given an ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
-   \[m \in A~\text{is maximal if}~(a \in A) \land (m \preceq a) \implies a = m\]
-\end{definition}
-\begin{remark}
-   In other words, a minimal element of \(A\) is \textit{not greater} than any other element in \(A\), likewise a maximal element is \textit{not smaller} than any other element.
+\begin{remark}[Terminology]
+   If \(A\) is bounded above and below we simply say it is \emph{bounded}.
 \end{remark}
-\begin{remark}
+
+\begin{definition}[Maximal/Minimal Element]
+   Given an ordered set \((X, \preceq)\) and \(A \subset X\), \(m \in A\) is
+   \[\text{maximal if}~(a \in A) \land (m \preceq a) \implies a = m\]
+   \[\text{minimal if}~(a \in A) \land (a \preceq m) \implies a = m\]
+\end{definition}
+\begin{remark}[Intuition]
+   In other words, a minimal element of \(A\) is \emph{not greater} than any other element in \(A\), likewise a maximal element is \emph{not smaller} than any other element.
    In general, the minimal and maximal elements don't have to exist or be unique.
    However if the order on \(X\) is total, then they are unique.
-
    Let \(m_1, m_2 \in A\) be two maximal elements.
    It holds that either \(m_1 \preceq m_2\) or \(m_2 \preceq m_1\).
    \[m_1 \preceq m_2 \implies m_2 = m_1~\text{since}~m_1~\text{is maximal}\]
    \[m_2 \preceq m_1 \implies m_1 = m_2~\text{since}~m_2~\text{is maximal}\]
    hence \(m_1 = m_2\), the same can be proven for the minimal element.
 \end{remark}
-\begin{remark}
-   The notions of maximal and minimal elements are weaker than those of greatest element and least element which are also known, respectively, as maximum and minimum.
-   While a (partially) ordered set can have at most one each maximum and minimum it may have multiple maximal and minimal elements.
-\end{remark}
 
-\begin{definition}[Infimum]
-   Given a partially ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+\begin{definition}[Infimum/Supremum]
+   Given an ordered set \((X, \preceq)\) and \(A \subset X\).
    \[\inf(A) := \text{maximal element of}~\{x \in X \mid x~\text{lower bound of}~A\}\]
-\end{definition}
-
-\begin{definition}[Supremum]
-   Given a partially ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
    \[\sup(A) := \text{minimal element of}~\{x \in X \mid x~\text{upper bound of}~A\}\]
 \end{definition}
+% TODO: merge with analysis
+\begin{remark}[Notation]
+   If \(A\) is unbounded (not bounded above or below) we define
+   \[\sup(A) := \infty \qquad\text{and}\qquad \inf(A) := -\infty\]
+\end{remark}
+\begin{remark}[Intuition]
+   In words, the infimum of a set \(A\) is the largest lower bound of \(A\) while the supremum is the smallest upper bound of \(A\).
+\end{remark}
 \begin{remark}
    From the uniqueness of the minimal and maximal element (of totally ordered sets) follows that \(\sup\) and \(\inf\) are unique if they exist.
 \end{remark}
 
-\begin{definition}[Maximum]
-   Given an totally ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
-   \[\max(A) := \sup(A)~\text{if}~\sup(A) \in A\]
-\end{definition}
+The notions of maximal and minimal elements are weaker than those of greatest element and least element which are also known, respectively, as maximum and minimum.
+While a partially ordered set can have at most one maximum and one minimum it may have multiple maximal and minimal elements.
 
-\begin{definition}[Minimum]\label{def:set_minimum}
-   Given an totally ordered set \((X, \preceq)\) and the subset \(A \subset X: A \neq \emptyset\).
+\begin{definition}[Maximum/Minimum]
+   Given an totally ordered set \((X, \preceq)\) and \(A \subset X\),
+   \[\max(A) := \sup(A)~\text{if}~\sup(A) \in A\]
    \[\min(A) := \inf(A)~\text{if}~\inf(A) \in A\]
 \end{definition}
 
-% TODO: merge with analysis
-\begin{definition}[Inf/Sup of unbounded Set]\label{def:unbounded_subsets}
-   Given a set \(M \subset \mathbb{R}: M \neq \emptyset\) which is not bounded above or below
-   \[\sup(M) = \infty \quad\text{and}\quad \inf(M) = -\infty\]
-\end{definition}
-
-\section{Maps}
+\section{Maps \& Functions}
 \subsection{Definition \& Terminology}
 \begin{definition}[Map]\label{def:map}
-   Given the sets \(X, Y\)
-   \[f: X \to Y \quad\text{where}\quad x \in X \mapsto f(x) \in Y\]
-   and
-   \[\forall x \in X: f(x)~\text{is defined} \qquad\text{and}\qquad \forall x \in X: f(x)~\text{is unique}\]
+   Given the sets \(X\) and \(Y\), a \emph{map} \(f: X \to Y\) associates
+   \[\forall x \in X~\exists y \in Y: f(x) = y\]
 \end{definition}
-\begin{remark}
-   Formally we would define a map as a subset of \(X \times Y\).
-   \[\Gamma_f = \big\{(x, f(x)) \in X \times Y \mid \forall x \in X\big\}\]
-   \[\forall x \in X: (\exists! y \in Y: (x, y) \in \Gamma_f)\]
+\begin{remark}[Terminology]
+   If every \(x \in X\) is mapped to a \(y \in Y\) we say \(f\) is \emph{well-defined}.
 \end{remark}
 
-\begin{definition}[Equivalent Maps]
-   Given the maps \(f: X \to Y\) and \(g: X' \to Y'\)
-   \[f = g := (X = X') \land (Y = Y') \land (\forall x \in X: f(x) = g(x))\]
+\begin{definition}[Function]
+   A map \(f: X \to Y\) where
+   \[\forall x \in X~\exists! y \in Y: f(x) = y\]
 \end{definition}
+\begin{remark}[Terminology]
+   If every \(x \in X\) is mapped to a unique \(y \in Y\) we say \(f\) is \emph{well-defined}.
+   This means that no elements in \(X\) are mapped to the same value \(y\).
+   Important to remember is to not confuse this with bijectivity (\ref{def:bijective}).
+\end{remark}
+
+Formally we would define a map or function as
+\[\Gamma_f = \big\{(x, f(x)) \in X \times Y \mid \forall x \in X\big\} \subset X \times Y\]
+where the condition above would be reformulated as
+\[\forall x \in X: (\exists! y \in Y: (x, y) \in \Gamma_f)\]
 
 \begin{definition}[Graph of a Map]
    Given a map \(f: X \to Y\)
-   \[\mathcal{G}(f) := \big\{(x, f(x)) \in X \times Y \mid \forall x \in X\big\}\]
+   \[\mathcal{G}(f) := \Big\{\big(x, f(x)\big) \in X \times Y \mid \forall x \in X\Big\}\]
+\end{definition}
+
+\begin{definition}[Equivalent Maps]
+   Given the maps \(f: X \to Y\) and \(g: X' \to Y'\), then \(f = g\) iff
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(X = X'\)
+      \item \(Y = Y'\)
+      \item \(\forall x \in X: f(x) = g(x)\)
+   \end{enumerate}
 \end{definition}
 
 \begin{definition}[Composition of Maps]
@@ -746,58 +752,106 @@ and show that it is an equivalence relation.
                                           & Z \\
       \end{tikzcd}
    \end{center}
-   We say the diagram is \textit{commutative} or \textit{commutates} if you can reach \(Z\) from \(X\) in every way.
 \end{definition}
+\begin{remark}[Terminology]
+   We say the diagram is \emph{commutative} or \emph{commutates} if you can reach \(Z\) from \(X\) in every way.
+\end{remark}
 
+\begin{definition}[Set of all Maps]
+   Given the sets \(X\) and \(Y\)
+   \[Y^X = \Abb(X, Y) := \{f: X \to Y\}\]
+\end{definition}
+\begin{example}
+   Let \(X = Y = \{1, 2\}\).
+   We have the following maps \(X \to Y\)
+   \[f_1: 1_x \mapsto 1_y \land 2_x \mapsto 2_y \qquad f_2: 1_x \mapsto 1_y \land 2_x \mapsto 1_y\]
+   \[f_3: 1_x \mapsto 2_y \land 2_x \mapsto 2_y \qquad f_4: 1_x \mapsto 2_y \land 2_x \mapsto 1_y\]
+   \[Y^X = \{f_1, f_2, f_3, f_4\}\]
+\end{example}
+
+\subsubsection{Domain}
 \begin{definition}[Domain of a Map]\label{def:domain}
    The set \(X\) of a map \(f: X \to Y\).
 \end{definition}
-\begin{remark}
-   Sometimes also called \textit{source}.
+\begin{remark}[Terminology]
+   Sometimes also called \emph{source}.
 \end{remark}
 
 \begin{definition}[Co-Domain of a Map]\label{def:codomain}
    The set \(Y\) of a map \(f: X \to Y\).
 \end{definition}
-\begin{remark}
-   Sometimes also called \textit{target}.
+\begin{remark}[Terminology]
+   Sometimes also called \emph{target}.
 \end{remark}
 
-\begin{definition}[Image of a Map]
-   Given a map \(f: X \to Y\)
-   \[\im(f) := f(X) = \{y \in Y \mid \exists x \in X: y = f(x)\}\]
-\end{definition}
-\begin{remark}
-   Sometimes also called \textit{range}: \(\Ran(f)\).
-\end{remark}
-\begin{remark}
-   The image of a single element \(x \in X\) is the \textit{value} of \(f\) at \(x\).
-\end{remark}
-
-\begin{definition}[Image of a Subset]
+\begin{definition}[Restricted Domain]
    Given a map \(f: X \to Y\) and a subset \(A \subset X\)
-   \[f(A) = \{f(a) \in Y \mid \forall a \in A\}\]
+   \[f|_A: A \to Y \quad\text{where}\quad a \in A \mapsto f(a) \in Y\]
 \end{definition}
+\begin{remark}[Intuition]
+   The notation \(f|_A\) means that we \emph{restricted \(f\) to a subset \(A\) of its actual domain \(X\)}.
+\end{remark}
 
-\begin{definition}[Pre-Image of a Map]\label{def:pre-image}
+\subsubsection{Fibre \& Image}
+We use the following example for the following concepts.
+Let \(X = \{1, 2, 3, 4, 5\}\) and \(Y = \{6, 7, 8\}\).
+We define \(f: X \to Y\) as follows
+\[f(1) = f(2) = f(4) = 6\]
+\[f(3) = f(5) = 7\]
+\(f\) is well-defined since every \(x \in X\) is mapped.
+
+\begin{definition}[Fibre of an Element]
+   Given a map \(f: X \to Y\) and \(y \in Y\)
+   \[f^{-1}(y) := \{x \in X \mid f(x) = y\}\]
+\end{definition}
+\begin{remark}[Intuition]
+   In words, the fibre of \(y\) is the set of all \(x \in X\) which \(f\) maps to \(y\).
+   Every fibre is the pre-image of a single element.
+\end{remark}
+\begin{example}
+   From the example above we have the following fibres
+   \[f^{-1}(6) = \{1, 2, 4\} \qquad\qquad f^{-1}(7) = \{3,5\} \qquad\qquad f^{-1}(8) = \emptyset\]
+\end{example}
+
+\begin{definition}[Pre-Image of a Subset]\label{def:pre-image}
    Given a map \(f: X \to Y\) and a subset \(A \subset Y\)
    \[f^{-1}(A) = \{x \in X \mid \forall f(x) \in A\}\]
 \end{definition}
-\begin{remark}
-   Sometimes also called \textit{inverse image}.
+\begin{remark}[Intuition]
+   This generalizes fibres to a whole subset of the co-domain.
+   \[f^{-1)}\big(\{6\}\big) = \{1, 2, 4\}\]
 \end{remark}
+\begin{remark}[Terminology]
+   Sometimes also called \emph{inverse image}.
+\end{remark}
+\begin{example}
+   From the example above we have for \(A := \{6,7\}\)
+   \[f^{-1}(A) = \{1,2,3,4,5\}\]
+\end{example}
 
-\begin{example}[Image Set, Image \& Pre-Image]
-   Let \(M = \{1, 2, 3, 4, 5\}\) and \(N = \{6, 7, 8\}\).
-   We define \(f: M \to N\) as follows
-   \[f(1) = f(2) = f(4) = 6\]
-   \[f(3) = f(5) = 7\]
-   \(f\) is well-defined since every \(m \in M\) is mapped.
-   The image set is \(f(M) = \{1, 2\}\)
-   The pre-images are
-   \[f^{-1}(\{6\}) = \{1, 2, 4\}\]
-   \[f^{-1}(\{7\}) = \{3, 5\}\]
-   \[f^{-1}(\{8\}) = \emptyset\]
+\begin{definition}[Image of a Subset]
+   Given a map \(f: X \to Y\) and a subset \(A \subset X\)
+   \[f(A) := \{f(a) \in Y \mid a \in A\}\]
+\end{definition}
+\begin{example}
+   From the example above we have for \(A := \{1, 2, 5\}\)
+   \[f(A) = \{6, 7\}\]
+\end{example}
+
+\begin{definition}[Image of a Map]
+   Given a map \(f: X \to Y\)
+   \[\im(f) := \{y \in Y \mid \exists x \in X: y = f(x)\}\]
+\end{definition}
+\begin{remark}[Terminology]
+   Sometimes also called \emph{range} denoted \(\Ran(f)\).
+   The image \(f(x)\) of a single element \(x \in X\) is called the \emph{value of \(f\) at \(x\)}.
+\end{remark}
+\begin{remark}[Intuition]
+   Equivalenty we can write \(f(X) := \{f(x) \mid x \in X\}\).
+   With this notation we can think of the image of \(f\) as the set of all values \(f(x)\) for which we have a corresponding argument \(x \in X\).
+\end{remark}
+\begin{example}
+   From the example above we have \(\im(f) = \{6, 7\}\).
 \end{example}
 
 \begin{proposition}[Properties of Image/Pre-Image]
@@ -812,82 +866,27 @@ and show that it is an equivalence relation.
    \end{enumerate}
 \end{proposition}
 
-\begin{definition}[Fibre of an Element]
-   Given a map \(f: X \to Y\) and an element \(y \in Y\)
-   \[f^{-1}(y) = \{x \in X \mid f(x) = y\}\]
-\end{definition}
-\begin{remark}
-   Every fibre is the pre-image of a single element.
-   In other words, the fibre of \(y\) is the set of all \(x \in X\) which \(f\) maps to \(y\).
-\end{remark}
-
-\begin{proposition}[Fibre of Compositions]
-   Let \(f: X \to Y\) and \(g: Y \to Z\) be maps, then is
-   \[\forall B \subset Z: (g \circ f)^{-1}(B) = f^{-1} \circ g^{-1}(B)\]
-\end{proposition}
-
-\begin{definition}[Set of all Maps]
-   Given the sets \(X\) and \(Y\)
-   \[Y^X = \Abb(X, Y) := \{f: X \to Y\}\]
-\end{definition}
-\begin{example}
-   Let \(X = Y = \{1, 2\}\).
-   We have the following maps \(X \to Y\)
-   \[f_1: 1_x \mapsto 1_y \land 2_x \mapsto 2_y \qquad f_2: 1_x \mapsto 1_y \land 2_x \mapsto 1_y\]
-   \[f_3: 1_x \mapsto 2_y \land 2_x \mapsto 2_y \qquad f_4: 1_x \mapsto 2_y \land 2_x \mapsto 1_y\]
-   \[Y^X = \{f_1, f_2, f_3, f_4\}\]
-\end{example}
-
-\subsection{Important Examples}
-\begin{example}[Identity]
-   Given a set \(X\)
-   \[\id_X: X \to X \quad\text{where}\quad x \mapsto x\]
-\end{example}
-
-\begin{definition}[Projection]\label{def:projection}
-   Given the sets \(Y \subset X\)
-   \[p: Y \to X \quad\text{where}\quad y \in Y \mapsto y \in X\]
-\end{definition}
-
-\begin{definition}[Inclusion/Projection]
-   Given the sets \(X \subset Y\)
-   \[i: X \to Y \quad\text{where}\quad x \in X \mapsto x \in Y\]
-\end{definition}
-
-\begin{example}[Restriction of a Map]
-   Given a map \(f: X \to Y\) and a subset \(A \subset X\)
-   \[f|_A: A \to Y \quad\text{where}\quad a \mapsto y\]
-   where we ''shrank`` the domain (\ref{def:domain}) of \(f\).
-\end{example}
-
-\begin{example}[Map of Sets]
-   Given a map \(f: X \to Y \quad\text{where}\quad x \in X \mapsto f(x) \in Y\)
-   \[g: \mathcal{P}(X) \to \mathcal{P}(Y) \quad\text{where}\quad A \in \mathcal{P}(X) \mapsto f(A) \in \mathcal{P}(Y)\]
-   \[g^{-1}: \mathcal{P}(Y) \to \mathcal{P}(X) \quad\text{where}\quad A \in \mathcal{P}(Y) \mapsto f^{-1}(A) \in \mathcal{P}(X)\]
-   where \(g^{-1}\) and \(f^{-1}\) are the corresponding pre-images (\ref{def:pre-image}).
-\end{example}
-
 \subsection{Injectivity, Surjectivity \& Bijectivity}
 \begin{definition}[Injective Map]\label{def:injective}
-   A map where
+   A map \(f: X \to Y\) where
    \[\forall x, x' \in X: f(x) = f(x') \implies x = x'\]
 \end{definition}
 \begin{remark}[Notation]
-   \(f: X \xhookrightarrow{} Y\)
+   \(f: X \hookrightarrow Y\)
 \end{remark}
-\begin{remark}
+\begin{remark}[Intuition]
    No multiple elements of \(X\) are mapped to the same element in \(Y\).
    Or differently put, every element in \(Y\) is mapped at most once.
 \end{remark}
 
 \begin{definition}[Surjective Map]\label{def:surjective}
    A map  where
-   \[\text{im}(f) = Y \implies f(X) = Y \implies \forall y \in Y~\exists x \in X: y = f(x)\]
+   \[\im(f) = Y \implies f(X) = Y \implies \forall y \in Y~\exists x \in X: y = f(x)\]
 \end{definition}
 \begin{remark}[Notation]
    \(f: X \twoheadrightarrow Y\)
 \end{remark}
-\begin{remark}
+\begin{remark}[Intuition]
    Every element in \(Y\) is mapped at least once.
 \end{remark}
 
@@ -898,7 +897,7 @@ and show that it is an equivalence relation.
 \begin{remark}[Notation]
    \(f: X \xrightarrow{\sim} Y\)
 \end{remark}
-\begin{remark}
+\begin{remark}[Intuition]
    There is a one-to-one correspondence between \(X\) and \(Y\).
    Or differently put, every element in \(Y\) is mapped exactly once.
 \end{remark}
@@ -913,38 +912,33 @@ and show that it is an equivalence relation.
 \begin{remark}
    Since \(g\) is unique, we write \(f^{-1}: Y \to X\) where \(y = f(x) \mapsto x = f^{-1}(y)\) hence \(f^{-1}(f(x)) = x\).
 \end{remark}
-\begin{proof}[Proof ``\(\implies\)'']
-   Suppose \(f\) is bijective.
-   First we prove the existence of \(g\).
-   \[\exists y \in Y: (\exists! x \in X: y = f(x))\]
-   So we define \(g: Y \to X\) through \(g(y) := x\).
-
-   Now we show that \(g\) is unique.
-   Let \(h: Y \to X\) be a second map with \(h \circ f = \id_X\) and \(f \circ h = \id_Y\).
-   \[g = g \circ \id_Y = g \circ \underbrace{f \circ h}_{\id_Y} = \underbrace{g \circ f}_{\id_X} \circ h = \id_X \circ h = h\]
-\end{proof}
-\begin{proof}[Proof ``\(\impliedby\)'']
-   Let \(g: Y \to X\) be a map with \(g \circ f = \id_X\) and \(f \circ g = \id_Y\), we prove that \(f\) is bijective.
-
-   From \(f \circ g = \id_Y\) follows that \(f\) is surjective since
-   \[\forall y \in Y: f(g(y)) = y\]
-
-   Now let \(x, x' \in X: f(x) = f(x')\).
-   \[x = \id_X(x) = g(f(x)) = g(f(x')) = \id_X(x') = x'\]
-   Thus \(f\) is injective.
-\end{proof}
 
 \begin{proposition}[Inverse of a Composition]
    Let \(f: X \xrightarrow{\sim} Y\) and \(g: Y \xrightarrow{\sim} Z\) be bijections, then is
    \[g \circ f: X \to Z~\text{a bijection with}~(g \circ f)^{-1} = f^{-1} \circ g^{-1}\]
 \end{proposition}
-\begin{proof}
-   \(g \circ f\) is surjective, since \(f\) and \(g\) are surjective.
-   Let \(x, x' \in X\)
-   \[g(f(x)) = g(f(x')) \implies f(x) = f(x') \implies x = x'\]
-   since both are injective.
-   \[(f^{-1} \circ g^{-1}) \circ (g \circ f) = f^{-1} \circ \id_Y \circ f = f^{-1} \circ f = \id_X\]
-\end{proof}
+
+\subsection{Important Examples}
+\begin{definition}[Identity Map]
+   Given a set \(X\), we have the canonical map
+   \[\id_X: X \to X \quad\text{where}\quad x \in X \mapsto x \in X\]
+\end{definition}
+\begin{remark}[Intuition]
+   Differently put \(\forall x \in X: f(x) = x\).
+\end{remark}
+
+\begin{definition}[Inclusion Map]
+   Given the sets \(X \subset Y\), the map
+   \[i: X \hookrightarrow Y \quad\text{where}\quad x \in X \mapsto x \in Y\]
+\end{definition}
+\begin{remark}[Intuition]
+   Since all elements of \(X\) are contained in \(Y\), the inclusion maps all elements of the subset \(X\) to the same elements in the superset \(Y\).
+\end{remark}
+
+\begin{definition}[Projection Map]\label{def:projection}
+   Given the sets \(Y \subset X\), the map
+   \[i: X \twoheadrightarrow Y \quad\text{where}\quad x \in X \mapsto x \in Y\]
+\end{definition}
 
 \subsection{Maps with ordered Co-/Domain}
 \begin{definition}[Increasing Map]
@@ -1710,32 +1704,51 @@ Also the equation \(x^2 = -1\) has no solution in \(\mathbb{R}\) since it is an 
 Complex numbers form a field \(\mathbb{C}\) which contains \(\mathbb{R}\) and an element \(i^2 = -1\).
 
 \begin{definition}[Complex Numbers]
-   \[\mathbb{C} :=  \mathbb{R} \times \mathbb{R}\]
+   \[\mathbb{C} := \{x + iy \mid x, y \in \mathbb{R}\} \qquad\text{where}~i^2 := -1\]
 \end{definition}
 \begin{remark}
-   More formally we would define that \(i \in \mathbb{C}: i^2 = -1\) and
-   \[\mathbb{C} = \{x + iy \mid x, y \in \mathbb{R}\}\]
-   with
-   \[z_1 + z_2 = (x_1 + iy_1) + (x_2 + iy_2) = (x_1 + x_2) + i(y_1 + y_2)\]
-   \[z_1 \cdot z_2 = (x_1 + iy_1) \cdot (x_2 + iy_2) = x_1x_2 + ix_1y_2 + ix_2y_1 + i^2y_1y_2 = (x_1x_2 - y_1y_2) + i(x_1y_2 + x_2y_1)\]
-
-   \[z \in \mathbb{C}: z = (x, y) = x \cdot (1, 0) + y \cdot (0, 1) = x + iy\]
-   for such a complex number \(z\) we call
-   \[\Re(z) := x\]
-   \[\Im(z) := y\]
-   the \emph{real} respectively \emph{imaginary} part.
+   We define \(0 \cdot i := 0\) and have for \(z_1, z_2 \in \mathbb{C}\)
+   \[z_1 + z_2 =  (x_1 + x_2) + i(y_1 + y_2)\]
+   \[z_1 \cdot z_2 = (x_1x_2 - y_1y_2) + i(x_1y_2 + x_2y_1)\]
 \end{remark}
+
+\begin{definition}[Real/Imaginary Part]
+   Given \(z = x + iy \in \mathbb{C}\) we call
+   \[\Re(z) := x \qquad \Im(z) := y\]
+   the \emph{real} respectively \emph{imaginary} part.
+\end{definition}
 
 \begin{definition}[Complex Conjugate]
    Given \(z = x + iy \in \mathbb{C}\)
-   \[\overline{z} = x - iy\]
+   \[\overline{z} := x - iy\]
 \end{definition}
-\begin{remark}
-   The following calculation rules apply
-   \[\overline{z_1 + z_2} = \overline{z_1} + \overline{z_2}\]
-   \[\overline{z_1 \cdot z_2} = \overline{z_1} \cdot \overline{z_2}\]
-   \[z \cdot \overline{z} = \overline{z} \cdot z = (x+iy) \cdot (x-iy) = x^2 + y^2 \geq 0 \in \mathbb{R}\]
-\end{remark}
+
+\begin{definition}[Complex Absolute Value]
+   Given \(z = x + iy \in \mathbb{C}\)
+   \[|z| := \sqrt{\overline{z} \cdot z} = \sqrt{x^2 + y^2}\]
+\end{definition}
+
+\begin{proposition}[Calculation Rules]
+   Let \(z = x+iy\), \(z_1 = x_1 + iy_1\) and \(z_2 = x_2 + iy_2\), then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\Re(z) = \frac{1}{2}(z + \overline{z})\)
+      \item \(\Im(z) = \frac{1}{2i}(z - \overline{z})\)
+      \item \(z \in \mathbb{R} \iff z = \overline{z}\)
+      \item \(\overline{(\overline{z})} = z\)
+      \item \(\overline{z_1 + z_2} = \overline{z_1} + \overline{z_2}\)
+      \item \(\overline{z_1 \cdot z_2} = \overline{z_1} \cdot \overline{z_2}\)
+      \item \(z \cdot \overline{z} = \lvert z \rvert^2\)
+      \item \(0 \leq \lvert z\rvert\) and \(\lvert z\rvert = 0 \iff z = 0\)
+      \item \(z \in \mathbb{R} \iff \lvert z \rvert_\mathbb{C} = \lvert z \rvert_\mathbb{R}\)
+      \item \(|z_1 + z_2| \leq |z_1| + |z_2|\)
+      \item \(|z_1 \cdot z_2| = |z_1| \cdot |z_2|\)
+      \item \(\left\lvert \lvert z_1\rvert - \lvert z_2\rvert \right\rvert \leq \lvert z_1 - z_2\rvert\)
+      \item \(|\Re(z)| \leq |z|\)
+      \item \(|\Im(z)| \leq |z|\)
+      \item If \(z \neq 0\)
+         \[\frac{1}{z} = \frac{\overline{z}}{\lvert z \rvert^2}\]
+   \end{enumerate}
+\end{proposition}
 
 Geometrically, complex numbers extend the concept of the one-dimensional number line to the two-dimensional complex plane by using the horizontal axis for the real part and the vertical axis for the imaginary part.
 The complex number \(z = x + iy\) can be identified with the point \((x, y)\) in the complex plane.
@@ -1788,19 +1801,6 @@ The complex number \(z = x + iy\) can be identified with the point \((x, y)\) in
    \[\frac{1}{x + iy} = \frac{x - iy}{(x+iy)(x-iy)} = \frac{x}{x^2 + y^2} - i\frac{y}{x^2 + y^2}\]
    \[(x, y)^{-1} := \left(\frac{x}{x^2 + y^2}, \frac{-y}{x^2 + y^2}\right)\]
 \end{proof}
-
-\begin{definition}[Complex Absolute Value]
-   Given \(z = x + iy \in \mathbb{C}\)
-   \[|z| := \sqrt{\overline{z}z} = \sqrt{x^2 + y^2}\]
-\end{definition}
-\begin{remark}
-   The following calculation rules apply
-   \[|z_1 \cdot z_2| = |z_1| \cdot |z_2|\]
-   \[|z| = \iff z = 0\]
-   \[|\Re(z)| \leq |z|\]
-   \[|\Im(z)| \leq |z|\]
-   \[|z_1 + z_2| \leq |z_1| + |z_2|\]
-\end{remark}
 
 % TODO: add polar coordinates
 

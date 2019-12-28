@@ -1,6 +1,7 @@
 \section{Sequences}
 In this section we use the notation \(\mathbb{K}\) to represent the field of \(\mathbb{R}\) respectively \(\mathbb{C}\).
 
+\subsection{Definition \& Terminology}
 \begin{definition}[Sequence]
    A sequence \((x_n)_{n \in \mathbb{N}}\) on \(\mathbb{K}\) is an enumerated collection
    \[(x_n)_{n \in \mathbb{N}} := \{x_1, x_2, \ldots, x_n\}\]
@@ -16,21 +17,15 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    A sequence \((x_n)_{n \in \mathbb{N}}\) where \(x_n \xrightarrow{n \to \infty} 0\).
 \end{definition}
 
-\subsection{Bounded Sequences}
-\begin{definition}[Bounded Below Sequence]
-   A sequence \((x_n)_{n \in \mathbb{N}}\) where
-   \[\exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: b \leq x_n)\]
-\end{definition}
-
-\begin{definition}[Bounded Above Sequence]
-   A sequence \((x_n)_{n \in \mathbb{N}}\) where
-   \[\exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: x_n \leq b)\]
-\end{definition}
-
 \begin{definition}[Bounded Sequence]
-   A sequence \((x_n)_{n \in \mathbb{N}}\) which is bounded above and below
-   \[\exists b > 0 \in \mathbb{R}: (\forall n \in \mathbb{N}: |x_n| < b)\]
+   A sequence \((x_n)_{n \in \mathbb{N}}\) is
+   \[\text{bounded below if} \quad \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: b \leq x_n)\]
+   \[\text{bounded above if} \quad \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: x_n \leq b)\]
+   \[\text{bounded if} \quad \exists b \in \mathbb{R}_{>0}: (\forall n \in \mathbb{N}: |x_n| < b)\]
 \end{definition}
+\begin{remark}
+   \((x_n)\) is bounded if it is bounded above and below.
+\end{remark}
 
 \begin{theorem}[Convergent \(\implies\) Bounded]\label{thm:conv_bound}
    Every convergent sequence is bounded.
@@ -39,24 +34,15 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    The contraposition: ''Every unbounded sequence diverges``, is often more usefull.
 \end{remark}
 
-\subsection{Monotonic Sequences}
-\begin{definition}[Increasing Sequence]
-   A sequence \((x_n)_{n \in \mathbb{N}}\) where
-   \[\forall n \in \mathbb{N}: x_n \leq x_{n+1}\]
+\begin{definition}[Monotonic Sequence]
+   A sequence \((x_n)_{n \in \mathbb{N}}\) is
+   \[\text{increasing if} \quad \forall n \in \mathbb{N}: x_n \leq x_{n+1}\]
+   \[\text{decreasing if} \quad \forall n \in \mathbb{N}: x_n \geq x_{n+1}\]
 \end{definition}
-\begin{remark}
-   If \(x_n < x_{n+1}\), we say \((x_n)\) is \emph{strictly} increasing.
+\begin{remark}[Terminology]
+   If instead we have \(<\) or \(>\), we say \((x_n)\) is \emph{strictly} increasing respectively decreasing.
 \end{remark}
-
-\begin{definition}[Decreasing Sequence]
-   A sequence \((x_n)_{n \in \mathbb{N}}\) where
-   \[\forall n \in \mathbb{N}: x_n \geq x_{n+1}\]
-\end{definition}
-\begin{remark}
-   If \(x_n > x_{n+1}\), \((x_n)\) is \emph{strictly} decreasing.
-\end{remark}
-
-\begin{remark}[Show Monotonic Behaviour]
+\begin{remark}[Intuition]
    To prove that a sequence is increasing, respectively decreasing we have the following options
    \begin{enumerate}
       \item \(x_{n+1} = \ldots \geq x_n\) resp. \(x_{n+1} = \ldots \leq x_n\)
@@ -68,7 +54,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
 \subsection{Accumulation Points}
 \begin{definition}[Accumulation Point]
-   \(x \in \mathbb{K}\) is a accumulation point of \((x_n) \in \mathbb{K}^\mathbb{N}\) iff
+   \(x \in \mathbb{K}\) is a \emph{accumulation point} of \((x_n) \in \mathbb{K}^\mathbb{N}\) iff
    \[\forall \varepsilon > 0: \exists~\text{an infinite}~N_{\varepsilon} \subset \mathbb{N}: (\forall n \in N_\varepsilon: |x_n - x| < \varepsilon)\]
 \end{definition}
 \begin{example}
@@ -139,20 +125,18 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{theorem}
 
 \begin{theorem}
-   Let \((x_n) \in \mathbb{K}^\mathbb{N}\) such that \(\lim_{n \to \infty} x_n = x \in \mathbb{K}\), the following statements are equivalent
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(x\) is the only accumulation point of \((x_n)\)
-      \item \(x\) is unique
-   \end{enumerate}
+   Let \((x_n) \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\) such that \(\lim_{n \to \infty} x_n = x\), then \(x\) is the only accumulation point of \((x_n)\).
+   In particular, \(x\) is unique.
 \end{theorem}
 
 \subsection{Convergence}
-A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index \(n_\varepsilon\) \emph{all} following \(x_n\) are closer to \(x\) than an arbitrarily chosen error margin \(\varepsilon\).
-
 \begin{definition}[Convergent Sequence]\label{def:conv_seq}
    \((x_n) \in \mathbb{K}^\mathbb{N}\) converges to \(x \in \mathbb{K}\) iff
    \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n > n_\varepsilon: |x_n - x| < \varepsilon)\]
 \end{definition}
+\begin{remark}[Intuition]
+   A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index \(n_\varepsilon\) \emph{all} following \(x_n\) are closer to \(x\) than an arbitrarily chosen error margin \(\varepsilon\).
+\end{remark}
 \begin{remark}[Notation]
    If \((x_n)_{n \in \mathbb{N}}\) converges to \(x\) we write
    \[x_n \xrightarrow{n \to \infty} x \qquad\text{or}\qquad \lim_{n \to \infty} x_n = x\]
@@ -170,8 +154,8 @@ A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index 
    \end{center}
 \end{example}
 
-\begin{theorem}[Monotone \& Bounded \(\implies\) Convergent]\label{thm:incr_bound_conv}
-   If a sequence \((x_n)_{n \in \mathbb{N}}\) is
+\begin{theorem}[Monotonic \& Bounded\(\implies\)Convergent]\label{thm:incr_bound_conv}
+   If \((x_n) \in \mathbb{K}^\mathbb{N}\) is
    \[\text{increasing and bounded above, then is} \quad \lim_{n \to \infty} x_n = \sup\{x_n \mid n \in \mathbb{N}\}\]
    \[\text{decreasing and bounded below, then is} \quad \lim_{n \to \infty} x_n = \inf\{x_n \mid n \in \mathbb{N}\}\]
 \end{theorem}
@@ -201,27 +185,27 @@ A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index 
 \end{example}
 
 \subsubsection{Calculation Rules}
-\begin{lemma}\label{lem:zero_seq}
-   Let \((x_n)_{n \in \mathbb{N}}\) be a sequence and \((r_n)_{n \in \mathbb{N}}\) a zero sequence.
+\begin{lemma}[Zero Sequences]\label{lem:zero_seq}
+   Let \((x_n) \in \mathbb{K}^\mathbb{N}\) and \((r_n) \in \mathbb{K}^\mathbb{N}\) be a zero sequence.
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \[x_n \xrightarrow{n \to \infty} 0 \implies |x_n| \xrightarrow{n \to \infty} 0\]
-      \item \[x_n \xrightarrow{n \to \infty} x \implies x_n - x \xrightarrow{n \to \infty} 0\]
-      \item \[\exists n_0 \in \mathbb{N}: (\forall n \geq n_0: |x_n| \leq r_n) \implies (x_n) \xrightarrow{n \to \infty} 0\]
+      \item \[\lim_{n \to \infty} x_n = 0 \implies \lim_{n \to \infty} \lvert x_n\rvert = 0\]
+      \item \[\lim_{n \to \infty} x_n = x \implies \lim_{n \to \infty} (x_n - x) = 0\]
+      \item \[\exists n_0 \in \mathbb{N}: (\forall n \geq n_0: |x_n| \leq r_n) \implies \lim_{n \to \infty} x_n = 0\]
    \end{enumerate}
 \end{lemma}
 
-\begin{proposition}[Rules for Sequence Limits]
-   Let \(x_n \to x\), \(y_n \to y\) and \(\alpha \in \mathbb{K}\), then holds
+\begin{proposition}[Sequence Limits]
+   Let \(\alpha \in \mathbb{K}\) and suppose \(x_n \to x\), \(y_n \to y\), then
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \[|x_n| \xrightarrow{n \to \infty} |x|\]
-      \item \[\alpha \cdot x_n \xrightarrow{n \to \infty} \alpha \cdot x\]
-      \item \[x_n + y_n \xrightarrow{n \to \infty} x + y\]
-      \item \[x_n - y_n \xrightarrow{n \to \infty} x - y\]
-      \item \[x_n \cdot y_n \xrightarrow{n \to \infty} x \cdot y\]
-      \item For \(y \neq 0\) and \(\forall n \in \mathbb{N}: y_n \neq 0\)
-         \[\frac{x_n}{y_n} \xrightarrow{n \to \infty} \frac{x}{y}\]
+      \item \[\lim_{n \to \infty} \lvert x_n\rvert = \lvert x \rvert\]
+      \item \[\lim_{n \to \infty} (\alpha \cdot x_n) = \alpha \cdot x\]
+      \item \[\lim_{n \to \infty} (x_n + y_n) = x + y\]
+      \item \[\lim_{n \to \infty} (x_n - y_n) = x - y\]
+      \item \[\lim_{n \to \infty} (x_n \cdot y_n) = x \cdot y\]
+      \item If \(y \neq 0\) and \(\forall n \in \mathbb{N}: y_n \neq 0\), then
+         \[\lim_{n \to \infty} \frac{x_n}{y_n} = \frac{x}{y}\]
       \item If \(\forall n \in \mathbb{N}: x_n \geq 0\)
-         \[p \in \mathbb{Z}, q \in \mathbb{Z} \setminus \{0\}: x_n^{\frac{p}{q}} \to a^{\frac{p}{q}}\]
+         \[\lim_{n \to \infty} x_n^{\frac{p}{q}} = x^{\frac{p}{q}} \qquad\text{with}~p \in \mathbb{Z}, q \in \mathbb{Z} \setminus \{0\}: \]
    \end{enumerate}
 \end{proposition}
 \begin{example}
@@ -256,13 +240,10 @@ A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index 
 \end{example}
 
 \subsubsection{Important Sequences}
-\begin{proposition}
-   For the sequence \(x_n := x^n\) hold the following cases
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \[|x| < 1 \implies x^n \xrightarrow{n \to \infty} 0\]
-      \item \[x = 1 \implies x^n \xrightarrow{n \to \infty} 1\]
-      \item \[|x| \geq 1 \land x \neq 1 \implies x^n \xrightarrow{n \to \infty} \pm\infty\]
-   \end{enumerate}
+\begin{proposition}[Sequence \(x^n\)]
+      \[|x| < 1 \implies \lim_{n \to \infty} x^n = 0\]
+      \[x = 1 \implies \lim_{n \to \infty} x^n = 1\]
+      \[|x| \geq 1 \land x \neq 1 \implies \lim_{n \to \infty} x^n = \pm\infty\]
 \end{proposition}
 \begin{proof}
    Suppose \((x_n)\) converges, i.e. \(\lim_{n \to \infty} x^n = \tilde{x}\), then is
@@ -290,8 +271,8 @@ A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index 
 \end{proof}
 
 \begin{proposition}
-   Fort the sequence \(x_n := n^r \cdot x^n\) where \(|x| < 1\) and \(r \in \mathbb{N}\) holds
-   \[n^r \cdot x^n \xrightarrow{n \to \infty} 0\]
+   Let \(|x| < 1\) and \(r \in \mathbb{N}\)
+   \[\lim_{n \to \infty} n^r \cdot x^n = 0\]
 \end{proposition}
 \begin{remark}
    This means that the sequence \(x^n\) converges faster to 0 than any other power of \(n\).
@@ -310,25 +291,35 @@ A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index 
 \end{proof}
 
 % TODO: finish
-% \begin{example}
-%    \[\lim_{n \to \infty} \sqrt[n]{n} = \infty\]
-% \end{example}
-% \begin{example}
-%    \[\forall r \in \mathbb{R}_{>0}: \lim_{n \to \infty} \sqrt[n]{r} = 1\]
-% \end{example}
-% \begin{example}
-%    \[\forall s \in \mathbb{R}_{>0}: \lim_{n \to \infty} \sqrt[n]{n^s} = 1\]
-% \end{example}
-% \begin{example}
-%    \[\forall z \in \mathbb{C}: \lim_{n \to \infty} \left(1 + \frac{z}{n}\right)^n = e^z\]
-% \end{example}
-% \begin{example}
-%    \[\lim_{n \to \infty} \frac{n!}{n^n} = 0\]
-% \end{example}
+\begin{proposition}
+   \[\lim_{n \to \infty} \sqrt[n]{n} = 1\]
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}
+   \[\forall r \in \mathbb{R}_{>0}: \lim_{n \to \infty} \sqrt[n]{r} = 1\]
+\end{proposition}
+
+\begin{proposition}
+   \[\forall s \in \mathbb{R}_{>0}: \lim_{n \to \infty} \sqrt[n]{n^s} = 1\]
+\end{proposition}
+
+\begin{proposition}
+   \[\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e\]
+\end{proposition}
+
+\begin{proposition}
+   \[\forall z \in \mathbb{C}: \lim_{n \to \infty} \left(1 + \frac{z}{n}\right)^n = e^z\]
+\end{proposition}
+
+\begin{proposition}
+   \[\lim_{n \to \infty} \frac{n!}{n^n} = 0\]
+\end{proposition}
 
 \subsection{Subsequences}
 \begin{definition}[Subsequence]
-   Given \((x_n)_{n \in \mathbb{N}}\) and a strictly increasing \(\phi: \mathbb{N} \to \mathbb{N}\)
+   Given \((x_n) \mathbb{K}^\mathbb{N}\) and a strictly increasing \(\phi: \mathbb{N} \to \mathbb{N}\)
    \[(x_{n_k})_{k \in \mathbb{N}} := (x_{\phi(k)})_{k \in \mathbb{N}}\]
 \end{definition}
 \begin{example}
@@ -345,12 +336,12 @@ A sequence \((x_n)_{n \in \mathbb{N}}\) converges to \(x\), if after some index 
 
 \begin{theorem}\label{thm:all_subseq_conv}
    Let \((x_n) \in \mathbb{K}^\mathbb{N}\), then
-   \[x_n \xrightarrow{n \to \infty} x \iff \forall (x_{n_k}): x_{n_k} \xrightarrow{k \to \infty} x\]
+   \[\lim_{n \to \infty} x_n = x \iff \forall (x_{n_k}): \lim_{k \to \infty} x_{n_k} = x\]
 \end{theorem}
 
 \begin{theorem}\label{thm:cp_iff_subseq}
    Let \((x_n)_{n \in \mathbb{N}}\) and \(x \in \mathbb{K}\)
-   \[x~\text{is accumulation point of}~(x_n) \iff \exists (x_{n_k}): x_{n_k} \xrightarrow{k \to \infty} x\]
+   \[x~\text{is accumulation point of}~(x_n) \iff \exists (x_{n_k}): \lim_{k \to \infty} x_{n_k} = x\]
 \end{theorem}
 
 \subsection{Cauchy Sequences}
@@ -1322,36 +1313,47 @@ In contrast, uniform continuity is a global property of \(f\), in the sense that
    \[\sqrt[n]{x} := f^{-1}(x)\]
 \end{example}
 
-\section{Differential Calculus}
-\subsection{Definition \& Basic Properties}
-\begin{definition}[Derivative]
-   \(f: (a;b) \to \mathbb{R}\) is differentiable at \(x_0 \in (a; b)\) if
-   \[\frac{df}{dx} (x_0) = f'(x_0) := \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h} = \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}\]
-   exists.
-\end{definition}
-\begin{remark}
-   We call \(f'(x_0)\) the \textit{derivative} of \(f\) at \(x_0\).
-   \(f\) is differentiable on \((a; b)\) if \(\forall x_0 \in (a;b): f~\text{is differentiable at}~x_0\).
-\end{remark}
-\begin{remark}
-   When we differentiate a function \(f\) we want to calculate the slope of \(f\) at \(x_0\), which is the tangent to the function graph at \(x_0\).
-   To do this we start of by calculating the slope of the secant from \(\big(x_0, f(x_0)\big)\) to \(\big(x_0 + h, f(x_0) + h\big)\) through.
-   \[\frac{f(x_0 + h) - f(x_0)}{h}\]
-   Then we let \(h \to 0\) which makes the point \(\big(x_0 + h, f(x_0) + h\big)\) move along the function graph until it coincides with \(\big(x_0, f(x_0)\big)\).
-   At this point the secant coincides (never but close enough) the tangent, then the fraction above gives us the slope of the tangent.
-\end{remark}
-\begin{remark}[Differential]
-   Given a function \(y = f(x)\) we call \(dy\) and \(dx\) differentials and the relationship between them is given by
-   \[dy = f'(x)dx\]
-   Note that if we are just given \(f(x)\) then the differentials are \(df\) and \(dx\) and we compute them in the same manner.
-   \[df = f'(x)dx \implies f'(x) = \frac{df}{dx}\]
-\end{remark}
-% TODO: add for vector space?
+\newpage
 
+\section{Differential Calculus}
+Let \(D \subset \mathbb{K}\), \(x_0 \in D\) be an accumulation point of \(D\) and \((Y, \|\ldots\|)\).
+
+\subsection{Definition \& Basic Properties}
+When we differentiate a function \(f\) we want to calculate the slope of \(f\) at \(x_0\), which is the tangent to the function graph at \(x_0\).
+To do this we start of by calculating the slope of the secant from \(\big(x_0, f(x_0)\big)\) to \(\big(x_0 + h, f(x_0) + h\big)\) through.
+\[\frac{f(x_0 + h) - f(x_0)}{h}\]
+Then we let \(h \to 0\) which makes the point \(\big(x_0 + h, f(x_0) + h\big)\) move along the function graph until it coincides with \(\big(x_0, f(x_0)\big)\).
+At this point the secant coincides (never but close enough) the tangent, then the fraction above gives us the slope of the tangent.
 \begin{center}
    \input{drawings/derivative.tex}
 \end{center}
 
-\begin{proposition}[Derivative \(\implies\) Continuity]\label{pro:deri_impl_cont}
-   If \(f: (a; b) \to \mathbb{R}\) is differentiable at \(x_0 \in (a; b)\) then is \(f\) also continuous at \(x_0\).
+\begin{definition}[Differentiable Function]
+   \(f: D \to Y\) is differentiable at \(x_0 \in D\) if
+   \[\frac{df}{dx}(x_0) := \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}\]
+   exists.
+\end{definition}
+\begin{remark}[Terminology]
+   \(f\) is differentiable on \(D\) if \(f\) is differentiable in all \(x_0 \in D\).
+   We call \(\frac{df}{dx}\) the \emph{derivative} of \(f\) at \(x_0\).
+\end{remark}
+\begin{remark}[Notation]
+   For the derivative of \(f\) in \(x_0\) we write
+   \[f'(x_0) \qquad\qquad Df(x_0) \qquad\qquad \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}\]
+\end{remark}
+
+\begin{proposition}[Derivative\(\implies\)Continuity]\label{pro:deri_impl_cont}
+   If \(f: D \to \mathbb{R}\) is differentiable in \(x_0 \in D\) then is \(f\) also continuous in \(x_0\).
+\end{proposition}
+
+\begin{proposition}
+   Let \(f: D \to Y\) be differentiable in \(x_0 \in D\), then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item
+         \[\exists c \in Y: \lim_{x \to x_0} \frac{f(x) - f(x_0) - c \cdot (x - x_0)}{x - x_0} = 0\]
+      \item There is \(c \in Y\) and \(r: D \to Y\) which is continuous in \(x_0\) and \(r(x_0) = 0\) such that
+         \[\forall x \in D: f(x) = f(x_0) + c \cdot (x - x_0) + r(x) \cdot (x - x_0)\]
+   \end{enumerate}
+   Then is
+   \[\frac{d}{dx}f(x_0) = c\]
 \end{proposition}
