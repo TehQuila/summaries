@@ -443,40 +443,45 @@ From \cref{pro:limit_comp} follows that
 
 \section{Series}
 \begin{definition}[Series]
-   Given a sequence \(x_n \mathbb{K}^\mathbb{N}\).
+   Given a sequence \(x_n \in \mathbb{K}^\mathbb{N}\).
    \[\sum_{n=0}^{\infty} x_n = x_0 + x_1 + \ldots\]
 \end{definition}
 \begin{remark}[Notation]
    We can also shorten the notation above to \(\sum x_n\) where we mean that we sum over \emph{all} elements of \((x_n)\).
 \end{remark}
-
-\subsection{Convergence}
+To be able to analyze the bevavior of a series, we need a way to refer to the value of it, at a given index.
 \begin{definition}[Partial Sum]
    Given a series \(\sum x_n\) its k-th partial sum is
    \[s_k := \sum_{n = 0}^{k} x_n = x_0 + \ldots + x_k\]
 \end{definition}
 \begin{remark}[Terminology]
-   We say \((s_k)_{k \in \mathbb{N}}\) is the \emph{sequence of partial sums}.
+   We say \(s_k \in \mathbb{K}^\mathbb{N}\) is the \emph{sequence of partial sums}.
    From the definition we see that \(s_k =  s_{k-1} + x_k\).
 \end{remark}
-\begin{example}
-   \[\sum_{n = 1}^\infty \frac{1}{n^2} \rightsquigarrow s_k = \sum_{n=0}^k \frac{1}{n^2} \rightsquigarrow 1 + \frac{1}{4} + \frac{1}{9} + \ldots\]
-   \((s_k)\) is increasing, now we show that it is bounded. We regard the first term seperately since we would divide by 0.
-   \begin{equation*}
-      \begin{split}
-         s_k & = \frac{1}{1} + \sum_{n=2}^k \frac{1}{n^2} \leq 1 + \sum_{n=2}^k \frac{1}{n(n-1)} = 1 + \sum_{n=2}^k \left(\frac{1}{n-1} - \frac{1}{n} = 1 + \sum \frac{1}{n-1} - \sum \frac{1}{n} = 1 + \sum_{n=1}^{k-1} \frac{1}{n} - \sum_{n=2}^k \frac{1}{n} = 1 + 1 + \sum_{n=2}^{k-1} \frac{1}{n} - \sum_{n=2}^{k-1}\frac{1}{n} - \frac{1}{k} = 2 - \frac{1}{k} \leq 2
-      \end{split}
-   \end{equation*}
-\end{example}
 
+\subsection{Convergence}
 \begin{definition}[Convergent Series]\label{def:series_convergence}
    A series \(\sum x_n\) where \(s_k \xrightarrow{k \to \infty} s\).
-   \[\sum_{n = 0}^{\infty} x_n := s = \lim_{k \to \infty} s_k\]
+   \[\sum_{n=0}^{\infty} x_n := s = \lim_{k \to \infty} s_k\]
 \end{definition}
-\begin{remark}
+\begin{remark}[Terminology]
    If \(s_k \to \pm\infty\) we say the series \emph{diverges}.
    If it neither converges nor diverges we say the series \emph{doesn't exist}.
 \end{remark}
+
+\begin{example}
+   We prove that the series \(e := \sum \frac{1}{n^2}\) converges.
+   So first we regard its sequence of partial sums
+   \[s_k = \sum_{n=1}^k \frac{1}{n^2} \qquad\rightsquigarrow\qquad 1, \left(1 + \frac{1}{4}\right),  \left(1 + \frac{1}{4} + \frac{1}{9}\right), \ldots\]
+   We see that \(s_k\) is increasing, now we show that it is bounded.
+   \begin{equation*}
+      \begin{split}
+         s_k & = \frac{1}{1} + \sum_{n=2}^k \frac{1}{n^2} \leq 1 + \sum_{n=2}^k \frac{1}{n(n-1)} = 1 + \sum_{n=2}^k \left(\frac{n}{n(n-1)} - \frac{n-1}{n(n-1)}\right) = 1 + \sum_{n=2}^k \left(\frac{1}{n-1} - \frac{1}{n}\right) = \\
+             & = 1 + \sum_{n=2}^k \frac{1}{n-1} - \sum_{n=2}^k \frac{1}{n} = 1 + \sum_{n=1}^{k-1} \frac{1}{n} - \sum_{n=2}^k \frac{1}{n} = 1 + 1 + \sum_{n=2}^{k-1} \frac{1}{n} - \sum_{n=2}^{k-1}\frac{1}{n} - \frac{1}{k} = 2 - \frac{1}{k} \leq 2
+      \end{split}
+   \end{equation*}
+   so according to \cref{thm:incr_bound_conv}, the sequence of partial sums is convergent and therefor also the series.
+\end{example}
 
 \begin{proposition}[Series Calculation Rules]\label{pro:series_calc_rules}
    Let \(\alpha \in \mathbb{K}\) and \(\sum a_n\), \(\sum b_n\) be converget, then is
@@ -488,20 +493,16 @@ From \cref{pro:limit_comp} follows that
 \begin{definition}[Absolute Convergent Series]
    \(\sum x_n\) is absolute convergent if \(\sum |x_n|\) converges.
 \end{definition}
-\begin{remark}
-   So if a series is not absolute convergent, then is
-   \[\sum_{n=0}^\infty |a_n| = \infty\]
-\end{remark}
 
 \begin{definition}[Conditionally Convergent Series]
    A convergent series, which is not absolute convergent.
 \end{definition}
 
-\begin{theorem}[Absolute Convergent \(\implies\) Convergent]
-   An absolute convergent series converges.
+\begin{theorem}[Absolute Convergent\(\implies\)Convergent]
+   Every absolute convergent series converges.
 \end{theorem}
 \begin{remark}
-   Absolute convergence is sufficient for convergence but not necessary.
+   Absolute convergence is \emph{sufficient} for convergence but \emph{not necessary}.
 \end{remark}
 
 \begin{theorem}[Cauchy Product]
@@ -512,32 +513,31 @@ From \cref{pro:limit_comp} follows that
 
 \subsection{Convergence Tests}
 In mathematics, convergence tests are methods of testing for the convergence, conditional convergence, absolute convergence or divergence of an infinite series.
-They define conditions for sequences and tell you whether their series converges.
+They define conditions for sequences \(x_n\) and tell you whether their series \(\sum x_n\) converges.
 
 \subsubsection{Criteria for Convergence}
+For a series (to even have any chance) to converge it is necessary that its sequence \(x_n\) is a zero-sequence.
+Then the only question remains is whether the series' sequence converges fast enough to 0.
+The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{n} \to 0\).
 \begin{proposition}[Term Test]\label{pro:series_sequence_converge}
-   \[\sum_{n = 0}^\infty a_n~\text{converges} \implies a_n \xrightarrow{n \to \infty} 0\]
+   \[\sum x_n~\text{converges} \implies \lim_{n \to \infty} x_n = 0\]
 \end{proposition}
-\begin{remark}
-   The contraposition is more usefull, i.e. to show divergence.
-\end{remark}
-\begin{remark}
-   A zero sequence is necessary but not sufficient for the convergence of the series.
-   The harmonic series diverges even though \(\frac{1}{n} \to 0\).
+\begin{remark}[Tips]
+   The contraposition is more usefull, i.e. prove that the series' sequence is not a zero-sequence to show divergence.
 \end{remark}
 
 \begin{theorem}[Monotonicity Criterion]\label{thm:convergence=bounded}
-   Let \((a_n)_{n \in \mathbb{N}}\) where \(\forall n \in \mathbb{N}: 0 \leq a_n\).
-   \[\sum_{n = 0}^\infty a_n~\text{converges} \iff (s_k)_{k \in \mathbb{N}}~\text{is bounded}\]
+   Let \(x_n\) such that \(\forall n \in \mathbb{N}: 0 \leq x_n\), then
+   \[\sum x_n~\text{converges} \iff s_k~\text{is bounded}\]
 \end{theorem}
 
 \begin{theorem}[Cauchy Criterion for Series]\label{thm:cauchy_crit_ser}
-   \[\sum a_n\text{converges} \iff \forall \varepsilon > 0: \exists n_\varepsilon \in \mathbb{N}: \left(\forall n > m \geq n_\varepsilon: \left| \sum_{k = m + 1}^n a_k \right| < \varepsilon \right)\]
+   \[\sum x_n~\text{converges} \iff \forall \varepsilon > 0: \exists n_\varepsilon \in \mathbb{N}: \left(\forall n > m \geq n_\varepsilon: \left| \sum_{k = m + 1}^n x_k \right| < \varepsilon \right)\]
 \end{theorem}
 
 \begin{proposition}[Leibnitz Test]\label{pro:leibnitz}
-   Let \((x_n)_{n \in \mathbb{N}}\) be a decreasing with \(\forall n \in \mathbb{N}: 0 \leq x_n\) .
-   \[\sum (-1)^{n} \cdot x_n~\text{converges} \iff x_n \to 0\]
+   Let \(x_n\) be a decreasing with \(\forall n \in \mathbb{N}: 0 \leq x_n\) .
+   \[\sum (-1)^{n} \cdot x_n~\text{converges} \iff \lim_{n \to \infty} x_n = 0\]
 \end{proposition}
 \begin{example}
    We regard the series
@@ -547,25 +547,13 @@ They define conditions for sequences and tell you whether their series converges
 
 \subsubsection{Criteria for Absolute Convergence}
 \begin{proposition}[Comparison Test]\label{pro:comparison_test}
-   Let \((b_n)_{n \in \mathbb{N}}\) where \(\forall n \in \mathbb{N}: 0 \leq b_n\) and \((x_n)_{n \in \mathbb{N}}\) where \(x_n \leq b_n\) for almost all \(n \in \mathbb{N}\), then is
+   Let \(b_n\) such that \(\forall n \in \mathbb{N}: 0 \leq b_n\) and \(x_n\) such that \(x_n \leq b_n\) for almost all \(n\), then
    \[\sum b_n~\text{convergent} \implies \sum x_n~\text{absolute convergent}\]
    \[\sum x_n~\text{divergent} \implies \sum b_n~\text{divergent}\]
 \end{proposition}
 \begin{remark}
    Typical series to use for comparison are the geometric and harmonic series.
 \end{remark}
-\begin{example}
-   The series
-   \[\sum_{j=0}^\infty \frac{1}{j!}\]
-   converges.
-   For \(j \geq 1\) we see that
-   \[\frac{1}{(j + 1)!} = \frac{1}{j + 1} \cdot \frac{1}{j!} \leq \frac{1}{2^1} \cdot \frac{1}{j!} \leq \frac{1}{2^2} \cdot \frac{1}{(j - 1)!} \leq \ldots \leq \frac{1}{2^j}\]
-   and so
-   \[\frac{1}{j!} = \frac{1}{j \cdot (j - 1) \cdot \ldots 2 \cdot 1} \leq \frac{1}{2^{j-1}} = 2 \cdot \frac{1}{2^j}\]
-   According to the comparison test converges the series \(\frac{1}{j!}\) because the series \(2 \cdot \frac{1}{2^j}\) converges.
-   Later on we define
-   \[e := \sum_{j=0}^\infty \frac{1}{j!}\]
-\end{example}
 % TODO
 \begin{example}
    \[\sum_{n=1}^\infty \frac{1}{k^m}\]
