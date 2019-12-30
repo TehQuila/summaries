@@ -51,7 +51,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
 \subsection{Accumulation Points}
 \begin{definition}[Accumulation Point]
-   \(x \in \mathbb{K}\) is a \emph{accumulation point} of \(x_n \in \mathbb{K}^\mathbb{N}\) iff
+   \(x \in \mathbb{K}\) is an \emph{accumulation point} of \(x_n \in \mathbb{K}^\mathbb{N}\) iff
    \[\forall \varepsilon > 0: \exists~\text{an infinite}~N_{\varepsilon} \subset \mathbb{N}: (\forall n \in N_\varepsilon: |x_n - x| < \varepsilon)\]
 \end{definition}
 \begin{example}
@@ -124,6 +124,9 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \begin{theorem}
    Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\) such that \(\lim_{n \to \infty} x_n = x\), then is \(x\) the only accumulation point of \(x_n\) and unique.
 \end{theorem}
+\begin{remark}
+   Note that the converse is in general false, e.g. \(\frac{1}{2}, 2, \frac{1}{3}, 3, \frac{1}{4}, 4, \ldots\) has exactly one accumulation point, but is not convergent.
+\end{remark}
 
 \subsection{Convergence}
 \begin{definition}[Convergent Sequence]\label{def:conv_seq}
@@ -333,12 +336,12 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \subsection{Cauchy Sequences}
 \begin{definition}[Cauchy Sequence]
    A sequence \(x_n \in \mathbb{K}^\mathbb{N}\) where
-   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall m, n > n_\varepsilon: |x_m - x_n| < \varepsilon)\]
+   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n, m > n_\varepsilon: |x_n - x_m| < \varepsilon)\]
 \end{definition}
-\begin{remark}
+\begin{remark}[Intuition]
    In other words, given any small positive distance, almost all elements of the sequence are less than that given distance from each other.
 \end{remark}
-\begin{remark}
+\begin{remark}[Tips]
    The \emph{cauchy condition} can be restated as
    \[\forall n, m > n_\varepsilon: |x_m - x_n| < \varepsilon \iff \forall m > n \geq n_\varepsilon: |x_m - x_n| < \varepsilon\]
    and also
@@ -346,15 +349,16 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{remark}
 
 \begin{theorem}[Cauchy\(\implies\)Bounded]\label{thm:cauchy_bound}
-   Every Cauchy-sequence is bounded.
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\) be a Cauchy sequence, then \(x_n\) is bounded.
 \end{theorem}
 
 \begin{theorem}[Cauchy\(\iff\)Convergent]\label{thm:cauchy_crit_seq}
-   Let \(x_n \in \mathbb{K}^\mathbb{N}\).
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\),
    \[x_n~\text{is convergent} \iff x_n~\text{is a cauchy sequence}\]
 \end{theorem}
 \begin{remark}
    Only holds on order complete fields.
+   Also we can define \(\mathbb{R}\) as the limits of Cauchy sequences in \(\mathbb{Q}\).
 \end{remark}
 
 \subsection{Improper Convergence}
@@ -364,8 +368,8 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    \[\lim_{n \to \infty} = -\infty :\iff \forall M \in \mathbb{R}_{\geq 0}~\exists n_M \in \mathbb{N}: (\forall n \geq n_M: x_n < M)\]
 \end{definition}
 \begin{remark}
-   \[\infty~\text{is an accumulation point of}~(x_n) :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} > M\]
-   \[-\infty~\text{is an accumulation point of}~(x_n) :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} < -M\]
+   \[\infty~\text{is an accumulation point of}~x_n :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} > M\]
+   \[-\infty~\text{is an accumulation point of}~x_n :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} < -M\]
 \end{remark}
 
 \begin{theorem}[Rules for Improper Convergence]
@@ -427,7 +431,7 @@ From \cref{pro:limit_comp} follows that
    \begin{enumerate}[label=\roman*, align=Center]
       \item \[\liminf_{n \to \infty}(x_n) \leq \limsup_{n \to \infty}(x_n)\]
       \item \[x_n~\text{converges} \iff \liminf_{n \to \infty}(x_n) = \limsup_{n \to \infty}(x_n)\]
-      \item \[x_n~\text{converges} \iff \lim_{n \to \infty}(x_n) = \liminf_{n \to \infty}(x_n) = \limsup_{n \to \infty}(x_n)\]
+         \item \[\lim_{n \to \infty} x_n = x \iff x = \liminf_{n \to \infty}(x_n) = \limsup_{n \to \infty}(x_n)\]
    \end{enumerate}
 \end{theorem}
 \begin{example}
@@ -462,7 +466,7 @@ To be able to analyze the bevavior of a series, we need a way to refer to the va
 \subsection{Convergence}
 \begin{definition}[Convergent Series]\label{def:series_convergence}
    A series \(\sum x_n\) where \(s_k \xrightarrow{k \to \infty} s\).
-   \[\sum_{n=0}^{\infty} x_n := s = \lim_{k \to \infty} s_k\]
+   \[\sum_{n=0}^{\infty} x_n := \lim_{k \to \infty} s_k\]
 \end{definition}
 \begin{remark}[Terminology]
    If \(s_k \to \pm\infty\) we say the series \emph{diverges}.
@@ -491,7 +495,7 @@ To be able to analyze the bevavior of a series, we need a way to refer to the va
 
 \subsubsection{Absolute Convergence}
 \begin{definition}[Absolute Convergent Series]
-   \(\sum x_n\) is absolute convergent if \(\sum |x_n|\) converges.
+   A series where \(\sum |x_n|\) converges.
 \end{definition}
 
 \begin{definition}[Conditionally Convergent Series]
@@ -536,7 +540,7 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 \end{theorem}
 
 \begin{proposition}[Leibnitz Test]\label{pro:leibnitz}
-   Let \(x_n\) be a decreasing with \(\forall n \in \mathbb{N}: 0 \leq x_n\) .
+   Let \(x_n\) be decreasing with \(\forall n \in \mathbb{N}: 0 \leq x_n\), then
    \[\sum (-1)^{n} \cdot x_n~\text{converges} \iff \lim_{n \to \infty} x_n = 0\]
 \end{proposition}
 \begin{example}
@@ -564,11 +568,12 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 \end{example}
 
 \begin{proposition}[Root Test]\label{pro:root_test}
-   Let \((x_n)_{n \in \mathbb{N}}\) with \(\alpha = \limsup_{n \to \infty} \sqrt[n]{|x_n|}\)
+   Let \(x_n\) such that \(\limsup_{n \to \infty} \sqrt[n]{|x_n|} = \alpha\)
    \[\alpha < 1 \implies \sum_{n=0}^\infty x_n~\text{absolute convergent}\]
    \[\alpha > 1 \implies \sum_{n=0}^\infty x_n~\text{not absolute convergent}\]
 \end{proposition}
 \begin{remark}
+   If \(\alpha = 1\) no statement is possible.
    Usefull when \(x_n = (y_n)^n\).
 \end{remark}
 \begin{example}
@@ -578,9 +583,9 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 \end{example}
 
 \begin{proposition}[Ratio Test]\label{pro:ratio_test}
-   Let \((x_n)_{n \in \mathbb{N}}\) where \(0 \neq x_n\) for almost all \(n \in \mathbb{N}\), then
-   \[\limsup_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) < 1 \implies \sum x_n~\text{absolute convergent}\]
-   \[\liminf_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) > 1 \implies \sum x_n~\text{not absolute convergent}\]
+   Let \(x_n\) such that \(0 \neq x_n\) for almost all \(n \in \mathbb{N}\), then
+   \[\limsup_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) < 1 \implies \sum x_n~\text{converges absolutely}\]
+   \[\liminf_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) > 1 \implies \sum x_n~\text{doesn't converge absolutely}\]
 \end{proposition}
 \begin{remark}
    If \(\limsup\), \(\liminf\) is 1, no statement is possible.
@@ -594,14 +599,22 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 \end{example}
 
 \subsection{Important Examples}
-\begin{proposition}[Harmonic Series]
-   \[\sum_{n = 1}^\infty \frac{1}{n} = \infty\]
+\begin{proposition}[Important Series]
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item Harmonic Series
+         \[\sum_{n = 1}^\infty \frac{1}{n} = \infty\]
+      \item Geometric Series
+         \[\sum_{n = 0}^\infty x^n = \frac{1}{1 - x} \qquad\text{for}~|x| < 1\]
+         \[\sum_{n = 0}^\infty x^n = \infty \qquad\text{for}~|x| \geq 1\]
+      \item Exponential Series
+         \[e^x := \sum_{n=0}^\infty \frac{x^n}{n!} \qquad\text{for}~x \in \mathbb{R}\]
+   \end{enumerate}
 \end{proposition}
 \begin{remark}
    To put it differently: \(\frac{1}{n}\) does not approach 0 fast enough so that the whole series would converge to 0.
    The sum ''overtakes`` the convergence behaviour of \(\frac{1}{n}\) which is why it diverges to \(\infty\).
 \end{remark}
-\begin{proof}
+\begin{proof}[Proof (i)]
    We regard the sequence of partial sums
    \[s_k = \sum_{n = 1}^k \frac{1}{n} = 1 + \frac{1}{2} + \ldots + \frac{1}{n}\]
    and show that it is not a cauchy sequence, hence not converges.
@@ -619,22 +632,11 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
    hence we have found \(\varepsilon := \frac{1}{2}\) where for any \(n\)
    \[\sum_{k=n+1}^{m} \frac{1}{k} \geq \varepsilon\]
 \end{proof}
-
-\begin{proposition}[Geometric Series]
-   \[\sum_{n = 0}^\infty x^n = \frac{1}{1 - x} \qquad\text{for}~|x| < 1\]
-   \[\sum_{n = 0}^\infty x^n = \infty \qquad\text{for}~|x| \geq 1\]
-\end{proposition}
-\begin{proof}
+\begin{proof}[Proof (ii)]
    Let \(|x| < 1 \), then is
    \[s_k = \sum_{n = 0}^k x^n = \frac{1 - x^{n+1}}{1 - x} \xrightarrow{n \to \infty} \frac{1}{x-1}\]
 \end{proof}
-
-\begin{proposition}[Exponential Series]
-   For \(x \in \mathbb{R}\) is
-   \[\exp(x) := \sum_{n=0}^\infty \frac{x^n}{n!}\]
-   absolute convergent.
-\end{proposition}
-\begin{proof}
+\begin{proof}[Proof (iii)]
    \(x = 0\) is trivial since
    \[e^x = \sum_{n=0}^\infty \frac{0^n}{n!} = \frac{0^0}{0!} = 1\]
    Now let \(x \neq 0\) and \(a_n := \frac{x^n}{n!}\).
@@ -652,7 +654,7 @@ We look at the convergence of series, when we rearrange their elements, which ha
    Let \(\sum a_n\) be absolute convergent.
 
    Every reaarranged series is also absolute convergent and for any permutation \(\sigma\)
-   \[\sum x_\sigma(n) = \sum x_n\]
+   \[\sum x_{\sigma(n)} = \sum x_n\]
 \end{theorem}
 
 \begin{proposition}[Riemann's Rearrangement Theorem]\label{pro:riemann_rearrang}
@@ -660,26 +662,25 @@ We look at the convergence of series, when we rearrange their elements, which ha
 
    There exists a permutation \(\sigma\) such that \(\sum x_{\sigma(n)} = \alpha\).
 \end{proposition}
-\begin{remark}
-   It can be shown that there exists a rearrangement of \(\sum x_n\) such that \(\sum x_{\sigma(n)} = \) for any \(z \in \mathbb{R}\).
+\begin{remark}[Intuition]
+   In words, for any \(\alpha \in \mathbb{R}\) we can find a permutation \(\sigma\) for any \(\sum x_n\) such that \(\sum x_{\sigma(n)} = \alpha\).
 \end{remark}
 
 \subsection{Power Series}
 \begin{definition}[Power Series]\label{def:power_series}
-   Given \((a_n)_{n \in \mathbb{N}} \in \mathbb{C}\), \(c, z \in \mathbb{C}\)
+   Given \(a_n \in \mathbb{C}^\mathbb{N}\), a constant \(c \in \mathbb{C}\) and a variable \(z \in \mathbb{C}\)
    \[\sum_{n=0}^\infty a_n (z - c)^n\]
 \end{definition}
-\begin{remark}
-   \(c\) is the center of the \textit{disk of convergence}
-   In many situations \(c\) is equal to zero and we can write the series as
-   \[\sum_{n=0}^\infty a_n z^n = a_0 + a_1z + a_2z^2 + \ldots\]
+% TODO: intuition
+\begin{remark}[Terminology]
+   \(c\) is the \emph{center} of the \emph{disk of convergence} of the power series.
 \end{remark}
-
-\begin{definition}[Radius of Convergence]
-   Let \(\sum a_n z^n\) be a power series.
+A power series will converge for some values of \(z\) and may diverge for others.
+\begin{theorem}[Radius of Convergence]
+   Let \(\sum a_n (z - c)^n\) be a power series.
    \[\rho := \frac{1}{\lim\sup_{n \to \infty} \sqrt[n]{|a_n|}}\]
    where we define that \(\frac{1}{\infty} := 0\) and \(\frac{1}{0} := \infty\).
-\end{definition}
+\end{theorem}
 \begin{remark}[Intuition]
    As power series are complex series, their convergence can be imagined as an inward spiral.
    This way \(\rho\) is the radius of the \emph{disk of convergence}, the set of all points for which the series converges
@@ -692,9 +693,9 @@ We look at the convergence of series, when we rearrange their elements, which ha
 % \end{center}
 
 \begin{theorem}[Power Series Convergence]\label{thm:conv_radius}
-   Let \(\rho\) be the radius of convergence for \(\sum a_n z^n\).
-   \[\forall |z| < \rho \implies \sum a_n z^n~\text{converges absolutely}\]
-   \[\forall |z| > \rho \implies \sum a_n z^n~\text{diverges.}\]
+   Let \(\rho\) be the radius of convergence for \(\sum a_n (z-c)^n\).
+   \[\forall z \in \mathbb{C}: \lvert z-c\rvert < \rho \implies \sum a_n (z-c)^n~\text{converges absolutely}\]
+   \[\forall z \in \mathbb{C}: \lvert z-c\rvert > \rho \implies \sum a_n (z-c)^n~\text{diverges}\]
 \end{theorem}
 \begin{remark}
    If \(\rho = 0\), diverges \(\sum a_nz^n~\forall z \neq 0\).
@@ -712,8 +713,8 @@ We look at the convergence of series, when we rearrange their elements, which ha
 \end{example}
 
 \begin{proposition}\label{pro:conv_rad_ratio_test}
-   Let \(\rho\) be the radius of convergence of \(\sum a_n z^n\).
-   \[\rho = \lim_{n \to \infty} \frac{|a_n|}{|a_{n+1}|}\]
+   Let \(\rho\) be the radius of convergence of \(\sum a_n (z-c)^n\).
+   \[\rho = \lim_{n \to \infty} \frac{\lvert a_n\rvert}{\lvert a_{n+1}\rvert}\]
 \end{proposition}
 \begin{remark}
    This proposition states that \(\rho\) can be calculated with the ratio test (\ref{pro:ratio_test}).
@@ -722,10 +723,12 @@ We look at the convergence of series, when we rearrange their elements, which ha
 \begin{theorem}
    Let \(\alpha \in \mathbb{C}\), \(\sum a_n (z - c)^n\) and \(\sum b_n (z-c)^n\) be power series with radius of convergence \(\rho_a\) respectively \(\rho_b\).
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\forall |z-c| < \rho_a: \alpha \sum a_n (z - c)^n = \sum \alpha a_n (z - c)^n\)
-      \item \(\forall |z-c| < \min\{\rho_a, \rho_b\}: \sum a_n (z-c)^n + \sum b_n (z-c)^n = \sum (a_n + b_n)(z-c)^n\)
+      \item \(\forall z \in \mathbb{C}: |z-c| < \rho_a\)
+         \[\alpha \sum a_n (z - c)^n = \sum \alpha a_n (z - c)^n\]
+      \item \(\forall z \in \mathbb{C}: |z-c| < \min\{\rho_a, \rho_b\}\)
+         \[\sum a_n (z-c)^n + \sum b_n (z-c)^n = \sum (a_n + b_n)(z-c)^n\]
       \item \(\forall |z-c| < \min\{\rho_a, \rho_b\}:\)
-            \[\sum a_n (z-c)^n \cdot \sum b_n (z-c)^n = \sum_{n=0}^\infty\left(\sum_{k=0}^\infty a_k \cdot b_{n-k}\right)(z-c)^n\]
+         \[\sum a_n (z-c)^n \cdot \sum b_n (z-c)^n = \sum_{n=0}^\infty\left(\sum_{k=0}^\infty a_k \cdot b_{n-k}\right)(z-c)^n\]
    \end{enumerate}
 \end{theorem}
 
@@ -758,14 +761,15 @@ They are typically defined as a sum, product, and/or composition of finitely man
    From above we have \(e^z := \exp(z)\).
 \end{remark}
 
-Let \(z \in \mathbb{C}\), we see that
+Let \(z \in \mathbb{C}\), from above we see that
 \[\exp(z) = \exp(x + iy) = \exp(x) \cdot \exp(iy)\]
- which means that the complex \(\exp\) function is characterized by
+which means that the complex \(\exp\) function is characterized by two parts
 \[\exp: \mathbb{R} \to \mathbb{R} \qquad\text{and}\qquad \exp: i\mathbb{R} \to \mathbb{R}\]
+We define the \emph{imaginary exponential function} \(\ixp: \mathbb{R} \to \mathbb{R}\) through \(\ixp(x) := \exp(ix)\).
 
 \subsubsection{Logarithm}
 \begin{proposition}
-   Let \(\exp: \mathbb{R} \to \mathbb{R}\), then
+   We regard \(\exp: \mathbb{R} \to \mathbb{R}\), then
    \begin{enumerate}[label=\roman*, align=Center]
       \item \(\exp\) is strictly increasing
       \item \(\im(\exp) = (0; \infty)\)
@@ -859,27 +863,22 @@ and for \(p \in \mathbb{Z}\), \(q \in \mathbb{N}_{>0}\)
 \end{proposition}
 
 \subsubsection{Connecting Exponential and Trigonometric}
-In this section we regard the imaginary part of the exponential function, for simplicity sake we define
-\[\ixp: \mathbb{R} \to \mathbb{C} \qquad\text{by}\qquad \ixp(x) := \exp(ix)\]
+Recall that \(\ixp(x) := \exp(ix)\).
 
 \begin{proposition}
-   Let \(\exp: i\mathbb{R} \to \mathbb{R}\) and \(x \in \mathbb{R}\), then
+   Let \(x \in \mathbb{R}\) and \(z \in \mathbb{C}\), then
    \begin{enumerate}[label=\roman*, align=Center]
       \item \(\cos(x) = \Re\big(\exp(ix)\big)\)
       \item \(\sin(x) = \Im\big(\exp(ix)\big)\)
       \item \(\exp(ix) = \cos(x) + i \cdot \sin(x)\)
+      \item \[\cos(z) = \frac{\exp(iz) + \exp(-iz)}{2}\]
+      \item \[\sin(z) = \frac{\exp(iz) - \exp(-iz)}{2i}\]
    \end{enumerate}
-\end{proposition}
-
-\begin{proposition}
-   Let \(z \in \mathbb{C}\), then
-   \[\cos(z) = \frac{\exp(iz) + \exp(-iz)}{2} \qquad\text{and}\qquad \sin(z) = \frac{\exp(iz) - \exp(-iz)}{2i}\]
 \end{proposition}
 
 \begin{theorem}[Unit Circle]
    \(\im(\ixp) = S^1 := \{z \in \mathbb{C} \mid \lvert z\rvert = 1\}\)
 \end{theorem}
-
 \begin{center}
    \input{drawings/unit_circle.tex}
 \end{center}
@@ -930,27 +929,58 @@ In this section we regard the imaginary part of the exponential function, for si
 \begin{theorem}
    For \(x \in \mathbb{R}\) is \(\exp: \mathbb{R} + i[x; x + 2\pi) \to \mathbb{C}\setminus\{0\}\) bijective.
 \end{theorem}
-\begin{remark}
-   From this are polar coordinates of complex numbers derived.
-\end{remark}
 
 \begin{theorem}
-   For \(z \in \mathbb{C}\setminus\{0\}\)
-   \[\exists! \alpha \in [0; 2\pi): z = \lvert z\rvert \exp(i \alpha)\]
+   For any \(z \in \mathbb{C}\setminus\{0\}\),
+   \[\exists! \theta \in [0; 2\pi): z = \lvert z\rvert \cdot \exp(i \theta)\]
 \end{theorem}
-\begin{remark}
-   We call \(\alpha\) the \emph{argument} of \(z\): \(\alpha := \argu(z)\).
-\end{remark}
+We call \(\theta\) the \emph{argument} of \(z\), denoted \(\theta := \argu(z)\).
+With this we can derive \emph{polar coordinates} of any complex number \(z\)
+\[z = x + iy = r \cdot \exp(i \theta) \qquad\text{where}~r := |z| = \sqrt{x^2 + y^2}\]
+The values \(x\) and \(y\) are called the \emph{Cartesian coordinates} of \(z\), while \(r\) and \(\theta\) are its \emph{polar coordinates}.
+
+% TODO: make better drawing
+% \begin{center}
+%    \input{drawings/complex_polar_coords.tex}
+% \end{center}
 
 \begin{theorem}
    For \(x \in \mathbb{C}\) has \(z^n = x\) \(n\) distinct solutions
    \[z_k = \lvert x\rvert^\frac{1}{n} \exp\left(\frac{i(\argu(x) + 2\pi k)}{n}\right)\]
 \end{theorem}
 
-
 \newpage
 
-\section{Function Limits}
+\section{Functions in \texorpdfstring{\(\mathbb{R}\)}{R}}
+\begin{theorem}
+   Let \(f: D \to \mathbb{R}\) be on an intervall \(D\), continuous and strictly monotonic, then is
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(f(D)\) of the same type as \(D\).
+      \item \(f:D \xrightarrow{\sim} f(D)\)
+      \item \(f^{-1}\) is continuous and also strictly monotonic.
+   \end{enumerate}
+\end{theorem}
+\begin{example}
+   Let \(n \in \mathbb{N}: n \geq 2\) and \(f(x) := x^n\).
+   First we show that \(f\) is strictly increasing, let \(x \in \mathbb{R}_{\geq 0}: x < y\), then
+   \[f(y) - f(x) = y^n - x^n = y^n \left(1 - \left(\frac{x}{y}\right)^n\right)\]
+   Recall that by the geometric series we have
+   \[(1- q^n) = (1-q) \sum_{l=0}^{n-1} q^l = (1-q)\left(1 + \sum_{l=1}^{n-1} q^l\right)\]
+   hence
+   \[y^n \left(1 - \left(\frac{x}{y}\right)^n\right) = y^n \left(1 - \frac{x}{y}\right) \sum_{j=0}^{n-1} \left(\frac{x}{y}\right)^{n-1-j} > 0\]
+   Therefor we have an inverse which is continuous and strictly increasing
+   \[\sqrt[n]{x} := f^{-1}(x)\]
+\end{example}
+
+\begin{theorem}[Intermediate Value]\label{thm:intmd_value}
+   Let \(f: [a; b] \to \mathbb{R}\) be continuous and \(f(a) < 0 < f(b)\).
+   \[\exists \xi \in (a;b): f(\xi) = 0\]
+\end{theorem}
+\begin{remark}[Tips]
+   The statement holds more generally, if \(f(a) < f(c) < f(b)\) then \(\exists \xi \in (a;b): f(\xi) = f(c)\).
+\end{remark}
+
+\subsection{Function Limits}
 So far we only looked at limits of sequences, now we want to regard how \(f: X \to Y\) behave as \(x \to x_0\).
 
 \begin{definition}[Function Limit]\label{def:func_limit}
@@ -968,7 +998,7 @@ So far we only looked at limits of sequences, now we want to regard how \(f: X \
    \input{drawings/continuity.tex}
 \end{center}
 
-\subsection{Calculation-Rules \& -Tricks}
+\subsubsection{Calculation-Rules}
 \begin{proposition}[Calculation Rules]
    Let \(f: I \to \mathbb{R}\), \(g: I \to \mathbb{R}\) and \(c \in \mathbb{R}\)
    \begin{enumerate}[label=\roman*, align=Center]
@@ -1063,7 +1093,7 @@ In this sections we regard functions
 \[f: D \subset (X, \|\ldots\|) \to (Y, \|\ldots\|)\]
 
 \begin{theorem}[Continuity Definitions are Equivalent]
-   \[\text{\cref{def:neigh_cont}} \iff \text{\cref{def:eps_delt_cont}} \iff \text{\cref{def:seq_cont}}\]
+   \[\text{\cref{def:eps_delt_cont}} \iff \text{\cref{def:seq_cont}} \iff \text{\cref{def:neigh_cont}}\]
 \end{theorem}
 
 \begin{definition}[Set of Continuous Functions]
@@ -1085,30 +1115,16 @@ In this sections we regard functions
    \(f\) is \emph{discontinuous} in \(x_0\) iff
    \[\exists \varepsilon > 0~\forall \delta > 0: (\exists x \in D: |x - x_0| < \delta~\text{but}~|f(x) - f(x_0)| \geq \varepsilon)\]
 \end{remark}
-
 With \cref{def:func_limit} we see that
 \begin{theorem}[Function Continuity]
    Let \(f: D \to \mathbb{R}\) and \(x_0 \in D\), then is
    \[f~\text{continuous in}~x_0 \iff \lim_{x \to x_0} f(x) = f(x_0)\]
 \end{theorem}
-
-This makes sense, because if \(f\) does not approach \(f(x_0\), there must be a ''gap in the function graph``.
+This makes sense, because if \(f\) does not approach \(f(x_0)\), there must be a ''gap in the function graph``.
 This becomes apparant when regarding both one-sided limits, approaching the same point.
-
 \begin{theorem}
    Let \(x_0 \in \mathbb{R}\) be a limit point of \(D\) and \(f: D \to \mathbb{R}\).
    \[\lim_{x \to x_0} f(x) = L \iff \lim_{x \uparrow x_0} f(x) = L = \lim_{x \downarrow x_0} f(x)\]
-\end{theorem}
-
-\begin{definition}[Jump Discontinuity]
-   Given \(D \subset \mathbb{R}\) and \(f: D \to \mathbb{R}\)
-   \[x_0 \in \mathbb{R}: x_0 \in \overline{D \cap (-\infty; x_0)} \cap \overline{D \cap (x_0; \infty)}\]
-   is a \emph{jump discontinuity} iff
-   \[\lim_{x \uparrow a} f(x) \neq \lim_{x \downarrow a} f(x)\]
-\end{definition}
-
-\begin{theorem}
-   Let \(f:D \to \mathbb{R}\) be monotonic. \(f\) has countable jump discontinuities.
 \end{theorem}
 
 \begin{proposition}\label{pro:one_sided_lim_incr}
@@ -1129,10 +1145,22 @@ This becomes apparant when regarding both one-sided limits, approaching the same
    \input{drawings/one-sided_limit.tex}
 \end{center}
 
+\begin{definition}[Jump Discontinuity]
+   Given \(D \subset \mathbb{R}\) and \(f: D \to \mathbb{R}\)
+   \[x_0 \in \mathbb{R}: x_0 \in \overline{D \cap (-\infty; x_0)} \cap \overline{D \cap (x_0; \infty)}\]
+   is a \emph{jump discontinuity} iff
+   \[\lim_{x \uparrow a} f(x) \neq \lim_{x \downarrow a} f(x)\]
+\end{definition}
+
+\begin{theorem}
+   Let \(f:D \to \mathbb{R}\) be monotonic.
+   \(f\) is continuous except for countable jump discontinuities.
+\end{theorem}
+
 \subsection{In Terms of Sequences}
 \begin{definition}[Sequence Continuity]\label{def:seq_cont}
    \(f: D \to \mathbb{R}\) is continuous in \(x_0 \in D\) iff
-   \[\forall (x_n) \in (D\setminus\{x_0\})^\mathbb{N}: \lim_{n \to \infty} x_n = x_0 \implies \lim_{n \to \infty} f(x_n) = f(x_0)\]
+   \[\forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \lim_{n \to \infty} x_n = x_0 \implies \lim_{n \to \infty} f(x_n) = f(x_0)\]
 \end{definition}
 \begin{remark}
    This definition allows us interchange \(\lim f(x) = f(\lim(x))\).
@@ -1140,7 +1168,7 @@ This becomes apparant when regarding both one-sided limits, approaching the same
 
 \begin{proposition}[Function Limit = Sequence Limit]
    Let \(x_0 \in X\) be a limit point of \(D\) and \(f: D \to \mathbb{R}\)
-   \[\lim_{x \to x_0} f(x) = L \iff \forall (x_n) \in (D\setminus\{x_0\})^\mathbb{N}: \left(\lim_{n \to \infty} x_n = x_0 \implies  \lim_{n \to \infty} f(x_n) = L\right)\]
+   \[\lim_{x \to x_0} f(x) = L \iff \forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \left(\lim_{n \to \infty} x_n = x_0 \implies  \lim_{n \to \infty} f(x_n) = L\right)\]
 \end{proposition}
 
 \subsection{In Terms of Topology}
@@ -1232,42 +1260,9 @@ In contrast, uniform continuity is a global property of \(f\), in the sense that
 \begin{remark}
    The difference to regular continuity is that for uniform continuity \(\delta\) does not depend on \(x_0\) but only on \(\varepsilon\).
    This means that the same \(\delta\) must be applicabale to all \(x \in D\).
-
    As this is a more strict requirement we have that every uniformly continuous function is also continuous.
+   \[f~\text{uniformly continuous} \implies f~\text{continuous}\]
 \end{remark}
-
-\section{Functions in R}
-\begin{theorem}[Intermediate Value]\label{thm:intmd_value}
-   Let \(f: [a; b] \to \mathbb{R}\) be continuous and \(f(a) < 0 < f(b)\).
-   \[\exists \xi \in (a;b): f(\xi) = 0\]
-\end{theorem}
-\begin{remark}
-   More in general: if \(f(a) < f(c) < f(b)\) then \(\exists \xi \in (a;b): f(\xi) = f(c)\).
-\end{remark}
-
-% TODO intervall types --> merge with foundations and equivalent reformulations (function limit)
-\begin{theorem}
-   Let \(f: [a;b] \to \mathbb{R}\) be continuous and strictly increasing, then is
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(f\big([a;b]\big)\) an intervall of the same type as \([a;b]\).
-      \item \(f:[a;b] \xrightarrow{\sim} f\big([a;b]\big)\)
-      \item \(f^{-1}\) is continuous as strictly increasing.
-   \end{enumerate}
-\end{theorem}
-\begin{remark}
-   The same holds for decreasing \(f\).
-\end{remark}
-\begin{example}
-   Let \(n \in \mathbb{N}: n \geq 2\) and \(f(x) := x^n\).
-   First we show that \(f\) is strictly increasing, let \(x \in \mathbb{R}_{\geq 0}: x < y\), then
-   \[f(y) - f(x) = y^n - x^n = y^n \left(1 - \left(\frac{x}{y}\right)^n\right)\]
-   Recall that by the geometric series we have
-   \[(1- q^n) = (1-q) \sum_{l=0}^{n-1} q^l = (1-q)\left(1 + \sum_{l=1}^{n-1} q^l\right)\]
-   hence
-   \[y^n \left(1 - \left(\frac{x}{y}\right)^n\right) = y^n \left(1 - \frac{x}{y}\right) \sum_{j=0}^{n-1} \left(\frac{x}{y}\right)^{n-1-j} > 0\]
-   Therefor we have an inverse which is continuous and strictly increasing
-   \[\sqrt[n]{x} := f^{-1}(x)\]
-\end{example}
 
 \newpage
 
@@ -1303,8 +1298,9 @@ At this point the secant coincides (never but close enough) the tangent, then th
 \end{proposition}
 
 \begin{proposition}
-   Let \(f: D \to Y\) be differentiable in \(x_0 \in D\), then
+   Let \(f: D \to Y\), the following statements are equivalent
    \begin{enumerate}[label=\roman*, align=Center]
+      \item \(f\) is differentiable in \(x_0 \in D\)
       \item
          \[\exists c \in Y: \lim_{x \to x_0} \frac{f(x) - f(x_0) - c \cdot (x - x_0)}{x - x_0} = 0\]
       \item There is \(c \in Y\) and \(r: D \to Y\) which is continuous in \(x_0\) and \(r(x_0) = 0\) such that
@@ -1313,3 +1309,8 @@ At this point the secant coincides (never but close enough) the tangent, then th
    Then is
    \[\frac{d}{dx}f(x_0) = c\]
 \end{proposition}
+\begin{remark}[Intuition]
+   (iii) states, that some \(f\) which is differentiable in \(x_0\), can be approximated by an \emph{affine function} (a function of the form \(x \mapsto A + c \cdot x\)) such that
+   \[\lim_{x \to x_0} \frac{R(x)}{x - x_0} = 0\]
+   where \(R(x)\) is the error of the approximation.
+\end{remark}
