@@ -1046,21 +1046,19 @@ where \(\ast\) is some term in \(x\) with \(\ast \xrightarrow{x \to x_0} 0\).
    \[\lim_{x \to 1} \frac{\sin(1-x^2)}{1-x} = \lim_{x \to 1}\frac{\sin(1-x^2)}{1-x^2} \cdot \frac{1-x^2}{1-x} = 1 \cdot \lim_{x \to 1} \frac{(1-x)(1+x)}{1-x} = \lim_{x \to 1} 1 + x = 2\]
 \end{example}
 
-% TODO: l'hopital needed
 \subsubsection{\(e^{\log}\) - Trick}
 The following is a usefull method to determine limits \(\lim_{x \to x_0} f(x)^{g(x)}\).
 The main idea is to rewrite
 \[f(x)^{g(x)} = \exp\Big(\log\big(f(x)^{g(x)}\big)\Big) = \exp\Big(g(x) \cdot \log\big(f(x)\big)\Big)\]
 as \(\exp\) is continuous, we can pull the limit into the argument.
-\begin{example}
-   We want to find \(\lim_{x \to 0} x^{\sin(x)}\)
-\end{example}
+\begin{equation*}
+   \begin{split}
+      \lim_{x \to x_0} f(x)^{g(x)} &= \lim_{x \to x_0} e^{\log(f(x)^{g(x)})} = \lim_{x \to x_0} e^{g(x) \cdot \log(f(x))} \overset{e~\text{cont.}}{=} \exp\left(\lim_{x \to x_0} \Big(g(x) \cdot log\big(f(x)\big)\Big)\right) = \\
+                                   & = \exp\left(\lim_{x \to x_0}g(x) \cdot \lim_{x \to x_0}\Big(\log\big(f(x)\big)\Big)\right) \overset{\ln~\text{cont.}}{=} \exp\left(\lim_{x \to x_0}g(x) \cdot \log\left(\lim_{x \to x_0}f(x)\right)\right)
+   \end{split}
+\end{equation*}
 
-\begin{remark}
-   It is important to remember the \(e^{\log}\) trick.
-   \[\lim_{x \to x_0} f(x)^{g(x)} = \lim_{x \to x_0} e^{\log(f(x)^{g(x)})} = \lim_{x \to x_0} e^{g(x) \cdot \log(f(x))} \overset{e~\text{cont.}}{=} \exp \left(\lim_{x \to x_0} g(x) \cdot log(f(x))\right)\]
-   is sometimes easier to calculate.
-\end{remark}
+% TODO: example
 
 \subsection{One-Sided Limits}
 \begin{definition}[One-Sided Limit]\label{def:one-sided_limit}
