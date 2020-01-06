@@ -1,0 +1,26 @@
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+   \begin{axis}[
+   x=1cm,y=1cm,
+   axis lines=middle,
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xmin=-3.6423644972783227,
+   xmax=9.836484290540891,
+   ymin=-2.466863579845977,
+   ymax=5.846571116588563,
+   xtick={-3,-2,...,9},
+   ytick={-2,-1,...,5},]
+      \draw [shift={(0,0)},line width=2pt,fill=black,fill opacity=0.10000000149011612] (0,0) -- (0:0.33253738785738196) arc (0:30.96375653207352:0.33253738785738196) -- cycle;
+      \draw [line width=1.2pt,dashed] (5,3)-- (5,0);
+      \draw [line width=1.2pt,dashed] (5,3)-- (0,3);
+      \draw [line width=2pt,color=grey] (0,0)-- (5,3);
+      \draw [line width=2pt,color=blue] (0,0)-- (0,3);
+      \draw [line width=2pt,color=red] (0,0)-- (5,0);
+      \draw [fill=blue] (5,3) circle (2.5pt);
+      \draw[color=blue] (6.466772093586088,3.236152621908117) node {\(z = x + iy = |z| * \exp(i\theta)\)};
+      \draw[color=grey] (2.7201841903929185,1.4847890458592405) node {|z|};
+      \draw[color=black] (0.6695369652723964,0.1878932332154525) node {\(\theta\)};
+      \draw[color=blue] (-0.18397566356155054,1.5956348418117012) node {\(iy\)};
+      \draw[color=red] (2.5428309168689816,-0.044882938284714596) node {\(x\)};
+   \end{axis}
+\end{tikzpicture}

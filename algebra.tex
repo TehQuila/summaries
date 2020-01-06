@@ -3049,16 +3049,34 @@ Then two possibilities arise: eigher all elements \(n \cdot 1\) are distinct or 
    If such \(p\) doesn't exist we define \(\chark(F) := 0\).
 \end{remark}
 
-% TODO: create section "ordered algebraic structures"
-\begin{definition}[Ordered Field]
-   A field \(K\) is ordered if \((K, \leq)\) is totally ordered and
-   \[\forall x, y, z \in K: x < y \implies x + z < y + z\]
-   \[\forall x, y \in K: x, y > 0 \implies x \cdot y > 0\]
-\end{definition}
-
 \begin{definition}[Subfield]
    Given a field \(K\), the subset \(L \subset K\) where \(L\) is a field in respect to the field operations of \(K\).
 \end{definition}
+
+\subsection{Ordered Fields}
+\begin{definition}[Ordered Field]
+   A field \(K\) where \((K, \leq)\) is totally ordered and
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\forall x, y, z \in K: x < y \implies x + z < y + z\)
+      \item \(\forall x, y \in K: x, y > 0 \implies x \cdot y > 0\)
+   \end{enumerate}
+\end{definition}
+
+% TODO: use this in intervalls
+\begin{proposition}
+   Let \(K\) be an ordered field.
+   \[\forall a \in K, c \in K_{\geq 0}: \lvert a \rvert \leq c \iff -c \leq a \leq c\]
+\end{proposition}
+
+\begin{proposition}[Triangle Inequality]
+   Let \(K\) be an ordered field.
+   \[\forall a,b \in K: \lvert a + b \rvert \leq \lvert a\rvert + \lvert b\rvert\]
+\end{proposition}
+
+\begin{proposition}[Reverse Triangle Inequality]
+   Let \(K\) be an ordered field.
+   \[\forall a,b \in K: \lvert a - b\rvert \geq \left\lvert\lvert a\rvert - \lvert b\rvert\right\rvert\]
+\end{proposition}
 
 \subsection{Important Examples}
 % TODO this is Field of Fractions of Z
