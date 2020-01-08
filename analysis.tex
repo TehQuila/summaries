@@ -1,30 +1,57 @@
 \section{Sequences}
-In this section we use the notation \(\mathbb{K}\) to represent the field of \(\mathbb{R}\) respectively \(\mathbb{C}\).
+In this section we use the notation \(\mathbb{K}\) to represent the field of \(\mathbb{R}\) respectively \(\mathbb{C}\) and specify otherwise.
 
 \subsection{Definition \& Terminology}
 \begin{definition}[Sequence]
-   A sequence \((x_n)_{n \in \mathbb{N}}\) on \(\mathbb{K}\) is an enumerated collection
-   \[(x_n)_{n \in \mathbb{N}} := \{x_1, x_2, \ldots, x_n\}\]
-   with elements \(x_i \in \mathbb{K}\).
+   A map \(x: \mathbb{N} \to \mathbb{K}\) where we denote \(x_n := x(n)\).
 \end{definition}
 \begin{remark}[Notation]
-   For conciseness we denote ''\((x_n)_{n \in \mathbb{N}}\) is a sequence on \(\mathbb{K}\)`` as \(x_n \in \mathbb{K}^\mathbb{N}\).
+   For conciseness we denote a sequence as \((x_n)_{n \in \mathbb{N}}\).
+   When we say ''\((x_n)_{n \in \mathbb{N}}\) is a sequence in \(\mathbb{K}\)`` we write \(x_n \in \mathbb{K}^\mathbb{N}\).
 \end{remark}
-\begin{remark}
-   Formally we define a sequence as a map \(x: \mathbb{N} \to \mathbb{K}\).
+\begin{remark}[Intuition]
+   A sequence is an enumerated collection of elements in \(\mathbb{K}\).
+   \[(x_n)_{n \in \mathbb{N}} = x_1, x_2, \ldots, x_n\]
 \end{remark}
 
+\subsubsection{Convergence}
+\begin{definition}[Convergent Sequence]\label{def:conv_seq}
+   \(x_n \in \mathbb{K}^\mathbb{N}\) \emph{converges to} \(x \in \mathbb{K}\) iff
+   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n \geq n_\varepsilon: |x_n - x| < \varepsilon)\]
+\end{definition}
+\begin{remark}[Intuition]
+   \(x_n\) converges to \(x\), if after some index \(n_\varepsilon\) \emph{all} following \(x_n\) are closer to \(x\) than an arbitrarily chosen error margin \(\varepsilon\).
+\end{remark}
+\begin{remark}[Notation]
+   If \(x_n\) converges to \(x\) we write
+   \[x_n \xrightarrow{n \to \infty} x \qquad\text{or}\qquad \lim_{n \to \infty}(x_n) = x\]
+\end{remark}
+\begin{example}
+   We regard the sequence \(x_n := \frac{1}{n}\) and show that \(\lim_{n \to \infty}(x_n) = 0\).
+
+   Let \(\varepsilon > 0\) be arbitrary but fixed.
+   According to the archimedes principle \(\exists n_\varepsilon \in \mathbb{N}: \frac{1}{n_\varepsilon} < \varepsilon\).
+
+   Now since \(\forall n > n_\varepsilon: \frac{1}{n} < \frac{1}{n_\varepsilon}\), it follows that
+   \[\forall \varepsilon > 0~\exists n_\varepsilon: \left(n > n_\varepsilon \implies \frac{1}{n} < \varepsilon\right)\]
+
+   \begin{center}
+      \input{drawings/convergent_sequence.tex}
+   \end{center}
+\end{example}
+
+\subsubsection{Bounded \& Monotonic Sequences}
 \begin{definition}[Bounded Sequence]
    \(x_n \in \mathbb{K}^\mathbb{N}\) is
    \[\text{bounded below} :\iff \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: b \leq x_n)\]
    \[\text{bounded above} :\iff \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: x_n \leq b)\]
-   \[\text{bounded} :\iff \exists b \in \mathbb{R}_{>0}: (\forall n \in \mathbb{N}: |x_n| < b)\]
+   \[\text{bounded} :\iff \exists b \in \mathbb{R}_{>0}: (\forall n \in \mathbb{N}: |x_n| \leq b)\]
 \end{definition}
 \begin{remark}
-   In words, \(x_n\) is \emph{bounded} if it is bounded above and below.
+   Since \(\lvert x_n \rvert < b \iff -b < x_n < b\) we see that \(x_n\) is \emph{bounded} if it is bounded above and below.
 \end{remark}
 
-\begin{theorem}[Convergent \(\implies\) Bounded]\label{thm:conv_bound}
+\begin{theorem}[Convergent\(\implies\)Bounded]\label{thm:conv_bound}
    Every convergent sequence is bounded.
 \end{theorem}
 \begin{remark}
@@ -37,10 +64,10 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    \[\text{decreasing} :\iff \forall n \in \mathbb{N}: x_n \geq x_{n+1}\]
 \end{definition}
 \begin{remark}[Terminology]
-   If instead we have \(<\) or \(>\), we say \(x_n\) is \emph{strictly} increasing respectively decreasing.
+   If instead we have \(<\) or \(>\), we say \(x_n\) is \emph{strictly} monotonic.
 \end{remark}
-\begin{remark}[Intuition]
-   To prove that a sequence is increasing, respectively decreasing we have the following options
+\begin{remark}[Tips]
+   To prove that \(x_n\) is increasing, respectively decreasing we can show that
    \begin{enumerate}
       \item \(x_{n+1} = \ldots \geq x_n\) resp. \(x_{n+1} = \ldots \leq x_n\)
       \item \(\frac{x_{n+1}}{x_n} = \ldots \geq 1\) resp. \(\frac{x_{n+1}}{x_n} = \ldots < 1\)
@@ -49,129 +76,25 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    \end{enumerate}
 \end{remark}
 
-\subsection{Accumulation Points}
-\begin{definition}[Accumulation Point]
-   \(x \in \mathbb{K}\) is an \emph{accumulation point} of \(x_n \in \mathbb{K}^\mathbb{N}\) iff
-   \[\forall \varepsilon > 0: \exists~\text{an infinite}~N_{\varepsilon} \subset \mathbb{N}: (\forall n \in N_\varepsilon: |x_n - x| < \varepsilon)\]
-\end{definition}
-\begin{example}
-   \(x_n = (-1)^n\) doesn't converge but it has the accumulation points \(\pm 1\).
-\end{example}
-
-\begin{theorem}[Bolzano-Weierstrass]\label{thm:bolzano}
-   Every bounded sequence has at least one accumulation point.
-\end{theorem}
-% \begin{proof}[Proof in \(\mathbb{R}\)]
-%    Let \((x_n)_{n \in \mathbb{N}}\) be a bounded sequence, i.e.
-%    \[\exists l_0, u_0 \in \mathbb{R}: (\forall n \in \mathbb{N}: l_0 \leq x_n \leq u_0)\]
-%    Starting with \(l_0\) and \(u_0\) we recursively construct two sequences \((l_n)_{n \in \mathbb{N}}\) and \((u_n)_{n \in \mathbb{N}}\) such that \((l_n)\) are lower bounds and \((u_n)\) are upper bounds of \((x_n)\).
-%    Now assume we already have the the first \(n\) elements.
-%    We regard the middle of our boundary \(m := \frac{1}{2}(l_n + u_n)\)
-
-%    \textbf{Case 1:} \(x_n = m\) for infinitely many \(n \in \mathbb{N}\).
-%    Then is \(m\) a accumulation point of \((x_n)\).
-
-%    \textbf{Case 2:} \(x_n \in [l_n; m)\) for infinitely many \(n \in \mathbb{N}\).
-%    We set \(l_{n+1} = l_n\) and \(u_{n+1} = m\)
-
-%    \textbf{Case 3:} \(x_n \in (m; u_n]\) for infinitely many \(n \in \mathbb{N}\).
-%    We set \(l_{n+1} = m\) and \(u_{n+1} = u_n\)
-
-%    With this process we narrow our boundary sequences, this means that \((l_n)\) is increasing (since they are the lower boundaries) and \((u_n)\) is decreasing.
-%    Furthermore since \(\forall n \in \mathbb{N}: l_n, u_n \in [l_0; u_0]\) both are bounded.
-%    This means they converge according to \cref{thm:incr_bound_conv}.
-
-%    Since we half the distance between them with every step we have
-%    \[\forall n \in \mathbb{N}: u_n - l_n \leq \frac{1}{2^n} (u_0 - l_0)\]
-%    which means that they converge towards one another, hence
-%    \[\lim_{n \to \infty} l_n = \lim_{n \to \infty} u_n\]
-%    but this in turn means that those limit must be a accumulation point.
-
-%    Let \(c := \lim_{n \to \infty} l_n\) and \(\varepsilon > 0\) be arbitrary but fixed, then
-%    \[\exists n_{\varepsilon_1} \in \mathbb{N}: (\forall n \geq n_{\varepsilon_1}: c - \varepsilon < l_n \leq c) \qquad\text{and}\qquad \exists n_{\varepsilon_2} \in \mathbb{N}: (\forall n \geq n_{\varepsilon_2}: c \leq u_n < c + \varepsilon)\]
-%    Now let \(n_\varepsilon := \max\{n_{\varepsilon_1}, n_{\varepsilon_2}\}\), then
-%    \[c - \varepsilon < l_{n_\varepsilon} < u_{n_\varepsilon} < c + \varepsilon\]
-%    Finally since we constructed \((l_n)\) and \((u_n)\) according to \((x_n)\), there are infinitely many \(n \in \mathbb{N}: x_n \in [l_{n_\varepsilon};  u_{n_\varepsilon}]\), hence \(c\) is a accumulation point.
-% \end{proof}
-% \begin{proof}[Proof in \(\mathbb{C}\)]
-%    Let \((z_n)_{n \in \mathbb{N}}\) be a bounded sequence, for \(n \in \mathbb{N}\) we define sequences for the real and imaginary part
-%    \[r_n := \Re(z_n) \qquad\text{and}\qquad i_n := \Im(z_n)\]
-%    Since \(\forall z \in \mathbb{C}: |\Re(z)|, |\Im(z)| \leq |z|\) both are bounded.
-
-%    Because we've proven this theorem for sequences in \(\mathbb{R}\) we know that there exists a accumulation point \(a \in \mathbb{R}\) of \((r_n)\).
-%    So according to \cref{thm:cp_iff_subseq},
-%    \[\exists (r_{n_k})_{k \in \mathbb{N}}: r_{n_k} \xrightarrow{k \to \infty} a\]
-
-%    Now we regard the \emph{subsequence} \((i_{n_k})_{k \in \mathbb{N}}\) which is bounded since \((i_n)\) is bounded.
-%    So again as before there exists a accumulation point \(b \in \mathbb{R}\) of \((i_{n_k})\) and thus a sub-subsequence \((i_{n_{k_l}})_{l \in \mathbb{N}}\) where
-%    \[\lim_{l \to \infty} i_{n_{k_l}} = b\]
-%    according to \cref{thm:all_subseq_conv}.
-
-%    Now since \(\forall z \in \mathbb{C}: |z| \leq |\Re(z)| + |\Im(z)|\) we have
-%    \[|z_{n_{k_l}} - (a + ib)| \leq |r_{n_{k_l}} - a| + |i_{n_{k_l}} - b|\]
-%    So by construction
-%    \[|r_{n_{k_l}} - a| \xrightarrow{l \to \infty} 0 \qquad\text{and}\qquad |i_{n_{k_l}} - b| \xrightarrow{l \to \infty} 0\]
-%    thus according to \cref{pro:limit_comp}
-%    \[|z_{n_{k_l}} - (a + ib)| \xrightarrow{l \to \infty} 0\]
-%    hence \(a + ib\) is a accumulation point of \((z_n)\) according to \cref{thm:cp_iff_subseq}.
-% \end{proof}
-
-\begin{theorem}
-   Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\), then is
-   \[x~\text{an accumulation point of}~x_n \iff \forall \varepsilon > 0: (\forall n \in \mathbb{N}~\exists m \geq n: |x_m - x| < \varepsilon)\]
-\end{theorem}
-
-\begin{theorem}
-   Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\) such that \(\lim_{n \to \infty} x_n = x\), then is \(x\) the only accumulation point of \(x_n\) and unique.
-\end{theorem}
-\begin{remark}
-   Note that the converse is in general false, e.g. \(\frac{1}{2}, 2, \frac{1}{3}, 3, \frac{1}{4}, 4, \ldots\) has exactly one accumulation point, but is not convergent.
-\end{remark}
-
-\subsection{Convergence}
-\begin{definition}[Convergent Sequence]\label{def:conv_seq}
-   \(x_n \in \mathbb{K}^\mathbb{N}\) \emph{converges to} \(x \in \mathbb{K}\) iff
-   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n > n_\varepsilon: |x_n - x| < \varepsilon)\]
-\end{definition}
-\begin{remark}[Intuition]
-   \(x_n\) converges to \(x\), if after some index \(n_\varepsilon\) \emph{all} following \(x_n\) are closer to \(x\) than an arbitrarily chosen error margin \(\varepsilon\).
-\end{remark}
-\begin{remark}[Notation]
-   If \(x_n\) converges to \(x\) we write
-   \[x_n \xrightarrow{n \to \infty} x \qquad\text{or}\qquad \lim_{n \to \infty} x_n = x\]
-\end{remark}
-\begin{example}
-   Let \(x_n = \frac{1}{n}\), then \(x_n \to 0\).
-
-   Let \(\varepsilon > 0\) be arbitrary but fixed.
-   According to the archimedes principle \(\exists N_\varepsilon \in \mathbb{N}: \frac{1}{N_\varepsilon} < \varepsilon\).
-   Now since \(\forall n > N_\varepsilon: \frac{1}{n} < \frac{1}{N_\varepsilon}\) follows
-   \[\forall \varepsilon > 0~\exists N_\varepsilon: n > N_\varepsilon \implies \frac{1}{n} < \varepsilon\]
-
-   \begin{center}
-      \input{drawings/convergent_sequence.tex}
-   \end{center}
-\end{example}
-
-\begin{theorem}[Monotonic \& Bounded\(\implies\)Convergent]\label{thm:incr_bound_conv}
+\begin{theorem}[Monotonic \& Bounded Convergence]\label{thm:incr_bound_conv}
    If \(x_n \in \mathbb{K}^\mathbb{N}\) is
-   \[\text{increasing and bounded above, then is} \quad \lim_{n \to \infty} x_n = \sup\{x_n \mid n \in \mathbb{N}\}\]
-   \[\text{decreasing and bounded below, then is} \quad \lim_{n \to \infty} x_n = \inf\{x_n \mid n \in \mathbb{N}\}\]
+   \[\text{increasing and bounded above, then is} \quad \lim_{n \to \infty}(x_n) = \sup\{x_n \mid n \in \mathbb{N}\}\]
+   \[\text{decreasing and bounded below, then is} \quad \lim_{n \to \infty}(x_n) = \inf\{x_n \mid n \in \mathbb{N}\}\]
 \end{theorem}
 \begin{example}
    Let \(x_0 := a \geq 1\) and \(x_{n+1} := \frac{1}{2} \left(x_n + \frac{a}{x_n}\right)\).
-   We want to prove that \(\lim_{n \to \infty} x_n = \sqrt{a}\).
+   We want to prove that \(\lim_{n \to \infty}(x_n) = \sqrt{a}\).
 
    First we prove that \(x_n\) is decreasing.
    \[x_{n+1} = \frac{1}{2} \left(x_n + \frac{a}{x_n}\right) = \frac{x_n}{2} \left(1 + \frac{a}{x_n^2}\right) \overset{x_n^2 \geq a}{\leq} \frac{x_n}{2} \left(1 + \frac{a}{a}\right) = x_n\]
 
    Now we show that \(x_n\) is bounded below by induction over \(n\)
 
-   \textit{IB:} \(n = 0 \implies x_0 = a \geq \sqrt{a}\) holds since \(a \geq 1\).
+   \emph{IB:} \(n = 0 \implies x_0 = a \geq \sqrt{a}\) holds since \(a \geq 1\).
 
-   \textit{IH:} For some \(n \in \mathbb{N}\) holds \(x_n \geq \sqrt{a}\).
+   \emph{IH:} For some \(n \in \mathbb{N}\) holds \(x_n \geq \sqrt{a}\).
 
-   \textit{IS:} Assume IH holds.
+   \emph{IS:} Assume IH holds.
    \begin{equation*}
       \begin{split}
          x_{n+1} \geq \sqrt{a} & \iff \frac{1}{2} \left(x_n + \frac{a}{x_n}\right) \geq \sqrt{a} \iff x_n + \frac{a}{x_n} \geq 2 \sqrt{a}\\
@@ -183,87 +106,58 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    So according to the induction axiom and IB, IH, IS follows that \(x_n\) is bounded below \(\forall n \in \mathbb{N}\).
 \end{example}
 
-\subsubsection{Calculation Rules}
-\begin{definition}[Zero Sequence]
-   \(x_n \in \mathbb{K}^\mathbb{N}\) where \(\lim_{n \to \infty} x_n = 0\).
+\subsubsection{Improper Convergence}
+\begin{definition}[Improper Convergence]
+   Given \(x_n \in \mathbb{R}^\mathbb{N}\).
+   \[\lim_{n \to \infty}(x_n) = \infty :\iff \forall M \in \mathbb{R}_{\geq 0}~\exists n_M \in \mathbb{N}: (\forall n \geq n_M: x_n > M)\]
+   \[\lim_{n \to \infty}(x_n) = -\infty :\iff \forall M \in \mathbb{R}_{\geq 0}~\exists n_M \in \mathbb{N}: (\forall n \geq n_M: x_n < M)\]
 \end{definition}
-
-\begin{lemma}[Zero Sequence Convergence ]\label{lem:zero_seq}
-   Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(r_n \in \mathbb{K}^\mathbb{N}\) be a zero sequence.
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \[\lim_{n \to \infty} x_n = 0 \implies \lim_{n \to \infty} \lvert x_n\rvert = 0\]
-      \item \[\lim_{n \to \infty} x_n = x \implies \lim_{n \to \infty} (x_n - x) = 0\]
-      \item \[\exists n_0 \in \mathbb{N}: (\forall n \geq n_0: |x_n| \leq r_n) \implies \lim_{n \to \infty} x_n = 0\]
-   \end{enumerate}
-\end{lemma}
-
-\begin{proposition}[Sequence Limits]
-   Let \(\alpha \in \mathbb{K}\) and suppose \(\lim_{n \to \infty} x_n = x\), \(\lim_{n \to \infty} y_n = y\), then
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \[\lim_{n \to \infty} \lvert x_n\rvert = \lvert x \rvert\]
-      \item \[\lim_{n \to \infty} (\alpha \cdot x_n) = \alpha \cdot x\]
-      \item \[\lim_{n \to \infty} (x_n + y_n) = x + y\]
-      \item \[\lim_{n \to \infty} (x_n - y_n) = x - y\]
-      \item \[\lim_{n \to \infty} (x_n \cdot y_n) = x \cdot y\]
-      \item If \(y \neq 0\) and \(\forall n \in \mathbb{N}: y_n \neq 0\), then
-         \[\lim_{n \to \infty} \frac{x_n}{y_n} = \frac{x}{y}\]
-      \item If \(\forall n \in \mathbb{N}: x_n \geq 0\)
-         \[\lim_{n \to \infty} x_n^{\frac{p}{q}} = x^{\frac{p}{q}} \qquad\text{with}~p \in \mathbb{Z}, q \in \mathbb{Z} \setminus \{0\}: \]
-   \end{enumerate}
-\end{proposition}
+\begin{remark}
+   \[\infty~\text{is an accumulation point of}~x_n :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} > M\]
+   \[-\infty~\text{is an accumulation point of}~x_n :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} < -M\]
+\end{remark}
 \begin{example}
-   We regard \(x_n := \left(1 + \frac{1}{n}\right)^k\) with \(k \in \mathbb{N}\).
-   We know that for \(a_n := 1\) and \(b_n := \frac{1}{n}\) holds
-   \[a_n \xrightarrow{n \to \infty} 1 \qquad\text{and}\qquad b_n \xrightarrow{n \to \infty} 0\]
-   Therefor follows from (iii) that
-   \[a_n + b_n \xrightarrow{n \to \infty} 1 + 0\]
-   Now since \(x_n = (a_n + b_n)^k\) we know from (v) that
-   \[x_n = (a_n + b_n)^k \xrightarrow{n \to \infty} (1+0)^k = 1\]
+   Let \(x_n := \log(n)\) and \(M \in \mathbb{R}\) be arbitrarily large.
+   According to Archimedes principle \(\exists n_\varepsilon \in \mathbb{N}: n_\varepsilon \geq \lceil e^M\rceil\).
+   Now let \(n > n_\varepsilon\), then
+   \[\log(n) > \log(n_\varepsilon) \geq M\]
 \end{example}
 
-\begin{proposition}\label{pro:limit_comp}
-   Let \(x_n, y_n \in \mathbb{K}^\mathbb{N}\) where for infinite \(n \in \mathbb{N}: x_n \leq y_n\).
-   \[\lim_{n \to \infty} x_n \leq \lim_{n \to \infty} y_n\]
-\end{proposition}
+\begin{theorem}[Improper Limit]\label{thm:improper_limits}
+   Every monotonic \(x_n \in \overline{\mathbb{R}}^\mathbb{N}\) converges and
+   \[x_n~\text{increasing}~\implies \lim_{n \to \infty}(x_n) = \sup\{x_n \mid n \in \mathbb{N}\}\]
+   \[x_n~\text{decreasing}~\implies \lim_{n \to \infty}(x_n) = \inf\{x_n \mid n \in \mathbb{N}\}\]
+\end{theorem}
 \begin{remark}
-   \(x_n := \frac{1}{n}\) and \(y_n := -\frac{1}{n}\) show that \(\forall n \in \mathbb{N}: x_n > y_n\) does not imply \(\lim_{n \to \infty} x_n > \lim_{n \to \infty} y_n\).
+   Important to note here is that in contrast to \cref{thm:incr_bound_conv} we don't require \(x_n\) to be bounded.
 \end{remark}
 
-\begin{proposition}[Sandwich Sequence]\label{pro:sandwich_seq}
-   Let \(x_n, y_n, z_n \in \mathbb{K}^\mathbb{N}\) with \(\lim_{n \to \infty} x_n = \lim_{n \to \infty} z_n = y\).
-   \[\exists n_0 \in \mathbb{N}~\forall n > n_0: x_n \leq y_n \leq z_n \implies \lim_{n \to \infty} y_n = y\]
-\end{proposition}
-\begin{example}
-   We want to prove \(\lim_{n \to \infty} \frac{\sin(n)}{n} = 0\).
-   We know that \(-1 \leq \sin(x) \leq 1 \implies -\frac{1}{n} \leq \frac{\sin(x)}{n} \leq \frac{1}{n}\).
-   So we found \(x_n = -\frac{1}{n}\), \(c_n = \frac{1}{n}\) for \(b_n = \frac{\sin(n)}{n}\) such that
-   \[\forall n \in \mathbb{N}: x_n \leq b_n \leq c_n \quad\text{and}\quad \lim_{n \to \infty} x_n = \lim_{n \to \infty} c_n = 0\]
-   hence \(\lim_{n \to \infty} \frac{\sin(n)}{n} = 0\).
-\end{example}
+\subsection{Important Sequences}
+\begin{proposition}[Important Sequences]
+   The following are important examples of sequences.
 
-\subsubsection{Important Sequences}
-% TODO: finish
-\begin{proposition}[Important Examples]
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \(x_n := x^n\)
-         \[\lim_{n \to \infty} x_n = \begin{cases}
+      \item \[\lim_{n \to \infty} \left(\frac{1}{n}\right) = 0\]
+      \item \[\lim_{n \to \infty}(x^n) = \begin{cases}
                0 & x \in (-1; 1)\\
                1 & x = 1\\
                \pm\infty & x \in \mathbb{R}\setminus (-1;1)
          \end{cases}\]
       \item Let \(|x| < 1\) and \(r \in \mathbb{N}\)
-         \[\lim_{n \to \infty} n^r \cdot x^n = 0\]
-      \item \[\lim_{n \to \infty} \sqrt[n]{n} = 1\]
+         \[\lim_{n \to \infty}\big(n^r \cdot x^n\big) = 0\]
+      \item \[\lim_{n \to \infty}(\sqrt[n]{n}) = 1\]
       \item \(\forall r \in \mathbb{R}_{>0}\)
-         \[\lim_{n \to \infty} \sqrt[n]{r} = 1\]
+         \[\lim_{n \to \infty}(\sqrt[n]{r}) = 1\]
       \item \(\forall s \in \mathbb{R}_{>0}\)
-         \[\lim_{n \to \infty} \sqrt[n]{n^s} = 1\]
-      \item
-         \[\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e\]
+         \[\lim_{n \to \infty}(\sqrt[n]{n^s}) = 1\]
+      \item \[\lim_{n \to \infty}\big(\sqrt[n]{n!}\big) = \infty\]
+      \item \[\lim_{n \to \infty}\left(1 + \frac{1}{n}\right)^n = e\]
       \item \(\forall z \in \mathbb{C}\)
-         \[\lim_{n \to \infty} \left(1 + \frac{z}{n}\right)^n = e^z\]
+         \[\lim_{n \to \infty}\left(1 + \frac{z}{n}\right)^n = e^z\]
+      \item \[\lim_{n \to \infty}\left(\frac{n}{\sqrt[n]{n!}}\right) = e\]
+      \item \[\lim_{n \to \infty}\big(n \cdot (\sqrt[n]{a} - 1)\big) = \ln(a)\]
       \item
-         \[\lim_{n \to \infty} \frac{n!}{n^n} = 0\]
+         \[\lim_{n \to \infty}\left(\frac{n!}{n^n}\right) = 0\]
    \end{enumerate}
 \end{proposition}
 \begin{remark}
@@ -306,7 +200,99 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    So according to \cref{lem:zero_seq} (iii) is \(n^rx^n \to 0\).
 \end{proof}
 
-\subsection{Subsequences}
+\subsection{Calculation Rules}
+\begin{definition}[Zero Sequence]
+   \(x_n \in \mathbb{K}^\mathbb{N}\) where \(\lim_{n \to \infty} x_n = 0\).
+\end{definition}
+
+\begin{lemma}[Zero Sequence Rules]\label{lem:zero_seq}
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(y_n \in \mathbb{K}^\mathbb{N}\) be a zero sequence.
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[\lim_{n \to \infty}(x_n) = x \implies \lim_{n \to \infty} (x_n - x) = 0\]
+      \item \[\lim_{n \to \infty}\big(\lvert y_n\rvert\big) = 0\]
+      \item \[x_n~\text{bounded} \implies \lim_{n \to \infty} (x_n \cdot y_n) = 0\]
+      \item \[\exists n_0 \in \mathbb{N}: (\forall n \geq n_0: |x_n| \leq y_n) \implies \lim_{n \to \infty}(x_n) = 0\]
+   \end{enumerate}
+\end{lemma}
+
+\begin{proposition}[Sequence Limit Rules]
+   Let \(\alpha \in \mathbb{K}\) and suppose \(\lim_{n \to \infty} x_n = x\), \(\lim_{n \to \infty} y_n = y\), then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[\lim_{n \to \infty} \lvert x_n\rvert = \lvert x \rvert\]
+      \item \[\lim_{n \to \infty} (\alpha \cdot x_n) = \alpha \cdot x\]
+      \item \[\lim_{n \to \infty} (x_n + y_n) = x + y\]
+      \item \[\lim_{n \to \infty} (x_n - y_n) = x - y\]
+      \item \[\lim_{n \to \infty} (x_n \cdot y_n) = x \cdot y\]
+      \item If \(y \neq 0\) and \(\forall n \in \mathbb{N}: y_n \neq 0\), then
+         \[\lim_{n \to \infty} \left(\frac{x_n}{y_n}\right) = \frac{x}{y}\]
+      \item If \(\forall n \in \mathbb{N}: x_n \geq 0\)
+         \[\lim_{n \to \infty} \left(x_n^{\frac{p}{q}}\right) = x^{\frac{p}{q}} \qquad\text{with}~p \in \mathbb{Z}, q \in \mathbb{Z} \setminus \{0\}: \]
+   \end{enumerate}
+\end{proposition}
+\begin{remark}
+   From (vi) follows in particular that
+   \[\lim_{n \to \infty}(x_n^{-1}) = \left(\lim_{n \to \infty}(x_n)\right)^{-1}\]
+\end{remark}
+
+\begin{proposition}\label{pro:limit_comp}
+   Let \(x_n, y_n \in \mathbb{K}^\mathbb{N}\) where for infinite \(n \in \mathbb{N}: x_n \leq y_n\).
+   \[\lim_{n \to \infty}(x_n) \leq \lim_{n \to \infty}(y_n)\]
+\end{proposition}
+\begin{remark}
+   \(x_n := \frac{1}{n}\) and \(y_n := -\frac{1}{n}\) show that \(\forall n \in \mathbb{N}: x_n > y_n\) does not imply \(\lim_{n \to \infty} x_n > \lim_{n \to \infty} y_n\).
+\end{remark}
+
+\begin{proposition}[Sandwich Sequence]\label{pro:sandwich_seq}
+   Let \(x_n, y_n, z_n \in \mathbb{K}^\mathbb{N}\) with \(\lim(x_n) = \lim(z_n) = y\).
+   \[\exists n_0 \in \mathbb{N}~\forall n > n_0: x_n \leq y_n \leq z_n \implies \lim_{n \to \infty}(y_n) = y\]
+\end{proposition}
+\begin{example}
+   Let \(y_n := \frac{\sin(n)}{n}\), we prove that \(\lim_{n \to \infty}(y_n) = 0\).
+   First Note that \(\forall n \in \mathbb{N}\),
+   \[-1 \leq \sin(x) \leq 1 \implies -\frac{1}{n} \leq \frac{\sin(x)}{n} \leq \frac{1}{n}\]
+   So let \(x_n = -\frac{1}{n}\) and \(z_n = \frac{1}{n}\), where we know that \(\lim_{n \to \infty}(x_n) = \lim_{n \to \infty}(z_n) = 0\), thus
+   \[\forall n \in \mathbb{N}: x_n \leq y_n \leq z_n \implies \lim_{n \to \infty}\left(\frac{\sin(n)}{n}\right) = 0\].
+\end{example}
+
+\begin{theorem}[Improper Convergence Rules]
+   Let \(x_n \in \mathbb{R}^\mathbb{N}\)
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[\lim_{n \to \infty}(x_n) = \pm\infty \implies \lim_{n \to \infty}\left(\frac{1}{x_n}\right) = 0\]
+      \item \[\lim_{n \to \infty}(x_n) = 0~\text{and}~x_n > 0~\text{for almost all}~n \implies \lim_{n \to \infty}\left(\frac{1}{x_n}\right) = \infty\]
+      \item \[\lim_{n \to \infty}(x_n) = 0~\text{and}~x_n < 0~\text{for almost all}~n \implies \lim_{n \to \infty}\left(\frac{1}{x_n}\right) = -\infty\]
+   \end{enumerate}
+\end{theorem}
+
+\newpage
+
+\subsection{Cauchy Sequences}
+\begin{definition}[Cauchy Sequence]
+   A sequence \(x_n \in \mathbb{K}^\mathbb{N}\) where
+   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n, m > n_\varepsilon: |x_n - x_m| < \varepsilon)\]
+\end{definition}
+\begin{remark}[Intuition]
+   In other words, given any small positive distance, almost all elements of the sequence are less than that given distance from each other.
+\end{remark}
+\begin{remark}[Tips]
+   The \emph{cauchy condition} can be restated as
+   \[\forall n, m > n_\varepsilon: |x_m - x_n| < \varepsilon \iff \forall m > n \geq n_\varepsilon: |x_m - x_n| < \varepsilon\]
+   and also
+   \[|x_m - x_n| = |(x_m - x) + (x - x_n)| \leq |x_m - x| + |x_n - x| < \varepsilon\]
+\end{remark}
+
+\begin{theorem}[Cauchy\(\implies\)Bounded]\label{thm:cauchy_bound}
+   Every Cauchy sequence is bounded.
+\end{theorem}
+
+\begin{theorem}[Cauchy\(\iff\)Convergent]\label{thm:cauchy_crit_seq}
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\),
+   \[x_n~\text{is convergent} \iff x_n~\text{is a cauchy sequence}\]
+\end{theorem}
+\begin{remark}
+   \(\implies\) holds always but \(\impliedby\) holds only in complete metric spaces.
+\end{remark}
+
+\subsection{Subsequences \& Accumulation Points}
 \begin{definition}[Subsequence]
    Given \(x_n \in \mathbb{K}^\mathbb{N}\) and \(\phi: \mathbb{N} \to \mathbb{N}\) strictly increasing
    \[(x_{n_k})_{k \in \mathbb{N}} := (x_{\phi(k)})_{k \in \mathbb{N}}\]
@@ -325,69 +311,40 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
 \begin{theorem}\label{thm:all_subseq_conv}
    Let \(x_n \in \mathbb{K}^\mathbb{N}\).
-   \[\lim_{n \to \infty} x_n = x \iff \forall x_{n_k} \in \mathbb{K}^\mathbb{N}: \lim_{k \to \infty} x_{n_k} = x\]
+   \[\lim_{n \to \infty}(x_n) = x \iff \forall x_{n_k} \in \mathbb{K}^\mathbb{N}: \lim_{k \to \infty}(x_{n_k}) = x\]
 \end{theorem}
 
 \begin{theorem}\label{thm:cp_iff_subseq}
    Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\)
-   \[x~\text{is accumulation point of}~x_n \iff \exists x_{n_k} \in \mathbb{K}^\mathbb{N}: \lim_{k \to \infty} x_{n_k} = x\]
+   \[x~\text{is accumulation point of}~x_n \iff \exists x_{n_k} \in \mathbb{K}^\mathbb{N}: \lim_{k \to \infty}(x_{n_k}) = x\]
 \end{theorem}
 
-\subsection{Cauchy Sequences}
-\begin{definition}[Cauchy Sequence]
-   A sequence \(x_n \in \mathbb{K}^\mathbb{N}\) where
-   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n, m > n_\varepsilon: |x_n - x_m| < \varepsilon)\]
+\begin{definition}[Accumulation Point]
+   \(x \in \mathbb{K}\) is an \emph{accumulation point} of \(x_n \in \mathbb{K}^\mathbb{N}\) iff
+   \[\forall \varepsilon > 0: \exists~\text{an infinite}~N_{\varepsilon} \subset \mathbb{N}: (\forall n \in N_\varepsilon: |x_n - x| < \varepsilon)\]
 \end{definition}
-\begin{remark}[Intuition]
-   In other words, given any small positive distance, almost all elements of the sequence are less than that given distance from each other.
-\end{remark}
-\begin{remark}[Tips]
-   The \emph{cauchy condition} can be restated as
-   \[\forall n, m > n_\varepsilon: |x_m - x_n| < \varepsilon \iff \forall m > n \geq n_\varepsilon: |x_m - x_n| < \varepsilon\]
-   and also
-   \[|x_m - x_n| = |(x_m - x) + (x - x_n)| \leq |x_m - x| + |x_n - x| < \varepsilon\]
-\end{remark}
+\begin{example}
+   \(x_n = (-1)^n\) doesn't converge but it has the accumulation points \(\pm 1\).
+\end{example}
 
-\begin{theorem}[Cauchy\(\implies\)Bounded]\label{thm:cauchy_bound}
-   Let \(x_n \in \mathbb{K}^\mathbb{N}\) be a Cauchy sequence, then \(x_n\) is bounded.
+\begin{theorem}
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\), then is
+   \[x~\text{an accumulation point of}~x_n \iff \forall \varepsilon > 0: (\forall n \in \mathbb{N}~\exists m \geq n: |x_m - x| < \varepsilon)\]
 \end{theorem}
 
-\begin{theorem}[Cauchy\(\iff\)Convergent]\label{thm:cauchy_crit_seq}
-   Let \(x_n \in \mathbb{K}^\mathbb{N}\),
-   \[x_n~\text{is convergent} \iff x_n~\text{is a cauchy sequence}\]
+\begin{theorem}[Bolzano-Weierstrass]\label{thm:bolzano}
+   Every bounded sequence has at least one accumulation point.
 \end{theorem}
-\begin{remark}
-   Only holds on order complete fields.
-   Also we can define \(\mathbb{R}\) as the limits of Cauchy sequences in \(\mathbb{Q}\).
-\end{remark}
 
-\subsection{Improper Convergence}
-\begin{definition}[Improper Convergence]
-   Given \(x_n \in \mathbb{R}^\mathbb{N}\).
-   \[\lim_{n \to \infty} = \infty :\iff \forall M \in \mathbb{R}_{\geq 0}~\exists n_M \in \mathbb{N}: (\forall n \geq n_M: x_n > M)\]
-   \[\lim_{n \to \infty} = -\infty :\iff \forall M \in \mathbb{R}_{\geq 0}~\exists n_M \in \mathbb{N}: (\forall n \geq n_M: x_n < M)\]
-\end{definition}
-\begin{remark}
-   \[\infty~\text{is an accumulation point of}~x_n :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} > M\]
-   \[-\infty~\text{is an accumulation point of}~x_n :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} < -M\]
-\end{remark}
-
-\begin{theorem}[Rules for Improper Convergence]
-   Let \(x_n \in \mathbb{R}^\mathbb{N}\)
+\begin{theorem}
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\) such that \(\lim_{n \to \infty} x_n = x \in \mathbb{K}\), then
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \[\lim_{n \to \infty} x_n = \pm\infty \implies \lim_{n \to \infty} \frac{1}{x_n} = 0\]
-      \item \[\lim_{n \to \infty} x_n = 0~\text{and}~x_n > 0~\text{for almost all}~n \implies \lim_{n \to \infty} \frac{1}{x_n} = \infty\]
-      \item \[\lim_{n \to \infty} x_n = 0~\text{and}~x_n < 0~\text{for almost all}~n \implies \lim_{n \to \infty} \frac{1}{x_n} = -\infty\]
+      \item \(x\) is the only accumulation point of \(x_n\)
+      \item \(x\) is unique
    \end{enumerate}
 \end{theorem}
-
-\begin{theorem}[Improper Limit]\label{thm:improper_limits}
-   Every monotonic \(x_n \in \overline{\mathbb{R}}^\mathbb{N}\) converges and
-   \[x_n~\text{increasing}~\implies \lim_{n \to \infty} x_n = \sup\{x_n \mid n \in \mathbb{N}\}\]
-   \[x_n~\text{decreasing}~\implies \lim_{n \to \infty} x_n = \inf\{x_n \mid n \in \mathbb{N}\}\]
-\end{theorem}
 \begin{remark}
-   Important to note here is that in contrast to \cref{thm:incr_bound_conv} we don't require \(x_n\) to be bounded.
+   Note that the converse is in general false, e.g. \(\frac{1}{2}, 2, \frac{1}{3}, 3, \frac{1}{4}, 4, \ldots\) has exactly one accumulation point, namely 0, but is not convergent.
 \end{remark}
 
 \subsection{Limessuperior \& Limesinferior}
@@ -396,12 +353,12 @@ We define
 \[\overline{x}_n := \sup\{x_k \mid k \geq n\} \qquad\text{and}\qquad \underline{x}_n := \inf\{x_k \mid k \geq n\}\]
 Since \(x_n\) is bounded holds \(\forall n \in \mathbb{N}: -b \leq \underline{x}_n \leq \overline{x}_n \leq b\) which means that they both are bounded.
 Furthermore follows from their definitions that \(\overline{x}_n\) is increasing and \(\underline{x}_n\) is decreasing.
-Hence they are convergent according to \cref{thm:improper_limits}.
+Hence they are convergent according to \cref{thm:incr_bound_conv}.
 
 \begin{definition}[Limessuperior \& -inferior]
    Given a bounded \(x_n \in \mathbb{R}^\mathbb{N}\).
-   \[\limsup_{n \to \infty}(x_n) := \lim_{n \to \infty} \overline{x}_n\]
-   \[\liminf_{n \to \infty}(x_n) := \lim_{n \to \infty} \underline{x}_n\]
+   \[\limsup_{n \to \infty}(x_n) := \lim_{n \to \infty}(\overline{x}_n)\]
+   \[\liminf_{n \to \infty}(x_n) := \lim_{n \to \infty}(\underline{x}_n)\]
 \end{definition}
 \begin{remark}[Intuition]
    Imagine a nonempty set.
@@ -414,26 +371,31 @@ Hence they are convergent according to \cref{thm:improper_limits}.
 \begin{example}
    Let \(x_n := (-1)^n \left(1 + \frac{1}{n}\right)\).
    We have
-   \[\sup x_n = x_2 = \frac{3}{2} \quad\text{and}\quad \inf x_n = x_1 = -2\]
-   \[\limsup_{n \to \infty} x_n = 1 \quad\text{and}\quad \liminf_{n \to \infty} x_n = -1\]
+   \[\sup(x_n) = x_2 = \frac{3}{2} \quad\text{and}\quad \inf(x_n) = x_1 = -2\]
+   \[\limsup_{n \to \infty}(x_n) = 1 \quad\text{and}\quad \liminf_{n \to \infty}(x_n) = -1\]
 \end{example}
 
-\begin{theorem}
+\begin{theorem}[\(\limsup, \liminf\) Accumulation Points]
    Let \(x_n \in \mathbb{R}^\mathbb{N}\), then is
    \[\limsup_{n \to \infty}(x_n)~\text{the largest and}~\liminf_{n \to \infty}(x_n)~\text{the smallest accumulation point of}~x_n~\text{in}~\overline{\mathbb{R}}\]
 \end{theorem}
 
-From \cref{pro:limit_comp} follows that
-\[\forall n \in \mathbb{N}: \underline{x}_n \leq \overline{x}_n \implies \liminf_{n \to \infty}(x_n) \leq \limsup_{n \to \infty}(x_n)\]
-
-\begin{theorem}[\(\liminf = \limsup \iff (x_n)\) convergent]\label{thm:limsup_inf_rules}
-   Let \((x_n)_{n \in \mathbb{N}}\) be a bounded sequence.
+\begin{theorem}[\(\liminf, \limsup\) Convergence]\label{thm:limsup_inf_rules}
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\) be a bounded, then
    \begin{enumerate}[label=\roman*, align=Center]
       \item \[\liminf_{n \to \infty}(x_n) \leq \limsup_{n \to \infty}(x_n)\]
       \item \[x_n~\text{converges} \iff \liminf_{n \to \infty}(x_n) = \limsup_{n \to \infty}(x_n)\]
-         \item \[\lim_{n \to \infty} x_n = x \iff x = \liminf_{n \to \infty}(x_n) = \limsup_{n \to \infty}(x_n)\]
+         \item \[\lim_{n \to \infty}(x_n) = x \iff x = \liminf_{n \to \infty}(x_n) = \limsup_{n \to \infty}(x_n)\]
    \end{enumerate}
 \end{theorem}
+\begin{remark}[Tips]
+   Whenever we have to compute \(\limsup\) or \(\liminf\) we can try to compute the regular \(\lim\) first.
+   If that is possible we know that \(\lim = \limsup = \liminf\).
+\end{remark}
+\begin{remark}
+   (i) follows from \cref{pro:limit_comp}
+   \[\forall n \in \mathbb{N}: \underline{x}_n \leq \overline{x}_n \implies \liminf_{n \to \infty}(x_n) \leq \limsup_{n \to \infty}(x_n)\]
+\end{remark}
 \begin{example}
    Let \(x_n = \frac{1}{n}\), then are
    \[\overline{a}_n = \sup\left\{\frac{1}{j}~\middle|~j \geq n\right\} = \frac{1}{n} \quad\text{and}\quad \underline{a}_n = \inf\left\{\frac{1}{j}~\middle|~j \geq n\right\} = 0\]
