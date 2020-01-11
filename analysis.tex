@@ -215,16 +215,15 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    \end{enumerate}
 \end{lemma}
 
-\begin{proposition}[Sequence Limit Rules]
-   Let \(\alpha \in \mathbb{K}\) and suppose \(\lim_{n \to \infty} x_n = x\), \(\lim_{n \to \infty} y_n = y\), then
+\begin{proposition}[Sequence Limit Rules]\label{pro:seq_limit_rules}
+   Let \(\alpha \in \mathbb{K}\) and suppose \(x_n \to x\), \(y_n \to y\), then
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \[\lim_{n \to \infty} \lvert x_n\rvert = \lvert x \rvert\]
-      \item \[\lim_{n \to \infty} (\alpha \cdot x_n) = \alpha \cdot x\]
-      \item \[\lim_{n \to \infty} (x_n + y_n) = x + y\]
-      \item \[\lim_{n \to \infty} (x_n - y_n) = x - y\]
-      \item \[\lim_{n \to \infty} (x_n \cdot y_n) = x \cdot y\]
+      \item \[\lim_{n \to \infty}(x_n \pm y_n) = x \pm y\]
+      \item \[\lim_{n \to \infty}(c \cdot x_n) = c \cdot x\]
+      \item \[\lim_{n \to \infty}(x_n \cdot y_n) = x \cdot y\]
       \item If \(y \neq 0\) and \(\forall n \in \mathbb{N}: y_n \neq 0\), then
          \[\lim_{n \to \infty} \left(\frac{x_n}{y_n}\right) = \frac{x}{y}\]
+      \item \[\lim_{n \to \infty}\big(\lvert x_n\rvert\big) = \lvert x \rvert\]
       \item If \(\forall n \in \mathbb{N}: x_n \geq 0\)
          \[\lim_{n \to \infty} \left(x_n^{\frac{p}{q}}\right) = x^{\frac{p}{q}} \qquad\text{with}~p \in \mathbb{Z}, q \in \mathbb{Z} \setminus \{0\}: \]
    \end{enumerate}
@@ -803,7 +802,7 @@ First we need to check if everything remains the same as with whole exponents, s
 and for \(p \in \mathbb{Z}\), \(q \in \mathbb{N}_{>0}\)
 \[x^\frac{p}{q} = \Big(\exp\big(\ln(x)\big)\Big)^\frac{p}{q} = \exp\left(\frac{p}{q} \ln(x)\right)\]
 
-\begin{definition}[Real Exponents]
+\begin{definition}[Real Exponents]\label{def:real_exponents}
    Given \(x > 0\) and \(r \in \mathbb{R}\)
    \[x^r := \exp\big(r \cdot \ln(x)\big)\]
 \end{definition}
@@ -957,78 +956,60 @@ The values \(x\) and \(y\) are called the \emph{Cartesian coordinates} of \(z\),
 
 \newpage
 
-\section{Functions in \texorpdfstring{\(\mathbb{R}\)}{R}}
-\begin{theorem}
-   Let \(f: D \to \mathbb{R}\) be on an intervall \(D\), continuous and strictly monotonic, then is
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(f(D)\) of the same type as \(D\).
-      \item \(f:D \xrightarrow{\sim} f(D)\)
-      \item \(f^{-1}\) is continuous and also strictly monotonic.
-   \end{enumerate}
-\end{theorem}
-\begin{example}
-   Let \(n \in \mathbb{N}: n \geq 2\) and \(f(x) := x^n\).
-   First we show that \(f\) is strictly increasing, let \(x \in \mathbb{R}_{\geq 0}: x < y\), then
-   \[f(y) - f(x) = y^n - x^n = y^n \left(1 - \left(\frac{x}{y}\right)^n\right)\]
-   Recall that by the geometric series we have
-   \[(1- q^n) = (1-q) \sum_{l=0}^{n-1} q^l = (1-q)\left(1 + \sum_{l=1}^{n-1} q^l\right)\]
-   hence
-   \[y^n \left(1 - \left(\frac{x}{y}\right)^n\right) = y^n \left(1 - \frac{x}{y}\right) \sum_{j=0}^{n-1} \left(\frac{x}{y}\right)^{n-1-j} > 0\]
-   Therefor we have an inverse which is continuous and strictly increasing
-   \[\sqrt[n]{x} := f^{-1}(x)\]
-\end{example}
+\section{Continuity}
+A rigorous definition of continuity of real functions is usually given in terms of the idea of a limit of those functions.
+So far we only looked at limits of sequences, so now we want to regard the limit of functions.
 
-\begin{theorem}[Intermediate Value]\label{thm:intmd_value}
-   Let \(f: [a; b] \to \mathbb{R}\) be continuous and \(f(a) < 0 < f(b)\).
-   \[\exists \xi \in (a;b): f(\xi) = 0\]
-\end{theorem}
-\begin{remark}[Tips]
-   The statement holds more generally, if \(f(a) < f(c) < f(b)\) then \(\exists \xi \in (a;b): f(\xi) = f(c)\).
-\end{remark}
-
-\subsection{Function Limits}
-So far we only looked at limits of sequences, now we want to regard how \(f: X \to Y\) behave as \(x \to x_0\).
-
+\subsection{Function Limits}\label{ssec:function_limits}
 \begin{definition}[Function Limit]\label{def:func_limit}
    Given \(f: D \to \mathbb{R}\) and a limit point \(x_0 \in D\) of \(X\).
    \[\lim_{x \to x_0} f(x) = L :\iff \forall \varepsilon > 0~\exists \delta > 0: (\forall x \in D: \lvert x - x_0 \rvert < \delta \implies \lvert f(x) - L\rvert < \varepsilon\]
 \end{definition}
 \begin{remark}[Intuition]
-   Note that we can rewrite
-   \[\lvert x - x_0\rvert < \delta \iff -\delta < x - x_0 < \delta \iff x_0 - \delta < x < x_0 + \delta \iff x \in (x_0 - \delta; x_0 + \delta)\]
-   Hence we can rewrite the condition above as
+   Note that we can rewrite the condition above as
    \[\forall x \in (x_0 - \delta; x_0 + \delta): f(x) \in \big(L - \varepsilon; L + \varepsilon\big)\]
+   \begin{center}
+      \input{drawings/continuity.tex}
+   \end{center}
+\end{remark}
+Now we see that the concept of the limit of a function is connected to the concept of the limit of sequences.
+\begin{proposition}[Function Limit = Sequence Limit]
+   Let \(x_0 \in X\) be a limit point of \(D\) and \(f: D \to \mathbb{R}\)
+   \[\lim_{x \to x_0} f(x) = L \iff \forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \left(\lim_{n \to \infty}(x_n) = x_0 \implies  \lim_{n \to \infty}\big(f(x_n)\big) = L\right)\]
+\end{proposition}
+\begin{remark}[Intuition]
+   We regard all sequences \(x_n\) in the domain of \(f\) which converge to the input \(x_0\).
+   Then we take each sequence, use it as inputs for \(f\) and create a sequence of function values.
+   If all those sequences of function values converge to \(L\), we say \(L\) is the limit of \(f\) as \(x \to x_0\).
 \end{remark}
 
-\begin{center}
-   \input{drawings/continuity.tex}
-\end{center}
+\subsubsection{Computing Function Limits}
+As the limit of sequences and functions are equivalent we can derive calculation rules for function limits from \cref{pro:seq_limit_rules}.
+\begin{proposition}[Function Limit Rules]
+   Let \(f: I \to \mathbb{R}\), \(g: I \to \mathbb{R}\) and \(c \in \mathbb{R}\), then
 
-\subsubsection{Calculation-Rules}
-\begin{proposition}[Calculation Rules]
-   Let \(f: I \to \mathbb{R}\), \(g: I \to \mathbb{R}\) and \(c \in \mathbb{R}\)
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\lim_{x \to a}\big(f(x) \pm g(x)\big) = \lim_{x \to a}\big(f(x)\big) \pm \lim_{x \to a}\big(g(x)\big)\)
-      \item \(\lim_{x \to a} c \cdot f(x) = c \cdot \lim_{x \to a} f(x)\)
-      \item \(\lim_{x \to a} f(x) \cdot g(x) = \lim_{x \to a} f(x) \cdot \lim_{x \to a} g(x)\)
-      \item \(\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)}\)
+      \item \[\lim_{x \to x_0}\big(f(x) \pm g(x)\big) = \lim_{x \to x_0}\big(f(x)\big) \pm \lim_{x \to x_0}\big(g(x)\big)\]
+      \item \[\lim_{x \to x_0}\big(c \cdot f(x)\big) = c \cdot \lim_{x \to x_0}\big(f(x)\big)\]
+      \item \[\lim_{x \to x_0}\big(f(x) \cdot g(x)\big) = \lim_{x \to x_0}\big(f(x)\big) \cdot \lim_{x \to x_0}\big(g(x)\big)\]
+      \item \[\lim_{x \to x_0}\left(\frac{f(x)}{g(x)}\right) = \frac{\lim_{x \to x_0}\big(f(x)\big)}{\lim_{x \to x_0}\big(g(x)\big)}\]
    \end{enumerate}
 \end{proposition}
 
-\subsubsection{Root-Trick}
-The following is a usefull method to determine limits which contain the root function.
-We want to find \(\lim_{x \to \infty} \sqrt{x^2 + x} - x\).
+\paragraph{The Root-Trick} is a usefull method to determine limits which contain \(\sqrt{x}\).
+\begin{example}
+   We want to find \(\lim_{x \to \infty}\big(f(x)\big)\) where \(f(x) := \sqrt{x^2 + x} - x\).
 \begin{equation*}
    \begin{split}
       \lim_{x \to \infty} \left(\sqrt{x^2 + x} - x\right) & = \lim_{x \to \infty} \left(\left(\sqrt{x^2 + x} - x\right) \frac{\left(\sqrt{x^2 + x} + x\right)}{\left(\sqrt{x^2 + x} + x\right)}\right) = \lim_{x \to \infty} \left(\frac{x^2 + x - x^2}{\sqrt{x^2 + x} + x}\right) =\\
-                                                          & = \lim_{x \to \infty} \left(\frac{x}{\sqrt{x^2 + x} + x}\right) = \lim_{x \to \infty} \frac{x}{x \left(\frac{\sqrt{x^2 + x}}{x} + 1\right)} = \frac{1}{\lim_{x \to \infty}\left(\frac{\sqrt{x^2 + x}}{x} + 1\right)} =\\
-                                                          & = \frac{1}{\lim_{x \to \infty}\left(\sqrt{\frac{x^2 + x}{x^2}}\right) + 1} = \frac{1}{\sqrt{\lim_{x \to \infty}\frac{x^2 \left(1 + \frac{1}{x}\right)}{x^2}} + 1} = \frac{1}{\sqrt{\lim_{x \to \infty}\left(1 + \frac{1}{x}\right)} + 1} =\\
+                                                          & = \lim_{x \to \infty} \left(\frac{x}{\sqrt{x^2 + x} + x}\right) = \lim_{x \to \infty}\left(\frac{x}{x \left(\frac{\sqrt{x^2 + x}}{x} + 1\right)}\right) = \frac{1}{\lim_{x \to \infty}\left(\frac{\sqrt{x^2 + x}}{x} + 1\right)} =\\
+                                                          & = \frac{1}{\lim_{x \to \infty}\left(\sqrt{\frac{x^2 + x}{x^2}}\right) + 1} = \frac{1}{\sqrt{\lim_{x \to \infty}\left(\frac{x^2 \left(1 + \frac{1}{x}\right)}{x^2}\right)} + 1} = \frac{1}{\sqrt{\lim_{x \to \infty}\left(1 + \frac{1}{x}\right)} + 1} =\\
                                                           & = \frac{1}{\sqrt{1} + 1} = \frac{1}{2}
    \end{split}
 \end{equation*}
+\end{example}
 
-\subsubsection{Fundamental Limit \(e\)}
-We know that
+\paragraph{The Fundamental Limit \(e\)} is given by
 \[\lim_{x \to \infty} \left(1 + \frac{1}{x}\right)^x = e \qquad\text{and}\qquad \lim_{x \to 0} (1 + x)^{\frac{1}{x}} = e\]
 From this follows (not trivially) a neat trick:
 \[\lim_{x \to x_0} \left(1 + \frac{1}{\ast}\right)^* = e\]
@@ -1037,13 +1018,12 @@ Equivalently we have
 \[\lim_{x \to x_0} (1 + \ast)^{\frac{1}{\ast}} = e\]
 where \(\ast \xrightarrow{x \to x_0} 0\).
 \begin{example}
-   We want to find \(\lim_{x \to \infty} \left(1 - \frac{3}{x}\right)^{2x}\).
-   \[\lim_{x \to \infty} \left(1 - \frac{3}{x}\right)^{2x} = \lim_{x \to \infty} \left(\left(1 + \frac{1}{-\frac{x}{3}}\right)^{-\frac{x}{3}}\right)^{-\frac{3}{x} \cdot 2x} = \lim_{x \to \infty} e^{-\frac{6x}{x}} = e^{-6}\]
+   We want to find \(\lim_{x \to \infty}\big(f(x)\big)\) where \(f(x) := \left(1 - \frac{3}{x}\right)^{2x}\).
+   \[\lim_{x \to \infty} \left(1 - \frac{3}{x}\right)^{2x} = \lim_{x \to \infty} \left(\left(1 + \frac{1}{-\frac{x}{3}}\right)^{-\frac{x}{3}}\right)^{-\frac{3}{x} \cdot 2x} = \lim_{x \to \infty}\Big(e^{-\frac{6x}{x}}\Big) = e^{-6}\]
 \end{example}
 
-\subsubsection{Fundamental Limit \(\sin(x)\)}
-We know that
-\[\lim_{x \to 0} \frac{\sin(x)}{x} = 1\]
+\paragraph{The Fundamental Limit \(\sin(x)\)} is given by
+\[\lim_{x \to 0}\left(\frac{\sin(x)}{x}\right) = 1\]
 From this follows a neat trick:
 \[\lim_{x \to x_0} \frac{\sin(\ast)}{\ast} = 1\]
 where \(\ast\) is some term in \(x\) with \(\ast \xrightarrow{x \to x_0} 0\).
@@ -1052,8 +1032,7 @@ where \(\ast\) is some term in \(x\) with \(\ast \xrightarrow{x \to x_0} 0\).
    \[\lim_{x \to 1} \frac{\sin(1-x^2)}{1-x} = \lim_{x \to 1}\frac{\sin(1-x^2)}{1-x^2} \cdot \frac{1-x^2}{1-x} = 1 \cdot \lim_{x \to 1} \frac{(1-x)(1+x)}{1-x} = \lim_{x \to 1} 1 + x = 2\]
 \end{example}
 
-\subsubsection{\(e^{\log}\) - Trick}
-The following is a usefull method to determine limits \(\lim_{x \to x_0} f(x)^{g(x)}\).
+\paragraph{The \(e^{\log}\) - Trick} derived from \cref{def:real_exponents}, is a usefull method to determine limits \(\lim_{x \to x_0} f(x)^{g(x)}\).
 The main idea is to rewrite
 \[f(x)^{g(x)} = \exp\Big(\log\big(f(x)^{g(x)}\big)\Big) = \exp\Big(g(x) \cdot \log\big(f(x)\big)\Big)\]
 as \(\exp\) is continuous, we can pull the limit into the argument.
@@ -1063,17 +1042,24 @@ as \(\exp\) is continuous, we can pull the limit into the argument.
                                    & = \exp\left(\lim_{x \to x_0}g(x) \cdot \lim_{x \to x_0}\Big(\log\big(f(x)\big)\Big)\right) \overset{\ln~\text{cont.}}{=} \exp\left(\lim_{x \to x_0}g(x) \cdot \log\left(\lim_{x \to x_0}f(x)\right)\right)
    \end{split}
 \end{equation*}
+% TODO
+\begin{example}
+\end{example}
 
-% TODO: example
-
-\subsection{One-Sided Limits}
+\subsubsection{One-Sided Limits}
+Another intuitive viewpoint to see how function limits and continuity are connected is the following.
 \begin{definition}[One-Sided Limit]\label{def:one-sided_limit}
    Given a limit point \(x_0 \in \mathbb{R}\) of \(D\) and \(f: D \to \mathbb{R}\).
-   \[\lim_{x \uparrow x_0}f(x) = \lim_{x \to x_0} f|_{D \cap (-\infty; x_0)}\]
-   \[\lim_{x \downarrow x_0}f(x) = \lim_{x \to x_0} f|_{D \cap (x_0; \infty)}\]
+   \[\lim_{x \uparrow x_0}\big(f(x)\big) = \lim_{x \to x_0}\big(f|_{D \cap (-\infty; x_0)}\big)\]
+   \[\lim_{x \downarrow x_0}\big(f(x)\big) = \lim_{x \to x_0}\big(f|_{D \cap (x_0; \infty)}\big)\]
 \end{definition}
 \begin{remark}[Terminology]
    We call \(\lim_{x \uparrow x_0} f(x)\) a \emph{left-handed} and \(\lim_{x \downarrow x_0} f(x)\) a \emph{right-handed} limit.
+\end{remark}
+\begin{remark}[Notation]
+   There are many equivalent ways of denoting left- and right-handed limits
+   \[\lim_{x \downarrow x_0}\big(f(x)\big) \qquad \lim_{x \to x_0^+}\big(f(x)\big) \qquad \lim_{x \searrow x_0}\big(f(x)\big)\]
+   \[\lim_{x \uparrow x_0}\big(f(x)\big) \qquad \lim_{x \to x_0^-}\big(f(x)\big) \qquad \lim_{x \nearrow x_0}\big(f(x)\big)\]
 \end{remark}
 \begin{remark}
    From \cref{def:func_limit} we can equivalently write
@@ -1090,21 +1076,35 @@ as \(\exp\) is continuous, we can pull the limit into the argument.
    \input{drawings/one-sided-limit.tex}
 \end{center}
 
-\newpage
+With \cref{def:func_limit} in place we now can introduce the concept of \emph{continuous} functions.
+First, a function \(f(x)\) is said to be continuous in \(x_0\) on the real line, if the limit of \(f(x)\), as \(x\) approaches that point \(x_0\), is equal to the value \(f(x_0)\).
+\begin{theorem}[Function Continuity]
+   Let \(f: D \to \mathbb{R}\) and \(x_0 \in D\), then is
+   \[f~\text{continuous in}~x_0 \iff \lim_{x \to x_0}\big(f(x)\big) = f(x_0)\]
+\end{theorem}
+\begin{remark}[Intuition]
+   This theorem allows us to interchange the limit iff \(f\) is continuous
+   \[\lim_{x \to x_0}\big(f(x)\big) = f\big(\lim_{x \to x_0}(x)\big)\]
+\end{remark}
+This makes sense, because if \(f\) does not approach \(f(x_0)\), there must be a ''gap in the function graph``.
+This becomes apparant when regarding both one-sided limits, approaching the same point.
+\begin{theorem}
+   Let \(x_0 \in \mathbb{R}\) be a limit point of \(D\) and \(f: D \to \mathbb{R}\).
+   \[\lim_{x \to x_0}\big(f(x)\big) = L \iff L = \lim_{x \uparrow x_0}\big(f(x)\big) = \lim_{x \downarrow x_0}\big(f(x)\big)\]
+\end{theorem}
 
-\section{Continuity}
+\subsection{Definition \& Terminology}
 In this sections we regard functions
 \[f: D \subset (X, \|\ldots\|) \to (Y, \|\ldots\|)\]
-
+% TODO: merge with numerics
+\begin{definition}[Set of Continuous Functions]
+   \[C^0(D, Y) := \{f: D \to Y \mid f~\text{is continuous}\}\]
+\end{definition}
+With the introduction established in \cref{ssec:function_limits} we now have mutliple equivalent ways to define continuous functions.
 \begin{theorem}[Continuity Definitions are Equivalent]
    \[\text{\cref{def:eps_delt_cont}} \iff \text{\cref{def:seq_cont}} \iff \text{\cref{def:neigh_cont}}\]
 \end{theorem}
-
-\begin{definition}[Set of Continuous Functions]
-   \(C^0(D, Y)\) the set of continuous functions in \(Y\).
-\end{definition}
-
-\subsection{In Terms of Function Limits}
+In terms of function limits.
 \begin{definition}[\(\varepsilon-\delta\) Continuity]\label{def:eps_delt_cont}
    \(f: D \to \mathbb{R}\) is continuous in \(x_0 \in D\) iff
    \[\forall \varepsilon > 0~\exists \delta > 0: (\forall x \in D: |x-x_0| < \delta \implies |f(x) - f(x_0)| < \varepsilon)\]
@@ -1119,18 +1119,53 @@ In this sections we regard functions
    \(f\) is \emph{discontinuous} in \(x_0\) iff
    \[\exists \varepsilon > 0~\forall \delta > 0: (\exists x \in D: |x - x_0| < \delta~\text{but}~|f(x) - f(x_0)| \geq \varepsilon)\]
 \end{remark}
-With \cref{def:func_limit} we see that
-\begin{theorem}[Function Continuity]
-   Let \(f: D \to \mathbb{R}\) and \(x_0 \in D\), then is
-   \[f~\text{continuous in}~x_0 \iff \lim_{x \to x_0} f(x) = f(x_0)\]
-\end{theorem}
-This makes sense, because if \(f\) does not approach \(f(x_0)\), there must be a ''gap in the function graph``.
-This becomes apparant when regarding both one-sided limits, approaching the same point.
-\begin{theorem}
-   Let \(x_0 \in \mathbb{R}\) be a limit point of \(D\) and \(f: D \to \mathbb{R}\).
-   \[\lim_{x \to x_0} f(x) = L \iff \lim_{x \uparrow x_0} f(x) = L = \lim_{x \downarrow x_0} f(x)\]
-\end{theorem}
+\begin{example}
+   Let \(f: \mathbb{R}\setminus\{1\} \to \mathbb{R}\) be defined as \(f(x) := \frac{x^2+x+1}{x+1}\).
+   We prove that \(f\) is continuous in \(x_0 := 1\).
+   Let \(\varepsilon > 0\) be arbitrary but fixed, then
+   \begin{equation}
+      \lvert f(x) - f(1)\rvert = \left\lvert\frac{x^2+x+1}{x+1} - \frac{3}{2}\right\rvert = \left\lvert \frac{2x^2+2x+2-3x-3}{2(x+1)}\right\rvert = \left\lvert\frac{x^2-\frac{1}{2}x - \frac{1}{2}}{x+1}\right\rvert = \frac{\lvert x-1\rvert \cdot \lvert x+\frac{1}{2}\rvert}{\lvert x+1\rvert} \overset{!}{<} \varepsilon
+   \end{equation}
+   We also need
+   \begin{equation}
+      \lvert x - x_0 \rvert = \lvert x - 1\rvert \overset{!}{<} \delta
+   \end{equation}
+   Now we want to 
+\end{example}
+As the limit of functions is equivalent to limits of sequences also in terms of sequences.
+\begin{definition}[Sequence Continuity]\label{def:seq_cont}
+   \(f: D \to \mathbb{R}\) is continuous in \(x_0 \in D\) iff
+   \[\forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \lim_{n \to \infty}(x_n) = x_0 \implies \lim_{n \to \infty}\big(f(x_n)\big) = f(x_0)\]
+\end{definition}
+As continuity is a core concept in topology we also give a definition of continuous functions in terms of neighbourhoods.
+\begin{definition}[Neighbourhood Continuity]\label{def:neigh_cont}
+   \(f: D \to Y\) is continuous in \(x_0 \in D\) iff
+   \[\forall V \in \mathcal{U}\big(f(x_0)\big)~\exists U \in \mathcal{U}(x_0): f(U \cap D) \subset V\]
+\end{definition}
+\begin{remark}
+   Equivalently \(x \in U \implies f(x) \in V\).
+\end{remark}
 
+\begin{theorem}
+   Given \(D' \subset D\), the following statements are equivalent
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(f: D \to Y\) is continuous on \(D'\)
+      \item Pre-images of open sets in \(Y\) are relatively open in \(D'\).
+      \item Pre-images of closed sets in \(Y\) are relatively closed in \(D'\)
+   \end{enumerate}
+\end{theorem}
+We can also connect one-sided function limits to topological terms
+\begin{definition}[One-Sided Continuity]
+   \(f: D \to \mathbb{R}\) is
+   \[\text{left-continuous in}~x_0 \in D \iff \forall V \in \mathcal{U}\big(f(x_0)\big) \exists \delta > 0: f\big(D \cap (x_0 - \delta; x_0]\big) \subset V\]
+   \[\text{right-continuous in}~x_0 \in D \iff \forall V \in \mathcal{U}\big(f(x_0)\big) \exists \delta > 0: f\big(D \cap [x_0; x_0 + \delta)\big) \subset V\]
+\end{definition}
+where we have that
+\begin{proposition}
+   \(f: D \to \mathbb{R}\) is continuous in \(x_0 \in D\) iff it is left- and right-continuous in \(x_0\).
+\end{proposition}
+
+\subsection{Discontinuities}
 \begin{proposition}\label{pro:one_sided_lim_incr}
    Let \(f: [a; b] \to \mathbb{R}\) and \(c \in (a; b)\).
 
@@ -1140,14 +1175,6 @@ This becomes apparant when regarding both one-sided limits, approaching the same
    If \(f\) is decreasing, then
    \[\lim_{x \uparrow c} f(x) = \inf\{f(x) \mid x < c\} \qquad\text{and}\qquad \lim_{x \downarrow c} f(x) = \sup\{f(x) \mid x > c\}\]
 \end{proposition}
-\begin{example}
-   \[f(c_1) = \lim_{x \uparrow c_1} f(x) = f(c_1^-) < f(c_1^+)\]
-   \[f(c_2) = \lim_{x \to c_2} f(x) = f(c_2^-) = f(c_2^+)\]
-   \[f(c_3^-) < f(c_3) < f(c_3^+)\]
-\end{example}
-\begin{center}
-   \input{drawings/one-sided_limit.tex}
-\end{center}
 
 \begin{definition}[Jump Discontinuity]
    Given \(D \subset \mathbb{R}\) and \(f: D \to \mathbb{R}\)
@@ -1161,63 +1188,21 @@ This becomes apparant when regarding both one-sided limits, approaching the same
    \(f\) is continuous except for countable jump discontinuities.
 \end{theorem}
 
-\subsection{In Terms of Sequences}
-\begin{definition}[Sequence Continuity]\label{def:seq_cont}
-   \(f: D \to \mathbb{R}\) is continuous in \(x_0 \in D\) iff
-   \[\forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \lim_{n \to \infty} x_n = x_0 \implies \lim_{n \to \infty} f(x_n) = f(x_0)\]
-\end{definition}
-\begin{remark}
-   This definition allows us interchange \(\lim f(x) = f(\lim(x))\).
-\end{remark}
-
-\begin{proposition}[Function Limit = Sequence Limit]
-   Let \(x_0 \in X\) be a limit point of \(D\) and \(f: D \to \mathbb{R}\)
-   \[\lim_{x \to x_0} f(x) = L \iff \forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \left(\lim_{n \to \infty} x_n = x_0 \implies  \lim_{n \to \infty} f(x_n) = L\right)\]
-\end{proposition}
-
-\subsection{In Terms of Topology}
-\begin{definition}[Neighbourhood Continuity]\label{def:neigh_cont}
-   \(f: D \to Y\) is continuous in \(x_0 \in D\) iff
-   \[\forall V \in \mathcal{U}\big(f(x_0)\big)~\exists U \in \mathcal{U}(x_0): f(U \cap D) \subset V\]
-\end{definition}
-\begin{remark}
-   Equivalently \(x \in U \implies f(x) \in V\)
-\end{remark}
-
-\begin{theorem}
-   Given \(D' \subset D\), the following statements are equivalent
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(f: D \to Y\) is continuous on \(D'\)
-      \item Pre-images of open sets in \(Y\) are relatively open in \(D'\).
-      \item Pre-images of closed sets in \(Y\) are relatively closed in \(D'\)
-   \end{enumerate}
-\end{theorem}
-
-\begin{definition}[One-Sided Continuity]
-   \(f: D \to \mathbb{R}\) is
-   \[\text{left-continuous in}~x_0 \in D \iff \forall V \in \mathcal{U}\big(f(x_0)\big) \exists \delta > 0: f\big(D \cap (x_0 - \delta; x_0]\big) \subset V\]
-   \[\text{right-continuous in}~x_0 \in D \iff \forall V \in \mathcal{U}\big(f(x_0)\big) \exists \delta > 0: f\big(D \cap [x_0; x_0 + \delta)\big) \subset V\]
-\end{definition}
-
-\begin{proposition}
-   \(f: D \to \mathbb{R}\) is continuous in \(x_0 \in D\) iff it is left- and right-continuous in \(x_0\).
-\end{proposition}
-
 \subsection{Properties}
-\begin{proposition}[Calculation Rules]
-   Let \(f, g: D \to Y\) be continuous in \(x_0 \in D\), then is
+\begin{proposition}[Continuous Function Rules]
+   Let \(f: D \to Y\), \(g: D \to Y\) be continuous in \(x_0 \in D\), then
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\alpha \cdot f: D \to Y \quad\text{where}\quad (\alpha \cdot f)(x) := \alpha \cdot f(x)\)
-      \item \(f + g: D \to Y \quad\text{where}\quad (f + g)(x) := f(x) + g(x)\)
-      \item \(f \cdot g: D \to \mathbb{K} \quad\text{where}\quad (f \cdot g)(x) := f(x) \cdot g(x)\)
+      \item \((\alpha \cdot f)(x) := \alpha \cdot f(x)\)
+      \item \((f + g)(x) := f(x) + g(x)\)
+      \item \((f \cdot g)(x) := f(x) \cdot g(x)\)
       \item If \(g(x_0) \neq 0\)
-         \[\frac{f}{g}: D \to \mathbb{K} \quad\text{where}\quad \left(\frac{f}{g}\right)(x) := \frac{f(x)}{g(x)}\]
+         \[\left(\frac{f}{g}\right)(x) := \frac{f(x)}{g(x)}\]
    \end{enumerate}
-   also continuous in \(x_0\).
+   are also continuous in \(x_0\).
 \end{proposition}
 
 \begin{corollary}
-   Polynomials and rational functions are continuous.
+   Constant functions, polynomials and rational functions are continuous.
 \end{corollary}
 
 \begin{proposition}[Composition is Continuous]\label{pro:contin_continuation}
@@ -1248,6 +1233,35 @@ This becomes apparant when regarding both one-sided limits, approaching the same
    \[\tilde{f}(x) := \begin{cases}f(x) & \text{if}~x \in D\\ y & \text{if}~x = x_0\end{cases}\]
    then is \(\tilde{f}\) continuous in \(x_0\).
 \end{proposition}
+
+\subsection{Consequences}
+\begin{theorem}
+   Let \(f: D \to \mathbb{R}\) be on an intervall \(D\), continuous and strictly monotonic, then is
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(f(D)\) of the same type as \(D\).
+      \item \(f:D \xrightarrow{\sim} f(D)\)
+      \item \(f^{-1}\) is continuous and also strictly monotonic.
+   \end{enumerate}
+\end{theorem}
+\begin{example}
+   Let \(n \in \mathbb{N}: n \geq 2\) and \(f(x) := x^n\).
+   First we show that \(f\) is strictly increasing, let \(x \in \mathbb{R}_{\geq 0}: x < y\), then
+   \[f(y) - f(x) = y^n - x^n = y^n \left(1 - \left(\frac{x}{y}\right)^n\right)\]
+   Recall that by the geometric series we have
+   \[(1- q^n) = (1-q) \sum_{l=0}^{n-1} q^l = (1-q)\left(1 + \sum_{l=1}^{n-1} q^l\right)\]
+   hence
+   \[y^n \left(1 - \left(\frac{x}{y}\right)^n\right) = y^n \left(1 - \frac{x}{y}\right) \sum_{j=0}^{n-1} \left(\frac{x}{y}\right)^{n-1-j} > 0\]
+   Therefor we have an inverse which is continuous and strictly increasing
+   \[\sqrt[n]{x} := f^{-1}(x)\]
+\end{example}
+
+\begin{theorem}[Intermediate Value]\label{thm:intmd_value}
+   Let \(f: [a; b] \to \mathbb{R}\) be continuous and \(f(a) < 0 < f(b)\).
+   \[\exists \xi \in (a;b): f(\xi) = 0\]
+\end{theorem}
+\begin{remark}[Tips]
+   The statement holds more generally, if \(f(a) < f(c) < f(b)\) then \(\exists \xi \in (a;b): f(\xi) = f(c)\).
+\end{remark}
 
 \subsection{Uniform Continuity}
 Continuity itself is a local property of a function—that is, a function \(f\) is continuous, or not, at a particular point, and this can be determined by looking only at the values of the function in an (arbitrarily small) neighbourhood of that point.
