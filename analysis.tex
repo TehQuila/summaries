@@ -1123,14 +1123,22 @@ In terms of function limits.
    Let \(f: \mathbb{R}\setminus\{1\} \to \mathbb{R}\) be defined as \(f(x) := \frac{x^2+x+1}{x+1}\).
    We prove that \(f\) is continuous in \(x_0 := 1\).
    Let \(\varepsilon > 0\) be arbitrary but fixed, then
-   \begin{equation}
-      \lvert f(x) - f(1)\rvert = \left\lvert\frac{x^2+x+1}{x+1} - \frac{3}{2}\right\rvert = \left\lvert \frac{2x^2+2x+2-3x-3}{2(x+1)}\right\rvert = \left\lvert\frac{x^2-\frac{1}{2}x - \frac{1}{2}}{x+1}\right\rvert = \frac{\lvert x-1\rvert \cdot \lvert x+\frac{1}{2}\rvert}{\lvert x+1\rvert} \overset{!}{<} \varepsilon
+   \begin{equation}\label{eq:ex_eps_delt_cont1}
+      \lvert f(x) - f(x_0)\rvert = \left\lvert\frac{x^2+x+1}{x+1} - \frac{3}{2}\right\rvert = \left\lvert \frac{2x^2+2x+2-3x-3}{2(x+1)}\right\rvert = \left\lvert\frac{x^2-\frac{1}{2}x - \frac{1}{2}}{x+1}\right\rvert = \frac{\lvert x-1\rvert \cdot \lvert x+\frac{1}{2}\rvert}{\lvert x+1\rvert} \overset{!}{<} \varepsilon
    \end{equation}
    We also need
-   \begin{equation}
+   \begin{equation}\label{eq:ex_eps_delt_cont2}
       \lvert x - x_0 \rvert = \lvert x - 1\rvert \overset{!}{<} \delta
    \end{equation}
-   Now we want to 
+   Now we want to estimate the last term of \cref{eq:ex_eps_delt_cont1} with \(\delta\) by using \cref{eq:ex_eps_delt_cont2}.
+   Coincidentally we already required \(\lvert x - 1\rvert < \delta\) so we only have to estimate \(\lvert x + \frac{1}{2}\rvert\) to get larger and \(\lvert x + 1\rvert\) to be smaller.
+   \[\left\lvert x + \frac{1}{2}\right\rvert = \left\lvert x - 1 + \frac{3}{2}\right\rvert \leq \lvert x - 1 \rvert + \frac{3}{2} < \delta + \frac{3}{2}\]
+   \[\lvert x - 1\lvert < \delta \iff -\delta < x - 1 \iff 2-\delta < x+1 \iff 2-\delta < \lvert x+1\rvert\]
+   With this we can now estimate
+   \[\lvert f(x) - f(x_0)\rvert = \frac{\lvert x-1\rvert \cdot \lvert x+\frac{1}{2}\rvert}{\lvert x+1\rvert} < \frac{\delta \cdot (\delta + \frac{3}{2})}{2-\delta}\]
+   Finally as we want to express \(\delta\) in terms of \(\varepsilon\) we note that
+   \[\delta = \frac{1}{4} \implies \frac{\delta \cdot (\delta + \frac{3}{2})}{2-\delta} = \frac{1}{4} \implies \delta < \frac{1}{4} \implies \frac{\delta \cdot (\delta + \frac{3}{2})}{2-\delta} < \delta\]
+   So we chose \(\delta < \min\{\frac{1}{4}, \varepsilon\}\).
 \end{example}
 As the limit of functions is equivalent to limits of sequences also in terms of sequences.
 \begin{definition}[Sequence Continuity]\label{def:seq_cont}
@@ -1154,6 +1162,10 @@ As continuity is a core concept in topology we also give a definition of continu
       \item Pre-images of closed sets in \(Y\) are relatively closed in \(D'\)
    \end{enumerate}
 \end{theorem}
+\begin{example}
+   Let \(D' := \{(x, y) \in \mathbb{R}^2 \mid f(x,y) = 0\} \subset \mathbb{R}^2\) and \(f(x,y) := x^2-y^2 + 2xy\).
+   Since \(\{0\}\) is closed, we know that \(f^{-1}\big(\{0\}\big) = D'\) is relatively closed.
+\end{example}
 We can also connect one-sided function limits to topological terms
 \begin{definition}[One-Sided Continuity]
    \(f: D \to \mathbb{R}\) is
@@ -1281,6 +1293,16 @@ In contrast, uniform continuity is a global property of \(f\), in the sense that
    As this is a more strict requirement we have that every uniformly continuous function is also continuous.
    \[f~\text{uniformly continuous} \implies f~\text{continuous}\]
 \end{remark}
+\begin{example}
+   We regard \(f(x) := x^2\) and show that it is uniformly continuous on \(D := [0; 1]\).
+   First note that
+   \[\lvert f(x)-f(y)\rvert = \lvert x^2-y^2\rvert = \lvert (x-y)(x+y)\rvert \leq \lvert x+y\rvert \cdot \lvert x-y\rvert \leq 2\lvert x-y\rvert \overset{!}{<} \varepsilon\]
+   and we want
+   \[\lvert x-y\rvert \overset{!}{<} \delta \implies 2 \lvert x-y\rvert < 2 \delta \overset{!}{<} \varepsilon\]
+   hence with \(\delta := \frac{\varepsilon}{2}\) we have shown that \(f\) is uniformly continuous.
+
+   However \(f\) is not uniformly continuous on \([0; \infty)\) because for some fixed \(|x - y|\) can \(|x^2 - y^2| = |x - y||x + y|\) get arbitrary large if we choose \(x, y\) large enough.
+\end{example}
 
 \newpage
 
@@ -1299,7 +1321,7 @@ At this point the secant coincides (never but close enough) the tangent, then th
 
 \begin{definition}[Differentiable Function]
    \(f: D \to Y\) is differentiable at \(x_0 \in D\) if
-   \[\frac{df}{dx}(x_0) := \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}\]
+   \[\frac{df}{dx}(x_0) := \lim_{h \to 0}\left(\frac{f(x_0 + h) - f(x_0)}{h}\right)\]
    exists.
 \end{definition}
 \begin{remark}[Terminology]
@@ -1311,8 +1333,8 @@ At this point the secant coincides (never but close enough) the tangent, then th
    \[f'(x_0) \qquad\qquad Df(x_0) \qquad\qquad \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}\]
 \end{remark}
 
-\begin{proposition}[Derivative\(\implies\)Continuity]\label{pro:deri_impl_cont}
-   If \(f: D \to \mathbb{R}\) is differentiable in \(x_0 \in D\) then is \(f\) also continuous in \(x_0\).
+\begin{proposition}[Differentiable\(\implies\)Continuous]\label{pro:deri_impl_cont}
+   \[f: D \to \mathbb{R}~\text{differentiable in}~x_0 \in D \implies f~\text{continuous in}~x_0\]
 \end{proposition}
 
 \begin{proposition}
