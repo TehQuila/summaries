@@ -536,6 +536,8 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
    also absolute convergent.
 \end{theorem}
 
+\newpage
+
 \subsubsection{Criteria for Absolute Convergence}
 \begin{proposition}[Comparison Test]\label{pro:comparison_test}
    Let \(x_n, b_n \in (\mathbb{R}_{\geq 0})^\mathbb{N}\) such that \(x_n \leq b_n\) for almost all \(n\), then
@@ -720,8 +722,6 @@ A power series will converge for some values of \(z\) and may diverge for others
    \end{enumerate}
 \end{theorem}
 
-\newpage
-
 \subsection{Elementary Functions}
 An \emph{elementary function} is a function of a single variable composed of particular simple functions.
 They are typically defined as a sum, product, and/or composition of finitely many polynomials, rational functions, trigonometric and exponential functions, and their inverse functions.
@@ -755,6 +755,8 @@ Let \(z \in \mathbb{C}\), from above we see that
 which means that the complex \(\exp\) function is characterized by two parts
 \[\exp: \mathbb{R} \to \mathbb{R} \qquad\text{and}\qquad \exp: i\mathbb{R} \to \mathbb{R}\]
 We define the \emph{imaginary exponential function} \(\ixp: \mathbb{R} \to \mathbb{R}\) through \(\ixp(x) := \exp(ix)\).
+
+\newpage
 
 \subsubsection{Logarithm}
 \begin{proposition}
@@ -963,7 +965,7 @@ So far we only looked at limits of sequences, so now we want to regard the limit
 \subsection{Function Limits}\label{ssec:function_limits}
 \begin{definition}[Function Limit]\label{def:func_limit}
    Given \(f: D \to \mathbb{R}\) and a limit point \(x_0 \in D\) of \(X\).
-   \[\lim_{x \to x_0} f(x) = L :\iff \forall \varepsilon > 0~\exists \delta > 0: (\forall x \in D: \lvert x - x_0 \rvert < \delta \implies \lvert f(x) - L\rvert < \varepsilon\]
+   \[\lim_{x \to x_0}\big(f(x)\big) = L :\iff \forall \varepsilon > 0~\exists \delta > 0: (\forall x \in D: \lvert x - x_0 \rvert < \delta \implies \lvert f(x) - L\rvert < \varepsilon\]
 \end{definition}
 \begin{remark}[Intuition]
    Note that we can rewrite the condition above as
@@ -975,7 +977,7 @@ So far we only looked at limits of sequences, so now we want to regard the limit
 Now we see that the concept of the limit of a function is connected to the concept of the limit of sequences.
 \begin{proposition}[Function Limit = Sequence Limit]
    Let \(x_0 \in X\) be a limit point of \(D\) and \(f: D \to \mathbb{R}\)
-   \[\lim_{x \to x_0} f(x) = L \iff \forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \left(\lim_{n \to \infty}(x_n) = x_0 \implies  \lim_{n \to \infty}\big(f(x_n)\big) = L\right)\]
+   \[\lim_{x \to x_0}\big(f(x)\big) = L \iff \forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \left(\lim_{n \to \infty}(x_n) = x_0 \implies  \lim_{n \to \infty}\big(f(x_n)\big) = L\right)\]
 \end{proposition}
 \begin{remark}[Intuition]
    We regard all sequences \(x_n\) in the domain of \(f\) which converge to the input \(x_0\).
