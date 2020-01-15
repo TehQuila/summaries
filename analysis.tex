@@ -6,8 +6,8 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    A map \(x: \mathbb{N} \to \mathbb{K}\) where we denote \(x_n := x(n)\).
 \end{definition}
 \begin{remark}[Notation]
-   For conciseness we denote a sequence as \((x_n)_{n \in \mathbb{N}}\).
-   When we say ''\((x_n)_{n \in \mathbb{N}}\) is a sequence in \(\mathbb{K}\)`` we write \(x_n \in \mathbb{K}^\mathbb{N}\).
+   We denote a generic sequence as \((x_n)_{n \in \mathbb{N}}\).
+   When we say ''\((x_n)_{n \in \mathbb{N}}\) is a sequence in \(\mathbb{K}\)`` we write \(x_n \in \mathbb{K}^\mathbb{N}\) where we mean that \(x_i \in \mathbb{K}~\forall i\).
 \end{remark}
 \begin{remark}[Intuition]
    A sequence is an enumerated collection of elements in \(\mathbb{K}\).
@@ -202,14 +202,14 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
 \subsection{Calculation Rules}
 \begin{definition}[Zero Sequence]
-   \(x_n \in \mathbb{K}^\mathbb{N}\) where \(\lim_{n \to \infty} x_n = 0\).
+   A sequence \((x_n)_{n \in \mathbb{N}}\) where \(\lim_{n \to \infty}(x_n) = 0\).
 \end{definition}
 
 \begin{lemma}[Zero Sequence Rules]\label{lem:zero_seq}
-   Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(y_n \in \mathbb{K}^\mathbb{N}\) be a zero sequence.
+   Let \((x_n)_{n \in \mathbb{N}}\) and \((y_n)_{n \in \mathbb{N}}\) be a zero sequence.
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \[\lim_{n \to \infty}(x_n) = x \implies \lim_{n \to \infty} (x_n - x) = 0\]
-      \item \[\lim_{n \to \infty}\big(\lvert y_n\rvert\big) = 0\]
+      \item \[\lim_{n \to \infty}(x_n) = x \iff \lim_{n \to \infty} (x_n - x) = 0\]
+      \item \[\lim_{n \to \infty}(x_n) = 0 \iff \lim_{n \to \infty}\big(\lvert x_n\rvert\big) = 0\]
       \item \[x_n~\text{bounded} \implies \lim_{n \to \infty} (x_n \cdot y_n) = 0\]
       \item \[\exists n_0 \in \mathbb{N}: (\forall n \geq n_0: |x_n| \leq y_n) \implies \lim_{n \to \infty}(x_n) = 0\]
    \end{enumerate}
@@ -591,7 +591,9 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
    The following are important examples of series.
    \begin{enumerate}[label=\roman*, align=Center]
       \item Harmonic Series
-         \[\sum_{n = 1}^\infty \frac{1}{n} = \infty\]
+         \[\sum_{n=1}^\infty \frac{1}{n} = \infty\]
+         \[\sum_{n=1}^\infty \frac{(-1)^{n+1}}{n} = \ln(2)\]
+         \[\sum_{n=0}^\infty \frac{(-1)^n}{2n+1} = \frac{\pi}{4}\]
       \item Geometric Series
          \[\sum_{n=0}^k x^n = \frac{1-x^n}{1-x}\]
          \[|x| < 1 \implies \sum_{n = 0}^\infty x^n = \frac{1}{1 - x}\]
