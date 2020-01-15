@@ -3908,18 +3908,22 @@ A \emph{norm} is a function that assigns a length or size to each vector in a ve
       \item \(\forall v, w \in V: \|v + w\| \leq \|v\| + \|w\|\)
    \end{enumerate}
 \end{definition}
-\begin{remark}
+\begin{remark}[Reversed Triangle Inequality]
+   In addition to (iv) we also have
+   \[\big\lvert \|x\| - \|y\| \big\rvert \leq \|x - y\|\]
+   since
+   \[\|x\| = \|y + (x - y)\| \leq \|y\| + \|x-y\| \implies \|x\| - \|y\| \leq \|x - y\|\]
+   and analogously \(\|y\| - \|x\| \leq \|x-y\|\), therefor
+   \[\big\lvert \|x\| - \|y\|\big\rvert = \max\big\{\|x\| - \|y\|, \|y\|-\|x\|\big\} \|x-y\|\]
+\end{remark}
+\begin{remark}[Terminology]
    A vector space with a norm is called a \emph{normed space}.
 \end{remark}
 
-\begin{definition}[Equivalent Norms]
+\begin{definition}[Equivalent Norms]\label{def:equiv_norms}
    Given a normed \(K\)-vector space \(V\), \(\|\ldots\|_a\) and \(\|\ldots\|_b\) are equivalent on \(V\) iff
    \[\exists c, C \in K: \big(\forall v \in V: c \|v\|_a \leq \|v\|_b \leq C \|v\|_a\]
 \end{definition}
-
-\begin{theorem}
-   On \(K^n\) are all norms equivalent.
-\end{theorem}
 
 A \emph{metric} or distance function is a function that defines a distance between each pair of elements of a set.
 
@@ -3993,10 +3997,15 @@ For \(x \in K^n\) we define
    \[\|x\|_2 := \sqrt{\sum_{k=0}^n |x_k|^2}\]
 \end{definition}
 
-We see that the following estimations hold
-\[\|x\|_\infty \leq \|x\|_1 \leq m \cdot \|x\|_\infty\]
-\[\|x\|_\infty \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_\infty\]
-\[\frac{1}{\sqrt{m}}\|x\|_1 \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_1\]
+\begin{theorem}
+   On \(K^n\), all norms are equivalent.
+\end{theorem}
+\begin{remark}[Tips]
+   With this theorem with have in accordance with \cref{def:equiv_norms} that
+   \[\|x\|_\infty \leq \|x\|_1 \leq m \cdot \|x\|_\infty\]
+   \[\|x\|_\infty \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_\infty\]
+   \[\frac{1}{\sqrt{m}}\|x\|_1 \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_1\]
+\end{remark}
 
 \subsubsection{Sequence Spaces}
 Given a field \(K\) and a set of sequences \((x_n)_{n \in \mathbb{N}}\) with the operations
@@ -4027,6 +4036,14 @@ and the 0-sequence \((0, 0, \ldots)\) as identity element, we can build the sequ
 \end{definition}
 \begin{remark}
    \[\|(x_n)_{n \in \mathbb{N}}\|_2 := \sqrt{\sum_{n=0}^\infty |x_n|^2}\]
+\end{remark}
+
+\begin{definition}[Convergent Sequences w.r.t Norm]
+   Given \(x_n \in (X, \|\ldots\|)\),
+   \[\lim_{n \to \infty}(x_n) = x \in X :\iff \lim_{n \to \infty}\big(\|x_n - x\|\big) = 0\]
+\end{definition}
+\begin{remark}[Terminology]
+   If \(\lim_{n \to \infty}\big(\|x_n - x\|\big) = 0\) we say \emph{\(x_n\) converges with respect to \(\|\ldots\|\)}.
 \end{remark}
 
 \subsection{Scalar Product Spaces}

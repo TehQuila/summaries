@@ -266,8 +266,8 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
 \subsection{Cauchy Sequences}
 \begin{definition}[Cauchy Sequence]
-   A sequence \(x_n \in \mathbb{K}^\mathbb{N}\) where
-   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n, m > n_\varepsilon: |x_n - x_m| < \varepsilon)\]
+   A sequence \((x_n)_{n \in \mathbb{N}}\) where
+   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n, m > n_\varepsilon: \lvert x_n - x_m\rvert < \varepsilon)\]
 \end{definition}
 \begin{remark}[Intuition]
    In other words, given any small positive distance, almost all elements of the sequence are less than that given distance from each other.
@@ -284,7 +284,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{theorem}
 
 \begin{theorem}[Cauchy\(\iff\)Convergent]\label{thm:cauchy_crit_seq}
-   Let \(x_n \in \mathbb{K}^\mathbb{N}\),
+   Let \((x_n)_{n \in \mathbb{N}}\),
    \[x_n~\text{is convergent} \iff x_n~\text{is a cauchy sequence}\]
 \end{theorem}
 \begin{remark}
@@ -1145,8 +1145,11 @@ In terms of function limits.
 As the limit of functions is equivalent to limits of sequences also in terms of sequences.
 \begin{definition}[Sequence Continuity]\label{def:seq_cont}
    \(f: D \to \mathbb{R}\) is continuous in \(x_0 \in D\) iff
-   \[\forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \lim_{n \to \infty}(x_n) = x_0 \implies \lim_{n \to \infty}\big(f(x_n)\big) = f(x_0)\]
+   \[\forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \left(\lim_{n \to \infty}(x_n) = x_0 \implies \lim_{n \to \infty}\big(f(x_n)\big) = f(x_0)\right)\]
 \end{definition}
+\begin{remark}[Tips]
+   Only usefull to prove discontinuity by counterexample.
+\end{remark}
 As continuity is a core concept in topology we also give a definition of continuous functions in terms of neighbourhoods.
 \begin{definition}[Neighbourhood Continuity]\label{def:neigh_cont}
    \(f: D \to Y\) is continuous in \(x_0 \in D\) iff
@@ -1241,8 +1244,8 @@ where we have that
    \[\Re(f)~\text{and}~\Im(f)~\text{are continuous in}~x_0\]
 \end{theorem}
 
-\begin{proposition}[Continuous Continuation]
-   Let \(x_0\) be a limit point of \(D\) and assume there exists \(y := \lim_{x \to x_0} f(x)\).
+\begin{proposition}[Continuous Extension]
+   Let \(x_0\) be a limit point of \(D\) and assume there exists \(y := \lim_{x \to x_0}\big(f(x)\big)\).
    We define \(\tilde{f}: D \cup \{x_0\} \to Y\) by
    \[\tilde{f}(x) := \begin{cases}f(x) & \text{if}~x \in D\\ y & \text{if}~x = x_0\end{cases}\]
    then is \(\tilde{f}\) continuous in \(x_0\).
