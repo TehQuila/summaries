@@ -7,11 +7,12 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{definition}
 \begin{remark}[Notation]
    We denote a generic sequence as \((x_n)_{n \in \mathbb{N}}\).
-   When we say ''\((x_n)_{n \in \mathbb{N}}\) is a sequence in \(\mathbb{K}\)`` we write \(x_n \in \mathbb{K}^\mathbb{N}\) where we mean that \(x_i \in \mathbb{K}~\forall i\).
+   When we say ''\((x_n)_{n \in \mathbb{N}}\) is a sequence in \(\mathbb{K}\)`` we write \(x_n \in \mathbb{K}^\mathbb{N}\) where we mean that \(\forall n \in \mathbb{N}: x_n \in \mathbb{K}\).
 \end{remark}
 \begin{remark}[Intuition]
-   A sequence is an enumerated collection of elements in \(\mathbb{K}\).
+   A sequence viewed as a map is an \emph{enumeration}, so we can regard a sequence as an \emph{enumerated collection} of elements in \(\mathbb{K}\).
    \[(x_n)_{n \in \mathbb{N}} = x_1, x_2, \ldots, x_n\]
+   Not to confuse with the enumerated set of points \(\{x_n \mid n \in \mathbb{N}\}\).
 \end{remark}
 
 \subsubsection{Convergence}
@@ -42,7 +43,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
 \subsubsection{Bounded \& Monotonic Sequences}
 \begin{definition}[Bounded Sequence]
-   \(x_n \in \mathbb{K}^\mathbb{N}\) is
+   A sequence \((x_n)_{n \in \mathbb{N}}\) is
    \[\text{bounded below} :\iff \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: b \leq x_n)\]
    \[\text{bounded above} :\iff \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: x_n \leq b)\]
    \[\text{bounded} :\iff \exists b \in \mathbb{R}_{>0}: (\forall n \in \mathbb{N}: |x_n| \leq b)\]
@@ -59,7 +60,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{remark}
 
 \begin{definition}[Monotonic Sequence]
-   \(x_n \in \mathbb{K}^\mathbb{N}\) is
+   \(x_n \in \mathbb{R}^\mathbb{N}\) is
    \[\text{increasing} :\iff \forall n \in \mathbb{N}: x_n \leq x_{n+1}\]
    \[\text{decreasing} :\iff \forall n \in \mathbb{N}: x_n \geq x_{n+1}\]
 \end{definition}
@@ -77,7 +78,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{remark}
 
 \begin{theorem}[Monotonic \& Bounded Convergence]\label{thm:incr_bound_conv}
-   If \(x_n \in \mathbb{K}^\mathbb{N}\) is
+   If \(x_n \in \mathbb{R}^\mathbb{N}\) is
    \[\text{increasing and bounded above, then is} \quad \lim_{n \to \infty}(x_n) = \sup\{x_n \mid n \in \mathbb{N}\}\]
    \[\text{decreasing and bounded below, then is} \quad \lim_{n \to \infty}(x_n) = \inf\{x_n \mid n \in \mathbb{N}\}\]
 \end{theorem}
@@ -112,15 +113,18 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    \[\lim_{n \to \infty}(x_n) = \infty :\iff \forall M \in \mathbb{R}_{\geq 0}~\exists n_M \in \mathbb{N}: (\forall n \geq n_M: x_n > M)\]
    \[\lim_{n \to \infty}(x_n) = -\infty :\iff \forall M \in \mathbb{R}_{\geq 0}~\exists n_M \in \mathbb{N}: (\forall n \geq n_M: x_n < M)\]
 \end{definition}
-\begin{remark}
-   \[\infty~\text{is an accumulation point of}~x_n :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} > M\]
-   \[-\infty~\text{is an accumulation point of}~x_n :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} < -M\]
-\end{remark}
 \begin{example}
    Let \(x_n := \log(n)\) and \(M \in \mathbb{R}\) be arbitrarily large.
    According to Archimedes principle \(\exists n_\varepsilon \in \mathbb{N}: n_\varepsilon \geq \lceil e^M\rceil\).
    Now let \(n > n_\varepsilon\), then
    \[\log(n) > \log(n_\varepsilon) \geq M\]
+\end{example}
+\begin{remark}
+   \[\infty~\text{is an accumulation point of}~x_n :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} > M\]
+   \[-\infty~\text{is an accumulation point of}~x_n :\iff \forall M \geq 0, n \in \mathbb{N}~\exists n_M \geq n: x_{n_M} < -M\]
+\end{remark}
+\begin{example}
+   \(x_n := (-1)^n \cdot n\) does not converge in \(\overline{R}\) but has the accumulation points \(\infty\) and \(-\infty\).
 \end{example}
 
 \begin{theorem}[Improper Limit]\label{thm:improper_limits}
@@ -132,11 +136,13 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    Important to note here is that in contrast to \cref{thm:incr_bound_conv} we don't require \(x_n\) to be bounded.
 \end{remark}
 
-\subsection{Important Sequences}
+\subsection{Important Examples}
 \begin{proposition}[Important Sequences]
    The following are important examples of sequences.
 
    \begin{enumerate}[label=\roman*, align=Center]
+      \item Fibonacci Sequence
+         \[x_0 := 1 \quad x_1 := 1 \qquad x_{n} := x_{n-1} + x_{n-2}\]
       \item \[\lim_{n \to \infty} \left(\frac{1}{n}\right) = 0\]
       \item \[\lim_{n \to \infty}(x^n) = \begin{cases}
                0 & x \in (-1; 1)\\
@@ -151,6 +157,8 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
       \item \(\forall s \in \mathbb{R}_{>0}\)
          \[\lim_{n \to \infty}(\sqrt[n]{n^s}) = 1\]
       \item \[\lim_{n \to \infty}\big(\sqrt[n]{n!}\big) = \infty\]
+      \item Let \(x_k := \sum_{n=0}^k \frac{1}{k!}\)
+         \[\lim_{k \to \infty}(x_k) = e\]
       \item \[\lim_{n \to \infty}\left(1 + \frac{1}{n}\right)^n = e\]
       \item \(\forall z \in \mathbb{C}\)
          \[\lim_{n \to \infty}\left(1 + \frac{z}{n}\right)^n = e^z\]
@@ -202,24 +210,24 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
 \subsection{Calculation Rules}
 \begin{definition}[Zero Sequence]
-   A sequence \((x_n)_{n \in \mathbb{N}}\) where \(\lim_{n \to \infty}(x_n) = 0\).
+   \((x_n)_{n \in \mathbb{N}}\) where \(\lim_{n \to \infty}(x_n) = 0\).
 \end{definition}
 
-\begin{lemma}[Zero Sequence Rules]\label{lem:zero_seq}
-   Let \((x_n)_{n \in \mathbb{N}}\) and \((y_n)_{n \in \mathbb{N}}\) be a zero sequence.
+\begin{proposition}[Zero Sequence Rules]\label{lem:zero_seq}
+   Let \((x_n)_{n \in \mathbb{N}}\) and let \((y_n)_{n \in \mathbb{N}}\) be a zero sequence, then
    \begin{enumerate}[label=\roman*, align=Center]
       \item \[\lim_{n \to \infty}(x_n) = x \iff \lim_{n \to \infty} (x_n - x) = 0\]
       \item \[\lim_{n \to \infty}(x_n) = 0 \iff \lim_{n \to \infty}\big(\lvert x_n\rvert\big) = 0\]
       \item \[x_n~\text{bounded} \implies \lim_{n \to \infty} (x_n \cdot y_n) = 0\]
       \item \[\exists n_0 \in \mathbb{N}: (\forall n \geq n_0: |x_n| \leq y_n) \implies \lim_{n \to \infty}(x_n) = 0\]
    \end{enumerate}
-\end{lemma}
+\end{proposition}
 
 \begin{proposition}[Sequence Limit Rules]\label{pro:seq_limit_rules}
-   Let \(\alpha \in \mathbb{K}\) and suppose \(x_n \to x\), \(y_n \to y\), then
+   Let \(c \in \mathbb{K}\) and suppose \(x_n \xrightarrow{n \to \infty} x\), \(y_n \xrightarrow{n \to \infty} y\), then
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \[\lim_{n \to \infty}(x_n \pm y_n) = x \pm y\]
       \item \[\lim_{n \to \infty}(c \cdot x_n) = c \cdot x\]
+      \item \[\lim_{n \to \infty}(x_n \pm y_n) = x \pm y\]
       \item \[\lim_{n \to \infty}(x_n \cdot y_n) = x \cdot y\]
       \item If \(y \neq 0\) and \(\forall n \in \mathbb{N}: y_n \neq 0\), then
          \[\lim_{n \to \infty} \left(\frac{x_n}{y_n}\right) = \frac{x}{y}\]
@@ -234,7 +242,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{remark}
 
 \begin{proposition}\label{pro:limit_comp}
-   Let \(x_n, y_n \in \mathbb{K}^\mathbb{N}\) where for infinite \(n \in \mathbb{N}: x_n \leq y_n\).
+   Let \(x_n, y_n \in \mathbb{R}^\mathbb{N}\) where for infinite \(n \in \mathbb{N}: x_n \leq y_n\).
    \[\lim_{n \to \infty}(x_n) \leq \lim_{n \to \infty}(y_n)\]
 \end{proposition}
 \begin{remark}
@@ -242,7 +250,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{remark}
 
 \begin{proposition}[Sandwich Sequence]\label{pro:sandwich_seq}
-   Let \(x_n, y_n, z_n \in \mathbb{K}^\mathbb{N}\) with \(\lim(x_n) = \lim(z_n) = y\).
+   Let \(x_n, y_n, z_n \in \mathbb{R}^\mathbb{N}\) with \(\lim(x_n) = \lim(z_n) = y\).
    \[\exists n_0 \in \mathbb{N}~\forall n > n_0: x_n \leq y_n \leq z_n \implies \lim_{n \to \infty}(y_n) = y\]
 \end{proposition}
 \begin{example}
@@ -284,20 +292,20 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{theorem}
 
 \begin{theorem}[Cauchy\(\iff\)Convergent]\label{thm:cauchy_crit_seq}
-   Let \((x_n)_{n \in \mathbb{N}}\),
+   Let \((x_n)_{n \in \mathbb{N}}\), then
    \[x_n~\text{is convergent} \iff x_n~\text{is a cauchy sequence}\]
 \end{theorem}
 \begin{remark}
-   \(\implies\) holds always but \(\impliedby\) holds only in complete metric spaces.
+   \(\implies\) holds always but \(\impliedby\) holds only if \(x_n \in \mathbb{K}\).
 \end{remark}
 
 \subsection{Subsequences \& Accumulation Points}
 \begin{definition}[Subsequence]
-   Given \(x_n \in \mathbb{K}^\mathbb{N}\) and \(\phi: \mathbb{N} \to \mathbb{N}\) strictly increasing
+   Given \((x_n)_{n \in \mathbb{N}}\) and \(\phi: \mathbb{N} \to \mathbb{N}\) strictly increasing
    \[(x_{n_k})_{k \in \mathbb{N}} := (x_{\phi(k)})_{k \in \mathbb{N}}\]
 \end{definition}
 \begin{example}
-   Let \((x_n) = n = 1, 2, 3, \ldots\).
+   Let \(x_n := n = 1, 2, 3, \ldots\).
    \[\begin{drcases}
          x: \mathbb{N} \to X \quad\text{where}\quad n \mapsto n \\
          \phi: \mathbb{N} \to \mathbb{N} \quad\text{where}\quad n \mapsto 2n
@@ -307,15 +315,20 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    We can write the subsequence in terms of the index of \(x_n\), without the subindices \(n_j\)
    \[x_{2n} = x_2, x_4, x_6, \ldots = 2, 4, 6, \ldots\]
 \end{example}
+\begin{example}
+   Let \(x_n := (-1)^n\), then we see that
+   \[x_{2n} = (-1)^{2n} = \big((-1)^2\big)^n = 1^n = 1\]
+   \[x_{2n+1} = (-1)^{2n+1} = \big((-1)^2\big)^n \cdot (-1)^1 = 1^n \cdot (-1) = -1\]
+\end{example}
 
 \begin{theorem}\label{thm:all_subseq_conv}
-   Let \(x_n \in \mathbb{K}^\mathbb{N}\).
-   \[\lim_{n \to \infty}(x_n) = x \iff \forall x_{n_k} \in \mathbb{K}^\mathbb{N}: \lim_{k \to \infty}(x_{n_k}) = x\]
+   Let \((x_n)_{n \in \mathbb{N}}\), then
+   \[\lim_{n \to \infty}(x_n) = x \iff \forall (x_{n_k})_{k \in \mathbb{N}}: \lim_{k \to \infty}(x_{n_k}) = x\]
 \end{theorem}
 
 \begin{theorem}\label{thm:cp_iff_subseq}
-   Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\)
-   \[x~\text{is accumulation point of}~x_n \iff \exists x_{n_k} \in \mathbb{K}^\mathbb{N}: \lim_{k \to \infty}(x_{n_k}) = x\]
+   Let \((x_n)_{n \in \mathbb{N}}\), then
+   \[x~\text{is accumulation point of}~x_n \iff \exists (x_{n_k})_{k \in \mathbb{N}}: \lim_{k \to \infty}(x_{n_k}) = x\]
 \end{theorem}
 
 \begin{definition}[Accumulation Point]
@@ -323,7 +336,23 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    \[\forall \varepsilon > 0: \exists~\text{an infinite}~N_{\varepsilon} \subset \mathbb{N}: (\forall n \in N_\varepsilon: |x_n - x| < \varepsilon)\]
 \end{definition}
 \begin{example}
-   \(x_n = (-1)^n\) doesn't converge but it has the accumulation points \(\pm 1\).
+   Following some examples of sequences and their accumulation points.
+   \begin{table}[h]\label{tbl:example_accumulation_points}
+      \begin{center}
+         \begin{tabular}{|c|c|}
+            \hline
+            Sequence \(x_n\)              & Accumulation Points        \\\hline
+            \(a\)                         & \(a\)                      \\
+            \(\frac{1}{n}\)               & \(0\)                      \\
+            \((-1)^n\)                    & \(-1, 1\)                  \\
+            \(i^n\)                       & \(-1, 1, -i, i\)           \\
+            \(n\)                         & None                       \\
+            Fibonacci                     & None                       \\
+            Enumeration of \(\mathbb{Q}\) & Every \(a \in \mathbb{R}\) \\\hline
+         \end{tabular}
+      \end{center}
+      % \caption{Examples of Accumulation Points}
+   \end{table}
 \end{example}
 
 \begin{theorem}
@@ -332,11 +361,11 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{theorem}
 
 \begin{theorem}[Bolzano-Weierstrass]\label{thm:bolzano}
-   Every bounded sequence has at least one accumulation point.
+   Every bounded sequence in \(\mathbb{K}\) has at least one accumulation point.
 \end{theorem}
 
 \begin{theorem}
-   Let \(x_n \in \mathbb{K}^\mathbb{N}\) such that \(\lim_{n \to \infty} x_n = x \in \mathbb{K}\), then
+   Let \((x_n)_{n \in \mathbb{N}}\) such that \(\lim_{n \to \infty} x_n = x\), then
    \begin{enumerate}[label=\roman*, align=Center]
       \item \(x\) is the only accumulation point of \(x_n\)
       \item \(x\) is unique
@@ -419,7 +448,7 @@ A series is, roughly speaking, a description of the operation of adding infinite
 \end{remark}
 To be able to analyze the bevavior of a series, we need a way to refer to the value of it at a given index.
 \begin{definition}[Partial Sum]
-   Given a series \(\sum x_n\) its \(k\)-th partial sum is
+   Given a series \(\sum x_n\) its \emph{\(k\)-th partial sum} is
    \[s_k := \sum_{n = 0}^{k} x_n = x_0 + \ldots + x_k\]
 \end{definition}
 \begin{remark}[Terminology]
@@ -540,7 +569,7 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 
 \subsubsection{Criteria for Absolute Convergence}
 \begin{proposition}[Comparison Test]\label{pro:comparison_test}
-   Let \(x_n, b_n \in (\mathbb{R}_{\geq 0})^\mathbb{N}\) such that \(x_n \leq b_n\) for almost all \(n\), then
+   Let \(x_n \in \mathbb{K}^\mathbb{N}\), \(b_n \in (\mathbb{R}_{\geq 0})^\mathbb{N}\) such that \(\lvert x_n\rvert \leq b_n\) for almost all \(n\), then
    \[\sum b_n~\text{convergent} \implies \sum x_n~\text{absolute convergent}\]
    \[\sum x_n~\text{divergent} \implies \sum b_n~\text{divergent}\]
 \end{proposition}
@@ -557,9 +586,9 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 \end{example}
 
 \begin{proposition}[Root Test]\label{pro:root_test}
-   Let \(x_n \in \mathbb{R}^\mathbb{N}\) and \(\alpha := \limsup_{n \to \infty}\big(\sqrt[n]{|x_n|}\big)\), then
+   Let \((x_n)_{n \in \mathbb{N}}\) and \(\alpha := \limsup_{n \to \infty}\big(\sqrt[n]{|x_n|}\big)\), then
    \[\alpha < 1 \implies \sum x_n~\text{absolute convergent}\]
-   \[\alpha > 1 \implies \sum x_n~\text{not absolute convergent}\]
+   \[\alpha > 1 \implies \sum x_n~\text{divergent}\]
    \[\text{If}~\alpha = 1~\text{then no statement is possible}\]
 \end{proposition}
 \begin{remark}[Tips]
@@ -572,9 +601,9 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 \end{example}
 
 \begin{proposition}[Ratio Test]\label{pro:ratio_test}
-   Let \(x_n\) such that \(0 \neq x_n\) for almost all \(n \in \mathbb{N}\), then
+   Let \((x_n)_{n \in \mathbb{N}}\) such that \(x_n \neq 0\) for almost all \(n \in \mathbb{N}\), then
    \[\limsup_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) < 1 \implies \sum x_n~\text{absolute convergent}\]
-   \[\liminf_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) > 1 \implies \sum x_n~\text{not absolute convergent}\]
+   \[\liminf_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) > 1 \implies \sum x_n~\text{divergent}\]
    \[\text{If}~\limsup, \liminf = 1~\text{then no statement is possible}\]
 \end{proposition}
 \begin{remark}[Tips]
@@ -594,13 +623,15 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
          \[\sum_{n=1}^\infty \frac{1}{n} = \infty\]
          \[\sum_{n=1}^\infty \frac{(-1)^{n+1}}{n} = \ln(2)\]
          \[\sum_{n=0}^\infty \frac{(-1)^n}{2n+1} = \frac{\pi}{4}\]
+      \item \[\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}\]
+      \item \[\sum_{n=0}^\infty \frac{n^2}{2^n} = 6\]
       \item Geometric Series
          \[\sum_{n=0}^k x^n = \frac{1-x^n}{1-x}\]
          \[|x| < 1 \implies \sum_{n = 0}^\infty x^n = \frac{1}{1 - x}\]
          \[|x| \geq 1 \implies \sum_{n = 0}^\infty x^n = \infty\]
+      \item \[\sum_{n=0}^\infty \left(\frac{1}{2}\right)^{n+(-1)^n}~\text{is absolute convergent}\]
       \item Exponential Series
          \[\sum_{n=0}^\infty \frac{1}{n!} = e\]
-         \[\sum_{n=0}^\infty \frac{x^n}{n!} = e^x\]
    \end{enumerate}
 \end{proposition}
 \begin{proof}[Proof (i)]
@@ -648,9 +679,7 @@ We look at the convergence of series, when we rearrange their elements, which ha
 \end{remark}
 
 \begin{proposition}[Riemann's Rearrangement Theorem]\label{pro:riemann_rearrang}
-   Let \(\sum x_n\) be conditionally convergent and \(\alpha \in \mathbb{R}\) be arbitrary.
-
-   There exists a permutation \(\sigma\) such that \(\sum x_{\sigma(n)} = \alpha\).
+   Let \(\sum x_n\) be conditionally convergent and \(\alpha \in \mathbb{R}\) be arbitrary, then there exists a permutation \(\sigma\) such that \(\sum x_{\sigma(n)} = \alpha\).
 \end{proposition}
 \begin{remark}[Intuition]
    In words, for \emph{any} \(\alpha \in \mathbb{R}\) we can find a permutation \(\sigma\) such that \(\sum x_{\sigma(n)} = \alpha\).
@@ -658,7 +687,7 @@ We look at the convergence of series, when we rearrange their elements, which ha
 
 \subsection{Power Series}
 \begin{definition}[Power Series]\label{def:power_series}
-   Given \(a_n \in \mathbb{C}^\mathbb{N}\), a constant \(c \in \mathbb{C}\) and a variable \(z \in \mathbb{C}\)
+   Given \(a_n \in \mathbb{K}^\mathbb{N}\), a constant \(c \in \mathbb{K}\) and a variable \(z \in \mathbb{C}\)
    \[\sum_{n=0}^\infty a_n (z - c)^n\]
 \end{definition}
 % TODO: intuition
@@ -667,11 +696,11 @@ We look at the convergence of series, when we rearrange their elements, which ha
    Conventionally it is located at the origin of the complex plane, where we can write \(\sum a_n z^n\)
 \end{remark}
 A power series will converge for some values of \(z\) and may diverge for others.
-\begin{theorem}[Radius of Convergence]
+\begin{definition}[Radius of Convergence]
    Let \(\sum a_n z^n\) be a power series.
    \[\rho := \frac{1}{\lim\sup_{n \to \infty} \sqrt[n]{|a_n|}}\]
    where we define that \(\frac{1}{\infty} := 0\) and \(\frac{1}{0} := \infty\).
-\end{theorem}
+\end{definition}
 \begin{remark}[Intuition]
    As power series are complex series, their convergence can be imagined as an inward spiral.
    This way \(\rho\) is the radius of the \emph{disk of convergence}, the set of all points for which the series converges
@@ -688,8 +717,8 @@ A power series will converge for some values of \(z\) and may diverge for others
 
 \begin{theorem}[Power Series Convergence]\label{thm:conv_radius}
    Let \(\rho\) be the radius of convergence for \(\sum a_n z^n\).
-   \[\forall z \in \mathbb{C}: \lvert z\rvert < \rho \implies \sum a_n z^n~\text{converges absolutely}\]
-   \[\forall z \in \mathbb{C}: \lvert z\rvert > \rho \implies \sum a_n z^n~\text{diverges}\]
+   \[\forall z \in \mathbb{C}: \lvert z\rvert < \rho \implies \sum a_n z^n~\text{absolute convergent}\]
+   \[\forall z \in \mathbb{C}: \lvert z\rvert > \rho \implies \sum a_n z^n~\text{divergent}\]
 \end{theorem}
 \begin{remark}
    For \(\lvert z\rvert = \rho\) we have to check for convergence seperately, i.e. we have to check if the series converges for \(z = \rho\) and \(z = -\rho\).
@@ -704,6 +733,20 @@ A power series will converge for some values of \(z\) and may diverge for others
    For \(z = -1\) is it the alternating harmonic series and converges.
 \end{example}
 
+\begin{proposition}[Important Power Series]
+   The following are important examples of power series
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\forall z \in \mathbb{C}\)
+         \[\sum_{n=0}^\infty \frac{1}{n!} z^n~\text{is absolute convergent}\]
+      \item \(\forall z \in \mathbb{C}: \lvert z\rvert < 1\)
+         \[\sum_{n=0}^\infty z^n~\text{is absolute convergent}\]
+      \item Let \(z = 0\)
+         \[\sum_{n=0}^\infty n! \cdot z^n~\text{is convergent}\]
+      \item Let \(m \in \mathbb{Z}\) and \(\lvert z\rvert < 1\)
+         \[\sum_{n=0}^\infty n^m \cdot z^n~\text{is convergent}\]
+   \end{enumerate}
+\end{proposition}
+
 \begin{proposition}\label{pro:conv_rad_ratio_test}
    Let \(\rho\) be the radius of convergence of \(\sum a_n z^n\).
    \[\rho = \lim_{n \to \infty} \frac{\lvert a_n\rvert}{\lvert a_{n+1}\rvert}\]
@@ -716,7 +759,7 @@ A power series will converge for some values of \(z\) and may diverge for others
    Let \(\alpha \in \mathbb{C}\), \(\sum a_n z^n\) and \(\sum b_n z^n\) with radius of convergence \(\rho_a\) respectively \(\rho_b\).
    \begin{enumerate}[label=\roman*, align=Center]
       \item \(\forall z \in \mathbb{C}: \lvert z\rvert < \rho_a\)
-         \[\alpha \sum a_n z^n = \sum \alpha a_n z^n\]
+         \[\sum \alpha \cdot a_n z^n = \alpha \cdot \sum a_n z^n\]
       \item \(\forall z \in \mathbb{C}: \lvert z\rvert < \min\{\rho_a, \rho_b\}\)
          \[\sum a_n z^n + \sum b_n z^n = \sum (a_n + b_n)z^n\]
       \item \(\forall \lvert z\rvert < \min\{\rho_a, \rho_b\}:\)
@@ -757,8 +800,6 @@ Let \(z \in \mathbb{C}\), from above we see that
 which means that the complex \(\exp\) function is characterized by two parts
 \[\exp: \mathbb{R} \to \mathbb{R} \qquad\text{and}\qquad \exp: i\mathbb{R} \to \mathbb{R}\]
 We define the \emph{imaginary exponential function} \(\ixp: \mathbb{R} \to \mathbb{R}\) through \(\ixp(x) := \exp(ix)\).
-
-\newpage
 
 \subsubsection{Logarithm}
 \begin{proposition}
@@ -966,7 +1007,7 @@ So far we only looked at limits of sequences, so now we want to regard the limit
 
 \subsection{Function Limits}\label{ssec:function_limits}
 \begin{definition}[Function Limit]\label{def:func_limit}
-   Given \(f: D \to \mathbb{R}\) and a limit point \(x_0 \in D\) of \(X\).
+   Given \(f: D \to \mathbb{R}\) and \(x_0 \in D\),
    \[\lim_{x \to x_0}\big(f(x)\big) = L :\iff \forall \varepsilon > 0~\exists \delta > 0: (\forall x \in D: \lvert x - x_0 \rvert < \delta \implies \lvert f(x) - L\rvert < \varepsilon\]
 \end{definition}
 \begin{remark}[Intuition]
@@ -978,7 +1019,7 @@ So far we only looked at limits of sequences, so now we want to regard the limit
 \end{remark}
 Now we see that the concept of the limit of a function is connected to the concept of the limit of sequences.
 \begin{proposition}[Function Limit = Sequence Limit]
-   Let \(x_0 \in X\) be a limit point of \(D\) and \(f: D \to \mathbb{R}\)
+   Let \(f: D \to \mathbb{R}\) and \(x_0 \in X\),
    \[\lim_{x \to x_0}\big(f(x)\big) = L \iff \forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \left(\lim_{n \to \infty}(x_n) = x_0 \implies  \lim_{n \to \infty}\big(f(x_n)\big) = L\right)\]
 \end{proposition}
 \begin{remark}[Intuition]
@@ -1053,9 +1094,9 @@ as \(\exp\) is continuous, we can pull the limit into the argument.
 \subsubsection{One-Sided Limits}
 Another intuitive viewpoint to see how function limits and continuity are connected is the following.
 \begin{definition}[One-Sided Limit]\label{def:one-sided_limit}
-   Given a limit point \(x_0 \in \mathbb{R}\) of \(D\) and \(f: D \to \mathbb{R}\).
-   \[\lim_{x \uparrow x_0}\big(f(x)\big) = \lim_{x \to x_0}\big(f|_{D \cap (-\infty; x_0)}\big)\]
-   \[\lim_{x \downarrow x_0}\big(f(x)\big) = \lim_{x \to x_0}\big(f|_{D \cap (x_0; \infty)}\big)\]
+   Given \(x_0 \in \overline{\mathbb{R}}\) and \(f: [a;b] \to \mathbb{R}\),
+   \[\lim_{x \uparrow x_0}\big(f(x)\big) := \lim_{x \to x_0}\big(f|_{D \cap (-\infty; x_0)}\big)\]
+   \[\lim_{x \downarrow x_0}\big(f(x)\big) := \lim_{x \to x_0}\big(f|_{D \cap (x_0; \infty)}\big)\]
 \end{definition}
 \begin{remark}[Terminology]
    We call \(\lim_{x \uparrow x_0} f(x)\) a \emph{left-handed} and \(\lim_{x \downarrow x_0} f(x)\) a \emph{right-handed} limit.
@@ -1096,6 +1137,16 @@ This becomes apparant when regarding both one-sided limits, approaching the same
    Let \(x_0 \in \mathbb{R}\) be a limit point of \(D\) and \(f: D \to \mathbb{R}\).
    \[\lim_{x \to x_0}\big(f(x)\big) = L \iff L = \lim_{x \uparrow x_0}\big(f(x)\big) = \lim_{x \downarrow x_0}\big(f(x)\big)\]
 \end{theorem}
+
+\begin{proposition}\label{pro:one_sided_lim_incr}
+   Let \(f: [a; b] \to \mathbb{R}\) and \(c \in (a; b)\).
+
+   If \(f\) is increasing, then
+   \[\lim_{x \uparrow c}\big(f(x)\big) = \sup\{f(x) \mid x < c\} \qquad\text{and}\qquad \lim_{x \downarrow c}\big(f(x)\big) = \inf\{f(x) \mid x > c\}\]
+
+   If \(f\) is decreasing, then
+   \[\lim_{x \uparrow c}\big(f(x)\big) = \inf\{f(x) \mid x < c\} \qquad\text{and}\qquad \lim_{x \downarrow c}\big(f(x)\big) = \sup\{f(x) \mid x > c\}\]
+\end{proposition}
 
 \subsection{Definition \& Terminology}
 In this sections we regard functions
@@ -1185,18 +1236,9 @@ where we have that
 \end{proposition}
 
 \subsection{Discontinuities}
-\begin{proposition}\label{pro:one_sided_lim_incr}
-   Let \(f: [a; b] \to \mathbb{R}\) and \(c \in (a; b)\).
-
-   If \(f\) is increasing, then
-   \[\lim_{x \uparrow c} f(x) = \sup\{f(x) \mid x < c\} \qquad\text{and}\qquad \lim_{x \downarrow c} f(x) = \inf\{f(x) \mid x > c\}\]
-
-   If \(f\) is decreasing, then
-   \[\lim_{x \uparrow c} f(x) = \inf\{f(x) \mid x < c\} \qquad\text{and}\qquad \lim_{x \downarrow c} f(x) = \sup\{f(x) \mid x > c\}\]
-\end{proposition}
 
 \begin{definition}[Jump Discontinuity]
-   Given \(D \subset \mathbb{R}\) and \(f: D \to \mathbb{R}\)
+   Given \(D \subset \mathbb{R}\) and \(f: D \to Y\)
    \[x_0 \in \mathbb{R}: x_0 \in \overline{D \cap (-\infty; x_0)} \cap \overline{D \cap (x_0; \infty)}\]
    is a \emph{jump discontinuity} iff
    \[\lim_{x \uparrow a} f(x) \neq \lim_{x \downarrow a} f(x)\]
@@ -1207,14 +1249,33 @@ where we have that
    \(f\) is continuous except for countable jump discontinuities.
 \end{theorem}
 
+\subsection{Important Examples}
+\begin{proposition}[Continuous Functions]
+   The following are important examples of continuous functions
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\|\ldots\|: X \to \mathbb{R}_{\geq 0}\) is continuous.
+      \item \(\sqrt{\ldots}: \mathbb{R}_{\geq 0} \to \mathbb{R}_{\geq 0}\) is continuous.
+      \item \(\lfloor\ldots\rfloor: \mathbb{R} \to \mathbb{R}\) is continuous on \(\mathbb{R}\setminus\mathbb{Z}\) and discontinuous on \(\mathbb{Z}\).
+      \item \(f: \mathbb{K}^n \to \mathbb{K}\) where \(f(x) := x_k\) is continuous.
+      \item \(f: \mathbb{C} \to \mathbb{R}\) where \(f(x) := \Re(x)\) or \(f(x) := \Im(x)\) is continuous.
+      \item \(\id: (X, \|\ldots\|_a) \to (X, \|\ldots\|_b)\) is continuous.
+   \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+   Let \(f: X \to \mathbb{R}\) be continuous and \(r \in \mathbb{R}\), then is
+   \[\{x \in X \mid f(x) > r\} \quad\text{and}\quad \{x \in X \mid f(x) < r\}~\text{open}\]
+   \[\{x \in X \mid f(x) \geq r\} \quad\text{and}\quad \{x \in X \mid f(x) \leq r\}~\text{closed}\]
+\end{proposition}
+
 \subsection{Properties}
 \begin{proposition}[Continuous Function Rules]
    Let \(f: D \to Y\), \(g: D \to Y\) be continuous in \(x_0 \in D\), then
    \begin{enumerate}[label=\roman*, align=Center]
       \item \((\alpha \cdot f)(x) := \alpha \cdot f(x)\)
-      \item \((f + g)(x) := f(x) + g(x)\)
-      \item \((f \cdot g)(x) := f(x) \cdot g(x)\)
-      \item If \(g(x_0) \neq 0\)
+      \item \((f \pm g)(x) := f(x) \pm g(x)\)
+      \item If \(Y = \mathbb{K}\) \((f \cdot g)(x) := f(x) \cdot g(x)\)
+      \item If \(Y = \mathbb{K}\) and \(g(x_0) \neq 0\)
          \[\left(\frac{f}{g}\right)(x) := \frac{f(x)}{g(x)}\]
    \end{enumerate}
    are also continuous in \(x_0\).
@@ -1283,10 +1344,8 @@ where we have that
 \end{remark}
 
 \subsection{Uniform Continuity}
-Continuity itself is a local property of a function—that is, a function \(f\) is continuous, or not, at a particular point, and this can be determined by looking only at the values of the function in an (arbitrarily small) neighbourhood of that point.
 When we speak of a function being continuous on an interval, we mean only that it is continuous at each point of the interval.
 In contrast, uniform continuity is a global property of \(f\), in the sense that the standard definition refers to pairs of points rather than individual points.
-
 \begin{definition}[Uniform Continuity]
    \(f: D \to Y\) is uniform continuous iff
    \[\forall \varepsilon > 0~\exists \delta > 0: (\forall x,y \in D: |x - y| < \delta \implies |f(x) - f(y)| < \varepsilon)\]
@@ -1310,6 +1369,16 @@ In contrast, uniform continuity is a global property of \(f\), in the sense that
 
    However \(f\) is not uniformly continuous on \([0; \infty)\) because for some fixed \(|x - y|\) can \(|x^2 - y^2| = |x - y||x + y|\) get arbitrary large if we choose \(x, y\) large enough.
 \end{example}
+
+\begin{proposition}[Important Examples]
+   The following functions are uniformly continuous
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\|\ldots\|: X \to \mathbb{R}_{\geq 0}\) is uniformly continuous.
+      \item \(\frac{1}{x}: \mathbb{R}_{>0} \to \mathbb{R}\) is \emph{not} uniformly continuous.
+      \item \(x^2: [-1; 1] \to \mathbb{R}_{\geq 0}\) is uniformly continuous.
+      \item \(x^2: \mathbb{R} \to \mathbb{R}_{\geq 0}\) is \emph{not} uniformly continuous
+   \end{enumerate}
+\end{proposition}
 
 \newpage
 
@@ -1339,6 +1408,15 @@ At this point the secant coincides (never but close enough) the tangent, then th
    For the derivative of \(f\) in \(x_0\) we write
    \[f'(x_0) \qquad\qquad Df(x_0) \qquad\qquad \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}\]
 \end{remark}
+
+\begin{proposition}[Important Examples]
+   The following are important examples of derivatives.
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\frac{d}{dx} \exp(x) = \exp(x)\)
+      \item \(\frac{d}{dx} \frac{1}{x} = -\frac{1}{x^2}\)
+      \item 
+   \end{enumerate}
+\end{proposition}
 
 \begin{proposition}[Differentiable\(\implies\)Continuous]\label{pro:deri_impl_cont}
    \[f: D \to \mathbb{R}~\text{differentiable in}~x_0 \in D \implies f~\text{continuous in}~x_0\]

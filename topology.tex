@@ -70,8 +70,8 @@
    \end{enumerate}
 \end{theorem}
 
-\begin{definition}[Limit Point]
-   \(x \in X\) is a \emph{limit point} of \(M \subset (X, \mathcal{T})\) iff
+\begin{definition}[Accumulation Point]
+   \(x \in X\) is a \emph{accumulation point} of \(M \subset (X, \mathcal{T})\) iff
    \[\forall U \in \mathcal{U}(x): (U \cap M) \setminus \{x\} \neq \emptyset\]
 \end{definition}
 \begin{remark}[Intuition]
@@ -80,15 +80,15 @@
 
 \begin{proposition}
    Let \(M \subset (X, \mathcal{T})\), then is
-   \[x \in X~\text{a limit point of}~M \iff \exists (x_n)_{n \in \mathbb{N}} \in (M\setminus\{x\})^\mathbb{N}: \lim_{n \to \infty} x_n = x\]
+   \[x \in X~\text{a accumulation point of}~M \iff \exists x_n \in (M\setminus\{x\})^\mathbb{N}: \lim_{n \to \infty}(x_n) = x\]
 \end{proposition}
 
 \begin{theorem}
    Given \((X, \mathcal{T})\) and \(M \subset X\), the following statements are equivalent
    \begin{enumerate}[label=\roman*, align=Center]
       \item \(M\) is closed.
-      \item \(M\) contains all its limit points.
-      \item \[\forall (x_n) \in M^\mathbb{N}: \lim_{n \to \infty} x_n \in X \implies \lim_{n \to \infty} x_n \in M\]
+      \item \(M\) contains all its accumulation points.
+      \item \[\forall x_n \in M^\mathbb{N}: \lim_{n \to \infty}(x_n) \in X \implies \lim_{n \to \infty}(x_n) \in M\]
    \end{enumerate}
 \end{theorem}
 
@@ -101,12 +101,12 @@
    An adherent point has in every neighbourhood around it at least one point (maybe even only itself).
 \end{remark}
 \begin{remark}
-   Every limit point is and adherent point.
+   Every accumulation point is and adherent point.
 \end{remark}
 
 \begin{proposition}
    Let \(M \subset (X, \mathcal{T})\), then is
-   \[x \in X~\text{an adherent point of}~M \iff \exists (x_n) \in M^\mathbb{N}: \lim_{n \to \infty} x_n = x\]
+   \[x \in X~\text{an adherent point of}~M \iff \exists x_n \in M^\mathbb{N}: \lim_{n \to \infty}(x_n) = x\]
 \end{proposition}
 
 \begin{definition}[Closure of a Set]

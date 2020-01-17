@@ -3894,171 +3894,24 @@ which means that \(A\) and \(A'\) are similar (\ref{def:sim_mat}).
 
 \newpage
 
-\section{Metric- \& Normed Spaces}
-In this section we will see that inroducing a new structure on \(K\)-vector spaces, namely the \emph{scalar product}, gives us a way to ``measure'' vectors and the distance between them.
+% TODO: terminology!
 
+\section{Scalar Product Spaces}
+An \emph{inner product space} is a vector space with an additional structure called an \emph{inner product}.
+This additional structure associates each pair of vectors in the space with a scalar quantity known as the \emph{inner product} of the vectors.
+
+An inner product is the more general term which can apply to a wide range of different vector spaces.
+Inner products allow the rigorous introduction of intuitive geometrical notions such as the length of a vector or the angle between two vectors.
+They also provide the means of defining orthogonality between vectors.
+
+Inner product spaces generalize Euclidean spaces.
+The term \emph{scalar product} can apply to more general symmetric bilinear form, for example for a pseudo-Euclidean space.
+The dot product is the name given to the inner product on a finite dimensional Euclidean space. For such a space all terms mean the same thing but it might be better to us one term or another in different contexts.
 \subsection{Definition \& Terminology}
-A \emph{norm} is a function that assigns a length or size to each vector in a vector space, except for the zero vector, which is assigned a length of zero.
-
-\begin{definition}[Norm]\label{def:norm}
-   Given a \(\mathbb{R}\)-vector space \(V\),
-   \[\|\ldots\|: V \to \mathbb{R}_0^+\]
-   is a norm iff
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item Non-negative: \(\forall v \in V: \|v\| \geq 0\)
-      \item Positive definite: \(\forall v \in V: \|v\| = 0 \iff v = 0\)
-      \item Absolutely homogeneous: \(\forall \lambda \in \mathbb{R}, v \in V: \|\lambda \cdot v\| = |\lambda| \cdot \|v\|\)
-      \item Triangle inequality: \(\forall v, w \in V: \|v + w\| \leq \|v\| + \|w\|\)
-   \end{enumerate}
-\end{definition}
-\begin{remark}[Reversed Triangle Inequality]
-   In addition to (iv) we also have
-   \[\big\lvert \|x\| - \|y\| \big\rvert \leq \|x - y\|\]
-   since
-   \[\|x\| = \|y + (x - y)\| \leq \|y\| + \|x-y\| \implies \|x\| - \|y\| \leq \|x - y\|\]
-   and analogously \(\|y\| - \|x\| \leq \|x-y\|\), therefor
-   \[\big\lvert \|x\| - \|y\|\big\rvert = \max\big\{\|x\| - \|y\|, \|y\|-\|x\|\big\} \|x-y\|\]
-\end{remark}
-\begin{remark}[Terminology]
-   A vector space with a norm is called a \emph{normed space}.
-\end{remark}
-
-\begin{definition}[Equivalent Norms]\label{def:equiv_norms}
-   Given a normed \(K\)-vector space \(V\), \(\|\ldots\|_a\) and \(\|\ldots\|_b\) are equivalent on \(V\) iff
-   \[\exists c, C \in K: \big(\forall v \in V: c \|v\|_a \leq \|v\|_b \leq C \|v\|_a\]
-\end{definition}
-
-A \emph{metric} or distance function is a function that defines a distance between each pair of elements of a set.
-\begin{definition}[Metric]
-   Let \(X\) be a set,
-   \[d: X \times X \to \mathbb{R}^+\]
-   is a metric iff
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item Non-negative: \(\forall x, y \in X: d(x,y) \geq 0\)
-      \item Identive: \(\forall x, y \in X: d(x, y) = 0 \iff x = y\)
-      \item Symmetric: \(\forall x, y \in X: d(x, y) = d(y, x)\)
-      \item Triangle inequality: \(\forall x, y, z \in X: d(x, z) \leq d(x, y) + d(y, z)\)
-   \end{enumerate}
-\end{definition}
-
-\begin{definition}[Metric Space]
-   A set \(X\) with a metric \(d\).
-\end{definition}
-\begin{remark}[Notation]
-   \((X, d)\)
-\end{remark}
-
-\begin{definition}[Complete Metric Space]
-   \((X, d)\) is complete iff for all cauchy sequences \((x_n)_{n \in \mathbb{N}} \in X^\mathbb{N}\) holds that \(\lim_{n \to \infty} x_n \in X\).
-\end{definition}
-\begin{remark}[Terminology]
-   Also called \emph{Banach space}.
-\end{remark}
-\begin{remark}[Intuition]
-   We can define \(\mathbb{R}\) as the limits of Cauchy sequences in \(\mathbb{Q}\).
-\end{remark}
-
-\begin{theorem}[Complete Metric Spaces]
-   The following normed spaces are complete
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\mathbb{C}\) and \(\mathbb{R}\)
-      \item \(K^n\)
-      \item \((l_1, \|\ldots\|_1)\)
-      \item \((l_2, \|\ldots\|_2)\)
-      \item \((l_\infty, \|\ldots\|_\infty)\)
-   \end{enumerate}
-\end{theorem}
-
-\subsection{Introduction}
-In the following sections we will introduce the underlying theory of normed and metric spaces.
-However we have already seen the most common example of a metric space and now look at an example to see how norms an metric fit together.
-
-We already know that for the real vector space \(\mathbb{R}^n\) we have the \emph{standard scalar product}
-\[\langle v, w \rangle := \sum_{i = 1}^n v_i \cdot w_i\]
-which makes it a \emph{Euclidean vector space}.
-As we will see in \cref{cor:euclid_norm}, we can use this scalar product to formulate the \emph{Euclidean norm}
-\[\|v\| = \sqrt{\langle v, v\rangle} = \sqrt{v_1^2 + \ldots + v_n^2}\]
-which makes \(\mathbb{R}^n\) a \emph{normed vector space}.
-We intuitively see how this norm is used to compute the ``length'' of a vector
-\[\left\|\begin{pmatrix}1\\0\end{pmatrix}\right\| = \sqrt{1^2 + 0^2} = 1 \qquad \left\|\begin{pmatrix}3\\0\end{pmatrix}\right\| = \sqrt{3^2 + 0^2} = 3\]
-Furthermore, with this norm we can define the \emph{Euclidean distance}
-\[d(v, w) := \|v - w\| = \Big\|\big((v_1 - w_1)~\ldots~(v_n - w_n)\big)\Big\| = \sqrt{(v_1 - w_1)^2 + \ldots + (v_n - w_n)^2}\]
-which makes \(V\) a \emph{metric space}.
-Again we see intuitively how far apart two vectors (points) are
-\[d\left(\begin{pmatrix}1\\0\end{pmatrix}, \begin{pmatrix}3\\0\end{pmatrix}\right) = \sqrt{(3 - 1)^2 + (0 - 0)^2} = 2\]
-
-\subsection{Important Examples}
-\subsubsection{\(K^n\) Vector Space}
-For \(x \in K^n\) we define
-\begin{definition}[\(l^\infty\) Norm]
-   \[\|x\|_\infty := \max_{1 \leq k \leq n} |x_k|\]
-\end{definition}
-
-\begin{definition}[\(l^1\) Norm]
-   \[\|x\|_1 := \sum_{k=0}^n |x_k|\]
-\end{definition}
-
-\begin{definition}[\(l^2\) Norm]
-   \[\|x\|_2 := \sqrt{\sum_{k=0}^n |x_k|^2}\]
-\end{definition}
-
-\begin{theorem}
-   On \(K^n\), all norms are equivalent.
-\end{theorem}
-\begin{remark}[Tips]
-   With this theorem with have in accordance with \cref{def:equiv_norms} that
-   \[\|x\|_\infty \leq \|x\|_1 \leq m \cdot \|x\|_\infty\]
-   \[\|x\|_\infty \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_\infty\]
-   \[\frac{1}{\sqrt{m}}\|x\|_1 \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_1\]
-\end{remark}
-
-\subsubsection{Sequence Spaces}
-Given a field \(K\) and a set of sequences \((x_n)_{n \in \mathbb{N}}\) with the operations
-\[+: \big((x_n), (y_n)\big) \mapsto (x_n + y_n)\]
-\[\cdot: \big(\lambda, (x_n)\big) \mapsto (\lambda \cdot x_n)\]
-and the 0-sequence \((0, 0, \ldots)\) as identity element, we can build the sequence spaces \(l^p\) which are special cases of \(L^p\) Lebesgue spaces.
-
-\begin{definition}[Sequences]
-   \[K^{\mathbb{N}} := \{(x_n)_{n \in \mathbb{N}} \mid \forall n \in \mathbb{N}: x_n \in K\}\]
-\end{definition}
-
-\begin{definition}[Bounded Sequences]
-   \[l^\infty := \{(x_n)_{n \in \mathbb{N}} \mid \|(x_n)\|_\infty < \infty\}\]
-\end{definition}
-\begin{remark}
-   \[\|(x_n)_{n \in \mathbb{N}}\|_\infty := \sup_{n \in \mathbb{N}} |x_n|\]
-\end{remark}
-
-\begin{definition}[Sequences with convergent Series]
-   \[l^1 := \left\{(x_n)_{n \in \mathbb{N}} \mid \|(x_n)\|_1 < \infty\right\}\]
-\end{definition}
-\begin{remark}
-   \[\|(x_n)_{n \in \mathbb{N}}\|_1 := \sum_{n=0}^\infty |x_n|\]
-\end{remark}
-
-\begin{definition}[Sequences with convergent Series]
-   \[l^2 := \left\{(x_n)_{n \in \mathbb{N}} \mid \|(x_n)\|_2 < \infty\right\}\]
-\end{definition}
-\begin{remark}
-   \[\|(x_n)_{n \in \mathbb{N}}\|_2 := \sqrt{\sum_{n=0}^\infty |x_n|^2}\]
-\end{remark}
-
-\begin{definition}[Convergent Sequences w.r.t Norm]
-   Given \(x_n \in (X, \|\ldots\|)\),
-   \[\lim_{n \to \infty}(x_n) = x \in X :\iff \lim_{n \to \infty}\big(\|x_n - x\|\big) = 0\]
-\end{definition}
-\begin{remark}[Terminology]
-   If \(\lim_{n \to \infty}\big(\|x_n - x\|\big) = 0\) we say \emph{\(x_n\) converges with respect to \(\|\ldots\|\)}.
-\end{remark}
-
-\subsection{Scalar Product Spaces}
 \begin{definition}[Scalar Product]\label{def:scalar_product}
    A positive definite bilinear form, which we denote
    \[\langle \ldots,~ \ldots\rangle: V \times V \to \mathbb{R} \qquad\text{where}\qquad (v, w) \mapsto \langle v, w\rangle\]
 \end{definition}
-\begin{remark}
-   Sometimes referred to as \emph{Inner Product}.
-\end{remark}
 
 \begin{definition}[Complex Scalar Product]
    A positive definite hermitian sesquilinear form, which we denote
@@ -4073,13 +3926,10 @@ and the 0-sequence \((0, 0, \ldots)\) as identity element, we can build the sequ
    Analogously to \cref{def:scalar_product}, a vector space with a scalar product is sometimes called \emph{Inner Product Space}.
 \end{remark}
 
-\begin{definition}[Standard Scalar Product]\label{def:std_scal_prod}
+\begin{definition}[Standard Dot Product]\label{def:std_scal_prod}
    Let \(V = \mathbb{R}^n\), then we have the scalar product
    \[\langle v, w \rangle := \sum_{i=1}^n v_i \cdot w_i\]
 \end{definition}
-\begin{remark}
-   Sometimes reffered to as \emph{Dot Product}.
-\end{remark}
 \begin{remark}
    We easily see that this scalar product is a \emph{symmetric} bilinear form.
    \[\langle v, w \rangle = \sum_{i=1}^n v_iw_i = \sum_{i=1}^n w_iv_i = \langle w, v\rangle\]
@@ -4118,7 +3968,7 @@ and the 0-sequence \((0, 0, \ldots)\) as identity element, we can build the sequ
    \[d(z, z') := \|z - z'\| = \sqrt{(x_1 - x_1' + y_1-y_1')^2 + \ldots + (x_n - x_n' + y_n-y_n')^2}\]
 \end{example}
 
-\begin{definition}[Standard Complex Scalar Product]\label{def:compl_scal_prod}
+\begin{definition}[Complex Dot Product]\label{def:compl_scal_prod}
    Let \(V = \mathbb{C}^n\), then we have the scalar product
    \[\langle v, w \rangle := \sum_{i=1}^n v_i \overline{w_i}\]
 \end{definition}
@@ -4140,7 +3990,7 @@ and the 0-sequence \((0, 0, \ldots)\) as identity element, we can build the sequ
    \[\|\ldots\|: V \to \mathbb{R}_0^+ \qquad\text{where}\qquad \|v\| := \sqrt{\langle v, v\rangle}\]
 \end{corollary}
 
-\subsubsection{Hadamard's Inequality}
+\subsection{Hadamard's Inequality}
 In geometrical terms, when restricted to real numbers, it bounds the volume in Euclidean space of \(n\) dimensions marked out by \(n\) vectors \(v_i\) in terms of the lengths of these vectors \(\|vi\|\).
 % TODO: how is the gramian matrix a representation of s?
 \begin{definition}[Gramian Matrix \& Determinant]
@@ -4180,7 +4030,6 @@ In geometrical terms, when restricted to real numbers, it bounds the volume in E
 
    This volume is maximal for orthogonal columns and is thus at most as large as the volume of the \(n\)-dimensional cuboid \(\prod_{i=1}^n \|v_i\|\) whose edges have length \(\|v_i\|\).
 \end{remark}
-
 
 \subsection{Orthogonality}
 Through the Cauchy-Schwarz inequality (\ref{pro:cauchy_schwarz}) we can define the angle between two vectors \(v, w \neq 0\)
@@ -4384,6 +4233,166 @@ The following is a generalization of both over unitary vector spaces.
 \begin{proposition}[Spectral Theorem for Normal Endomorphisms]
    Given a finite-dimensional unitary vector space \(V\), \(f: V \to V\) is normal iff there exists an orthonormal basis of \(V\) consisting of eigenvectors of \(f\).
 \end{proposition}
+
+\section{Normed Spaces}
+In this section we will see that inroducing a new structure on \(K\)-vector spaces, namely a \emph{norm}, gives us a way to ``measure'' vectors.
+
+\subsection{Introduction}\label{ssec:normed_spaces_introduction}
+We have already seen the most common example of a normed space.
+The real vector space \(\mathbb{R}^n\) we have the \emph{standard scalar product}
+\[\langle v, w \rangle := \sum_{i = 1}^n v_i \cdot w_i\]
+which makes it a \emph{Euclidean vector space}.
+As we will see in \cref{cor:euclid_norm}, we can use this scalar product to formulate the \emph{Euclidean norm}
+\[\|v\| = \sqrt{\langle v, v\rangle} = \sqrt{v_1^2 + \ldots + v_n^2}\]
+which makes \(\mathbb{R}^n\) a \emph{normed vector space}.
+We intuitively see how this norm is used to compute the ``length'' of a vector
+\[\left\|\begin{pmatrix}1\\0\end{pmatrix}\right\| = \sqrt{1^2 + 0^2} = 1 \qquad \left\|\begin{pmatrix}3\\0\end{pmatrix}\right\| = \sqrt{3^2 + 0^2} = 3\]
+
+\subsection{Definition \& Terminology}
+A \emph{norm} is a function that assigns a length or size to each vector in a vector space, except for the zero vector, which is assigned a length of zero.
+\begin{definition}[Norm]\label{def:norm}
+   Given a \(\mathbb{R}\)-vector space \(V\),
+   \[\|\ldots\|: V \to \mathbb{R}_0^+\]
+   is a norm iff
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item Non-negative: \(\forall v \in V: \|v\| \geq 0\)
+      \item Positive definite: \(\forall v \in V: \|v\| = 0 \iff v = 0\)
+      \item Absolutely homogeneous: \(\forall \lambda \in \mathbb{R}, v \in V: \|\lambda \cdot v\| = |\lambda| \cdot \|v\|\)
+      \item Triangle inequality: \(\forall v, w \in V: \|v + w\| \leq \|v\| + \|w\|\)
+   \end{enumerate}
+\end{definition}
+\begin{remark}[Reversed Triangle Inequality]
+   In addition to (iv) we also have
+   \[\big\lvert \|x\| - \|y\| \big\rvert \leq \|x - y\|\]
+   since
+   \[\|x\| = \|y + (x - y)\| \leq \|y\| + \|x-y\| \implies \|x\| - \|y\| \leq \|x - y\|\]
+   and analogously \(\|y\| - \|x\| \leq \|x-y\|\), therefor
+   \[\big\lvert \|x\| - \|y\|\big\rvert = \max\big\{\|x\| - \|y\|, \|y\|-\|x\|\big\} \|x-y\|\]
+\end{remark}
+
+\begin{proposition}[Important Norms]
+   Let \(x \in K^n\) and \((x_n)_{n \in \mathbb{N}}\), we define
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item Maximums Norm
+         \[\|x\|_\infty := \max_{1 \leq k \leq n} |x_k| \qquad\qquad \|x_n\|_\infty := \sup_{n \in \mathbb{N}} |x_n|\]
+      \item \(l^1\) Norm
+         \[\|x\|_1 := \sum_{k=0}^n |x_k| \qquad\qquad \|x_n\|_1 := \sum_{n=0}^\infty |x_n|\]
+      \item \(l^2\) Norm
+         \[\|x\|_2 := \sqrt{\sum_{k=0}^n |x_k|^2} \qquad\qquad \|x_n\|_2 := \sqrt{\sum_{n=0}^\infty |x_n|^2}\]
+      \item \(l^p\) Norm
+         \[\|x\|_p := \sqrt[p]{\sum_{k=0}^n |x_k|^p} \qquad\qquad \|x_n\|_p := \sqrt[p]{\sum_{n=0}^\infty |x_n|^p}\]
+   \end{enumerate}
+\end{proposition}
+\begin{remark}[Terminology]
+   \(\|\ldots\|_2\) on \(K^n\) is called the \emph{Euclidean norm}.
+\end{remark}
+
+\begin{definition}[Equivalent Norms]\label{def:equiv_norms}
+   Given a normed \(K\)-vector space \(V\), \(\|\ldots\|_a\) and \(\|\ldots\|_b\) are equivalent on \(V\) iff
+   \[\exists c, C \in K: \big(\forall v \in V: c \|v\|_a \leq \|v\|_b \leq C \|v\|_a\]
+\end{definition}
+
+\begin{theorem}
+   On \(K^n\), all norms are equivalent.
+\end{theorem}
+\begin{remark}[Tips]
+   With this theorem with have in accordance with \cref{def:equiv_norms} that
+   \[\|x\|_\infty \leq \|x\|_1 \leq m \cdot \|x\|_\infty\]
+   \[\|x\|_\infty \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_\infty\]
+   \[\frac{1}{\sqrt{m}}\|x\|_1 \leq \|x\|_2 \leq \sqrt{m} \cdot \|x\|_1\]
+\end{remark}
+
+\begin{definition}[Normed Space]
+   A \(K\)-vector space \(V\) with a norm \(\|\ldots\|\).
+\end{definition}
+\begin{remark}[Notation]
+   \((V, \|\ldots\|)\)
+\end{remark}
+
+\begin{definition}[Complete Normed Space]
+   \((V, \|\ldots\|)\) is complete iff
+   \[\forall x_n \in X^\mathbb{N}: x_n~\text{Cauchy}~\text{holds}~\lim_{n\to\infty}\big(\|x_n - x\|\big) = 0\]
+\end{definition}
+\begin{remark}[Terminology]
+   Also called \emph{Banach space}.
+\end{remark}
+
+\begin{definition}[Convergent Sequences w.r.t Norm]
+   Given \(x_n \in (X, \|\ldots\|)\),
+   \[\lim_{n \to \infty}(x_n) = x \in X :\iff \lim_{n \to \infty}\big(\|x_n - x\|\big) = 0\]
+\end{definition}
+\begin{remark}[Terminology]
+   If \(\lim_{n \to \infty}\big(\|x_n - x\|\big) = 0\) we say \emph{\(x_n\) converges with respect to \(\|\ldots\|\)}.
+\end{remark}
+
+\subsection{Important Examples}
+Let \(K\) be the field of \(\mathbb{R}\) or \(\mathbb{C}\).
+\begin{definition}[Set of Sequences]
+   \[K^\mathbb{N} := \{(x_n)_{n \in \mathbb{N}} \mid \forall n \in \mathbb{N}: x_n \in K\}\]
+\end{definition}
+Using this notation we can define
+\begin{definition}[Sequence Spaces]
+   We define the space of
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item bounded sequences
+         \[l^\infty := \left\{x_n \in K^\mathbb{N} \mid \|x_n\|_\infty < \infty\right\}\]
+      \item sequences with convergent series
+         \[l^1 := \left\{x_n \in K^\mathbb{N} \mid \|x_n\|_1 < \infty\right\}\]
+      \item
+         \[l^2 := \left\{x_n \in K^\mathbb{N} \mid \|x_n\|_2 < \infty\right\}\]
+   \end{enumerate}
+\end{definition}
+
+\begin{theorem}[Important Complete Normed Spaces]
+   The following are important examples of normed spaces
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \((\mathbb{R}, \lvert\ldots\rvert)\)
+      \item \((\mathbb{C}, \lvert\ldots\rvert)\)
+      \item \((K^n, \|\ldots\|_2)\)
+      \item \((l_\infty, \|\ldots\|_\infty)\)
+      \item \((l_1, \|\ldots\|_1)\)
+      \item \((l_2, \|\ldots\|_2)\)
+   \end{enumerate}
+\end{theorem}
+
+\section{Metric Spaces}
+In this section we will see that inroducing a new structure on \(K\)-vector spaces, namely a \emph{metric}, gives us a way to measure the distance between vectors.
+
+\subsection{Introduction}
+With the euclidean norm from \cref{ssec:normed_spaces_introduction} we can define the \emph{Euclidean distance}
+\[d(v, w) := \|v - w\| = \Big\|\big((v_1 - w_1)~\ldots~(v_n - w_n)\big)\Big\| = \sqrt{(v_1 - w_1)^2 + \ldots + (v_n - w_n)^2}\]
+which makes \(V\) a \emph{metric space}.
+Again we see intuitively how far apart two vectors (points) are
+\[d\left(\begin{pmatrix}1\\0\end{pmatrix}, \begin{pmatrix}3\\0\end{pmatrix}\right) = \sqrt{(3 - 1)^2 + (0 - 0)^2} = 2\]
+
+\subsection{Definition \& Terminology}
+A \emph{metric} or distance function is a function that defines a distance between each pair of elements of a set.
+\begin{definition}[Metric]
+   Let \(X\) be a set,
+   \[d: X \times X \to \mathbb{R}^+\]
+   is a metric iff
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item Non-negative: \(\forall x, y \in X: d(x,y) \geq 0\)
+      \item Identive: \(\forall x, y \in X: d(x, y) = 0 \iff x = y\)
+      \item Symmetric: \(\forall x, y \in X: d(x, y) = d(y, x)\)
+      \item Triangle inequality: \(\forall x, y, z \in X: d(x, z) \leq d(x, y) + d(y, z)\)
+   \end{enumerate}
+\end{definition}
+
+\begin{definition}[Metric Space]
+   A set \(X\) with a metric \(d\).
+\end{definition}
+\begin{remark}[Notation]
+   \((X, d)\)
+\end{remark}
+
+\begin{definition}[Complete Metric Space]
+   \((X, d)\) is complete iff
+   \[\forall x_n \in X^\mathbb{N}: x_n~\text{Cauchy}~\text{holds}~\lim_{n\to\infty}(x_n) \in X\]
+\end{definition}
+\begin{remark}[Intuition]
+   We can define \(\mathbb{R}\) as the limits of Cauchy sequences in \(\mathbb{Q}\).
+\end{remark}
 
 \section{Moduln}
 In a vector space, the set of scalars is a field and acts on the vectors by scalar multiplication, subject to certain axioms such as the distributive law.
