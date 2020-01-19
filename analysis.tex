@@ -157,7 +157,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
       \item \(\forall s \in \mathbb{R}_{>0}\)
          \[\lim_{n \to \infty}(\sqrt[n]{n^s}) = 1\]
       \item \[\lim_{n \to \infty}\big(\sqrt[n]{n!}\big) = \infty\]
-      \item Let \(x_k := \sum_{n=0}^k \frac{1}{k!}\)
+      \item Let \(x_k := \sum_{n=0}^k \frac{1}{n!}\)
          \[\lim_{k \to \infty}(x_k) = e\]
       \item \[\lim_{n \to \infty}\left(1 + \frac{1}{n}\right)^n = e\]
       \item \(\forall z \in \mathbb{C}\)
@@ -251,7 +251,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
 \begin{proposition}[Sandwich Sequence]\label{pro:sandwich_seq}
    Let \(x_n, y_n, z_n \in \mathbb{R}^\mathbb{N}\) with \(\lim(x_n) = \lim(z_n) = y\).
-   \[\exists n_0 \in \mathbb{N}~\forall n > n_0: x_n \leq y_n \leq z_n \implies \lim_{n \to \infty}(y_n) = y\]
+   \[\exists n_0 \in \mathbb{N}:(\forall n > n_0: x_n \leq y_n \leq z_n) \implies \lim_{n \to \infty}(y_n) = y\]
 \end{proposition}
 \begin{example}
    Let \(y_n := \frac{\sin(n)}{n}\), we prove that \(\lim_{n \to \infty}(y_n) = 0\).
@@ -524,7 +524,7 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 \end{theorem}
 
 \begin{proposition}[Leibnitz Test]\label{pro:leibnitz}
-   Let \(x_n \in (\mathbb{R}_{\geq 0})^\mathbb{N}\) be decreasing, then
+   Let \(x_n \in (\mathbb{R}_{\geq 0})^\mathbb{N}\) be monotonic, then
    \[\sum (-1)^{n} \cdot x_n~\text{converges} \iff \lim_{n \to \infty}(x_n) = 0\]
 \end{proposition}
 \begin{example}
@@ -561,7 +561,7 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 
 \begin{theorem}[Cauchy Product]
    Let \(\sum a_n\), \(\sum b_n\) be absolute converget, then is
-   \[\left(\sum_{n=0}^\infty a_n\right) \cdot \left(\sum_{n=0}^\infty b_n\right) = \sum_{n=0}^\infty\left(\sum_{k=0}^n a_k \cdot b_{n - k}\right)\]
+   \[\left(\sum_{n=0}^\infty a_n\right) \cdot \left(\sum_{n=0}^\infty b_n\right) = \sum_{k=0}^\infty\left(\sum_{n=0}^k a_n \cdot b_{k-n}\right)\]
    also absolute convergent.
 \end{theorem}
 
@@ -589,7 +589,7 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
    Let \((x_n)_{n \in \mathbb{N}}\) and \(\alpha := \limsup_{n \to \infty}\big(\sqrt[n]{|x_n|}\big)\), then
    \[\alpha < 1 \implies \sum x_n~\text{absolute convergent}\]
    \[\alpha > 1 \implies \sum x_n~\text{divergent}\]
-   \[\text{If}~\alpha = 1~\text{then no statement is possible}\]
+   \[\text{If}~\alpha = 1~\text{then no statement is possible.}\]
 \end{proposition}
 \begin{remark}[Tips]
    Usefull for series \(\sum x_n\) where \(x_n = (y_n)^n\).
@@ -604,10 +604,10 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
    Let \((x_n)_{n \in \mathbb{N}}\) such that \(x_n \neq 0\) for almost all \(n \in \mathbb{N}\), then
    \[\limsup_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) < 1 \implies \sum x_n~\text{absolute convergent}\]
    \[\liminf_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) > 1 \implies \sum x_n~\text{divergent}\]
-   \[\text{If}~\limsup, \liminf = 1~\text{then no statement is possible}\]
+   \[\text{If}~\limsup, \liminf = 1~\text{then no statement is possible.}\]
 \end{proposition}
 \begin{remark}[Tips]
-   Usefull for series which contain \(n!\), \(x^n\) or polynomials.
+   Usefull for series which contain \(n!\), \(x^n\) or polynomials, or are of the form \(x_n = \frac{a_n}{b_n}\).
 \end{remark}
 \begin{example}
    We regard \(\sum \frac{5 + n}{10^n}\)
@@ -829,7 +829,7 @@ We define the \emph{imaginary exponential function} \(\ixp: \mathbb{R} \to \math
       \item \(\ln\) is strictly increasing
       \item \(\lim_{x \to \infty} \ln(x) = \infty\)
       \item \(\lim_{x \to 0} \ln(x) = -\infty\)
-      \item \(\ln(x^\alpha) \alpha \cdot \ln(x)\)
+      \item \(\ln(x^\alpha) = \alpha \cdot \ln(x)\)
       \item \(\ln(x \cdot y) = \ln(x) + \ln(y)\)
       \item \(\ln\left(\frac{x}{y}\right) = \ln(x) - \ln(y)\)
    \end{enumerate}
@@ -883,16 +883,16 @@ and for \(p \in \mathbb{Z}\), \(q \in \mathbb{N}_{>0}\)
 \end{definition}
 
 \begin{proposition}[Properties]
-   Let \(x, y \in \mathbb{R}\) and \(z \in \mathbb{C}\), then
+   Let \(z, w \in \mathbb{C}\), then
    \begin{enumerate}[label=\roman*, align=Center]
       \item Both series have radius of convergence \(\rho = \infty\)
       \item \(\cos\) and \(\sin\) are continuous
       \item \(\cos(-z) = \cos(z)\)
       \item \(\sin(-z) = -\sin(z)\)
-      \item \(\cos(x \pm y) = \cos(x) \cdot \cos(y) \mp \sin(x) \cdot \sin(y)\)
-      \item \(\sin(x \pm y) = \sin(x) \cdot \cos(y) \pm \cos(x) \cdot \sin(y)\)
-      \item \(\sin(x) - \sin(y) = 2 \cos\left(\frac{x+y}{2}\right) \cdot \sin\left(\frac{x-y}{2}\right)\)
-      \item \(\cos(x) - \cos(y) = -2 \sin\left(\frac{x+y}{2}\right) \cdot \sin\left(\frac{x-y}{2}\right)\)
+      \item \(\cos(z \pm w) = \cos(z) \cdot \cos(w) \mp \sin(z) \cdot \sin(w)\)
+      \item \(\sin(z \pm w) = \sin(z) \cdot \cos(w) \pm \cos(z) \cdot \sin(w)\)
+      \item \(\sin(z) - \sin(w) = 2 \cos\left(\frac{z+w}{2}\right) \cdot \sin\left(\frac{z-w}{2}\right)\)
+      \item \(\cos(z) - \cos(w) = -2 \sin\left(\frac{z+w}{2}\right) \cdot \sin\left(\frac{z-w}{2}\right)\)
       \item \(\cos^2(z) + \sin^2(z) = 1\)
    \end{enumerate}
 \end{proposition}
@@ -980,24 +980,56 @@ Recall that \(\ixp(x) := \exp(ix)\).
    For \(x \in \mathbb{R}\) is \(\exp: \mathbb{R} + i[x; x + 2\pi) \to \mathbb{C}\setminus\{0\}\) bijective.
 \end{theorem}
 
-\begin{theorem}
+\begin{theorem}[Polar Coordinates]
    For any \(z \in \mathbb{C}\setminus\{0\}\),
    \[\exists! \theta \in [0; 2\pi): z = \lvert z\rvert \cdot \exp(i \theta)\]
 \end{theorem}
-We call \(\theta\) the \emph{argument} of \(z\), denoted \(\theta := \argu(z)\).
+We call \(\theta\) the \emph{argument} of \(z\), denoted \(\argu(z) := \theta\).
 With this we can derive \emph{polar coordinates} of any complex number \(z\)
 \[z = x + iy = r \cdot \exp(i \theta) \qquad\text{where}~r := |z| = \sqrt{x^2 + y^2}\]
 The values \(x\) and \(y\) are called the \emph{Cartesian coordinates} of \(z\), while \(r\) and \(\theta\) are its \emph{polar coordinates}.
+Now note that
+\[z = x + iy = \lvert z\rvert \cdot \exp(i \theta) = \lvert z \rvert \cdot \big(\cos(\theta) + i\sin(\theta)\big) = \lvert z\rvert\cos(\theta) + i\lvert z\rvert\sin(\theta)\]
+hence we have
+\[\cos(\theta) = \frac{\Re(z)}{\lvert z\rvert} \qquad\text{and}\qquad \sin(\theta) = \frac{\Im(z)}{\lvert z\rvert}\]
+\begin{example}
+   Let \(z := -\sqrt{3} + i3\), we compute its polar coordinates.
+
+   First we compute \(\lvert z\rvert = \sqrt{(-\sqrt{3})^2 + 3^2} = \sqrt{12}\).
+   Then we solve
+   hence
+   \[-\sqrt{3} + i3 = \sqrt{12}\cos(\theta) + i\sqrt{12}\sin(\theta) \implies \begin{cases}
+         -\sqrt{3} = \sqrt{12}\cos(\theta) \implies \cos(\theta) = -\frac{\sqrt{3}}{\sqrt{12}} = -\frac{1}{2}\\
+         3 = \sqrt{12}\sin(\theta) \implies \sin(\theta) = \frac{3}{\sqrt{12}} = \frac{\sqrt{3}}{2}
+   \end{cases}\]
+   Now we lookup the values on the unit circle and get that \(\theta = \frac{2\pi}{3}\).
+\end{example}
 
 % TODO: make better drawing
 % \begin{center}
 %    \input{drawings/complex_polar_coords.tex}
 % \end{center}
 
-\begin{theorem}
+\begin{theorem}[Complex nth-Root]
    For \(x \in \mathbb{C}\) has \(z^n = x\) \(n\) distinct solutions
    \[z_k = \lvert x\rvert^\frac{1}{n} \exp\left(\frac{i(\argu(x) + 2\pi k)}{n}\right)\]
 \end{theorem}
+\begin{example}
+   We want to find the 6th roots of \(x := 4 + i4\sqrt{3}\).
+
+   So first we compute
+   \[\lvert x\rvert = \sqrt{4^2 +4^2\cdot 3} = \sqrt{64} = 8 \rightsquigarrow \cos(\theta)=\frac{4}{8} = \frac{1}{2} \quad \sin(\theta) = \frac{4\sqrt{3}}{8} = \frac{\sqrt{3}}{2}\]
+   where we get \(\theta = \frac{\pi}{3} = \argu(x)\)
+   So we can compute our 6 solutions with the theorem above
+   \[z_k = \sqrt[6]{8} \cdot \exp\left(\frac{i(\frac{\pi}{3} + 2\pi k)}{6}\right) = \sqrt[6]{8} \left(\cos\left(\frac{\pi}{18} + \frac{\pi}{3} k\right) + i \sin\left(\frac{\pi}{18} + \frac{\pi}{3}k\right)\right)\]
+   hence we get
+   \[z_0 = \sqrt[6]{8}\left(\cos\left(\frac{\pi}{18}\right) + i\sin\left(\frac{\pi}{18}\right)\right)\]
+   \[z_1 = \sqrt[6]{8}\left(\cos\left(\frac{7\pi}{18}\right) + i\sin\left(\frac{7\pi}{18}\right)\right)\]
+   \[z_2 = \sqrt[6]{8}\left(\cos\left(\frac{13\pi}{18}\right) + i\sin\left(\frac{13\pi}{18}\right)\right)\]
+   \[z_3 = \sqrt[6]{8}\left(\cos\left(\frac{19\pi}{18}\right) + i\sin\left(\frac{19\pi}{18}\right)\right)\]
+   \[z_4 = \sqrt[6]{8}\left(\cos\left(\frac{25\pi}{18}\right) + i\sin\left(\frac{25\pi}{18}\right)\right)\]
+   \[z_5 = \sqrt[6]{8}\left(\cos\left(\frac{31\pi}{18}\right) + i\sin\left(\frac{31\pi}{18}\right)\right)\]
+\end{example}
 
 \newpage
 
