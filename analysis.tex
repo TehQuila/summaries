@@ -1209,7 +1209,7 @@ In terms of function limits.
 \begin{example}
    Let \(f: \mathbb{R}\setminus\{1\} \to \mathbb{R}\) be defined as \(f(x) := \frac{x^2+x+1}{x+1}\).
    We prove that \(f\) is continuous in \(x_0 := 1\).
-   Let \(\varepsilon > 0\) be arbitrary but fixed, then
+   Let \(\varepsilon > 0\) be arbitrary and fixed, then
    \begin{equation}\label{eq:ex_eps_delt_cont1}
       \lvert f(x) - f(x_0)\rvert = \left\lvert\frac{x^2+x+1}{x+1} - \frac{3}{2}\right\rvert = \left\lvert \frac{2x^2+2x+2-3x-3}{2(x+1)}\right\rvert = \left\lvert\frac{x^2-\frac{1}{2}x - \frac{1}{2}}{x+1}\right\rvert = \frac{\lvert x-1\rvert \cdot \lvert x+\frac{1}{2}\rvert}{\lvert x+1\rvert} \overset{!}{<} \varepsilon
    \end{equation}
@@ -1233,7 +1233,8 @@ As the limit of functions is equivalent to limits of sequences also in terms of 
    \[\forall x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \left(\lim_{n \to \infty}(x_n) = x_0 \implies \lim_{n \to \infty}\big(f(x_n)\big) = f(x_0)\right)\]
 \end{definition}
 \begin{remark}[Tips]
-   Only usefull to prove discontinuity by counterexample.
+   Only usefull to prove discontinuity by counterexample, i.e.
+   \[\exists x_n \in \big(D\setminus\{x_0\}\big)^\mathbb{N}: \left(\lim_{n \to \infty}(x_n) = x_0~\text{but}~\lim_{n \to \infty}\big(f(x_n)\big) \neq f(x_0)\right)\]
 \end{remark}
 As continuity is a core concept in topology we also give a definition of continuous functions in terms of neighbourhoods.
 \begin{definition}[Neighbourhood Continuity]\label{def:neigh_cont}
@@ -1268,12 +1269,11 @@ where we have that
 \end{proposition}
 
 \subsection{Discontinuities}
-
 \begin{definition}[Jump Discontinuity]
    Given \(D \subset \mathbb{R}\) and \(f: D \to Y\)
    \[x_0 \in \mathbb{R}: x_0 \in \overline{D \cap (-\infty; x_0)} \cap \overline{D \cap (x_0; \infty)}\]
    is a \emph{jump discontinuity} iff
-   \[\lim_{x \uparrow a} f(x) \neq \lim_{x \downarrow a} f(x)\]
+   \[\lim_{x \uparrow x_0} f(x) \neq \lim_{x \downarrow x_0} f(x)\]
 \end{definition}
 
 \begin{theorem}
@@ -1348,10 +1348,10 @@ where we have that
 
 \subsection{Consequences}
 \begin{theorem}
-   Let \(f: D \to \mathbb{R}\) be on an intervall \(D\), continuous and strictly monotonic, then is
+   Let \(f: I \to \mathbb{R}\) be, continuous and strictly monotonic, then is
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \(f(D)\) of the same type as \(D\).
-      \item \(f:D \xrightarrow{\sim} f(D)\)
+      \item \(f(I)\) of the same type as \(I\).
+      \item \(f:I \xrightarrow{\sim} f(I)\)
       \item \(f^{-1}\) is continuous and also strictly monotonic.
    \end{enumerate}
 \end{theorem}
