@@ -154,7 +154,7 @@ In logic, quantification specifies the quantity of specimens in the domain of di
 
 \begin{definition}[For Almost All]
    \(F(x)\) holds for \emph{almost all} \(x \in X\) iff
-   \[\Big|\big\{x \in X \mid \neg F(x)\big\}\Big| < \infty\]
+   \[\abs{\big\{x \in X \mid \neg F(x)\big\}} < \infty\]
 \end{definition}
 \begin{remark}
    In words: \(F(n)\) is true for \emph{almost all} iff it is true for all but some.
@@ -376,7 +376,7 @@ The fact that an \(n \in \mathbb{N}\) is a set itself containing all \(x \in n: 
 
 \begin{definition}[Cardinality]
    \(n \in \mathbb{N}\) the number of elements of a set \(A\)
-   \[|A| := n \]
+   \[\abs{A} := n \]
 \end{definition}
 \begin{remark}
    Where \(n\) is unique, hence the same as in \cref{def:finite_set}.
@@ -1090,7 +1090,7 @@ In other words, if \(A\) is a set of non-empty sets, then exists \(f: A \to \big
 
    We can explicitly construct such a map through \(\{x\} \mapsto x, \{y\} \mapsto y, \ldots\) where \(S = \{\{x\}, \{y\}, \ldots\}\).
 
-   For a \(S = \{1, \ldots, n\}\) can the existence of such a map be shown by induction over \(|S|\).
+   For a \(S = \{1, \ldots, n\}\) can the existence of such a map be shown by induction over \(\abs{S}\).
 
    Or in the case of \(S \subset \mathbb{R}\) where \(S\) is finite is \(f(x) = \inf(X)\).
 
@@ -1634,8 +1634,8 @@ It is important that the cuts don't have a maximum since for example \(\{x \in \
    \[\exists r \in \mathbb{Q}: x < r < y\]
 \end{proposition}
 \begin{remark}
-   It follows that for every \(x \in \mathbb{R}\) and \(\epsilon > 0\) there is an \(r \in \mathbb{Q}\) with \(|x - r| < \epsilon\) because
-   \[|x - r| \impliedby \begin{cases} x - r < \epsilon\\ x - r > - \epsilon \end{cases}\]
+   It follows that for every \(x \in \mathbb{R}\) and \(\epsilon > 0\) there is an \(r \in \mathbb{Q}\) with \(\abs{x - r} < \epsilon\) because
+   \[\abs{x - r} \impliedby \begin{cases} x - r < \epsilon\\ x - r > - \epsilon \end{cases}\]
    Where \(\epsilon\) is the approximation error.
    Furthermore exist infinite \(r \in \mathbb{Q}\) between \(x, y \in \mathbb{R}: x < y\)
 \end{remark}
@@ -1693,7 +1693,7 @@ With this procedure we can produce a number with \(n\) decimals.
    The map \(\phi: \mathbb{R} \to \mathcal{A}\) is bijective.
 \end{theorem}
 
-\begin{proposition}[\(|\mathbb{R}| = \infty\)]\label{pro:R_uncountable}
+\begin{proposition}[\(\abs{\mathbb{R}} = \infty\)]\label{pro:R_uncountable}
    \(\mathbb{R}\) is uncountably infinite.
 \end{proposition}
 
@@ -1748,7 +1748,7 @@ Complex numbers form a field \(\mathbb{C}\) which contains \(\mathbb{R}\) and an
 
 \begin{definition}[Complex Absolute Value]
    Given \(z = x + iy \in \mathbb{C}\)
-   \[|z| := \sqrt{\overline{z} \cdot z} = \sqrt{x^2 + y^2}\]
+   \[\abs{z} := \sqrt{\overline{z} \cdot z} = \sqrt{x^2 + y^2}\]
 \end{definition}
 
 \begin{proposition}[Calculation Rules]
@@ -1763,11 +1763,11 @@ Complex numbers form a field \(\mathbb{C}\) which contains \(\mathbb{R}\) and an
       \item \(z \cdot \overline{z} = \lvert z \rvert^2\)
       \item \(0 \leq \lvert z\rvert\) and \(\lvert z\rvert = 0 \iff z = 0\)
       \item \(z \in \mathbb{R} \iff \lvert z \rvert_\mathbb{C} = \lvert z \rvert_\mathbb{R}\)
-      \item \(|z_1 + z_2| \leq |z_1| + |z_2|\)
-      \item \(|z_1 \cdot z_2| = |z_1| \cdot |z_2|\)
+      \item \(\abs{z_1 + z_2} \leq \abs{z_1} + \abs{z_2}\)
+      \item \(\abs{z_1 \cdot z_2} = \abs{z_1} \cdot \abs{z_2}\)
       \item \(\left\lvert \lvert z_1\rvert - \lvert z_2\rvert \right\rvert \leq \lvert z_1 - z_2\rvert\)
-      \item \(|\Re(z)| \leq |z|\)
-      \item \(|\Im(z)| \leq |z|\)
+      \item \(\abs{\Re(z)} \leq \abs{z}\)
+      \item \(\abs{\Im(z)} \leq \abs{z}\)
       \item If \(z \neq 0\)
          \[\frac{1}{z} = \frac{\overline{z}}{\lvert z \rvert^2}\]
    \end{enumerate}

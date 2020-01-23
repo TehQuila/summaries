@@ -18,7 +18,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \subsubsection{Convergence}
 \begin{definition}[Convergent Sequence]\label{def:conv_seq}
    \(x_n \in \mathbb{K}^\mathbb{N}\) \emph{converges to} \(x \in \mathbb{K}\) iff
-   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n \geq n_\varepsilon: |x_n - x| < \varepsilon)\]
+   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: (\forall n \geq n_\varepsilon: \abs{x_n - x} < \varepsilon)\]
 \end{definition}
 \begin{remark}[Intuition]
    \(x_n\) converges to \(x\), if after some index \(n_\varepsilon\) \emph{all} following \(x_n\) are closer to \(x\) than an arbitrarily chosen error margin \(\varepsilon\).
@@ -46,7 +46,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
    A sequence \((x_n)_{n \in \mathbb{N}}\) is
    \[\text{bounded below} :\iff \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: b \leq x_n)\]
    \[\text{bounded above} :\iff \exists b \in \mathbb{R}: (\forall n \in \mathbb{N}: x_n \leq b)\]
-   \[\text{bounded} :\iff \exists b \in \mathbb{R}_{>0}: (\forall n \in \mathbb{N}: |x_n| \leq b)\]
+   \[\text{bounded} :\iff \exists b \in \mathbb{R}_{>0}: (\forall n \in \mathbb{N}: \abs{x_n} \leq b)\]
 \end{definition}
 \begin{remark}
    Since \(\lvert x_n \rvert < b \iff -b < x_n < b\) we see that \(x_n\) is \emph{bounded} if it is bounded above and below.
@@ -149,7 +149,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
                1 & x = 1\\
                \pm\infty & x \in \mathbb{R}\setminus (-1;1)
          \end{cases}\]
-      \item Let \(|x| < 1\) and \(r \in \mathbb{N}\)
+      \item Let \(\abs{x} < 1\) and \(r \in \mathbb{N}\)
          \[\lim_{n \to \infty}\big(n^r \cdot x^n\big) = 0\]
       \item \[\lim_{n \to \infty}(\sqrt[n]{n}) = 1\]
       \item \(\forall r \in \mathbb{R}_{>0}\)
@@ -180,31 +180,31 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
    \textbf{Case 2:} \(\tilde{x} = 0\) and \(x\) arbitrary.
 
-   \textbf{Case 2.1:} \(|x| < 1\) implies that \(x = \frac{a}{b}\) with \(a < b\), so we regard \(|x_n| = |x^n| = |x|^n\)
-   \[\frac{|x_{n+1}|}{|x_n|} = \frac{\left|\frac{a}{b}\right|^{n+1}}{\left|\frac{a}{b}\right|^n} = \frac{|a|^{n+1}\cdot|b|^n}{|a|^n\cdot|b|^{n+1}} = \left|\frac{a}{b}\right| < 1\]
-   hence \((|x_n|)\) is decreasing and since \(\forall n \in \mathbb{N}: 0 \leq |x_n|\) also bounded below.
-   So \(|x_n| \xrightarrow{n \to \infty} 0\), according to \cref{thm:incr_bound_conv} and thus \(\lim_{n \to \infty} x_n = 0\).
+   \textbf{Case 2.1:} \(\abs{x} < 1\) implies that \(x = \frac{a}{b}\) with \(a < b\), so we regard \(\abs{x_n} = \abs{x^n} = \abs{x}^n\)
+   \[\frac{\abs{x_{n+1}}}{\abs{x_n}} = \frac{\abs{\frac{a}{b}}^{n+1}}{\abs{\frac{a}{b}}^n} = \frac{\abs{a}^{n+1}\cdot\abs{b}^n}{\abs{a}^n\cdot\abs{b}^{n+1}} = \abs{\frac{a}{b}} < 1\]
+   hence \((\abs{x_n})\) is decreasing and since \(\forall n \in \mathbb{N}: 0 \leq \abs{x_n}\) also bounded below.
+   So \(\abs{x_n} \xrightarrow{n \to \infty} 0\), according to \cref{thm:incr_bound_conv} and thus \(\lim_{n \to \infty} x_n = 0\).
 
-   \textbf{Case 2.2:} \(|x| = 1\) but \(x \neq 1\).
+   \textbf{Case 2.2:} \(\abs{x} = 1\) but \(x \neq 1\).
    Suppose \((x_n)\) converges, then \(\lim_{n \to \infty} x_n = \tilde{x} = 0\) by assumption.
-   So according to \cref{lem:zero_seq} (i) \(\lim_{n \to \infty} |x_n| = 0\).
-   But this is a contradiction to \(|x| = 1\), hence \((x_n)\) diverges.
+   So according to \cref{lem:zero_seq} (i) \(\lim_{n \to \infty} \abs{x_n} = 0\).
+   But this is a contradiction to \(\abs{x} = 1\), hence \((x_n)\) diverges.
 
-   \textbf{Cases 2.3:} \(|x| > 1 \implies \left(\frac{1}{|x|}\right)^n \xrightarrow{n \to \infty} 0\)
+   \textbf{Cases 2.3:} \(\abs{x} > 1 \implies \left(\frac{1}{\abs{x}}\right)^n \xrightarrow{n \to \infty} 0\)
    This means that
-   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: \left(\forall n > n_\varepsilon: \frac{1}{|x^n|} < \varepsilon\right)\]
+   \[\forall \varepsilon > 0~\exists n_\varepsilon \in \mathbb{N}: \left(\forall n > n_\varepsilon: \frac{1}{\abs{x^n}} < \varepsilon\right)\]
    hence \((x_n)\) is unbounded below and thus diverges according to \cref{thm:conv_bound}.
 \end{proof}
 \begin{proof}[Proof (ii)]
    The case where \(x = 0\) is trivial, so assume w.l.o.g. \(x \neq 1\).
-   We regard \(x_n := n^r \cdot |x|^n\), then \(x_n > 0\) and
-   \[\frac{x_{n+1}}{x_n} = \frac{(n+1)^r \cdot |x|^{n+1}}{n^r \cdot |x|^n} = |x| \left(\frac{n+1}{n}\right)^r = |x| \left(1 + \frac{1}{n}\right)^r \xrightarrow{n \to \infty} |x|\]
+   We regard \(x_n := n^r \cdot \abs{x}^n\), then \(x_n > 0\) and
+   \[\frac{x_{n+1}}{x_n} = \frac{(n+1)^r \cdot \abs{x}^{n+1}}{n^r \cdot \abs{x}^n} = \abs{x} \left(\frac{n+1}{n}\right)^r = \abs{x} \left(1 + \frac{1}{n}\right)^r \xrightarrow{n \to \infty} \abs{x}\]
    since \(\left(1 + \frac{1}{n}\right)^r \xrightarrow{n \to \infty} 1\).
 
-   Now let \(\alpha \in \big(|x|; 1\big)\), then
-   \[\exists n_0 \in \mathbb{N}~\forall n > n_0: \left(\frac{x_{n+1}}{x_n} - \alpha = \left|\frac{x_{n+1}}{x_n} - \alpha\right| < \alpha - |x| \implies \frac{x_{n+1}}{x_n} < \alpha  \implies x_{n+1} < \alpha \cdot x_n\right)\]
+   Now let \(\alpha \in \big(\abs{x}; 1\big)\), then
+   \[\exists n_0 \in \mathbb{N}~\forall n > n_0: \left(\frac{x_{n+1}}{x_n} - \alpha = \abs{\frac{x_{n+1}}{x_n} - \alpha} < \alpha - \abs{x} \implies \frac{x_{n+1}}{x_n} < \alpha  \implies x_{n+1} < \alpha \cdot x_n\right)\]
    So by induction \(\forall n > n_0: x_n \leq x_{n_0} \cdot \alpha^{n - n_0}\), hence
-   \[|n^r \cdot x^n| = x_n \leq x_{n_0} \cdot \alpha^{n-n_0} \xrightarrow{n \to \infty} 0\]
+   \[\abs{n^r \cdot x^n} = x_n \leq x_{n_0} \cdot \alpha^{n-n_0} \xrightarrow{n \to \infty} 0\]
    So according to \cref{lem:zero_seq} (iii) is \(n^rx^n \to 0\).
 \end{proof}
 
@@ -219,7 +219,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
       \item \[\lim_{n \to \infty}(x_n) = x \iff \lim_{n \to \infty} (x_n - x) = 0\]
       \item \[\lim_{n \to \infty}(x_n) = 0 \iff \lim_{n \to \infty}\big(\lvert x_n\rvert\big) = 0\]
       \item \[x_n~\text{bounded} \implies \lim_{n \to \infty} (x_n \cdot y_n) = 0\]
-      \item \[\exists n_0 \in \mathbb{N}: (\forall n \geq n_0: |x_n| \leq y_n) \implies \lim_{n \to \infty}(x_n) = 0\]
+      \item \[\exists n_0 \in \mathbb{N}: (\forall n \geq n_0: \abs{x_n} \leq y_n) \implies \lim_{n \to \infty}(x_n) = 0\]
    \end{enumerate}
 \end{proposition}
 
@@ -282,9 +282,9 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{remark}
 \begin{remark}[Tips]
    The \emph{cauchy condition} can be restated as
-   \[\forall n, m > n_\varepsilon: |x_m - x_n| < \varepsilon \iff \forall m > n \geq n_\varepsilon: |x_m - x_n| < \varepsilon\]
+   \[\forall n, m > n_\varepsilon: \abs{x_m - x_n} < \varepsilon \iff \forall m > n \geq n_\varepsilon: \abs{x_m - x_n} < \varepsilon\]
    and also
-   \[|x_m - x_n| = |(x_m - x) + (x - x_n)| \leq |x_m - x| + |x_n - x| < \varepsilon\]
+   \[\abs{x_m - x_n} = \abs{(x_m - x) + (x - x_n)} \leq \abs{x_m - x} + \abs{x_n - x} < \varepsilon\]
 \end{remark}
 
 \begin{theorem}[Cauchy\(\implies\)Bounded]\label{thm:cauchy_bound}
@@ -333,7 +333,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
 \begin{definition}[Accumulation Point]
    \(x \in \mathbb{K}\) is an \emph{accumulation point} of \(x_n \in \mathbb{K}^\mathbb{N}\) iff
-   \[\forall \varepsilon > 0: \exists~\text{an infinite}~N_{\varepsilon} \subset \mathbb{N}: (\forall n \in N_\varepsilon: |x_n - x| < \varepsilon)\]
+   \[\forall \varepsilon > 0: \exists~\text{an infinite}~N_{\varepsilon} \subset \mathbb{N}: (\forall n \in N_\varepsilon: \abs{x_n - x} < \varepsilon)\]
 \end{definition}
 \begin{example}
    Following some examples of sequences and their accumulation points.
@@ -357,7 +357,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 
 \begin{theorem}
    Let \(x_n \in \mathbb{K}^\mathbb{N}\) and \(x \in \mathbb{K}\), then is
-   \[x~\text{an accumulation point of}~x_n \iff \forall \varepsilon > 0: (\forall n \in \mathbb{N}~\exists m \geq n: |x_m - x| < \varepsilon)\]
+   \[x~\text{an accumulation point of}~x_n \iff \forall \varepsilon > 0: (\forall n \in \mathbb{N}~\exists m \geq n: \abs{x_m - x} < \varepsilon)\]
 \end{theorem}
 
 \begin{theorem}[Bolzano-Weierstrass]\label{thm:bolzano}
@@ -376,7 +376,7 @@ In this section we use the notation \(\mathbb{K}\) to represent the field of \(\
 \end{remark}
 
 \subsection{Limessuperior \& Limesinferior}
-Let \(x_n \in \mathbb{R}^\mathbb{N}\) be bounded, i.e. \(\forall n \in \mathbb{N}: |x_n| \leq b\).
+Let \(x_n \in \mathbb{R}^\mathbb{N}\) be bounded, i.e. \(\forall n \in \mathbb{N}: \abs{x_n} \leq b\).
 We define
 \[\overline{x}_n := \sup\{x_k \mid k \geq n\} \qquad\text{and}\qquad \underline{x}_n := \inf\{x_k \mid k \geq n\}\]
 Since \(x_n\) is bounded holds \(\forall n \in \mathbb{N}: -b \leq \underline{x}_n \leq \overline{x}_n \leq b\) which means that they both are bounded.
@@ -520,7 +520,7 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 \end{theorem}
 
 \begin{theorem}[Cauchy Criterion for Series]\label{thm:cauchy_crit_ser}
-   \[\sum x_n~\text{converges} \iff \forall \varepsilon > 0: \exists n_\varepsilon \in \mathbb{N}: \left(\forall n > m \geq n_\varepsilon: \left| \sum_{k = m + 1}^n x_k \right| < \varepsilon \right)\]
+   \[\sum x_n~\text{converges} \iff \forall \varepsilon > 0: \exists n_\varepsilon \in \mathbb{N}: \left(\forall n > m \geq n_\varepsilon: \abs{\sum_{k=m+1}^n x_k} < \varepsilon \right)\]
 \end{theorem}
 
 \begin{proposition}[Leibnitz Test]\label{pro:leibnitz}
@@ -535,7 +535,7 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 
 \subsubsection{Absolute Convergence}
 \begin{definition}[Absolute Convergent Series]
-   A series where \(\sum |x_n|\) converges.
+   A series where \(\sum \abs{x_n}\) converges.
 \end{definition}
 \begin{remark}[Tips]
    For some series it is easier to show absolute convergence than regular convergence.
@@ -586,7 +586,7 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 \end{example}
 
 \begin{proposition}[Root Test]\label{pro:root_test}
-   Let \((x_n)_{n \in \mathbb{N}}\) and \(\alpha := \limsup_{n \to \infty}\big(\sqrt[n]{|x_n|}\big)\), then
+   Let \((x_n)_{n \in \mathbb{N}}\) and \(\alpha := \limsup_{n \to \infty}\big(\sqrt[n]{\abs{x_n}}\big)\), then
    \[\alpha < 1 \implies \sum x_n~\text{absolute convergent}\]
    \[\alpha > 1 \implies \sum x_n~\text{divergent}\]
    \[\text{If}~\alpha = 1~\text{then no statement is possible.}\]
@@ -602,8 +602,8 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
 
 \begin{proposition}[Ratio Test]\label{pro:ratio_test}
    Let \((x_n)_{n \in \mathbb{N}}\) such that \(x_n \neq 0\) for almost all \(n \in \mathbb{N}\), then
-   \[\limsup_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) < 1 \implies \sum x_n~\text{absolute convergent}\]
-   \[\liminf_{n \to \infty} \left(\left|\frac{x_{n+1}}{x_n}\right|\right) > 1 \implies \sum x_n~\text{divergent}\]
+   \[\limsup_{n \to \infty} \left(\abs{\frac{x_{n+1}}{x_n}}\right) < 1 \implies \sum x_n~\text{absolute convergent}\]
+   \[\liminf_{n \to \infty} \left(\abs{\frac{x_{n+1}}{x_n}}\right) > 1 \implies \sum x_n~\text{divergent}\]
    \[\text{If}~\limsup, \liminf = 1~\text{then no statement is possible.}\]
 \end{proposition}
 \begin{remark}[Tips]
@@ -627,8 +627,8 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
       \item \[\sum_{n=0}^\infty \frac{n^2}{2^n} = 6\]
       \item Geometric Series
          \[\sum_{n=0}^k x^n = \frac{1-x^n}{1-x}\]
-         \[|x| < 1 \implies \sum_{n = 0}^\infty x^n = \frac{1}{1 - x}\]
-         \[|x| \geq 1 \implies \sum_{n = 0}^\infty x^n = \infty\]
+         \[\abs{x} < 1 \implies \sum_{n = 0}^\infty x^n = \frac{1}{1 - x}\]
+         \[\abs{x} \geq 1 \implies \sum_{n = 0}^\infty x^n = \infty\]
       \item \[\sum_{n=0}^\infty \left(\frac{1}{2}\right)^{n+(-1)^n}~\text{is absolute convergent}\]
       \item Exponential Series
          \[\sum_{n=0}^\infty \frac{1}{n!} = e\]
@@ -642,9 +642,9 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
    Recall that \((s_k)\) is a cauchy sequence iff \(\forall \varepsilon > 0 \exists n_\varepsilon\) s.t.
    \begin{equation*}
       \begin{split}
-         \forall m, n > n_\varepsilon: |s_m - s_n| < \varepsilon \iff & \forall m > n \geq n_\varepsilon: |s_m - s_n| < \varepsilon \iff \\
-                                                                      & \forall m > n \geq n_\varepsilon: \left|\sum_{k=1}^m \frac{1}{k} - \sum_{k = 1}^n \frac{1}{k}\right| < \varepsilon \iff \\
-                                                                      & \forall m > n \geq n_\varepsilon: \left|\sum_{k=n+1}^m \frac{1}{k}\right| < \varepsilon
+         \forall m, n > n_\varepsilon: \abs{s_m - s_n} < \varepsilon \iff & \forall m > n \geq n_\varepsilon: \abs{s_m - s_n} < \varepsilon \iff \\
+                                                                      & \forall m > n \geq n_\varepsilon: \abs{\sum_{k=1}^m \frac{1}{k} - \sum_{k=1}^n \frac{1}{k}} < \varepsilon \iff \\
+                                                                      & \forall m > n \geq n_\varepsilon: \abs{\sum_{k=n+1}^m \frac{1}{k}} < \varepsilon
       \end{split}
    \end{equation*}
    Now we claim that this statement is false for any \(n\) when we set \(m = 2n\).
@@ -653,7 +653,7 @@ The \emph{harmonic series} \(\sum \frac{1}{n}\) diverges even though \(\frac{1}{
    \[\sum_{k=n+1}^{m} \frac{1}{k} \geq \varepsilon\]
 \end{proof}
 \begin{proof}[Proof (ii)]
-   Let \(|x| < 1 \), then is
+   Let \(\abs{x} < 1 \), then is
    \[s_k = \sum_{n = 0}^k x^n = \frac{1 - x^{n+1}}{1 - x} \xrightarrow{n \to \infty} \frac{1}{x-1}\]
 \end{proof}
 \begin{proof}[Proof (iii)]
@@ -698,13 +698,13 @@ We look at the convergence of series, when we rearrange their elements, which ha
 A power series will converge for some values of \(z\) and may diverge for others.
 \begin{definition}[Radius of Convergence]
    Let \(\sum a_n z^n\) be a power series.
-   \[\rho := \frac{1}{\lim\sup_{n \to \infty} \sqrt[n]{|a_n|}}\]
+   \[\rho := \frac{1}{\lim\sup_{n \to \infty} \sqrt[n]{\abs{a_n}}}\]
    where we define that \(\frac{1}{\infty} := 0\) and \(\frac{1}{0} := \infty\).
 \end{definition}
 \begin{remark}[Intuition]
    As power series are complex series, their convergence can be imagined as an inward spiral.
    This way \(\rho\) is the radius of the \emph{disk of convergence}, the set of all points for which the series converges
-   \[\{z \in \mathbb{C} \mid |c - z| < \rho\}\]
+   \[\{z \in \mathbb{C} \mid \abs{c - z} < \rho\}\]
    Also we see the following cases
    \[\rho = 0 \implies \forall z \neq 0: \sum a_n z^n~\text{diverges}\]
    \[\rho = \infty \implies \forall z \in \mathbb{C}: \sum a_n z^n~\text{converges}\]
@@ -725,11 +725,11 @@ A power series will converge for some values of \(z\) and may diverge for others
 \end{remark}
 \begin{example}
    For \(a_n := 1 \implies \sum_{n=0}^\infty z^n\) is \(\rho = 1\).
-   The series converges to 0 for all \(|z| < 1\) and diverges for \(|z| \geq 1\).
+   The series converges to 0 for all \(\abs{z} < 1\) and diverges for \(\abs{z} \geq 1\).
 \end{example}
 \begin{example}
    For \(a_n := \frac{1}{n} \implies \sum_{n=0}^\infty \frac{1}{n} z^n\) is \(\rho = 1\).
-   The series converges for \(|z| < 1\) and diverges for \(z = 1\).
+   The series converges for \(\abs{z} < 1\) and diverges for \(z = 1\).
    For \(z = -1\) is it the alternating harmonic series and converges.
 \end{example}
 
@@ -986,7 +986,7 @@ Recall that \(\ixp(x) := \exp(ix)\).
 \end{theorem}
 We call \(\theta\) the \emph{argument} of \(z\), denoted \(\argu(z) := \theta\).
 With this we can derive \emph{polar coordinates} of any complex number \(z\)
-\[z = x + iy = r \cdot \exp(i \theta) \qquad\text{where}~r := |z| = \sqrt{x^2 + y^2}\]
+\[z = x + iy = r \cdot \exp(i \theta) \qquad\text{where}~r := \abs{z} = \sqrt{x^2 + y^2}\]
 The values \(x\) and \(y\) are called the \emph{Cartesian coordinates} of \(z\), while \(r\) and \(\theta\) are its \emph{polar coordinates}.
 Now note that
 \[z = x + iy = \lvert z\rvert \cdot \exp(i \theta) = \lvert z \rvert \cdot \big(\cos(\theta) + i\sin(\theta)\big) = \lvert z\rvert\cos(\theta) + i\lvert z\rvert\sin(\theta)\]
@@ -1140,8 +1140,8 @@ Another intuitive viewpoint to see how function limits and continuity are connec
 \end{remark}
 \begin{remark}
    From \cref{def:func_limit} we can equivalently write
-   \[\lim_{x \uparrow x_0} f(x) = L \iff \forall \varepsilon~\exists \delta > 0: (x \in D: x_0- \delta < x < x_0 \implies |f(x) - L| < \varepsilon)\]
-   \[\lim_{x \downarrow x_0} f(x) = L \iff \forall \varepsilon~\exists \delta > 0: (x \in D: x_0 < x < x_0 + \delta \implies |f(x) - L| < \varepsilon)\]
+   \[\lim_{x \uparrow x_0} f(x) = L \iff \forall \varepsilon~\exists \delta > 0: (x \in D: x_0- \delta < x < x_0 \implies \abs{f(x) - L} < \varepsilon)\]
+   \[\lim_{x \downarrow x_0} f(x) = L \iff \forall \varepsilon~\exists \delta > 0: (x \in D: x_0 < x < x_0 + \delta \implies \abs{f(x) - L} < \varepsilon)\]
 \end{remark}
 \begin{example}
    We regard
@@ -1182,7 +1182,7 @@ This becomes apparant when regarding both one-sided limits, approaching the same
 
 \subsection{Definition \& Terminology}
 In this sections we regard functions
-\[f: D \subset (X, \|\ldots\|) \to (Y, \|\ldots\|)\]
+\[f: D \subset (X, \norm{\ldots}) \to (Y, \norm{\ldots})\]
 % TODO: merge with numerics
 \begin{definition}[Set of Continuous Functions]
    \[C^0(D, Y) := \{f: D \to Y \mid f~\text{is continuous}\}\]
@@ -1194,7 +1194,7 @@ With the introduction established in \cref{ssec:function_limits} we now have mut
 In terms of function limits.
 \begin{definition}[\(\varepsilon-\delta\) Continuity]\label{def:eps_delt_cont}
    \(f: D \to \mathbb{R}\) is continuous in \(x_0 \in D\) iff
-   \[\forall \varepsilon > 0~\exists \delta > 0: (\forall x \in D: |x-x_0| < \delta \implies |f(x) - f(x_0)| < \varepsilon)\]
+   \[\forall \varepsilon > 0~\exists \delta > 0: (\forall x \in D: \abs{x-x_0} < \delta \implies \abs{f(x) - f(x_0)} < \varepsilon)\]
 \end{definition}
 \begin{remark}[Intuition]
    A \emph{continuous function} is a function that does not have any abrupt changes in value, known as \emph{discontinuities}.
@@ -1204,7 +1204,7 @@ In terms of function limits.
    \(f\) is \emph{continuous} (on \(D\)) iff \(f\) is continuous in all \(x_0 \in D\).
 
    \(f\) is \emph{discontinuous} in \(x_0\) iff
-   \[\exists \varepsilon > 0~\forall \delta > 0: (\exists x \in D: |x - x_0| < \delta~\text{but}~|f(x) - f(x_0)| \geq \varepsilon)\]
+   \[\exists \varepsilon > 0~\forall \delta > 0: (\exists x \in D: \abs{x - x_0} < \delta~\text{but}~\abs{f(x) - f(x_0)} \geq \varepsilon)\]
 \end{remark}
 \begin{example}
    Let \(f: \mathbb{R}\setminus\{1\} \to \mathbb{R}\) be defined as \(f(x) := \frac{x^2+x+1}{x+1}\).
@@ -1285,12 +1285,12 @@ where we have that
 \begin{proposition}[Continuous Functions]
    The following are important examples of continuous functions
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\|\ldots\|: X \to \mathbb{R}_{\geq 0}\) is continuous.
+      \item \(\norm{\ldots}: X \to \mathbb{R}_{\geq 0}\) is continuous.
       \item \(\sqrt{\ldots}: \mathbb{R}_{\geq 0} \to \mathbb{R}_{\geq 0}\) is continuous.
       \item \(\lfloor\ldots\rfloor: \mathbb{R} \to \mathbb{R}\) is continuous on \(\mathbb{R}\setminus\mathbb{Z}\) and discontinuous on \(\mathbb{Z}\).
       \item \(f: \mathbb{K}^n \to \mathbb{K}\) where \(f(x) := x_k\) is continuous.
       \item \(f: \mathbb{C} \to \mathbb{R}\) where \(f(x) := \Re(x)\) or \(f(x) := \Im(x)\) is continuous.
-      \item \(\id: (X, \|\ldots\|_a) \to (X, \|\ldots\|_b)\) is continuous.
+      \item \(\id: (X, \norm{\ldots}_a) \to (X, \norm{\ldots}_b)\) is continuous.
    \end{enumerate}
 \end{proposition}
 
@@ -1380,7 +1380,7 @@ When we speak of a function being continuous on an interval, we mean only that i
 In contrast, uniform continuity is a global property of \(f\), in the sense that the standard definition refers to pairs of points rather than individual points.
 \begin{definition}[Uniform Continuity]
    \(f: D \to Y\) is uniform continuous iff
-   \[\forall \varepsilon > 0~\exists \delta > 0: (\forall x,y \in D: |x - y| < \delta \implies |f(x) - f(y)| < \varepsilon)\]
+   \[\forall \varepsilon > 0~\exists \delta > 0: (\forall x,y \in D: \abs{x - y} < \delta \implies \abs{f(x) - f(y)} < \varepsilon)\]
 \end{definition}
 \begin{remark}[Intuition]
    A function \(f\) is uniformly continuous if, it is possible to guarantee that \(f(x)\) and \(f(y)\) be as close to each other as we please by requiring only that \(x\) and \(y\) are sufficiently close to each other.
@@ -1399,13 +1399,13 @@ In contrast, uniform continuity is a global property of \(f\), in the sense that
    \[\lvert x-y\rvert \overset{!}{<} \delta \implies 2 \lvert x-y\rvert < 2 \delta \overset{!}{<} \varepsilon\]
    hence with \(\delta := \frac{\varepsilon}{2}\) we have shown that \(f\) is uniformly continuous.
 
-   However \(f\) is not uniformly continuous on \([0; \infty)\) because for some fixed \(|x - y|\) can \(|x^2 - y^2| = |x - y||x + y|\) get arbitrary large if we choose \(x, y\) large enough.
+   However \(f\) is not uniformly continuous on \([0; \infty)\) because for some fixed \(\abs{x - y}\) can \(\abs{x^2 - y^2} = \abs{x - y}\abs{x + y}\) get arbitrary large if we choose \(x, y\) large enough.
 \end{example}
 
 \begin{proposition}[Important Examples]
    The following functions are uniformly continuous
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\|\ldots\|: X \to \mathbb{R}_{\geq 0}\) is uniformly continuous.
+      \item \(\norm{\ldots}: X \to \mathbb{R}_{\geq 0}\) is uniformly continuous.
       \item \(\frac{1}{x}: \mathbb{R}_{>0} \to \mathbb{R}\) is \emph{not} uniformly continuous.
       \item \(x^2: [-1; 1] \to \mathbb{R}_{\geq 0}\) is uniformly continuous.
       \item \(x^2: \mathbb{R} \to \mathbb{R}_{\geq 0}\) is \emph{not} uniformly continuous
@@ -1415,7 +1415,7 @@ In contrast, uniform continuity is a global property of \(f\), in the sense that
 \newpage
 
 \section{Differential Calculus}
-Let \(D \subset \mathbb{K}\), \(x_0 \in D\) be an accumulation point of \(D\) and \((Y, \|\ldots\|)\).
+Let \(D \subset \mathbb{K}\), \(x_0 \in D\) be an accumulation point of \(D\) and \((Y, \norm{\ldots})\).
 
 \subsection{Definition \& Basic Properties}
 When we differentiate a function \(f\) we want to calculate the slope of \(f\) at \(x_0\), which is the tangent to the function graph at \(x_0\).

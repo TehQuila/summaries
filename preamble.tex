@@ -3,6 +3,8 @@
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\input{glyphtounicode}
+\pdfgentounicode=1
 
 % Glossaries
 \usepackage[toc,nonumberlist]{glossaries}
@@ -166,3 +168,7 @@
 \DeclareMathOperator\fl{fl}
 \DeclareMathOperator\rd{rd}
 \DeclareMathOperator\eps{eps}
+
+% Custom Math Commands
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
