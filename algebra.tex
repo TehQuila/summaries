@@ -1082,6 +1082,27 @@ which reveals the structure of a matrix multiplication (\ref{def:matrix_mult})
    \[y = -\frac{1}{2}z\]
 \end{example}
 
+\begin{definition}[Permutation Matrix]\label{def:perm_mat}
+   Given a field \(K\) and a permutation \(\sigma \in S_n\).
+   \[P \in \Mat_n(K)~\text{where}~\forall i \in \{1, \ldots, n\}: P_{i, \sigma(i)} = 1\]
+   and all other entries are 0.
+\end{definition}
+\begin{remark}
+   In other words, the \textit{i}th column vector of \(P\) is \(e_{\sigma(i)}\).
+   \(P_{ji}\) of \cref{def:elementary_matrix} is a special kind of permutation matrix (hence the german name ``Vertauschungsmatrix'').
+\end{remark}
+\begin{example}
+   Let \(\sigma = \begin{bmatrix}1&2&3&4&5\\2&5&1&3&4\end{bmatrix}\)
+   Then is
+   \[P_\sigma = (e_{\sigma(1)}~e_{\sigma(2)}~e_{\sigma(3)}~e_{\sigma(4)}~e_{\sigma(5)}~) = (e_2~e_5~e_1~e_3~e_4) = \begin{pmatrix}0&0&1&0&0\\1&0&0&0&0\\0&0&0&1&0\\0&0&0&0&1\\0&1&0&0&0\end{pmatrix}\]
+   So it is trivial to see that \(P_{\sigma_{\id}} = I_n\).
+\end{example}
+
+\begin{proposition}
+   Let \(P\) be a permutation matrix, then
+   \[P^{-1} = P^T\]
+\end{proposition}
+
 \newpage
 
 % TODO: merge with polynomial ring
@@ -1190,7 +1211,7 @@ As an application, we describe polynomials, whose roots are sums respectively po
    \end{enumerate}
 \end{definition}
 \begin{remark}[Notation]
-   As we only have a single operation, we omit it all together.
+   As we only have a single operation, we omit it all together, i.e. \(ab := a \ast b\).
 \end{remark}
 
 % TODO: foundations, generalized associative law --> abc don't have to be bracketed.
@@ -1207,8 +1228,7 @@ As an application, we describe polynomials, whose roots are sums respectively po
 \begin{remark}[Notation]
    Since the expression \(\underbrace{a a \ldots a}_{n-times}\) does not depend on how it is bracketd, we shall denote it by \(x^n\) and similarly \(a^{-n} := a^{-1} a^{-1} \ldots a^{-1}\).
    Furthermore let \(x^0 := e\).
-
-   When we are dealing with specific groups, we shal use the natural given operation.
+   When we are dealing with specific groups, we shall use the natural given operation.
    For example, when the operation is \(+\), the identity will be denoted by 0 and inverses \(a^{-1}\) by \(-a\).
 \end{remark}
 
@@ -1235,16 +1255,691 @@ As an application, we describe polynomials, whose roots are sums respectively po
 \end{definition}
 
 \begin{definition}[Abelian Group]\label{def:abel_group}
-   A group whose operation is commutative: \(\forall a, b \in G: ab = ba\).
+   A group \(G\) where \(\forall a, b \in G: ab = ba\).
+\end{definition}
+\begin{remark}
+   That is, the group operation is commutative.
+\end{remark}
+
+\subsubsection{Cosets}
+\begin{definition}[Left- \& Right Coset]
+   Given a group \(G\), \(H < G\) and \(g \in G\), then is
+   \[gH := \{gh \mid h \in H\}~\text{a left coset}\]
+   \[Hg := \{hg \mid h \in H\}~\text{a right coset}\]
+   of \(H\) in \(G\).
+\end{definition}
+\begin{remark}
+   \(H\) itself is also a coset when we take \(g = e_G\).
+\end{remark}
+
+\begin{proposition}
+   Let \(G\) be a group and \(H \subset G\) a subgroup.
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[\forall g, g' \in G: (gH = g'H) \lor (gH \cap g'H = \emptyset)\]
+      \item \[\bigcup_{g \in G} gH = G\]
+   \end{enumerate}
+   analogously for right cosets.
+\end{proposition}
+\begin{remark}
+   From this follows that ''belong to the same left \(H\)-coset`` defines an equivalence relation on \(G\), whose equivalence classes are the left cosets of \(H\).
+\[g \sim g' :\iff \exists h \in H: g' = gh\]
+\end{remark}
+
+\begin{definition}[Set of Cosets]
+   \[G/H := \{gH \mid g \in G\} \qquad\text{and}\qquad H\backslash G := \{Hg \mid g \in G\}\]
+\end{definition}
+\begin{remark}
+   The map \(G \xrightarrow{\sim} G\) where \(g \mapsto g^{-1}\) induces a map \(G/H \xrightarrow{\sim} H\backslash G\) because for \(a \in G\) we have
+   \[\{g^{-1} \mid g \in aH\} = Ha^{-1} \qquad\text{and}\qquad \{g^{-1} \mid g \in Ha\} = a^{-1}H\]
+   It follows that if one of the sets of cosets is finite, then so is the other and they have the same number of elements.
+
+   We could also say that \(H\) gives rise to finitely many cosets.
+\end{remark}
+
+\subsection{Subgroups}
+\begin{definition}[Subgroup]
+   Given a group \((G, \ast)\), \(H \subset G\) iff
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item Closure: \(\forall a, b \in H: a \ast b \in H\)
+      \item Inverse Closure: \(\forall a \in H: \exists a^{-1} \in H\).
+   \end{enumerate}
+\end{definition}
+\begin{remark}[Notation]
+   \(H < G\).
+\end{remark}
+\begin{remark}
+   Subgroups of abelian groups are also abelian.
+\end{remark}
+
+\subsubsection{Index of Subgroups}
+\begin{definition}[Quotient Group]
+   Given \(H \triangleleft G\), the set \(G/H\) with the operation
+   \[\ast: G/H \times G/H \to G/H \qquad\text{where}\qquad aH \ast bH := (a \ast b)H\]
+\end{definition}
+\begin{remark}[Notation]
+   For the group \((G/H, \ast)\) we write \(G_{/H}\), as for the elements we denote \(\bar{a} := aH \in G_{/H}\) hence we have \(\bar{a}\bar{b} = \overline{ab}\).
+\end{remark}
+
+\begin{definition}[Index of Subgroup]
+   Given a group \(G\) and \(H < G\),
+   \[[G:H] := |G_{/H}|\]
+   is the \emph{index of \(H\) in \(G\)}.
+\end{definition}
+\begin{remark}[Intuition]
+   The index of a subgroup is the relative size of \(H\) in \(G\).
+   Differently put, it is the number of cosets of \(H\) which fill up \(G\).
+   For example, if \(H\) has index 2, then half of the elements of \(G\) lie in \(H\).
+\end{remark}
+\begin{example}
+   Let \(2\mathbb{Z}\) be the subgroup of \(\mathbb{Z}\).
+   Then \(2\mathbb{Z}\) has two cosets in \(\mathbb{Z}\), namely the even integers and the odd integers.
+   So the index of \(2\mathbb{Z}\) is two.
+   To generalize,
+   \[[\mathbb{Z} : n\mathbb{Z}] = n\]
+   for any \(n \in \mathbb{N}_{>0}\).
+\end{example}
+\begin{remark}
+   So if \(G\) is finite then every \(H \subset G\) is of finite index.
+\end{remark}
+
+\begin{proposition}\label{pro:index_formula}
+   Let \(G\) be finite and \(H < G\).
+   \[|G| = [G:H] \cdot |H|\]
+\end{proposition}
+
+\begin{corollary}[Lagrange's Theorem]
+   Let \(G\) be finite and \(H < G\).
+   \[|H|~\text{divides}~|G|\]
+\end{corollary}
+
+\subsubsection{Normal \& Simple Subgroups}
+% TODO: Introduce notation \trianglelefteq to distinguish subgroups and proper subgroups
+\begin{definition}[Normal Subgroup]
+   Given a group \(G\), \(H < G\) where \(\forall g \in G: gH = Hg\).
+\end{definition}
+\begin{remark}[Notation]
+   \(H \triangleleft G\).
+\end{remark}
+\begin{remark}
+   It follows that if \(G\) is abelian, every subgroup is normal.
+\end{remark}
+\begin{remark}
+   Equivalently, \(H \triangleleft G\) iff \(\forall g \in G: gHg^{-1} = H\) i.e. \(H\) is invariant under conjugation.
+   In fact, it is equivalent to require \(\forall g \in G: gHg^{-1} \subset H\), i.e. conjugation sends elements of \(H\) to elements of \(H\).
+\end{remark}
+
+\begin{definition}[Simple Group]
+   Given a group \(G \neq \{e_G\}\), whose only normal subgroups are \(G\) and \(\{e_G\}\).
 \end{definition}
 
-% TODO: place correctly
+\begin{proposition}
+   Let \(G\) be a finite group and \(H < G\) where \(p := [G:H]\) is prime.
+
+   If \(p\) is the smallest prime factor of \(|G|\) then \(H\) is normal.
+\end{proposition}
+
+\begin{proposition}
+   Let \(G\) be a group and \(H < G\).
+   \[[G:H] = 2 \implies H~\text{normal}\]
+\end{proposition}
+
+\subsubsection{Centralizer, Stabilizer \& Normalizer}
+\begin{definition}[Centralizer]
+   Given a group \(G\) and some \(a \in G\),
+   \[C(a) := \{g \in G \mid ga = ag\} < G\]
+\end{definition}
+\begin{remark}
+   \(ga = ag \iff gag^{-1} = a\)
+\end{remark}
+
+\begin{definition}[Center]
+   Given a group \(G\),
+   \[Z(G) := \{g \in G \mid \forall a \in G: ga = ag\} < G\]
+\end{definition}
+\begin{remark}
+   \[Z(G) = \bigcap_{a \in G} C(a)\]
+\end{remark}
+
+\begin{definition}[Stabilizer]
+   Given a group \(G\), acting on a set \(A\) and some \(a \in A\)
+   \[G_a := \{g \in G \mid g \cdot a = a\} < G\]
+\end{definition}
+\begin{remark}[Terminology]
+   We say a \emph{fixed point} of some \(g \in G\) is some \(a \in A\) s.t. \(g \cdot a = a\).
+   To express the condition \(g \cdot a = a\) we may say, \emph{\(g\) fixes \(a\)}.
+\end{remark}
+\begin{remark}[Intuition]
+   The stabilizer of \(x\) is the set of all elements in \(G\) which don't move \(x\) when they act on it.
+\end{remark}
+
+A stabilizer for the conjugation action on \(\mathcal{P}(G)\) is a \emph{normalizer}.
+
+\begin{definition}[Normalizer]
+   Given a group \(G\) and \(A \in \mathcal{P}(G)\)
+   \[N(A) := \{g \in G \mid gAg^{-1} = A\} < G\]
+\end{definition}
+\begin{remark}
+   \(gAg^{-1} := \{gag^{-1} \mid a \in A\}\)
+\end{remark}
+
+\subsubsection{Sylow Subgroups}
+\begin{definition}[\(p\)-Group]
+   A group \(G\) where \(|G| = p^a\) with \(a \in \mathbb{N}_{>0}\).
+\end{definition}
+\begin{remark}
+   A group in which each element has a power of \(p\) as order.
+\end{remark}
+
+\begin{definition}[Sylow \(p\)-Subgroup]
+   Given a \(p\)-group \(G\), \(H < G: \abs{H} = p^k\) if \(p^k\) is the highest power of a prime \(p\) s.t. \(p^k \mid \abs{G}\).
+\end{definition}
+\begin{remark}
+   A subgroup of a \(p\)-group is again a \(p\)-group.
+\end{remark}
+Let \(p\) be a prime s.t. \(p \mid \abs{G}\) and largest \(a \in \mathbb{N}_{>0}\) s.t. \(p^a \mid \abs{G}\).
+\begin{theorem}[First Sylow Theorem]
+   There exists a Sylow \(p\)-subgroup, i.e. a subgroup of \(G\) with order \(p^a\).
+\end{theorem}
+\begin{theorem}[Second Sylow Theorem]
+   Any pair of Sylow \(p\)-subgroups are conjugate to each other, and any \(p\)-subgroup sits inside some Sylow \(p\)-subgroup.
+\end{theorem}
+\begin{theorem}[Third Sylow Theorem]
+   Let \(n_p\) be the number of Sylow \(p\)-subgroups of \(G\), then
+   \[n_p \mid \frac{|G|}{p^a} \qquad\text{and}\qquad n_p \equiv 1 \mod p\]
+\end{theorem}
+\begin{remark}
+   \(n_p = 1 \iff\) there exists a unique, normal Sylow \(p\)-subgroup.
+   Also \(q \not\equiv 1 \mod p \implies n_p = 1\)
+\end{remark}
+
+\begin{definition}[Composition Series]
+   A sequence of subgroups in a group \(G\),
+   \[\{e_G\} =: G_0 \triangleleft G_1 \triangleleft \ldots \triangleleft G_k = G\]
+   where the \emph{composition factors} \({G_j}_{/G_{j-1}}\) are simple \(\forall j = 1, \ldots, k\)
+\end{definition}
+\begin{remark}
+   We call \(k\) the \emph{composition length}.
+\end{remark}
+
+\begin{definition}[Solvable Group]
+   A group \(G\) with a composition series such that \(\forall j = 1, \ldots, k: {G_j}_{/G_{j-1}}\) is abelian.
+\end{definition}
+
+\subsection{Group Homomorphism}
+\begin{definition}[Group Homomorphism]
+   Given groups \(G, H\), a map \(f: G \to H\) where
+   \[\forall a, b \in G: f(a) \ast_H f(b) = f(a \ast_G b)\]
+\end{definition}
+\begin{remark}
+   \(\ker(f)\) is a subgroup of \(G\) and \(\im(f)\) is a subgroup of \(H\).
+\end{remark}
+\begin{remark}
+   From the definition follows directly that
+   \[f(e_G) = f(e_G +_G e_G) = f(e_G) +_H f(e_G) \implies f(e_G) = e_H\]
+   \[f(a^{-1}) = \big(f(a)\big)^{-1}\]
+\end{remark}
+
+\begin{proposition}\label{pro:ker_subgrp}
+   Let \(G, G'\) be groups and \(f: G \to G'\), then
+   \[\ker(f) \triangleleft G\]
+\end{proposition}
+\begin{example}
+   We have for \(\sign: S_n \to \{\pm 1\}\) that \(\ker(\sign) = A_n\), so \(A_n \triangleleft S_n\).
+\end{example}
+
+\begin{corollary}
+   Let \(G\) be a finite group, \(G'\) a group and \(f: G \to G'\), then
+   \[|G| = |\im(f)| \cdot |\ker(f)|\]
+\end{corollary}
+
+\begin{proposition}
+   Let \(G, G'\) be groups, \(H' < G'\) and \(f: G \to G'\), then is
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(f^{-1}(H') < G\)
+      \item \(f^{-1}(H') \triangleleft G \iff H' \triangleleft G'\)
+   \end{enumerate}
+\end{proposition}
+
+\subsection{Group Actions on Sets}
+A \emph{group action} is a formal way of interpreting the manner in which the elements of a group correspond to transformations of some set.
+For a given (finite) set, \(S_n\) is an abstraction used to describe the permutations of elements of that set.
+
+\begin{definition}[Group Action on Set]
+   Given a group \(G\) and a set \(X\),
+   \[\cdot: G \times X \to X \qquad\text{where}\qquad (g, x) \mapsto g \cdot x\]
+   if the following holds
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\forall g, h \in G, x \in X: g \cdot (h \cdot x) = (gh) \cdot x\)
+      \item \(\forall x \in X: e_G \cdot x = x\)
+   \end{enumerate}
+\end{definition}
+\begin{remark}
+   We say a group \(G\) \emph{is acting on} a set \(X\).
+   The definition above is a \emph{left} group action; we would define a \emph{right} group action analogously.
+\end{remark}
+\begin{example}[Left-Multiplication]
+   \(a \cdot b := ab\).
+\end{example}
+\begin{example}[Inverse Right-Multiplication]
+   \(a \cdot b := ba^{-1}\)
+\end{example}
+\begin{example}[Conjugation]
+   \(a \cdot b := aba^{-1}\)
+\end{example}
+% TODO
+% \(x \in G\) defines a homomorphism
+% \[\phi_x: G \to G \qquad\text{where}\qquad g \mapsto xgx^{-1}\]
+% This is a homomorphism since
+% \[\phi_x(g) \phi_x(h) = xgx^{-1}xhx^{-1}=xghx^{-1} = \phi_x(gh)\]
+% We call the operation of \(\phi_x\) on \(G\) by \(\phi_x\) \emph{conjugation by x}.
+
+\subsubsection{Orbits of Group Actions}
+\begin{definition}[Orbit]
+   Given a group \(G\) acting on a set \(X\) and some \(x \in X\),
+   \[G \cdot x := \{g \cdot x \mid g \in G\}\]
+\end{definition}
+\begin{remark}[Notation]
+   The set of all orbits is denoted \(G\backslash X\).
+\end{remark}
+\begin{remark}[Intuition]
+   The orbit of \(x\) is everything that can be reached from \(x\) by an action of something in \(G\).
+\end{remark}
+\begin{remark}
+   An orbit under the conjugation action is called a \emph{conjugacy class}.
+\end{remark}
+
+\begin{proposition}
+   Let \(G\) be a group acting on a set \(X\).
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[\forall x, x' \in X: \big((G \cdot x) = (G \cdot x')\big) \lor \big((G \cdot x) \cap (G \cdot x') = \emptyset\big)\]
+      \item \[\bigcup_{x \in X} (G \cdot x) = X\]
+   \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Transitive Group Action]
+   A group action which has exactly one orbit.
+\end{definition}
+\begin{remark}
+   Equivalently we could define \(\exists x \in X: G \cdot x = X\) or \(\forall x \in X: G \cdot x = X\).
+\end{remark}
+
+\begin{definition}[Equivariant Map]
+   Given group actions on sets \(X\) and \(Y\), \(f: X \to Y\) is \emph{equivariant} iff
+   \[\forall g \in G, x \in X: f(g \cdot x) = g \cdot f(x)\]
+\end{definition}
+
+\begin{definition}[Invariant Subset]
+   Given a group \(G\) acting on a set \(X\), \(X' \subset X\) if
+   \[\forall g \in G, x' \in X': g \cdot x' \in X'\]
+\end{definition}
+\begin{remark}
+   The original action \(G \times X \to X\) restricts to an action \(G \times X' \to X'\), in which case the inclusion map \(X' \to X\) is equivariant.
+\end{remark}
+\begin{example}
+   If \(H < G\) then we have this situation for \(a \cdot b := ab\) with \(X' := G_{/H}\).
+   The induced action of \(G\) on \(G_{/H}\) is transitive.
+
+   For a general action, any orbit \(G \cdot x\) is invariant.
+\end{example}
+
+\begin{proposition}[Orbit Formulas]
+   Let \(G\) be a group acting on \(X\) and \(x, x' \in X\)
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(G \cdot x \to G/G_x\) where \(g \cdot x \mapsto gG_x\) is well-defined, bijective and equivariant.
+      \item For \(g \in G: g \cdot x = x' \implies G_{x'} = gG_xg^{-1}\)
+      \item If \(G\) is finite, then \(|G \cdot x| = [G : G_x]\)
+      \item If \(G\) and \(X\) are finite, then
+         \[|X| = \sum_{G \cdot x \in G \backslash X} [G : G_x]\]
+   \end{enumerate}
+\end{proposition}
+\begin{remark}
+   Applied to the conjugation action of a finite group \(G\), we obtain the \emph{class equation}
+   \[|G| = |Z(G)| + \sum_{i=1}^n [G : C(x_i)]\]
+   with representatives \(x_i\) of the conjugacy classes of non-central elements of \(G\).
+\end{remark}
+
+\begin{proposition}[Cauchy's Theorem]
+   Let \(G\) be a finite group and \(p \in \mathbb{N}\) prime.
+   \[p~|~|G| \implies \exists g \in G: |g| = p\]
+\end{proposition}
+
+\begin{definition}[Faithful Group Action]
+   Given a group \(G\) acting on a set \(X\)
+   \[\{g \in G \mid \forall x \in X: g \cdot x = x\} = \{e_G\}\]
+\end{definition}
+\begin{remark}
+   Equivalently we can say that \(G \to \Perm(X)\) is injective.
+\end{remark}
+
+\begin{definition}[Free Group Action]
+   A group action whose stabilizers are all trivial.
+\end{definition}
+
+\begin{definition}[Simply Transitive Group Action]
+   A group action which is transitive and free.
+\end{definition}
+
+\subsubsection{Group Actions \& Permutations}
+Let the group \(G\) act on the set \(X\).
+For each fixed \(g \in G\) we get a map
+\[\sigma_g: X \to X \qquad\text{where}\qquad x \mapsto g \cdot x\]
+which is a \emph{permutation} of \(X\).
+To see this we show that we have an inverse \(\sigma_{g^{-1}}\), so let \(x \in X\) be arbitrary, then
+\[(\sigma_{g^{-1}} \circ \sigma_g)(x) = \sigma_{g^{-1}}\big(\sigma_g(x)\big) = g^{-1} \cdot (g \cdot x) = (g^{-1}g) \cdot x = e_G \cdot x = x\]
+since \(g\) was arbitrary we also see that \(\sigma_g \circ \sigma_{g^{-1}} = \id_X\).
+This means \(\sigma_g\) has a two-sided inverse, hence is a permutation of \(X\).
+
+The next observation is that
+\[\varphi: G \to S_X \qquad\text{where}\qquad g \mapsto \sigma_g\]
+is a group homomorphism.
+Note that the first observation shows that \(\sigma_g\) is indeed an element of \(S_X\).
+So we only need to show compatibility with the group operations, so let \(x \in X\) be arbitrary
+\[\varphi(gg')(x) = \sigma_{gg'}(x) = (gg') \cdot x = g \cdot (g' \cdot x) = \sigma_g\big(\sigma_{g'}(x)\big) = \big(\varphi(g) \circ \varphi(g')\big)(x)\]
+
+So intuitively, a group action of \(G\) on a set \(X\) just means that every element \(g \in G\) acts as a permutation on \(X\) in a manner consistent with the group operations in \(G\), which is precisely what the two observations state.
+
+The homomorphism \(\varphi\) above is called the \emph{permutation representation} associated to the given action.
+It is easy to see that this process is reversible in the sense that if \(\varphi\) is any homomorphism, then
+\[\cdot: G \times X \to X \qquad\text{where}\qquad (g, x) \mapsto g \cdot x := \varphi(g)(x)\]
+satisfies the properties of a group action of \(G\) on \(X\).
+Thus actions of \(G\) on \(X\) and the homomorphisms \(\varphi\) are in bijective correspondece (i.e. they are essentially the same notion, phrased in different terminology).
+
+\begin{proposition}
+   Let \(G\) be a group and \(X\) a set.
+
+   There is a bijection between the actions of \(G\) on \(X\) and the homomorphisms \(\varphi: G \to S_X\).
+\end{proposition}
+\begin{remark}
+   We have that \(\{g \in G \mid \forall x \in X: g \cdot x = x\} \triangleleft G\) since it is the kernel of the associated permutation representation.
+\end{remark}
+
+\subsection{Direct \& Semidirect Product}
+\begin{definition}[Product of Group Subsets]
+   Given a group \(G\) and \(H, K \subset G\)
+   \[HK := \{hk \mid h \in H, k \in K\}\]
+\end{definition}
+\begin{remark}
+   As we have closure in \(G\) it holds that \(HK \subset G\).
+\end{remark}
+
+Isomorphism Theorems exist for every algebraic structure and describe the relationship between quotients, homomorphisms and subobjects.
+\begin{proposition}[First Isomorphism Theorem]
+   Let \(G, G'\) be groups, \(f: G \to G'\) a homomorphism with \(\ker(f) = H\), then is
+   \[G_{/H} \to G' \qquad\text{where}\qquad \bar{a} \mapsto f(a)\]
+   an automorphism.
+\end{proposition}
+
+\begin{proposition}[Second Isomorphism Theorem]
+   Let \(G\) be a group, \(H < G\) and \(K \triangleleft G\), then is
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(H \cap K \triangleleft H\)
+      \item \(HK < G\)
+      \item \(H/(H \cap K) \cong HK/K\) by \(\bar{a} \mapsto \bar{a}\)
+   \end{enumerate}
+\end{proposition}
+
+\begin{proposition}[Third Isomorphism Theorem]
+   Let \(G\) be a group and \(K \triangleleft H \triangleleft G\), then is
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(H/K \triangleleft G/K\)
+      \item \((G/K)/(H/K) \cong G_{/H}\) by \(\bar{a}(H/K) \mapsto \bar{a}\)
+   \end{enumerate}
+\end{proposition}
+
+\begin{definition}[Direct Product]
+   Given the groups \(G, H\), the set \(G \times H\) with the operation
+   \[\ast: (G \times H) \times (G \times H) \to G \times H \qquad\text{where}\qquad (g, h) \ast (g', h') := (g \ast g', h \ast h')\]
+\end{definition}
+\begin{remark}[Notation]
+   For abelian groups the product may also be denoted with \(\oplus\) (c.f. \(\mathbb{Z}\)-modules).
+\end{remark}
+\begin{remark}
+   With a direct product, we get some natural group homomorphisms for free: the projection maps defined by
+   \[G \times H \to G \qquad \text{where}\qquad (g, h) \mapsto g\]
+   \[G \times H \to H \qquad \text{where}\qquad (g, h) \mapsto h\]
+\end{remark}
+
+\begin{definition}[Outer Semidirect Product]
+   Given the groups \(G, H\) and the group homomorphism \(H \to \Aut(G)\) where \(h \mapsto \varphi(h) =: \varphi_h\), the set \(G \rtimes_\varphi H := G \times H\) with operation
+   \[\ast: (G \rtimes_\varphi H) \times (G \rtimes_\varphi H) \to G \rtimes_\varphi H \qquad\text{where}\qquad (g_1, h_1) \ast (g_2, h_2) := \big(g_1 \ast \varphi_{h_1}(g_2), h_1 \ast h_2\big)\]
+\end{definition}
+\begin{remark}
+   Since \(\varphi_h\) is a homomorphism we have
+   \[\varphi_{g \ast h}(k) = \varphi_g\big(\varphi_h(k)\big) \qquad\text{and}\qquad \varphi_g(h) \ast \varphi_g(k) = \varphi_g(h \ast k)\]
+\end{remark}
+
+\begin{proposition}\label{pro:dir_semidir_prod}
+   Let \(G\) be a group and \(H, K < G\) furthermore let
+   \[f: H \times K \to HK \quad\text{where}\quad (h,k) \mapsto hk \qquad\text{and}\qquad \varphi_k(h) := k \ast h \ast k^{-1}\]
+
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(H \cap K = \{e_G\} \iff f~\text{is bijective}\)
+      \item \(HK = KH \iff HK < G\)
+      \item If \(H \cap K = \{e_G\}\) and \(G\) is finite with \(|G| = |H| \cdot |K|\), then \(HK = G\).
+      \item If \(H \cap K = \{e_G\}\) and \(H, K\) are normal, then is \(HK \triangleleft G\) and \(f\) is an isomorphism. \\
+      - if also \(HK = G\) then is \(H \times K \cong G\) by \(f\).
+      \item If \(\forall k \in K: kH = Hk\) then is \(H \triangleleft HK < G\) and \(k \mapsto \varphi_k\) defines a homomorphism \(K \to \Aut(H)\) such that we have a surjective homomorphism \(H \rtimes_{\varphi} K \to HK\) by \((h,k) \mapsto h \ast k\) which is an isomorphism iff \(H \cap K = \{e_G\}\). \\
+      - if also \(HK = G\), then is \(H \rtimes K \cong G\).
+   \end{enumerate}
+\end{proposition}
+\begin{remark}
+   In (iv) we may describe \(G\) as the direct product of \(H\) and \(K\).
+   In (v) we may describe \(G\) as the semidirect product of \(H\) and \(K\).
+\end{remark}
+
+\subsection{Group Presentation}
+Regarding \cref{ssec:dihedral_groups}, the use of the generators \(r\) and \(s\) for the dihedral group provides a simple an succinct way of computing in \(D_{2n}\).
+We can similarly introduce the notions of generators and relations for arbitrary groups.
+
+\subsubsection{Generators}
+Given a subset \(S \subset G\) of a group \(G\) we can obtain a subgroup \(\langle S \rangle < G\) by combining all elements of \(S\) in all possible ways; we say \(\langle S \rangle\) is \emph{generated} by \(S\) or \(S\) \emph{generates} \(\langle S\rangle\).
+
+\(\langle S \rangle\) is the smallest subgroup of \(G\) containing every element of \(S\).
+This means that \(S\) is not contained in any subgroup of the group other than the entire group.
+Hence \(\langle S \rangle\) is equal to the intersection over all subgroups containing \(S\).
+Equivalently, \(\langle S \rangle\) is the subgroup containing all elements of \(G\) that can be expressed as the finite product of elements in \(S\) and their inverses.
+
+If \(\langle S \rangle = G\) (\(S\) generates \(G\)) we say \(S\) is a \emph{generating set} or \emph{system of generators} of \(G\).
+The elements of \(S\) are called \emph{generators} and if \(S\) is finite we say \(G\) is \emph{finitely generated}.
+
+\begin{definition}[Generating Set of Groups]\label{def:gen_set_group}
+   Given a group \(G\), a subset \(S \subset G\), where every \(g \in G\) can be written as a product of elements of \(S\) and their inverses.
+\end{definition}
+\begin{example}[Group of Integers]
+   1 is a generator for \(\mathbb{Z}\) since every integer is a finite sum of \(\pm 1\).
+\end{example}
+\begin{example}[Dihedral Group]
+   \(S = \{r, s\}\) is a set of generators of \(D_{2n}\), so \(D_{2n} = \langle r, s \rangle\).
+\end{example}
+
+\subsubsection{Cyclic Groups}
+Every element \(g \in G\) generates the \emph{cyclic} subgroup \(\langle g \rangle < G\).
+
+\begin{definition}[Cyclic Group]\label{def:cyclic_group}
+   A group \(G\) which is generated by a single \(g \in G\).
+   \[G = \langle g \rangle = \{\ldots, g^{-2}, g^{-1}, e_G, g, g^2, \ldots\}\]
+\end{definition}
+\begin{remark}
+   Differently put, looking at \cref{def:gen_set_group} we see that
+   \[\exists a \in G: (\forall b \in G: b = a^i) \quad\text{with}~i \in \mathbb{Z}\]
+   With this follows that \(\mathbb{Z} \to G\) where \(i \mapsto g^i\) is a surjective homomorphism.
+\end{remark}
+\begin{example}
+   Subgroups of \(\mathbb{Z}\) are the same as ideals.
+   They are cyclic subgroups, of the form \(g\mathbb{Z} < \mathbb{Z}\) for some unique \(g \in G\).
+   If \(|G| = n\), then is \(G \cong \mathbb{Z}_{/n\mathbb{Z}}\) by the first isomorphism theorem.
+\end{example}
+
+% TODO: merge with Order of Group-Elements definition
+If \(\langle g \rangle \cong \mathbb{Z}_{/n\mathbb{Z}}\) for some \(n \in \mathbb{N}\), then \(n\) is the smallest positive integer for which \(g^n = e\), and \(n\) is called the \emph{order of} \(g\).
+Differently put we can also say that \(|\langle g \rangle| = n\)
+If \(\langle g \rangle \cong \mathbb{Z}\), then \(g\) is said to have \emph{infinite order}.
+
+\begin{definition}[Order of Group-Elements]
+   Given a group \(G\) and \(g \in G\)
+   \[|g| := n\]
+   where \(n \in \mathbb{N}\) is the smallest number s.t. \(g^n = e_G\).
+\end{definition}
+\begin{remark}[Notation]
+   If no positive power of \(g\) is the identity, we write \(|g| = \infty\).
+\end{remark}
+
+\subsubsection{Relations}
+Any equations in a general group \(G\) that the generators satisfy are called \emph{relations} in \(G\).
+Thus in \(D_{2n}\) we have relations \(r^n = 1\), \(s^2 = 1\) and \(rs = sr^{-1}\).
+Moreover, these three relations have the additional property that any other relation between elements of the group may be derived from these three.
+This is not immediately obvious; it follows from the fact that we can determine exactly when two group elements are equal by using only these three relations.
+
+In general, if some group \(G\) is generated by a subset \(S\) and there is some collection of relations \(R_1, R_2, \ldots, R_m\) (where each is an equation in the elements from \(S \cup \{1\}\)), such that any relation among the elements of \(S\) can be deduced from these, we shall call these generators and relations a \emph{presentation} of \(G\) and write
+\[G = \langle S \mid R_1, R_2, \ldots, R_m \rangle\]
+For example
+\[D_{2n} = \langle r, s \mid r^n = s^2 = 1, rs = sr^{-1}\rangle\]
+
+\subsubsection{Free Groups}
+In this section we introduce the basic theory of so-called \emph{free groups}.
+This will enable us to make precise the notions of generators and relations in a more general way.
+
+The basic idea of a free group \(F_S\) generated by a set \(S\) is that there are no relations satisfied by any of the elements in \(S\) (\(S\) is ''free`` of relations).
+
+For example if \(S = \{a, b\}\), then the elements of \(F_S\) are of the form \(a, aa, ab, abab, bab, \ldots\) and their inverses.
+If we group like terms together then we obtain the familiar form \(a, b^{-3}, aba^{-1}b^{-2}, \ldots\).
+We call those elements \emph{words} in \(a\) and \(b\), respectively in the \emph{alphabet} \(S\).
+
+The notion of ''freeness`` occurs in many algebraic systems.
+When the algebraic systems are vector spaces, \(F_S\) is simply the vector space which has \(S\) as a basis.
+Every vector in this spce is a unique linear combination of the elements of \(S\) which is the analogue of a word.
+
+\begin{definition}[Word]
+   Given a group \(G\) and \(S \subset G\)
+   \[s_1^{\alpha_1}s_2^{\alpha_2}\ldots s_n^{\alpha_n}\]
+   with \(s_i \in S\) and \(\alpha_i \in \{\pm 1\}\).
+\end{definition}
+\begin{remark}[Terminology]
+   \(n\) is known as the \emph{length} of a word.
+   The \emph{empty word} is the unique word of length 0.
+   A single symbol may be viewed as a word of length 1.
+\end{remark}
+\begin{remark}[Intuition]
+   We can think of a word as a finite product of elements of \(S\) and their inverses (where repetitions are allowed).
+\end{remark}
+In order to assure uniqueness of expressions we consider only words which have no obvious ''cancellations`` between adjacent terms (such as \(baa^{-1}b = b^2\)).
+\begin{definition}[Reduced Word]
+   A word \(s_1^{\alpha_1}s_2^{\alpha_2}\ldots s_n^{\alpha_n}\) where
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(\forall i: s_{i+1} \neq s_i^{-1}\)
+      \item \(s_k = 1 \implies s_i = 1 \forall i \geq k\)
+   \end{enumerate}
+\end{definition}
+\begin{remark}
+   The reduced word \(1~1~1~\cdots\) is called the \emph{empty word}.
+\end{remark}
+Words are mutliplied by concatenation, for example \((aba)(b^{-1}a^3b) = abab^{-1}a^3b\).
+To prove the associative property for multiplication of words we return to the most basic level where all the exponents in the words of \(S\) are \(\pm 1\).
+\begin{definition}[Free Group]
+   Given a set \(S\), the set \(F_S := S \times \{\pm 1\}\) with the operation
+   \[(s_1^{\alpha_1}\cdots s_k^{\alpha_k}) \ast (t_1^{\beta_1}\cdots t_l^{\beta_l}) := s_1^{\alpha_1}\cdots s_{k-j}^{\alpha_{k-j}}~t_{j+1}^{\beta_{j+1}}\cdots t_l^{\beta_l}\]
+\end{definition}
+\begin{remark}[Notation]
+   If \(S = \{1, \ldots, n\}\) we denote \(F_n\).
+\end{remark}
+\begin{remark}[Terminology]
+   A group \(G\) is a \emph{free group} if there is some set \(S\) such that \(G = F_S\).
+   In this case we call \(S\) a set of \emph{free generators} of \(G\).
+\end{remark}
+One important property reflecting the fact that there are no relations that must be satisfied by the generators in \(S\) is that any map from the \emph{set} \(S\) to a group \(G\) can be uniquely extended to a homomorphism from the group \(F_S\) to \(G\).
+The fact that there are no relations to worry about menas that we can specify the images of the generators arbitrarily.
+This is frequently reffered to as the \emph{universal property of the free group} and in fact characterizes the group \(F_S\).
+
+\begin{proposition}[Universal Property of Free Groups]\label{pro:univ_prop_free_groups}
+   Let \(S\) be a set and \(G\) be a group, for any map \(f: S \to G\) there is a unique group homomorphism \(\varphi: F_S \to G\).
+   \begin{center}
+      \begin{tikzcd}
+         S \arrow[dr, swap, "f"]\arrow[r, "i"] & F_S \arrow[d, dashrightarrow, "\varphi"]\\
+                                                    & G
+      \end{tikzcd}
+   \end{center}
+\end{proposition}
+
+\begin{proposition}
+   Let \(G\) be a group, \(S \subset G\) and \(\varphi: F_S \to G\) from \ref{pro:univ_prop_free_groups}, then
+   \[\langle S \rangle = \im(\varphi)\]
+   In particular is \(S\) a generating set iff \(\varphi\) is surjective.
+\end{proposition}
+
+\subsubsection{Presentations}
+% TODO: finish
+Let \(G\) be any group, take \(S = G\) and \(f = \id_G\), then by the universal property of free groups we have a surjective homomorphism \(\varphi: F_G \to G\).
+This means that \(G\) is the homomorphic image of a free group.
+
+More generally if \(S \subset G\) generates \(G\) then there is a unique surjective homomorphism \(\varphi: F_S \to G\) where \(\varphi = \id_S\).
+
+\begin{definition}[Normal Closure]
+   Given a group \(G\), the \emph{normal closure} of \(R \subset G\) -- denoted \(\langle R \rangle^G\) -- is the smallest normal subgroup of \(G\) containing \(R\).
+\end{definition}
+\begin{remark}
+   The normal closure is the intersection of all normal subgroups of \(G\) containing \(R\).
+\end{remark}
+
+\subsection{Isomorphism Classes of Small Groups}
+The goal of this section is to determine the isomorphism classes of groups with order of at most 10.
+An isomorphism class is a collection of mathematical objects isomorphic to each other.
+Isomorphism classes are often defined if the exact identity of the elements of the set is considered irrelevant, and the properties of the structure of the mathematical object are studied.
+
+\begin{center}
+   \begin{tabular}{|c|l|c|}
+      \(|G|\) & \(G\) abelian & \(G\) non-abelian \\
+      \hline
+      1 & trivial                                & none\\
+      2 & \(\mathbb{Z}_{/2\mathbb{Z}}\)          & none \\
+      3 & \(\mathbb{Z}_{/3\mathbb{Z}}\)          & none \\
+      4 & \(\mathbb{Z}_{/4\mathbb{Z}}\), \(V_4\) & none \\
+      5 & \(\mathbb{Z}_{/5\mathbb{Z}}\)          & none \\
+      \hline
+      6  & \(\mathbb{Z}_{/6\mathbb{Z}}\)         & \(S_3 \cong D_3\) \\
+      7  & \(\mathbb{Z}_{/7\mathbb{Z}}\)         & none \\
+      8  & \(\mathbb{Z}_{/8\mathbb{Z}}\), \(\mathbb{Z}_{/2\mathbb{Z}} \oplus \mathbb{Z}_{/4\mathbb{Z}}\), \(\mathbb{Z}_{/2\mathbb{Z}} \oplus \mathbb{Z}_{/2\mathbb{Z}} \oplus \mathbb{Z}_{/2\mathbb{Z}}\)           & \(D_4\), \(Q_8\) \\
+      9  & \(\mathbb{Z}_{/9\mathbb{Z}}\), \(\mathbb{Z}_{/3\mathbb{Z}} \oplus \mathbb{Z}_{/3\mathbb{Z}}\) & none \\
+      10 & \(\mathbb{Z}_{/10\mathbb{Z}}\)        & \(D_5\) \\
+   \end{tabular}
+\end{center}
+
+We can fill in the bulk of this table abstractly.
+In the case where \(G\) is abelian, we can utilize the fundamental theorem of abelian groups to imediately fill in the left column of the table.
+
 \begin{theorem}[Fundamental Theorem for Abelian Groups]
    Let \(G\) be a finitely generated abelian group.
 
    There exists unique \(r, s \in \mathbb{N}\) and unique \((a_i)_{i \leq r} \subset \mathbb{Z}\) where \(\forall i \leq r: a_i | a_{i+1}\) such that
    \[G \cong \bigoplus_{i = 1}^r \mathbb{Z}_{/a_i\mathbb{Z}} \oplus \mathbb{Z}^s\]
 \end{theorem}
+
+By Lagrange's theorem, if \(|G| = p\) where \(p\) is prime, then \(G\) is generated by any of its non-identity elements.
+This means that \(G\) is cyclic for every \(g\).
+
+\begin{proposition}
+   Let \(G\) be a group where every element is of order 2, then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(|G| = 2^m\)
+      \item \(G \cong (\mathbb{Z}_{/2\mathbb{Z}})^m\)
+      \item \(G\) is abelian
+   \end{enumerate}
+\end{proposition}
+\begin{remark}
+   This means that every group of order 4 is abelian.
+   Every group of order 9 is abelian.
+\end{remark}
+
+\begin{proposition}[Cayley's Theorem]
+   Every finite group is isomorphic to a subgroup of \(S_n\).
+\end{proposition}
+
+\begin{proposition}
+   Let \(G\) be a non-abelian group, then
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(|G| = 2p\) for \(p \in \{3,5\}\), then \(G \cong D_p\)
+      \item \(|G| = 8\), then \(G \cong D_4, Q_8\)
+   \end{enumerate}
+\end{proposition}
 
 \subsection{Important Examples}
 \subsubsection{Whole Numbers}
@@ -1294,6 +1989,8 @@ As an application, we describe polynomials, whose roots are sums respectively po
 %       \((2, 1) \sim (4, 3)\) because \(2 + 3 = 4 + 1\)
 %    \end{example}
 
+\newpage
+
 \subsubsection{General Linear Group}\label{sssec:gen_lin_grp}
 \begin{proposition}
    Given a \(K\)-vector space \(V\), the set of invertible linear maps
@@ -1319,12 +2016,10 @@ This brings us to the group of invertible matrices.
    \[\OG(V) := \{f \in \GL(V) \mid f~\text{is an isometry}~V \to V\}\]
    is a group \((\OG(V), \circ, \id_V)\).
 \end{proposition}
-
 With the rules in the remark of \cref{def:std_scal_prod} we see for \(A \in \OG(n)\) and some \(x, y \in \mathbb{R}^n\)
 \[\langle Ax, Ay\rangle = x^TA^TAy = x^Ty = \langle x, y\rangle\]
 So we define
 \[\OG(n) := \{A \in \GL_n(\mathbb{R}) \mid x \mapsto Ax~\text{is an isometry}~\mathbb{R}^n \to \mathbb{R}^n\}\]
-
 \begin{proposition}[Orthogonal Group]
    The set of orthogonal matrices
    \[\OG(n) := \{A \in \GL_n(K) \mid \det(A) \in \{\pm 1\}\}\]
@@ -1349,7 +2044,6 @@ So we define
    Given a unitary vector space \(V\)
    \[\U(V) := \{f \in \GL(V) \mid f~\text{is an isometry}~V \to V\}\]
 \end{proposition}
-
 With the rules of the remark in \cref{def:compl_scal_prod} we have for \(A \in \U(n)\)
 \[\langle Az, Aw\rangle = z^TA^T\overline{A}\overline{w} = z^T \overline{w} = \langle z, w\rangle\]
 As before we define for the orthogonal group for finite dimensional unitary vector spaces
@@ -1357,7 +2051,7 @@ As before we define for the orthogonal group for finite dimensional unitary vect
 \begin{proposition}[Unitary Group]
    The set of unitary matrices
    \[\U(n) := \{A \in \GL_n(K) \mid \det(A) \in \{\pm 1\}\}\]
-   is a group \((\OG(n), \cdot, I_n)\).
+   is a group \((\U(n), \cdot, I_n)\).
 \end{proposition}
 
 \subsubsection{Special Orthogonal Group}
@@ -1500,29 +2194,13 @@ In the special case when \(X = \{1, 2, \ldots, n\}\), the symmetric group on \(X
    and so \(\sign(\sigma) = (-1)^3 = -1\).
 \end{example}
 
+\subsubsection{Alternating Group}
 \begin{definition}[Alternating Group]
    For \(n \geq 2\) is \(A_n\) the group of all even permutations of \(S_n\).
 \end{definition}
 
-\begin{definition}[Permutation Matrix]\label{def:perm_mat}
-   Given a field \(K\) and a permutation \(\sigma \in S_n\).
-   \[P \in \Mat_n(K)~\text{where}~\forall i \in \{1, \ldots, n\}: P_{i, \sigma(i)} = 1\]
-   and all other entries are 0.
-\end{definition}
-\begin{remark}
-   In other words, the \textit{i}th column vector of \(P\) is \(e_{\sigma(i)}\).
-   \(P_{ji}\) of \cref{def:elementary_matrix} is a special kind of permutation matrix (hence the german name ``Vertauschungsmatrix'').
-\end{remark}
-\begin{example}
-   Let \(\sigma = \begin{bmatrix}1&2&3&4&5\\2&5&1&3&4\end{bmatrix}\)
-   Then is
-   \[P_\sigma = (e_{\sigma(1)}~e_{\sigma(2)}~e_{\sigma(3)}~e_{\sigma(4)}~e_{\sigma(5)}~) = (e_2~e_5~e_1~e_3~e_4) = \begin{pmatrix}0&0&1&0&0\\1&0&0&0&0\\0&0&0&1&0\\0&0&0&0&1\\0&1&0&0&0\end{pmatrix}\]
-   So it is trivial to see that \(P_{\sigma_{\id}} = I_n\).
-\end{example}
-
 \begin{proposition}
-   Let \(P\) be a permutation matrix, then
-   \[P^{-1} = P^T\]
+   \(A_n\) is simple for every \(n \geq 5\).
 \end{proposition}
 
 \subsubsection{Dihedral Group}\label{ssec:dihedral_groups}
@@ -1567,6 +2245,10 @@ For example if \(n = 12\)
 \[(sr^9)(sr^6) = s(r^9s)r^6 = s(sr^{-9})r^6 = s^2r^{-9+6} = 1 r^{-3} = r^9\]
 This means that all elements of \(D_{2n}\) can be represented by just 2 elements \(r, s\) and the relations (i), (ii) and (v).
 
+We can also describe the dihedral group through the semidirect product.
+Given \(\mathbb{Z}_{/2\mathbb{Z}} \to \Aut(\mathbb{Z}_{/n\mathbb{Z}})\) where \(i \mapsto ([m] \mapsto (-1)^i \cdot [m])\)
+\[D_n := \mathbb{Z}_{/n\mathbb{Z}} \rtimes \mathbb{Z}_{/2\mathbb{Z}}\]
+
 \subsubsection{Quaternion Group}
 \begin{definition}[Quaternion Group]
    \[Q_8 := \{1, -1, i, -i, j, -j, k, -k\}\]
@@ -1580,746 +2262,20 @@ This means that all elements of \(D_{2n}\) can be represented by just 2 elements
       \item \(ki = j \qquad\text{and}\qquad ik = -j\)
    \end{enumerate}
 \end{definition}
-
-\subsection{Group Presentation}
-Regarding \cref{ssec:dihedral_groups}, the use of the generators \(r\) and \(s\) for the dihedral group provides a simple an succinct way of computing in \(D_{2n}\).
-We can similarly introduce the notions of generators and relations for arbitrary groups.
-
-\subsubsection{Generators}
-Given a subset \(S \subset G\) of a group \(G\) we can obtain a subgroup \(\langle S \rangle < G\) by combining all elements of \(S\) in all possible ways; we say \(\langle S \rangle\) is \emph{generated} by \(S\) or \(S\) \emph{generates} \(\langle S\rangle\).
-
-\(\langle S \rangle\) is the smallest subgroup of \(G\) containing every element of \(S\).
-This means that \(S\) is not contained in any subgroup of the group other than the entire group.
-Hence \(\langle S \rangle\) is equal to the intersection over all subgroups containing \(S\).
-Equivalently, \(\langle S \rangle\) is the subgroup containing all elements of \(G\) that can be expressed as the finite product of elements in \(S\) and their inverses.
-
-If \(\langle S \rangle = G\) (\(S\) generates \(G\)) we say \(S\) is a \emph{generating set} or \emph{system of generators} of \(G\).
-The elements of \(S\) are called \emph{generators} and if \(S\) is finite we say \(G\) is \emph{finitely generated}.
-
-\begin{definition}[Generating Set of Groups]\label{def:gen_set_group}
-   Given a group \(G\), a subset \(S \subset G\), where every \(g \in G\) can be written as a product of elements of \(S\) and their inverses.
-\end{definition}
-\begin{example}[Group of Integers]
-   1 is a generator for \(\mathbb{Z}\) since every integer is a finite sum of \(\pm 1\).
-\end{example}
-\begin{example}[Dihedral Group]
-   \(S = \{r, s\}\) is a set of generators of \(D_{2n}\), so \(D_{2n} = \langle r, s \rangle\).
-\end{example}
-
-\subsubsection{Cyclic Groups}
-Every element \(g \in G\) generates the \emph{cyclic} subgroup \(\langle g \rangle < G\).
-
-\begin{definition}[Cyclic Group]\label{def:cyclic_group}
-   A group \(G\) which is generated by a single \(g \in G\).
-   \[G = \langle g \rangle = \{\ldots, g^{-2}, g^{-1}, e_G, g, g^2, \ldots\}\]
-\end{definition}
 \begin{remark}
-   Differently put, looking at \cref{def:gen_set_group} we see that
-   \[\exists a \in G: (\forall b \in G: b = a^i) \quad\text{with}~i \in \mathbb{Z}\]
-   With this follows that \(\mathbb{Z} \to G\) where \(i \mapsto g^i\) is a surjective homomorphism.
-\end{remark}
-\begin{example}
-   Subgroups of \(\mathbb{Z}\) are the same as ideals.
-   They are cyclic subgroups, of the form \(g\mathbb{Z} < \mathbb{Z}\) for some unique \(g \in G\).
-   If \(|G| = n\), then is \(G \cong \mathbb{Z}_{/n\mathbb{Z}}\) by the first isomorphism theorem.
-\end{example}
-
-% TODO: merge with Order of Group-Elements definition
-If \(\langle g \rangle \cong \mathbb{Z}_{/n\mathbb{Z}}\) for some \(n \in \mathbb{N}\), then \(n\) is the smallest positive integer for which \(g^n = e\), and \(n\) is called the \emph{order of} \(g\).
-Differently put we can also say that \(|\langle g \rangle| = n\)
-If \(\langle g \rangle \cong \mathbb{Z}\), then \(g\) is said to have \emph{infinite order}.
-
-\begin{definition}[Order of Group-Elements]
-   Given a group \(G\) and \(g \in G\)
-   \[|g| := n\]
-   where \(n \in \mathbb{N}\) is the smallest number s.t. \(g^n = e_G\).
-\end{definition}
-\begin{remark}[Notation]
-   If no positive power of \(g\) is the identity, we write \(|g| = \infty\).
+   In terms of generators an relations we can write
+   \[Q_8 = \langle \bar{e},i,j,k \mid \bar{e}^{2} = e,~ i^2 = j^2 = k^2 = ijk = \bar{e}\rangle\]
 \end{remark}
 
-\subsubsection{Relations}
-Any equations in a general group \(G\) that the generators satisfy are called \emph{relations} in \(G\).
-Thus in \(D_{2n}\) we have relations \(r^n = 1\), \(s^2 = 1\) and \(rs = sr^{-1}\).
-Moreover, these three relations have the additional property that any other relation between elements of the group may be derived from these three.
-This is not immediately obvious; it follows from the fact that we can determine exactly when two group elements are equal by using only these three relations.
-
-In general, if some group \(G\) is generated by a subset \(S\) and there is some collection of relations \(R_1, R_2, \ldots, R_m\) (where each is an equation in the elements from \(S \cup \{1\}\)), such that any relation among the elements of \(S\) can be deduced from these, we shall call these generators and relations a \emph{presentation} of \(G\) and write
-\[G = \langle S \mid R_1, R_2, \ldots, R_m \rangle\]
-For example
-\[D_{2n} = \langle r, s \mid r^n = s^2 = 1, rs = sr^{-1}\rangle\]
-
-\subsubsection{Free Groups}
-In this section we introduce the basic theory of so-called \emph{free groups}.
-This will enable us to make precise the notions of generators and relations in a more general way.
-
-The basic idea of a free group \(F_S\) generated by a set \(S\) is that there are no relations satisfied by any of the elements in \(S\) (\(S\) is ''free`` of relations).
-
-For example if \(S = \{a, b\}\), then the elements of \(F_S\) are of the form \(a, aa, ab, abab, bab, \ldots\) and their inverses.
-If we group like terms together then we obtain the familiar form \(a, b^{-3}, aba^{-1}b^{-2}, \ldots\).
-We call those elements \emph{words} in \(a\) and \(b\), respectively in the \emph{alphabet} \(S\).
-
-The notion of ''freeness`` occurs in many algebraic systems.
-When the algebraic systems are vector spaces, \(F_S\) is simply the vector space which has \(S\) as a basis.
-Every vector in this spce is a unique linear combination of the elements of \(S\) which is the analogue of a word.
-
-\begin{definition}[Word]
-   Given a group \(G\) and \(S \subset G\)
-   \[s_1^{\alpha_1}s_2^{\alpha_2}\ldots s_n^{\alpha_n}\]
-   with \(s_i \in S\) and \(\alpha_i \in \{\pm 1\}\).
-\end{definition}
-\begin{remark}[Terminology]
-   \(n\) is known as the \emph{length} of a word.
-   The \emph{empty word} is the unique word of length 0.
-   A single symbol may be viewed as a word of length 1.
-\end{remark}
-\begin{remark}[Intuition]
-   We can think of a word as a finite product of elements of \(S\) and their inverses (where repetitions are allowed).
-\end{remark}
-
-In order to assure uniqueness of expressions we consider only words which have no obvious ''cancellations`` between adjacent terms (such as \(baa^{-1}b = b^2\)).
-
-\begin{definition}[Reduced Word]
-   A word \(s_1^{\alpha_1}s_2^{\alpha_2}\ldots s_n^{\alpha_n}\) where
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\forall i: s_{i+1} \neq s_i^{-1}\)
-      \item \(s_k = 1 \implies s_i = 1 \forall i \geq k\)
-   \end{enumerate}
-\end{definition}
-\begin{remark}
-   The reduced word \(1~1~1~\cdots\) is called the \emph{empty word}.
-\end{remark}
-
-Words are mutliplied by concatenation, for example \((aba)(b^{-1}a^3b) = abab^{-1}a^3b\).
-To prove the associative property for multiplication of words we return to the most basic level where all the exponents in the words of \(S\) are \(\pm 1\).
-
-\begin{definition}[Free Group]
-   Given a set \(S\), the set \(F_S := S \times \{\pm 1\}\) with the operation
-   \[(s_1^{\alpha_1}\cdots s_k^{\alpha_k}) \ast (t_1^{\beta_1}\cdots t_l^{\beta_l}) := s_1^{\alpha_1}\cdots s_{k-j}^{\alpha_{k-j}}~t_{j+1}^{\beta_{j+1}}\cdots t_l^{\beta_l}\]
-\end{definition}
-\begin{remark}[Notation]
-   If \(S = \{1, \ldots, n\}\) we denote \(F_n\).
-\end{remark}
-\begin{remark}[Terminology]
-   A group \(G\) is a \emph{free group} if there is some set \(S\) such that \(G = F_S\).
-   In this case we call \(S\) a set of \emph{free generators} of \(G\).
-\end{remark}
-
-One important property reflecting the fact that there are no relations that must be satisfied by the generators in \(S\) is that any map from the \emph{set} \(S\) to a group \(G\) can be uniquely extended to a homomorphism from the group \(F_S\) to \(G\).
-The fact that there are no relations to worry about menas that we can specify the images of the generators arbitrarily.
-This is frequently reffered to as the \emph{universal property of the free group} and in fact characterizes the group \(F_S\).
-
-\begin{proposition}[Universal Property of Free Groups]\label{pro:univ_prop_free_groups}
-   Let \(S\) be a set and \(G\) be a group, for any map \(f: S \to G\) there is a unique group homomorphism \(\varphi: F_S \to G\).
-   \begin{center}
-      \begin{tikzcd}
-         S \arrow[dr, swap, "f"]\arrow[r, "i"] & F_S \arrow[d, dashrightarrow, "\varphi"]\\
-                                                    & G
-      \end{tikzcd}
-   \end{center}
-\end{proposition}
-
-\begin{proposition}
-   Let \(G\) be a group, \(S \subset G\) and \(\varphi: F_S \to G\) from \ref{pro:univ_prop_free_groups}, then
-   \[\langle S \rangle = \im(\varphi)\]
-   In particular is \(S\) a generating set iff \(\varphi\) is surjective.
-\end{proposition}
-
-\subsubsection{Presentations}
-% TODO: finish
-Let \(G\) be any group, take \(S = G\) and \(f = \id_G\), then by the universal property of free groups we have a surjective homomorphism \(\varphi: F_G \to G\).
-This means that \(G\) is the homomorphic image of a free group.
-
-More generally if \(S \subset G\) generates \(G\) then there is a unique surjective homomorphism \(\varphi: F_S \to G\) where \(\varphi = \id_S\).
-
-\begin{definition}[Normal Closure]
-   Given a group \(G\), the \emph{normal closure} of \(R \subset G\) -- denoted \(\langle R \rangle^G\) -- is the smallest normal subgroup of \(G\) containing \(R\).
-\end{definition}
-\begin{remark}
-   The normal closure is the intersection of all normal subgroups of \(G\) containing \(R\).
-\end{remark}
-
-\subsection{Cosets}
-\begin{definition}[Left- \& Right Coset]
-   Given a group \(G\), a subgroup \(H \subset G\) and \(g \in G\), then is
-   \[gH := \{gh \mid h \in H\}~\text{a left coset}\]
-   \[Hg := \{hg \mid h \in H\}~\text{a right coset}\]
-   of \(H\) in \(G\).
-\end{definition}
-\begin{remark}
-   \(H\) itself is also a coset when we take \(g = e_G\).
-\end{remark}
-
-\begin{proposition}
-   Let \(G\) be a group and \(H \subset G\) a subgroup.
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \[\forall g, g' \in G: (gH = g'H) \lor (gH \cap g'H = \emptyset)\]
-      \item \[\bigcup_{g \in G} gH = G\]
-   \end{enumerate}
-   analogously for right cosets.
-\end{proposition}
-\begin{remark}
-   From this follows that ''belong to the same left \(H\)-coset`` defines an equivalence relation on \(G\), whose equivalence classes are the left cosets of \(H\).
-\[g \sim g' :\iff \exists h \in H: g' = gh\]
-\end{remark}
-
-\begin{definition}[Set of Cosets]
-   \[G/H := \{gH \mid g \in G\} \qquad\text{and}\qquad H\backslash G := \{Hg \mid g \in G\}\]
-\end{definition}
-\begin{remark}
-   The map \(G \xrightarrow{\sim} G\) where \(g \mapsto g^{-1}\) induces a map \(G/H \xrightarrow{\sim} H\backslash G\) because for \(a \in G\) we have
-   \[\{g^{-1} \mid g \in aH\} = Ha^{-1} \qquad\text{and}\qquad \{g^{-1} \mid g \in Ha\} = a^{-1}H\]
-   It follows that if one of the sets of cosets is finite, then so is the other and they have the same number of elements.
-
-   We could also say that \(H\) gives rise to finitely many cosets.
-\end{remark}
-
-\subsection{Subgroups}
-\begin{definition}[Subgroup]
-   Given a group \((G, \ast)\), \(H \subset G\) iff
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item Closure: \(\forall a, b \in H: a \ast b \in H\)
-      \item Inverse Closure: \(\forall a \in H: \exists a^{-1} \in H\).
-   \end{enumerate}
-\end{definition}
-\begin{remark}[Notation]
-   We may denote \(H < G\).
-\end{remark}
-\begin{remark}
-   Subgroup of abelian groups are also abelian.
-\end{remark}
-
-\begin{proposition}[Cayley's Theorem]
-   Every finite group is isomorphic to a subgroup of \(S_n\).
-\end{proposition}
-
-\subsubsection{Normal Subgroups}
-% TODO: Introduce notation \trianglelefteq to distinguish subgroups and proper subgroups
-\begin{definition}[Normal Subgroup]
-   \(H < G\) where \(\forall g \in G: gH = Hg\).
-\end{definition}
-\begin{remark}[Notation]
-   We may denote \(H \triangleleft G\).
-\end{remark}
-\begin{remark}
-   It follows that if \(G\) is abelian, every subgroup is normal.
-\end{remark}
-
-\begin{proposition}
-   Let \(G\) be a group and \(H < G\).
-   \[H \triangleleft G \iff \forall g \in G: gH = Hg\]
-\end{proposition}
-
-\begin{remark}
-   The equality \(gH = Hg\) may be expressed in the equivalent form \(gHg^{-1} = H\), i.e. \(H\) is invariant under conjugation.
-   In fact, it is equivalent to require \(\forall g \in G: gHg^{-1} \subset H\), i.e. conjugation sends elements of \(H\) to elements of \(H\).
-   So if we need to prove \(gH = Hg\) we can just prove \(gHg^{-1}\).
-\end{remark}
-
-\begin{proposition}\label{pro:ker_subgrp}
-   Let \(G, G'\) be groups and \(f: G \to G'\) a group homomorphism.
-   \[\ker(f) \triangleleft G\]
-\end{proposition}
-\begin{example}
-   For \(n \in \mathbb{N}\), we have that for \(\sign: S_n \to \{\pm 1\}\) that \(\ker(\sign) = A_n\), so \(A_n \triangleleft S_n\).
-\end{example}
-
-\begin{corollary}
-   Suppose \(G\) from above is finite.
-   \[|G| = |\im(f)| \cdot |\ker(f)|\]
-\end{corollary}
-
-\begin{proposition}
-   Let \(G, G'\) be groups, \(H' < G'\) and \(f: G \to G'\) a homomorphism, then is
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(f^{-1}(H') < G\)
-      \item \(f^{-1}(H') \triangleleft G \iff H' \triangleleft G'\)
-   \end{enumerate}
-\end{proposition}
-
-\begin{definition}[Simple Group]
-   Given a non-trivial group \(G\), whose only normal subgroups are \(G\) and \(\{e_G\}\).
-\end{definition}
-
-\begin{proposition}
-   \(A_n\) is simple for every \(n \geq 5\).
-\end{proposition}
-
-\begin{proposition}
-   Let \(G\) be a finite group and \(H < G\) where \(p := [G:H]\) is prime.
-
-   If \(p\) is the smallest prime factor of \(|G|\) then \(H\) is normal.
-\end{proposition}
-
-\subsubsection{Index of Subgroups}
-\begin{definition}[Quotient Group]
-   Given \(H \triangleleft G\), the set \(G_{/H}\) with the operation
-   \[\ast: G_{/H} \times G_{/H} \to G_{/H} \qquad\text{where}\qquad aH \ast bH := abH\]
-\end{definition}
-\begin{remark}[Notation]
-   We denote \(\bar{a} := aH \in G_{/H}\) hence we have \(\bar{a}\bar{b} = \overline{ab}\).
-\end{remark}
-\begin{remark}
-   The definition above is only valid if \(H\) is normal, since only then \(G/H = H\backslash G\).
-
-   Then we can check that the operation above is well-defined
-   Suppose \(a' \in aH\) and \(b' \in bH\), i.e. \(a' = ah\) and \(b' = bk\) with \(h,k \in H\).
-   \[a'b' = ahbk = ab(b^{-1}hb)k\]
-   since \(H\) is normal, we have \(b^{-1}hb \in H\), hence \(a'b' \in abH\).
-
-   Associativity is imediate as
-   \[(\bar{a}\bar{b}) \bar{c} = \overline{ab}\bar{c} = \overline{abc} = \bar{a}\overline{bc} = \bar{a}(\bar{b}\bar{c})\]
-   \(\bar{e_G}\) is the identity and \(\bar{a^{-1}}\) is the inverse to \(\bar{a}\).
-\end{remark}
-
-There is the surjective canonical homomorphism \[G \to G_{/H} \qquad\text{where}\qquad a \mapsto \bar{a}\]
-with kernel equal to \(H\).
-In fact the kernel of any group homomorphism is normal.
-
-\begin{definition}[Index of Subgroup]
-   Given a group \(G\) and \(H < G\),
-   \[[G:H] := |G_{/H}|\]
-   is the \emph{index of \(H\) in \(G\)}.
-\end{definition}
-\begin{remark}[Intuition]
-   The index of a subgroup is the relative size of \(H\) in \(G\).
-   Differently put, it is the number of cosets of \(H\) which fill up \(G\).
-   For example, if \(H\) has index 2, then half of the elements of \(G\) lie in \(H\).
-\end{remark}
-\begin{example}
-   Let \(2\mathbb{Z}\) be the subgroup of \(\mathbb{Z}\).
-   Then \(2\mathbb{Z}\) has two cosets in \(\mathbb{Z}\), namely the even integers and the odd integers.
-   So the index of \(2\mathbb{Z}\) is two.
-   To generalize,
-   \[[\mathbb{Z} : n\mathbb{Z}] = n\]
-   for any \(n \in \mathbb{N}_{>0}\).
-\end{example}
-\begin{remark}
-   So if \(G\) is finite then every \(H \subset G\) is of finite index.
-\end{remark}
-
-\begin{proposition}\label{pro:index_formula}
-   Let \(G\) be finite and \(H < G\).
-   \[|G| = [G:H] \cdot |H|\]
-\end{proposition}
-
-\begin{corollary}[Lagrange's Theorem]
-   Let \(G\) be finite and \(H < G\).
-   \[|H|~\text{divides}~|G|\]
-\end{corollary}
-
-\begin{proposition}
-   Let \(G\) be a group and \(H < G\).
-   \[[G:H] = 2 \implies H~\text{normal}\]
-\end{proposition}
-
-\subsection{Direct \& Semidirect Product}
-\begin{definition}[Product of Group Subsets]
-   Given a group \(G\) and \(H, K \subset G\)
-   \[HK := \{hk \mid h \in H, k \in K\}\]
-\end{definition}
-\begin{remark}
-   As we have closure in \(G\) it holds that \(HK \subset G\).
-\end{remark}
-
-Isomorphism Theorems exist for every algebraic structure and describe the relationship between quotients, homomorphisms and subobjects.
-\begin{proposition}[First Isomorphism Theorem]
-   Let \(G, G'\) be groups, \(f: G \to G'\) a homomorphism with \(\ker(f) = H\), then is
-   \[G_{/H} \to G' \qquad\text{where}\qquad \bar{a} \mapsto f(a)\]
-   an automorphism.
-\end{proposition}
-
-\begin{proposition}[Second Isomorphism Theorem]
-   Let \(G\) be a group, \(H < G\) and \(K \triangleleft G\), then is
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(H \cap K \triangleleft H\)
-      \item \(HK < G\)
-      \item \(H/(H \cap K) \cong HK/K\) by \(\bar{a} \mapsto \bar{a}\)
-   \end{enumerate}
-\end{proposition}
-
-\begin{proposition}[Third Isomorphism Theorem]
-   Let \(G\) be a group and \(K \triangleleft H \triangleleft G\), then is
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(H/K \triangleleft G/K\)
-      \item \((G/K)/(H/K) \cong G_{/H}\) by \(\bar{a}(H/K) \mapsto \bar{a}\)
-   \end{enumerate}
-\end{proposition}
-
-\begin{definition}[Direct Product]
-   Given the groups \(G, H\), the set \(G \times H\) with the operation
-   \[\ast: (G \times H) \times (G \times H) \to G \times H \qquad\text{where}\qquad (g, h) \ast (g', h') := (g \ast g', h \ast h')\]
-\end{definition}
-\begin{remark}[Notation]
-   For abelian groups the product may also be denoted with \(\oplus\) (c.f. \(\mathbb{Z}\)-modules).
-\end{remark}
-\begin{remark}
-   With a direct product, we get some natural group homomorphisms for free: the projection maps defined by
-   \[G \times H \to G \qquad \text{where}\qquad (g, h) \mapsto g\]
-   \[G \times H \to H \qquad \text{where}\qquad (g, h) \mapsto h\]
-\end{remark}
-
-\begin{definition}[Outer Semidirect Product]
-   Given the groups \(G, H\) and the group homomorphism \(H \to \Aut(G)\) where \(h \mapsto \varphi(h) =: \varphi_h\), the set \(G \rtimes_\varphi H := G \times H\) with operation
-   \[\ast: (G \rtimes_\varphi H) \times (G \rtimes_\varphi H) \to G \rtimes_\varphi H \qquad\text{where}\qquad (g_1, h_1) \ast (g_2, h_2) := \big(g_1 \ast \varphi_{h_1}(g_2), h_1 \ast h_2\big)\]
-\end{definition}
-\begin{remark}
-   Since \(\varphi_h\) is a homomorphism we have
-   \[\varphi_{g \ast h}(k) = \varphi_g\big(\varphi_h(k)\big) \qquad\text{and}\qquad \varphi_g(h) \ast \varphi_g(k) = \varphi_g(h \ast k)\]
-\end{remark}
-
-\begin{proposition}\label{pro:dir_semidir_prod}
-   Let \(G\) be a group and \(H, K < G\) furthermore let
-   \[f: H \times K \to HK \quad\text{where}\quad (h,k) \mapsto hk \qquad\text{and}\qquad \varphi_k(h) := k \ast h \ast k^{-1}\]
-
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(H \cap K = \{e_G\} \iff f~\text{is bijective}\)
-      \item \(HK = KH \iff HK < G\)
-      \item If \(H \cap K = \{e_G\}\) and \(G\) is finite with \(|G| = |H| \cdot |K|\), then \(HK = G\).
-      \item If \(H \cap K = \{e_G\}\) and \(H, K\) are normal, then is \(HK \triangleleft G\) and \(f\) is an isomorphism. \\
-      - if also \(HK = G\) then is \(H \times K \cong G\) by \(f\).
-      \item If \(\forall k \in K: kH = Hk\) then is \(H \triangleleft HK < G\) and \(k \mapsto \varphi_k\) defines a homomorphism \(K \to \Aut(H)\) such that we have a surjective homomorphism \(H \rtimes_{\varphi} K \to HK\) by \((h,k) \mapsto h \ast k\) which is an isomorphism iff \(H \cap K = \{e_G\}\). \\
-      - if also \(HK = G\), then is \(H \rtimes K \cong G\).
-   \end{enumerate}
-\end{proposition}
-\begin{remark}
-   In (iv) we may describe \(G\) as the direct product of \(H\) and \(K\).
-   Alternatively we can say that
-   \(G \cong M \times N \iff \exists H, K < G\) such that
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(H \cong M\) and \(K \cong N\)
-      \item \(H \triangleleft G\) and \(K \triangleleft G\)
-      \item \(H \cap K = \{e_G\}\)
-      \item \(G = HK\)
-   \end{enumerate}
-
-   In (v) we may describe \(G\) as the semidirect product of \(H\) and \(K\).
-   Alternatively we can say that
-   \(G \cong M \rtimes N \iff \exists H, K < G\) such that
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(H \cong M\) and \(K \cong N\)
-      \item \(H \triangleleft G\)
-      \item \(H \cap K = \{e_G\}\)
-      \item \(G = HK\)
-   \end{enumerate}
-\end{remark}
-
-\subsection{Isomorphism Classes of Small Groups}
-The goal of this section is to determine the isomorphism classes of groups with order of at most 10.
-An isomorphism class is a collection of mathematical objects isomorphic to each other.
-Isomorphism classes are often defined if the exact identity of the elements of the set is considered irrelevant, and the properties of the structure of the mathematical object are studied.
-
-\begin{center}
-   \begin{tabular}{|c|l|c|}
-      \(|G|\) & \(G\) abelian & \(G\) non-abelian \\
-      \hline
-      1 & trivial                                & none\\
-      2 & \(\mathbb{Z}_{/2\mathbb{Z}}\)          & none \\
-      3 & \(\mathbb{Z}_{/3\mathbb{Z}}\)          & none \\
-      4 & \(\mathbb{Z}_{/4\mathbb{Z}}\), \(V_4\) & none \\
-      5 & \(\mathbb{Z}_{/5\mathbb{Z}}\)          & none \\
-      \hline
-      6  & \(\mathbb{Z}_{/6\mathbb{Z}}\)         & \(S_3 \cong D_3\) \\
-      7  & \(\mathbb{Z}_{/7\mathbb{Z}}\)         & none \\
-      8  & \(\mathbb{Z}_{/8\mathbb{Z}}\), \(\mathbb{Z}_{/2\mathbb{Z}} \oplus \mathbb{Z}_{/4\mathbb{Z}}\), \(\mathbb{Z}_{/2\mathbb{Z}} \oplus \mathbb{Z}_{/2\mathbb{Z}} \oplus \mathbb{Z}_{/2\mathbb{Z}}\)           & \(D_4\), \(Q_8\) \\
-      9  & \(\mathbb{Z}_{/9\mathbb{Z}}\), \(\mathbb{Z}_{/3\mathbb{Z}} \oplus \mathbb{Z}_{/3\mathbb{Z}}\) & none \\
-      10 & \(\mathbb{Z}_{/10\mathbb{Z}}\)        & \(D_5\) \\
-   \end{tabular}
-\end{center}
-
-We can fill in the bulk of this table abstractly.
-In the case where \(G\) is abelian, we can utilize the fundamental theorem of abelian groups to imediately fill in the left column of the table.
-
-By Lagrange's theorem, if \(|G| = p\) where \(p\) is prime, then \(G\) is generated by any of its non-identity elements.
-This means that \(G\) is cyclic for every \(g\).
-
-\begin{proposition}
-   Let \(G\) be a group where every element is of order 2, then
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(|G| = 2^m\) % TODO: true? its a power of 2... but 2^m?
-      \item \(G \cong (\mathbb{Z}_{/2\mathbb{Z}})^m\)
-      \item \(G\) is abelian
-   \end{enumerate}
-\end{proposition}
-
-This means that every group of order 4 is abelian.
-
+\subsubsection{Klein Four-Group}
 \begin{definition}[Klein Four-Group]
    \[V_4 := \mathbb{Z}_{/2\mathbb{Z}} \oplus \mathbb{Z}_{/2\mathbb{Z}}\]
 \end{definition}
-
-\begin{proposition}
-   Every group of order 9 is abelian.
-\end{proposition}
-
-\begin{proposition}
-   For \(p \in \{3, 5\}\), every non-abelian group of order \(2p\) is isomorphic to \(D_p\).
-\end{proposition}
-
-\begin{definition}[Dihedral Group]
-   Given \(\mathbb{Z}_{/2\mathbb{Z}} \to \Aut(\mathbb{Z}_{/n\mathbb{Z}})\) where \(i \mapsto ([m] \mapsto (-1)^i \cdot [m])\)
-   \[D_n := \mathbb{Z}_{/n\mathbb{Z}} \rtimes \mathbb{Z}_{/2\mathbb{Z}}\]
-\end{definition}
-\begin{remark}[Intuition]
-   A regular polygon with \(n\) sides has \(2n\) different symmetries: \(n\) rotational symmetries and \(n\) reflection symmetries.
-   Usually, we take \(n \geq 3\) here.
-   Then \(D_n\) is non-abelian.
-   Also \(D_3 \cong S_3\).
-
-   The associated rotations and reflections make up the dihedral group \(D_n\).
-
-   \begin{center}
-      \input{drawings/dn_example.tex}
-   \end{center}
-
-   If \(n\) is odd, each axis of symmetry connects the midpoint of one side to the opposite vertex.
-   If \(n\) is even, there are \(\frac{n}{2}\) axes of symmetry connecting the midpoints of opposite sides and \(\frac{n}{2}\) axes of symmetry connecting opposite vertices.
-   In either case, there are \(n\) axes of symmetry and \(|D_n| = 2n\) elements in the symmetry group.
-\end{remark}
-
-\begin{proposition}
-   Every non-abelian group of order 8 is isomorphic to \(D_4\) or \(Q_8\).
-\end{proposition}
-
-\begin{definition}[Quaternion Group]
-   \[Q_8 = \langle \bar{e},i,j,k \mid \bar{e}^{2} = e,~ i^2 = j^2 = k^2 = ijk = \bar{e}\rangle\]
-\end{definition}
-
-\subsection{Group Actions on Sets}
-A \emph{group action} is a formal way of interpreting the manner in which the elements of a group correspond to transformations of some set.
-For a given (finite) set, \(S_n\) is an abstraction used to describe the permutations of elements of that set.
-
-\begin{definition}[Group Action on Set]
-   Given a group \(G\) and a set \(X\),
-   \[\cdot: G \times X \to X \qquad\text{where}\qquad (g, x) \mapsto g \cdot x\]
-   if the following holds
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(\forall g, h \in G, x \in X: g \cdot (h \cdot x) = (gh) \cdot x\)
-      \item \(\forall x \in X: e_G \cdot x = x\)
-   \end{enumerate}
-\end{definition}
 \begin{remark}
-   We say a group \(G\) \emph{is acting on} a set \(X\).
-   The definition above is a \emph{left} group action; we would define a \emph{right} group action analogously.
-\end{remark}
-\begin{example}[Left-Multiplication]
-   \(a \cdot b := ab\).
-\end{example}
-\begin{example}[Inverse Right-Multiplication]
-   \(a \cdot b := ba^{-1}\)
-\end{example}
-\begin{example}[Conjugation]
-   \(a \cdot b := aba^{-1}\)
-\end{example}
-% TODO
-% \(x \in G\) defines a homomorphism
-% \[\phi_x: G \to G \qquad\text{where}\qquad g \mapsto xgx^{-1}\]
-% This is a homomorphism since
-% \[\phi_x(g) \phi_x(h) = xgx^{-1}xhx^{-1}=xghx^{-1} = \phi_x(gh)\]
-% We call the operation of \(\phi_x\) on \(G\) by \(\phi_x\) \emph{conjugation by x}.
-
-\subsubsection{Orbits of Group Actions}
-\begin{definition}[Orbit]
-   Given a group \(G\) acting on a set \(X\) and some \(x \in X\),
-   \[G \cdot x := \{g \cdot x \mid g \in G\}\]
-\end{definition}
-\begin{remark}[Notation]
-   The set of all orbits is denoted \(G\backslash X\).
-\end{remark}
-\begin{remark}[Intuition]
-   The orbit of \(x\) is everything that can be reached from \(x\) by an action of something in \(G\).
-\end{remark}
-\begin{remark}
-   An orbit under the conjugation action is called a \emph{conjugacy class}.
+   \(\oplus\) here refers to the direct product.
 \end{remark}
 
-\begin{proposition}
-   Let \(G\) be a group acting on a set \(X\).
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \[\forall x, x' \in X: \big((G \cdot x) = (G \cdot x')\big) \lor \big((G \cdot x) \cap (G \cdot x') = \emptyset\big)\]
-      \item \[\bigcup_{x \in X} (G \cdot x) = X\]
-   \end{enumerate}
-\end{proposition}
-
-\begin{definition}[Transitive Group Action]
-   A group action which has exactly one orbit.
-\end{definition}
-\begin{remark}
-   Equivalently we could define \(\exists x \in X: G \cdot x = X\) or \(\forall x \in X: G \cdot x = X\).
-\end{remark}
-
-\begin{definition}[Equivariant Map]
-   Given group actions on sets \(X\) and \(Y\), \(f: X \to Y\) is \emph{equivariant} iff
-   \[\forall g \in G, x \in X: f(g \cdot x) = g \cdot f(x)\]
-\end{definition}
-
-\begin{definition}[Invariant Subset]
-   Given a group \(G\) acting on a set \(X\), \(X' \subset X\) if
-   \[\forall g \in G, x' \in X': g \cdot x' \in X'\]
-\end{definition}
-\begin{remark}
-   The original action \(G \times X \to X\) restricts to an action \(G \times X' \to X'\), in which case the inclusion map \(X' \to X\) is equivariant.
-\end{remark}
-\begin{example}
-   If \(H < G\) then we have this situation for \(a \cdot b := ab\) with \(X' := G_{/H}\).
-   The induced action of \(G\) on \(G_{/H}\) is transitive.
-
-   For a general action, any orbit \(G \cdot x\) is invariant.
-\end{example}
-
-\begin{proposition}[Orbit Formulas]
-   Let \(G\) be a group acting on \(X\) and \(x, x' \in X\)
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(G \cdot x \to G/G_x\) where \(g \cdot x \mapsto gG_x\) is well-defined, bijective and equivariant.
-      \item For \(g \in G: g \cdot x = x' \implies G_{x'} = gG_xg^{-1}\)
-      \item If \(G\) is finite, then \(|G \cdot x| = [G : G_x]\)
-      \item If \(G\) and \(X\) are finite, then
-         \[|X| = \sum_{G \cdot x \in G \backslash X} [G : G_x]\]
-   \end{enumerate}
-\end{proposition}
-\begin{remark}
-   Applied to the conjugation action of a finite group \(G\), we obtain the \emph{class equation}
-   \[|G| = |Z(G)| + \sum_{i=1}^n [G : C(x_i)]\]
-   with representatives \(x_i\) of the conjugacy classes of non-central elements of \(G\).
-\end{remark}
-
-\begin{proposition}[Cauchy's Theorem]
-   Let \(G\) be a finite group and \(p \in \mathbb{N}\) prime.
-   \[p~|~|G| \implies \exists g \in G: |\langle g\rangle| = p\]
-\end{proposition}
-
-\subsubsection{Important Families of Subgroups}
-\begin{definition}[Centralizer]
-   Given a group \(G\) and some \(a \in G\),
-   \[C(a) := \{g \in G \mid ga = ag\} < G\]
-\end{definition}
-\begin{remark}
-   \(ga = ag \iff gag^{-1} = a\)
-\end{remark}
-
-\begin{definition}[Center]
-   Given a group \(G\),
-   \[Z(G) := \{g \in G \mid \forall a \in G: ga = ag\} < G\]
-\end{definition}
-\begin{remark}
-   \[Z(G) = \bigcap_{a \in G} C(a)\]
-\end{remark}
-
-\begin{definition}[Stabilizer]
-   Given a group \(G\), acting on a set \(A\) and some \(a \in A\)
-   \[G_a := \{g \in G \mid g \cdot a = a\} < G\]
-\end{definition}
-\begin{remark}[Terminology]
-   We say a \emph{fixed point} of some \(g \in G\) is some \(a \in A\) s.t. \(g \cdot a = a\).
-   To express the condition \(g \cdot a = a\) we may say, \emph{\(g\) fixes \(a\)}.
-\end{remark}
-\begin{remark}[Intuition]
-   The stabilizer of \(x\) is the set of all elements in \(G\) which don't move \(x\) when they act on it.
-\end{remark}
-
-A stabilizer for the conjugation action on \(\mathcal{P}(G)\) is a \emph{normalizer}.
-
-\begin{definition}[Normalizer]
-   Given a group \(G\) and \(A \in \mathcal{P}(G)\)
-   \[N(A) := \{g \in G \mid gAg^{-1} = A\} < G\]
-\end{definition}
-\begin{remark}
-   \(gAg^{-1} := \{gag^{-1} \mid a \in A\}\)
-\end{remark}
-
-\begin{definition}[Faithful Group Action]
-   Given a group \(G\) acting on a set \(X\)
-   \[\{g \in G \mid \forall x \in X: g \cdot x = x\} = \{e_G\}\]
-\end{definition}
-\begin{remark}
-   Equivalently we can say that \(G \to \Perm(X)\) is injective.
-\end{remark}
-
-\begin{definition}[Free Group Action]
-   A group action whose stabilizers are all trivial.
-\end{definition}
-
-\begin{definition}[Simply Transitive Group Action]
-   A group action which is transitive and free.
-\end{definition}
-
-\subsubsection{Group Actions \& Permutations}
-Let the group \(G\) act on the set \(X\).
-For each fixed \(g \in G\) we get a map
-\[\sigma_g: X \to X \qquad\text{where}\qquad x \mapsto g \cdot x\]
-which is a \emph{permutation} of \(X\).
-To see this we show that we have an inverse \(\sigma_{g^{-1}}\), so let \(x \in X\) be arbitrary, then
-\[(\sigma_{g^{-1}} \circ \sigma_g)(x) = \sigma_{g^{-1}}\big(\sigma_g(x)\big) = g^{-1} \cdot (g \cdot x) = (g^{-1}g) \cdot x = e_G \cdot x = x\]
-since \(g\) was arbitrary we also see that \(\sigma_g \circ \sigma_{g^{-1}} = \id_X\).
-This means \(\sigma_g\) has a two-sided inverse, hence is a permutation of \(X\).
-
-The next observation is that
-\[\varphi: G \to S_X \qquad\text{where}\qquad g \mapsto \sigma_g\]
-is a group homomorphism.
-Note that the first observation shows that \(\sigma_g\) is indeed an element of \(S_X\).
-So we only need to show compatibility with the group operations, so let \(x \in X\) be arbitrary
-\[\varphi(gg')(x) = \sigma_{gg'}(x) = (gg') \cdot x = g \cdot (g' \cdot x) = \sigma_g\big(\sigma_{g'}(x)\big) = \big(\varphi(g) \circ \varphi(g')\big)(x)\]
-
-So intuitively, a group action of \(G\) on a set \(X\) just means that every element \(g \in G\) acts as a permutation on \(X\) in a manner consistent with the group operations in \(G\), which is precisely what the two observations state.
-
-The homomorphism \(\varphi\) above is called the \emph{permutation representation} associated to the given action.
-It is easy to see that this process is reversible in the sense that if \(\varphi\) is any homomorphism, then
-\[\cdot: G \times X \to X \qquad\text{where}\qquad (g, x) \mapsto g \cdot x := \varphi(g)(x)\]
-satisfies the properties of a group action of \(G\) on \(X\).
-Thus actions of \(G\) on \(X\) and the homomorphisms \(\varphi\) are in bijective correspondece (i.e. they are essentially the same notion, phrased in different terminology).
-
-\begin{proposition}
-   Let \(G\) be a group and \(X\) a set.
-
-   There is a bijection between the actions of \(G\) on \(X\) and the homomorphisms \(\varphi: G \to S_X\).
-\end{proposition}
-\begin{remark}
-   We have that \(\{g \in G \mid \forall x \in X: g \cdot x = x\} \triangleleft G\) since it is the kernel of the associated permutation representation.
-\end{remark}
-
-\subsection{Sylow Theorems}
-\begin{definition}[\(p\)-Group]
-   A group \(G\) where \(|G| = p^a\) with \(a \in \mathbb{N}_{>0}\).
-\end{definition}
-\begin{remark}
-   A group in which each element has a power of \(p\) as order.
-\end{remark}
-
-\begin{definition}[Sylow \(p\)-Subgroup]
-   Given a \(p\)-group \(G\), \(H < G: \abs{H} = p^k\) if \(p^k\) is the highest power of a prime \(p\) s.t. \(p^k \mid \abs{G}\).
-\end{definition}
-\begin{remark}
-   A subgroup of a \(p\)-group is again a \(p\)-group.
-\end{remark}
-
-Let \(p\) be a prime s.t. \(p \mid \abs{G}\) and largest \(a \in \mathbb{N}_{>0}\) s.t. \(p^a \mid \abs{G}\).
-\begin{theorem}[First Sylow Theorem]
-   There exists a Sylow \(p\)-subgroup, i.e. a subgroup of \(G\) with order \(p^a\).
-\end{theorem}
-\begin{theorem}[Second Sylow Theorem]
-   Any pair of Sylow \(p\)-subgroups are conjugate to each other, and any \(p\)-subgroup sits inside some Sylow \(p\)-subgroup.
-\end{theorem}
-\begin{theorem}[Third Sylow Theorem]
-   Let \(n_p\) be the number of Sylow \(p\)-subgroups of \(G\), then
-   \[n_p \mid \frac{|G|}{p^a} \qquad\text{and}\qquad n_p \equiv 1 \mod p\]
-\end{theorem}
-\begin{remark}
-   \(n_p = 1 \iff\) there exists a unique, normal Sylow \(p\)-subgroup.
-   Also \(q \not\equiv 1 \mod p \implies n_p = 1\)
-\end{remark}
-
-\begin{definition}[Composition Series]
-   A sequence of subgroups in a group \(G\),
-   \[\{e_G\} =: G_0 \triangleleft G_1 \triangleleft \ldots \triangleleft G_k = G\]
-   where the \emph{composition factors} \({G_j}_{/G_{j-1}}\) are simple \(\forall j = 1, \ldots, k\)
-\end{definition}
-\begin{remark}
-   We call \(k\) the \emph{composition length}.
-\end{remark}
-
-\begin{definition}[Solvable Group]
-   A group \(G\) with a composition series such that \(\forall j = 1, \ldots, k: {G_j}_{/G_{j-1}}\) is abelian.
-\end{definition}
+\newpage
 
 \section{Rings}
 As we don't like to list all necessary axioms (closure, associativity, inverse, identity) again, but still be reminded of them we collapse them into axiom (i).
@@ -4661,19 +4617,6 @@ We say that \(f\) \emph{preserves} the operation or is \emph{compatible} with th
 \end{remark}
 
 \subsection{Homomorphisms of Algebraic Structures}
-\begin{definition}[Group Homomorphism]
-   Given groups \(G, H\), a map \(f: G \to H\) where
-   \[\forall a, b \in G: f(a) \ast_H f(b) = f(a \ast_G b)\]
-\end{definition}
-\begin{remark}
-   \(\ker(f)\) is a subgroup of \(G\) and \(\im(f)\) is a subgroup of \(H\).
-\end{remark}
-\begin{remark}
-   From the definition follows directly that
-   \[f(e_G) = f(e_G +_G e_G) = f(e_G) +_H f(e_G) \implies f(e_G) = e_H\]
-   \[f(a^{-1}) = \big(f(a)\big)^{-1}\]
-\end{remark}
-
 \begin{definition}[Ring Homomorphism]\label{def:ring_homo}
    Given rings \(R, S\), a map \(f: R \to S\) where
    \[\forall a, b \in R: f(a +_R b) = f(a) +_S f(b)\]
