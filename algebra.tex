@@ -1502,7 +1502,7 @@ Let \(p\) be a prime s.t. \(p \mid \abs{G}\) and largest \(a \in \mathbb{N}_{>0}
 
 \subsection{Group Actions on Sets}
 A \emph{group action} is a formal way of interpreting the manner in which the elements of a group correspond to transformations of some set.
-For a given (finite) set, \(S_n\) is an abstraction used to describe the permutations of elements of that set.
+For example, for a given (finite) set, \(S_n\) is an abstraction used to describe the permutations of elements of that set.
 
 \begin{definition}[Group Action on Set]
    Given a group \(G\) and a set \(X\),
@@ -1526,98 +1526,6 @@ For a given (finite) set, \(S_n\) is an abstraction used to describe the permuta
 \begin{example}[Conjugation]
    \(a \cdot b := aba^{-1}\)
 \end{example}
-% TODO
-% \(x \in G\) defines a homomorphism
-% \[\phi_x: G \to G \qquad\text{where}\qquad g \mapsto xgx^{-1}\]
-% This is a homomorphism since
-% \[\phi_x(g) \phi_x(h) = xgx^{-1}xhx^{-1}=xghx^{-1} = \phi_x(gh)\]
-% We call the operation of \(\phi_x\) on \(G\) by \(\phi_x\) \emph{conjugation by x}.
-
-\subsubsection{Orbits of Group Actions}
-\begin{definition}[Orbit]
-   Given a group \(G\) acting on a set \(X\) and some \(x \in X\),
-   \[G \cdot x := \{g \cdot x \mid g \in G\}\]
-\end{definition}
-\begin{remark}[Notation]
-   The set of all orbits is denoted \(G\backslash X\).
-\end{remark}
-\begin{remark}[Intuition]
-   The orbit of \(x\) is everything that can be reached from \(x\) by an action of something in \(G\).
-\end{remark}
-\begin{remark}
-   An orbit under the conjugation action is called a \emph{conjugacy class}.
-\end{remark}
-
-\begin{proposition}
-   Let \(G\) be a group acting on a set \(X\).
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \[\forall x, x' \in X: \big((G \cdot x) = (G \cdot x')\big) \lor \big((G \cdot x) \cap (G \cdot x') = \emptyset\big)\]
-      \item \[\bigcup_{x \in X} (G \cdot x) = X\]
-   \end{enumerate}
-\end{proposition}
-
-\begin{definition}[Transitive Group Action]
-   A group action which has exactly one orbit.
-\end{definition}
-\begin{remark}
-   Equivalently we could define \(\exists x \in X: G \cdot x = X\) or \(\forall x \in X: G \cdot x = X\).
-\end{remark}
-
-\begin{definition}[Equivariant Map]
-   Given group actions on sets \(X\) and \(Y\), \(f: X \to Y\) is \emph{equivariant} iff
-   \[\forall g \in G, x \in X: f(g \cdot x) = g \cdot f(x)\]
-\end{definition}
-
-\begin{definition}[Invariant Subset]
-   Given a group \(G\) acting on a set \(X\), \(X' \subset X\) if
-   \[\forall g \in G, x' \in X': g \cdot x' \in X'\]
-\end{definition}
-\begin{remark}
-   The original action \(G \times X \to X\) restricts to an action \(G \times X' \to X'\), in which case the inclusion map \(X' \to X\) is equivariant.
-\end{remark}
-\begin{example}
-   If \(H < G\) then we have this situation for \(a \cdot b := ab\) with \(X' := G_{/H}\).
-   The induced action of \(G\) on \(G_{/H}\) is transitive.
-
-   For a general action, any orbit \(G \cdot x\) is invariant.
-\end{example}
-
-\begin{proposition}[Orbit Formulas]
-   Let \(G\) be a group acting on \(X\) and \(x, x' \in X\)
-   \begin{enumerate}[label=\roman*, align=Center]
-      \item \(G \cdot x \to G/G_x\) where \(g \cdot x \mapsto gG_x\) is well-defined, bijective and equivariant.
-      \item For \(g \in G: g \cdot x = x' \implies G_{x'} = gG_xg^{-1}\)
-      \item If \(G\) is finite, then \(|G \cdot x| = [G : G_x]\)
-      \item If \(G\) and \(X\) are finite, then
-         \[|X| = \sum_{G \cdot x \in G \backslash X} [G : G_x]\]
-   \end{enumerate}
-\end{proposition}
-\begin{remark}
-   Applied to the conjugation action of a finite group \(G\), we obtain the \emph{class equation}
-   \[|G| = |Z(G)| + \sum_{i=1}^n [G : C(x_i)]\]
-   with representatives \(x_i\) of the conjugacy classes of non-central elements of \(G\).
-\end{remark}
-
-\begin{proposition}[Cauchy's Theorem]
-   Let \(G\) be a finite group and \(p \in \mathbb{N}\) prime.
-   \[p~|~|G| \implies \exists g \in G: |g| = p\]
-\end{proposition}
-
-\begin{definition}[Faithful Group Action]
-   Given a group \(G\) acting on a set \(X\)
-   \[\{g \in G \mid \forall x \in X: g \cdot x = x\} = \{e_G\}\]
-\end{definition}
-\begin{remark}
-   Equivalently we can say that \(G \to \Perm(X)\) is injective.
-\end{remark}
-
-\begin{definition}[Free Group Action]
-   A group action whose stabilizers are all trivial.
-\end{definition}
-
-\begin{definition}[Simply Transitive Group Action]
-   A group action which is transitive and free.
-\end{definition}
 
 \subsubsection{Group Actions \& Permutations}
 Let the group \(G\) act on the set \(X\).
@@ -1652,6 +1560,97 @@ Thus actions of \(G\) on \(X\) and the homomorphisms \(\varphi\) are in bijectiv
 \begin{remark}
    We have that \(\{g \in G \mid \forall x \in X: g \cdot x = x\} \triangleleft G\) since it is the kernel of the associated permutation representation.
 \end{remark}
+
+\subsubsection{Orbits of Group Actions}
+\begin{definition}[Orbit]
+   Given a group \(G\) acting on a set \(X\) and some \(x \in X\),
+   \[G \cdot x := \{g \cdot x \mid g \in G\}\]
+\end{definition}
+\begin{remark}[Notation]
+   The set of all orbits is denoted \(G\backslash X\).
+\end{remark}
+\begin{remark}[Intuition]
+   The orbit of \(x\) is everything that can be reached from \(x\) by an action of something in \(G\).
+\end{remark}
+\begin{remark}
+   An orbit under the conjugation action is called a \emph{conjugacy class}.
+\end{remark}
+
+\begin{proposition}
+   Let \(G\) be a group acting on a set \(X\).
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \[\forall x, x' \in X: \big((G \cdot x) = (G \cdot x')\big) \lor \big((G \cdot x) \cap (G \cdot x') = \emptyset\big)\]
+      \item \[\bigcup_{x \in X} (G \cdot x) = X\]
+   \end{enumerate}
+\end{proposition}
+
+\begin{proposition}[Orbit Formulas]
+   Let \(G\) be a group acting on \(X\) and \(x, x' \in X\)
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item \(G \cdot x \to G/G_x\) where \(g \cdot x \mapsto gG_x\) is well-defined, bijective and equivariant.
+      \item For \(g \in G: g \cdot x = x' \implies G_{x'} = gG_xg^{-1}\)
+      \item If \(G\) is finite, then \(|G \cdot x| = [G : G_x]\)
+      \item If \(G\) and \(X\) are finite, then
+         \[|X| = \sum_{G \cdot x \in G \backslash X} [G : G_x]\]
+   \end{enumerate}
+\end{proposition}
+\begin{remark}
+   Applied to the conjugation action of a finite group \(G\), we obtain the \emph{class equation}
+   \[|G| = |Z(G)| + \sum_{i=1}^n [G : C(x_i)]\]
+   with representatives \(x_i\) of the conjugacy classes of non-central elements of \(G\).
+\end{remark}
+
+\begin{definition}[Equivariant Map]
+   Given group actions on sets \(X\) and \(Y\), \(f: X \to Y\) is \emph{equivariant} iff
+   \[\forall g \in G, x \in X: f(g \cdot x) = g \cdot f(x)\]
+\end{definition}
+
+\begin{definition}[Invariant Subset]
+   Given a group \(G\) acting on a set \(X\), \(X' \subset X\) if
+   \[\forall g \in G, x' \in X': g \cdot x' \in X'\]
+\end{definition}
+\begin{remark}
+   The original action \(G \times X \to X\) restricts to an action \(G \times X' \to X'\), in which case the inclusion map \(X' \to X\) is equivariant.
+\end{remark}
+\begin{example}
+   If \(H < G\) then we have this situation for \(a \cdot b := ab\) with \(X' := G_{/H}\).
+   The induced action of \(G\) on \(G_{/H}\) is transitive.
+
+   For a general action, any orbit \(G \cdot x\) is invariant.
+\end{example}
+
+\begin{proposition}[Cauchy's Theorem]
+   Let \(G\) be a finite group and \(p \in \mathbb{N}\) prime.
+   \[p~|~|G| \implies \exists g \in G: |g| = p\]
+\end{proposition}
+
+\subsubsection{Types of Group Actions}
+\begin{definition}[Faithful Group Action]
+   A group \(G\) acting on a set \(X\) where
+   \[\{g \in G \mid \forall x \in X: g \cdot x = x\} = \{e_G\}\]
+\end{definition}
+\begin{remark}
+   Equivalently we can say that \(G \to \Perm(X)\) is injective or \((\forall x \in X: g \cdot x = g' \cdot x) \implies g = g'\).
+\end{remark}
+
+\begin{definition}[Transitive Group Action]
+   A group action which has exactly one orbit.
+\end{definition}
+\begin{remark}
+   In symbols \(\exists x \in X: G \cdot x = X \iff \forall x \in X: G \cdot x = X\).
+\end{remark}
+
+\begin{definition}[Free Group Action]
+   A group action whose stabilizers are all trivial.
+\end{definition}
+\begin{remark}
+   In symbols \(\forall x \in X: G_x = \{g \in G \mid g\cdot x = x\} = \{e_G\}\).
+   Equivalently we can define \((\exists x \in X: g \cdot x = g' \cdot x) \implies g = g'\), hence every free group action is also faithful.
+\end{remark}
+
+\begin{definition}[Simply Transitive Group Action]
+   A group action which is transitive and free.
+\end{definition}
 
 \subsection{Direct \& Semidirect Product}
 \begin{definition}[Product of Group Subsets]
@@ -2008,6 +2007,10 @@ This brings us to the group of invertible matrices.
    The set of invertible matrices
    \[\GL_n(K) := \{A \in \Mat_n(K) \mid \det(A) \neq 0\}\]
    is a group \((\GL_n(K), \cdot, I_n)\).
+\end{proposition}
+
+\begin{proposition}[Special Linear Group]
+   \[\SL_n(K) := \{A \in \GL_n(K) \mid \det(A) = 1\}\]
 \end{proposition}
 
 \subsubsection{Orthogonal Group}
