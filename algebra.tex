@@ -1114,7 +1114,7 @@ which reveals the structure of a matrix multiplication (\ref{def:matrix_mult})
    \[p(x) := \sum_{k=0}^n a_k \cdot x^k = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0\]
 \end{definition}
 \begin{remark}
-   A polynomial of degree \(d\) is \textit{normalized} if \(a_d = 1\).
+   A polynomial of degree \(d\) is \emph{normalized} if \(a_d = 1\).
 \end{remark}
 
 \begin{definition}[Rational Function]
@@ -1368,10 +1368,6 @@ As an application, we describe polynomials, whose roots are sums respectively po
    In fact, it is equivalent to require \(\forall g \in G: gHg^{-1} \subset H\), i.e. conjugation sends elements of \(H\) to elements of \(H\).
 \end{remark}
 
-\begin{definition}[Simple Group]
-   Given a group \(G \neq \{e_G\}\), whose only normal subgroups are \(G\) and \(\{e_G\}\).
-\end{definition}
-
 \begin{proposition}
    Let \(G\) be a finite group and \(H < G\) where \(p := [G:H]\) is prime.
 
@@ -1382,6 +1378,30 @@ As an application, we describe polynomials, whose roots are sums respectively po
    Let \(G\) be a group and \(H < G\).
    \[[G:H] = 2 \implies H~\text{normal}\]
 \end{proposition}
+
+\begin{definition}[Simple Group]
+   A group \(G \neq \{e_G\}\), whose only normal subgroups are \(G\) and \(\{e_G\}\).
+\end{definition}
+
+\begin{definition}[Composition Series]
+   Given a group \(G\), a finite chain of subgroups
+   \[\{e_G\} =: G_0 \triangleleft G_1 \triangleleft \ldots \triangleleft G_k = G\]
+\end{definition}
+\begin{remark}[Terminology]
+   We say \(k\) is the \emph{composition length} and we call the quotients \({G_j}_{/G_{j-1}}\) \emph{composition factors}.
+\end{remark}
+\begin{remark}
+   Equivalently we can define that each composition factor must be simple.
+\end{remark}
+
+\begin{definition}[Solvable Group]
+   A group \(G\) with a composition series such that
+   \[\forall 0 \leq j \leq k: {G_j}_{/G_{j-1}}~\text{is abelian}\]
+\end{definition}
+
+\begin{theorem}[Jordan-Hölder Theorem]
+   Any two composition series of a given group have the same composition length and the same composition factors, up to permutation and isomorphism.
+\end{theorem}
 
 \subsubsection{Centralizer, Stabilizer \& Normalizer}
 \begin{definition}[Centralizer]
@@ -1424,46 +1444,64 @@ A stabilizer for the conjugation action on \(\mathcal{P}(G)\) is a \emph{normali
 
 \subsubsection{Sylow Subgroups}
 \begin{definition}[\(p\)-Group]
-   A group \(G\) where \(|G| = p^a\) with \(a \in \mathbb{N}_{>0}\).
+   A group \(G\) where \(|G| = p^a\) with a prime \(p\) and \(a \in \mathbb{N}_{>0}\).
 \end{definition}
 \begin{remark}
    A group in which each element has a power of \(p\) as order.
 \end{remark}
 
+\begin{definition}[\(p\)-Subgroup]
+   A subgroup which is a \(p\)-group.
+\end{definition}
+
 \begin{definition}[Sylow \(p\)-Subgroup]
-   Given a \(p\)-group \(G\), \(H < G: \abs{H} = p^k\) if \(p^k\) is the highest power of a prime \(p\) s.t. \(p^k \mid \abs{G}\).
+   Given a group \(G\), a \(p\)-subgroup \(H < G: \abs{H} = p^a\) where \(a\) is the highest power s.t. \(p^a \mid \abs{G}\).
 \end{definition}
-\begin{remark}
-   A subgroup of a \(p\)-group is again a \(p\)-group.
-\end{remark}
-Let \(p\) be a prime s.t. \(p \mid \abs{G}\) and largest \(a \in \mathbb{N}_{>0}\) s.t. \(p^a \mid \abs{G}\).
-\begin{theorem}[First Sylow Theorem]
-   There exists a Sylow \(p\)-subgroup, i.e. a subgroup of \(G\) with order \(p^a\).
-\end{theorem}
-\begin{theorem}[Second Sylow Theorem]
-   Any pair of Sylow \(p\)-subgroups are conjugate to each other, and any \(p\)-subgroup sits inside some Sylow \(p\)-subgroup.
-\end{theorem}
-\begin{theorem}[Third Sylow Theorem]
-   Let \(n_p\) be the number of Sylow \(p\)-subgroups of \(G\), then
-   \[n_p \mid \frac{|G|}{p^a} \qquad\text{and}\qquad n_p \equiv 1 \mod p\]
-\end{theorem}
-\begin{remark}
-   \(n_p = 1 \iff\) there exists a unique, normal Sylow \(p\)-subgroup.
-   Also \(q \not\equiv 1 \mod p \implies n_p = 1\)
-\end{remark}
 
-\begin{definition}[Composition Series]
-   A sequence of subgroups in a group \(G\),
-   \[\{e_G\} =: G_0 \triangleleft G_1 \triangleleft \ldots \triangleleft G_k = G\]
-   where the \emph{composition factors} \({G_j}_{/G_{j-1}}\) are simple \(\forall j = 1, \ldots, k\)
-\end{definition}
-\begin{remark}
-   We call \(k\) the \emph{composition length}.
+\begin{theorem}[Sylow Theorems]
+   Let \(G\) be a finite group, \(p\) a primefactor of \(\abs{G}\) with multiplicity \(a \in \mathbb{N}_{>0}\).
+   \begin{enumerate}[label=\roman*, align=Center]
+      \item First Sylow Theorem
+         \[\exists H < G: \abs{H} = p^a\]
+      \item Second Sylow Theorem: Let \(H, K\) be Sylow \(p\)-subgroups of \(G\), then
+         \[\exists g \in G: g^{-1}Hg = K\]
+      \item Third Sylow Theorem: Let \(n_p\) be the number of Sylow \(p\)-subgroups of \(G\), then
+         \[n_p \mid \frac{|G|}{p^a} \qquad\text{and}\qquad n_p \equiv 1 \mod p\]
+   \end{enumerate}
+\end{theorem}
+\begin{remark}[ii]
+   Any \(p\)-subgroup sits inside some Sylow \(p\)-subgroup.
 \end{remark}
+\begin{remark}[iii]
+   If \(n_p = 1\), then the Sylow \(p\)-subgroup is a normal subgroup of \(G\).
+   Also for primes \(p, q\) we have \(q \not\equiv 1 \mod p \implies n_p = 1\).
+\end{remark}
+\begin{example}
+   Let \(G\) be of order 200.
+   Show that \(G\) has a normal Sylow 5-subgroup.
 
-\begin{definition}[Solvable Group]
-   A group \(G\) with a composition series such that \(\forall j = 1, \ldots, k: {G_j}_{/G_{j-1}}\) is abelian.
-\end{definition}
+   We have the factorization \(200 = 2^3 \cdot 5^2\).
+   Since we want to find a Sylow 5-subgroup we regard \(p = 5\) with \(a = 2\).
+   By the third Sylow theorem the number of Sylow 5-subgroup must satisfy
+   \[n_5 \equiv 1 \pmod{5} \implies n_5 \in \{1, 6, 11, \ldots\} \qquad\text{and}\qquad n_5 \mid \frac{\abs{G}}{p^a} = 8\]
+   As only \(n_5 = 1\) satisfies both conditions, we know that there is exactly one Sylow 5-subgroup, which we know from the remark is normal.
+\end{example}
+
+\begin{corollary}[Cauchy's Theorem]
+   Let \(G\) be a finite group and \(p \in \mathbb{N}\) prime.
+   \[p~|~|G| \implies \exists g \in G: |g| = p\]
+\end{corollary}
+
+% \begin{theorem}[First Sylow Theorem]
+%    There exists a Sylow \(p\)-subgroup, i.e. a subgroup of \(G\) with order \(p^a\).
+% \end{theorem}
+% \begin{theorem}[Second Sylow Theorem]
+%    Any pair of Sylow \(p\)-subgroups are conjugate to each other, and any \(p\)-subgroup sits inside some Sylow \(p\)-subgroup.
+% \end{theorem}
+% \begin{theorem}[Third Sylow Theorem]
+%    Let \(n_p\) be the number of Sylow \(p\)-subgroups of \(G\), then
+%    \[n_p \mid \frac{|G|}{p^a} \qquad\text{and}\qquad n_p \equiv 1 \mod p\]
+% \end{theorem}
 
 \subsection{Group Homomorphism}
 \begin{definition}[Group Homomorphism]
@@ -1513,7 +1551,7 @@ For example, for a given (finite) set, \(S_n\) is an abstraction used to describ
       \item \(\forall x \in X: e_G \cdot x = x\)
    \end{enumerate}
 \end{definition}
-\begin{remark}
+\begin{remark}[Terminology]
    We say a group \(G\) \emph{is acting on} a set \(X\).
    The definition above is a \emph{left} group action; we would define a \emph{right} group action analogously.
 \end{remark}
@@ -1619,33 +1657,39 @@ Thus actions of \(G\) on \(X\) and the homomorphisms \(\varphi\) are in bijectiv
    For a general action, any orbit \(G \cdot x\) is invariant.
 \end{example}
 
-\begin{proposition}[Cauchy's Theorem]
-   Let \(G\) be a finite group and \(p \in \mathbb{N}\) prime.
-   \[p~|~|G| \implies \exists g \in G: |g| = p\]
-\end{proposition}
-
 \subsubsection{Types of Group Actions}
 \begin{definition}[Faithful Group Action]
    A group \(G\) acting on a set \(X\) where
-   \[\{g \in G \mid \forall x \in X: g \cdot x = x\} = \{e_G\}\]
+   \[(\forall x \in X: g \cdot x = x = g' \cdot x) \implies g = g'\]
 \end{definition}
+\begin{remark}[Intuition]
+   In other words, the only element of \(G\) which fixes all elements of \(X\) is the neutral element.
+   \[\{g \in G \mid \forall x \in X: g \cdot x = x\} = \{e_G\}\]
+\end{remark}
 \begin{remark}
-   Equivalently we can say that \(G \to \Perm(X)\) is injective or \((\forall x \in X: g \cdot x = g' \cdot x) \implies g = g'\).
+   Equivalently we can say that \(G \to \Perm(X)\) is injective or
 \end{remark}
 
 \begin{definition}[Transitive Group Action]
-   A group action which has exactly one orbit.
+   A group \(G\) acting on a set \(X\) where
+   \[\forall x, y \in X: (\exists g \in G: y = g \cdot x)\]
 \end{definition}
-\begin{remark}
-   In symbols \(\exists x \in X: G \cdot x = X \iff \forall x \in X: G \cdot x = X\).
+\begin{remark}[Intuition]
+   In words it is a group action which has exactly one orbit.
+   \[\exists x \in X: G \cdot x = X \quad\text{or equivalently}\quad \forall x \in X: G \cdot x = X\]
 \end{remark}
 
 \begin{definition}[Free Group Action]
-   A group action whose stabilizers are all trivial.
+   A group \(G\) acting on a set \(X\) where
+   \[(\exists x \in X: g \cdot x = x = g' \cdot x) \implies g = g'\]
 \end{definition}
+\begin{remark}[Intuition]
+   In other words, it is a group action whose stabilizers are all trivial.
+   In symbols
+   \[\forall x \in X: G_x = \{g \in G \mid g\cdot x = x\} = \{e_G\}\]
+\end{remark}
 \begin{remark}
-   In symbols \(\forall x \in X: G_x = \{g \in G \mid g\cdot x = x\} = \{e_G\}\).
-   Equivalently we can define \((\exists x \in X: g \cdot x = g' \cdot x) \implies g = g'\), hence every free group action is also faithful.
+   Every free group action is also faithful.
 \end{remark}
 
 \begin{definition}[Simply Transitive Group Action]
@@ -2112,6 +2156,9 @@ Finally, we obtain a description of \(\SO(3)\) by relating it to the special uni
    Given a set \(X\),
    \[\big(S(X), \circ, \sigma_{\id}\big)\]
 \end{definition}
+\begin{remark}[Notation]
+   Sometimes also denoted \(\Perm(X)\).
+\end{remark}
 
 In the special case when \(X = \{1, 2, \ldots, n\}\), the symmetric group on \(X\) is denoted \(S_n\), the \emph{symmetric group of degree n}.
 
@@ -2211,7 +2258,7 @@ An important family of examples of groups is the class of groups whose elements 
 \emph{Symmetry} is the intrinsic property of a mathematical object which causes it to remain invariant under certain classes of transformations (such as rotation, reflection, inversion, or more abstract operations).
 
 So an approachable introduction are the symmetries of geometric objects in the plane.
-For some \(n \in \mathbb{N}_{\geq 3}\) we denote the set of symmetries of a regular \(n\)-gon with \(D_{2n}\).
+For some \(n \in \mathbb{N}_{\geq 3}\) we denote the set of symmetries of a regular \(n\)-gon with \(D_{2n}\) or \(D_n\) of order \(2n\).
 So for \(n=3\) we regard the symmetries of a regular triangle i.e. a triangle with sides of equal length.
 
 We can describe its symmetries by first choosing a labelling \(1, \ldots, n\) of the \(n\) vertices.
@@ -2256,7 +2303,8 @@ Given \(\mathbb{Z}_{/2\mathbb{Z}} \to \Aut(\mathbb{Z}_{/n\mathbb{Z}})\) where \(
 \begin{definition}[Quaternion Group]
    \[Q_8 := \{1, -1, i, -i, j, -j, k, -k\}\]
    where
-   \begin{enumerate}[label=\roman*, align=Center]
+   % TODO: fix numbering???
+   \begin{enumerate}%[label=\roman*, align=Center]
       \item \((-1)(-1) = 1\)
       \item \(\forall a \in Q_8: 1a = a = a1 \quad\text{and}\quad (-1)a = -a = a(-1)\)
       \item \(ii = jj = kk = -1\)
