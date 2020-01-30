@@ -1761,7 +1761,7 @@ Isomorphism Theorems exist for every algebraic structure and describe the relati
       \item If \(H \cap K = \{e_G\}\) and \(G\) is finite with \(|G| = |H| \cdot |K|\), then \(HK = G\).
       \item If \(H \cap K = \{e_G\}\) and \(H, K\) are normal, then is \(HK \triangleleft G\) and \(f\) is an isomorphism. \\
       - if also \(HK = G\) then is \(H \times K \cong G\) by \(f\).
-      \item If \(\forall k \in K: kH = Hk\) then is \(H \triangleleft HK < G\) and \(k \mapsto \varphi_k\) defines a homomorphism \(K \to \Aut(H)\) such that we have a surjective homomorphism \(H \rtimes_{\varphi} K \to HK\) by \((h,k) \mapsto h \ast k\) which is an isomorphism iff \(H \cap K = \{e_G\}\). \\
+      \item If \(HK = KH\) then is \(H \triangleleft HK < G\) and \(k \mapsto \varphi_k\) defines a homomorphism \(K \to \Aut(H)\) such that we have a surjective homomorphism \(H \rtimes_{\varphi} K \to HK\) by \((h,k) \mapsto h \ast k\) which is an isomorphism iff \(H \cap K = \{e_G\}\). \\
       - if also \(HK = G\), then is \(H \rtimes K \cong G\).
    \end{enumerate}
 \end{proposition}
@@ -3145,25 +3145,26 @@ modeled on the property of rational
 An \emph{embedding} is one instance of some mathematical structure contained within another instance, such as a group that is a subgroup.
 When some object \(X\) is said to be embedded in another object \(Y\), the embedding is given by some injective homomorphism \(f: X \hookrightarrow Y\).
 
+\subsubsection{Definition \& Terminology}
 \begin{definition}[Field Embedding]
-   Given the fields \(K, L\), a ring homomorphism \(f: K \hookrightarrow L\).
+   A ring homomorphism \(f: K \hookrightarrow L\) between two field \(K, L\).
 \end{definition}
 \begin{remark}[Terminology]
    We say \(f\) is an \emph{embedding} of \(K\) in \(L\) or \(K\) is \emph{embedded} in \(L\).
 \end{remark}
-
 When we speak of a \emph{field extension} we mean that an embedding of fields has been fixed.
 As \(K\) is a field we know that \(\im(f)\) is a subfield of \(L\) as the embedding is an injective homomorphism.
 This way we can identify \(K\) with a subfield of \(L\).
 %TODO: As every ring homomorphism is injective, does this actually mean that every field is embedded in every other field somehow?
-
 \begin{definition}[Field Extension]
-   The superfield \(L\) of a subfield \(K \subset L\), denoted \(L/K\).
+   The superfield \(L\) of a subfield \(K \subset L\)
 \end{definition}
 \begin{remark}[Terminology]
    \(L\) is an \emph{extension field} or simply \emph{extension} of \(K\) and this pair of fields is a \emph{field extension}.
 \end{remark}
-
+\begin{remark}[Notation]
+   We denote a field extension with \(L/K\).
+\end{remark}
 If \(L/K\) is any extension of fields, then the multiplication defined in \(L\) makes \(L\) into a \(K\)-vector space, i.e. elements of \(L\) can be viewed as vectors and elements in \(K\) as scalars.
 So it makes sense to ask if \(L\) is finite-dimensional as \(K\)-vector space.
 
@@ -3179,6 +3180,12 @@ So it makes sense to ask if \(L\) is finite-dimensional as \(K\)-vector space.
    Extensions of degree 2 and 3 are called \emph{quadratic} and \emph{cubic} extensions, respectively.
 \end{remark}
 
+\begin{proposition}
+   Let \(L/K\) and \(M/L\) be finite field extensions.
+   Then \(M/K\) is also a finite field extension and
+   \[[M:K] = [L:K] \cdot [M:L]\]
+\end{proposition}
+
 % TODO: use these examples throughout the whole section.
 % https://en.wikipedia.org/wiki/Field_extension#Examples
 \begin{example}
@@ -3191,7 +3198,6 @@ So it makes sense to ask if \(L\) is finite-dimensional as \(K\)-vector space.
    Hence we know that \(\dim_\mathbb{R}(\mathbb{C}) = 2\) and so \([C:R] = 2\).
    Which means \(\mathbb{C}/\mathbb{R}\) is a finite extension.
 \end{example}
-
 Given any field \(K\) and any polynomial \(p(x) \in K[x]\) one can ask a similar question: does there exist and extension \(L\) of \(K\) containing a solution to the equation \(p(x) = 0\), i.e. containing a \emph{root} of \(p(x)\)?
 Note that we may assume here that \(p(x)\) is irreducible in \(K[x]\) since a root of any factor of \(p(x)\) is certainly a root of \(p(x)\) itself.
 
@@ -3221,13 +3227,12 @@ Identifying \(K\) with this isomorphic copy shows that there exists an extension
    is an isomorphism.
 \end{example}
 
-
 \subsubsection{Generators}
 Suppose \(K\) is a subfield of \(L\) and let \(\alpha \in L\).
 There is a unique minimal subfield of \(L\) containing both \(K\) and \(\alpha\), which is the intersection of all subfields with this property.
 
 \begin{definition}[Generated Field]
-   Let \(L/K\) and \(S := \{\alpha, \beta, \ldots\} \subset L\)
+   Let \(L/K\) and \(S := \{\alpha, \beta, \ldots\} \subset L\).
    The smallest subfield of \(L\) containing both \(K\) and \(S\), is called the field \emph{generated} by \(S\) \emph{over} \(K\).
 \end{definition}
 \begin{remark}[Notation]
@@ -3242,28 +3247,13 @@ There is a unique minimal subfield of \(L\) containing both \(K\) and \(\alpha\)
    In words, an extension is simple if it is generated by a single element \(\alpha\).
    We call \(\alpha\) \emph{primitive} or \emph{generating} element and say that \(L\) is \emph{generated over \(K\) by \(\alpha\)}.
 \end{remark}
+If \(x \in L\) is algebraic then \(K(x) = K[x]\).
+Indeed \(K[x]\) is already a field.
+If \(x\) is transcendental, then \(K[x] \cong K[T]\) and \(K(x) \cong K[T]\).
 
-   If \(x \in L\) is algebraic then \(K(x) = K[x]\).
-   Indeed \(K[x]\) is already a field.
-   If \(x\) is transcendental, then \(K[x] \cong K[T]\) and \(K(x) \cong K[T]\).
-
-\subsubsection{Algebraic Closure}
-\begin{definition}[Algebraically Closed Field]
-   A field \(K\) where every non-constant polynomial in \(K[x]\) has a root in \(K\).
-\end{definition}
-\begin{remark}
-   Equivalently, a field \(K\) where every irreducible polynomial in \(K[x]\) is linear.
-\end{remark}
-
-\begin{definition}[Algebraic Closure of a Field]
-   The \emph{algebraic closure} of a field \(K\) is an algebraic extension \(L/K\) which is algebraically closed.
-\end{definition}
-\begin{remark}[Intuition]
-   The algebraic closure of \(K\) is the set of algebraic elements of \(L\).
-   The relation between the notion of algebraically closed and algebraic closure in an extension field is that \(K\) is algebraically closed iff \(K\) is algebraically closed in every extension field.
-   Also a field \(K\) is algebraically closed in \(L\) if the only algebraic elements of \(L\) are the elements of \(K\) itself.
-\end{remark}
-
+\subsubsection{Algebraic Field Extensions}
+We may also speak of an algebraic closure of \(K\) without mentioning any extension field \(L\).
+In that case we mean an algebraically closed, algebraic extension \(\overline{K}\) of \(K\).
 \begin{proposition}
    Let \(L/K\) be a field extension where \(L\) is algebraically closed, then \(\overline{K}\) is an algebraic closure of \(K\).
 \end{proposition}
@@ -3273,23 +3263,6 @@ There is a unique minimal subfield of \(L\) containing both \(K\) and \(\alpha\)
    For every finite field extension \(K'/K\) there exists an embedding \(K' \hookrightarrow K\).
 \end{proposition}
 
-\begin{proposition}
-   Let \(L/K\) be a field extension.
-   The algebraic closure of \(K\) is a subfield of \(L\).
-\end{proposition}
-
-\begin{proposition}
-   Let \(L/K\) and \(M/L\) be finite field extensions.
-   Then \(M/K\) is also a finite field extension and
-   \[[M:K] = [L:K] \cdot [M:L]\]
-\end{proposition}
-
-We may also speak of an algebraic closure of \(K\) without mentioning any extension field \(L\).
-In that case we mean an algebraically closed, algebraic extension \(\overline{K}\).
-One of the tasks of a more comprehensive treatment of fields is to prove that every field admits an algebraic closure, and any pair of such are isomorphic to each other.
-The main example of algebraic closure for us is \(\overline{\mathbb{Q}}\), the \emph{field of algebraic numbers}, consisting of all complex numbers that are algebraic over \(\mathbb{Q}\).
-
-\subsubsection{Algebraic Field Extensions}
 We will add the field \(\mathbb{Q} \subset \overline{\mathbb{Q}} \subset \mathbb{C}\), neither contained in nor containing \(\mathbb{R}\).
 This is the field consisting of all roots of polynomials with rational coefficients.
 This means that \(\overline{\mathbb{Q}}\) is the field of \emph{algebraic numbers} and \(\mathbb{C} \setminus \overline{\mathbb{Q}}\) the field of \emph{transcendental numbers}.
@@ -3323,15 +3296,32 @@ Given an algebraic element \(l \in L\), the set of polynomials \(p(x)\) above is
    \end{enumerate}
 \end{proposition}
 
-\begin{proposition}
-   Let \(L/K\) be a field extension where \(L\) is algebraically closed.
-   Then the algebraic closure \(\overline{K}\) of \(K\) in \(L\) is an algebraic closure of \(K\).
-\end{proposition}
-
 \begin{lemma}
    Let \(L/K\) be a field extension, and \(x, y \in L\) where \(y\) is transcendental over \(K\).
    If \(L\) is algebraic over \(K(x)\), then \(L\) is algebraic over \(K(y)\).
 \end{lemma}
+
+\subsubsection{Algebraic Closure}
+\begin{definition}[Algebraically Closed Field]
+   A field \(K\) where every non-constant polynomial in \(K[x]\) has a root in \(K\).
+\end{definition}
+\begin{remark}
+   Equivalently, a field \(K\) where every irreducible polynomial in \(K[x]\) is linear.
+\end{remark}
+
+\begin{definition}[Algebraic Closure of a Field]
+   The \emph{algebraic closure} of a field \(K\) is an algebraic extension \(L/K\) which is algebraically closed.
+\end{definition}
+\begin{remark}[Intuition]
+   The algebraic closure of \(K\) is the set of algebraic elements of \(L\).
+   The relation between the notion of algebraically closed and algebraic closure in an extension field is that \(K\) is algebraically closed iff \(K\) is algebraically closed in every extension field.
+   Also a field \(K\) is algebraically closed in \(L\) if the only algebraic elements of \(L\) are the elements of \(K\) itself.
+\end{remark}
+
+\begin{proposition}
+   Let \(L/K\) be a field extension.
+   The algebraic closure of \(K\) is a subfield of \(L\).
+\end{proposition}
 
 \subsubsection{Transcendence Bases}
 \begin{definition}[Algebraic Dependent]

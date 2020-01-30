@@ -1345,6 +1345,17 @@ where we have that
    \[\tilde{f}(x) := \begin{cases}f(x) & \text{if}~x \in D\\ y & \text{if}~x = x_0\end{cases}\]
    then is \(\tilde{f}\) continuous in \(x_0\).
 \end{proposition}
+\begin{example}
+   Let \(f: [-1;1]\setminus\{0\} \to \mathbb{R}\) be defined as \(f(x) := \frac{\exp(-\frac{1}{\abs{x}})}{x}\)
+   Is there a continuous extension of \(f\) on \([-1;1]\)?
+   \begin{equation*}
+      \begin{split}
+         \lim_{x \to \infty} \left(\frac{1}{x}\exp(x)\right) = \infty & \implies \lim_{x \to 0} \left(x \exp\left(\frac{1}{\abs{x}}\right)\right) = \infty \implies \lim_{x \to 0} \left(\frac{1}{x \exp\left(\frac{1}{\abs{x}}\right)}\right) = 0 \implies \\
+                                                                      & \implies \lim_{x \to 0} \left(\frac{\exp\left(-\frac{1}{\abs{x}}\right)}{x}\right) = 0
+      \end{split}
+   \end{equation*}
+   hence for \(f(0) := 0\) we have a continuous extension.
+\end{example}
 
 \subsection{Consequences}
 \begin{theorem}
