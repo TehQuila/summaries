@@ -1105,96 +1105,6 @@ which reveals the structure of a matrix multiplication (\ref{def:matrix_mult})
 
 \newpage
 
-% TODO: merge with polynomial ring
-\section{Polynomials}
-\begin{definition}[Polynomial]
-   Given a field \(K\) and a family of coefficients \((a_i)_{i \in \mathbb{N}} \in K\), where \(a_n \neq 0\) and \(\forall i > n: a_i = 0\).
-
-   A polynomial \(p(x)\) of degree \(n \in \mathbb{N}\) is
-   \[p(x) := \sum_{k=0}^n a_k \cdot x^k = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0\]
-\end{definition}
-\begin{remark}
-   A polynomial of degree \(d\) is \emph{normalized} if \(a_d = 1\).
-\end{remark}
-
-\begin{definition}[Rational Function]
-   Given two polynomials \(p(x), q(x)\)
-   \[f(x) := \frac{p(x)}{q(x)}\]
-\end{definition}
-
-\subsection{Symmetric Polynomials}
-A \emph{symmetric polynomial} is a polynomial \(p(x_1, x_2, \ldots, x_n)\) in \(n\) variables, such that if any of the variables are interchanged, one obtains the same polynomial.
-Formally,
-\begin{definition}[Symmetric Polynomial]
-   Given \(\sigma \in S_n\), \(p\) is a symmetric polynomial iff
-   \[p(x_1, x_2, \ldots, x_n) = p(x_{\sigma(1)}, x_{\sigma(2)}, \ldots, x_{\sigma(n)})\]
-\end{definition}
-\begin{example}
-   \[x_1^3 + x_2^3-7\]
-   \[4x_1^2x_2^2 + x_1^3x_2 + x_1x_2^3 + (x_1 + x_2)^4\]
-   \[x_1x_2x_3 - 2x_1x_2 - 2x_1x_3 - 2x_2x_3\]
-\end{example}
-\emph{Elementary symmetric polynomials} are one type of basic building block for symmetric polynomials, in the sense that any symmetric polynomial can be expressed as a polynomial in elementary symmetric polynomials.
-That is, any symmetric polynomial is given by an expression involving only additions and multiplication of constants and elementary symmetric polynomials.
-
-\begin{definition}[Elementary Symmetric Polynomial]
-   Let \(I \subset \{1, \ldots, n\}\) such that \(\abs{I} = k\), then
-   \[e_k(x_1, \ldots, x_n) := \sum\left(\prod_{i \in I} x_i\right)\]
-\end{definition}
-\begin{example}
-   In every case, \(e_0(x_1, \ldots, x_n) = 1\) and \(e_k = 0\) for \(k > n\).
-
-   For \(n = 1\):
-   \[e_1(x_1) = x_1\]
-
-   For \(n = 2\):
-   \begin{equation*}
-      \begin{split}
-         e_1(x_1,x_2) &= x_1 + x_2\\
-         e_2(x_1,x_2) &= x_1 x_2
-      \end{split}
-   \end{equation*}
-
-   For \(n = 3\):
-   \begin{equation*}
-      \begin{split}
-         e_1(x_1, x_2, x_3) &= x_1 + x_2 + x_3\\
-         e_2(x_1, x_2, x_3) &= x_1x_2 + x_1x_3 + x_2x_3\\
-         e_3(x_1, x_2, x_3) &= x_1x_2x_3
-      \end{split}
-   \end{equation*}
-
-   For \(n = 4\):
-   \begin{equation*}
-      \begin{split}
-         e_1(x_1, x_2, x_3, x_4) &= x_1 + x_2 + x_3 + x_4\\
-         e_2(x_1, x_2, x_3, x_4) &= x_1x_2 + x_1x_3 + x_1x_4 + x_2x_3 + x_2x_4 + x_3x_4\\
-         e_3(x_1, x_2, x_3, x_4) &= x_1x_2x_3 + x_1x_2x_4 + x_1x_3x_4 + x_2x_3x_4\\
-         e_4(x_1, x_2, x_3, x_4) &= x_1x_2x_3x_4
-      \end{split}
-   \end{equation*}
-\end{example}
-
-\begin{proposition}
-   Let \(R\) be a commutative ring.
-   The \(R\)-algebra-homomorphism
-   \[\iota: R[E_1, \ldots, E_n] \to R[X_1, \ldots, X_n] \qquad\text{where}\qquad \iota(E_k) := e_k(X_1, \ldots, X_n)\]
-   is an isomorphism.
-\end{proposition}
-% TODO: concept of the proof?
-
-As an application, we describe polynomials, whose roots are sums respectively powers of the roots of a given monic polynomial.
-\begin{proposition}
-   Let \(R\) be a commutative ring.
-   \[\mathscr{P}_q(f) := \mathscr{P}_{q,n}(T, b_1, \ldots, b_n) \in R[T, E_1, \ldots, E_n] \quad\text{for}~q \in R[U]\]
-   \[\Sigma_{\lambda}(f) := \Sigma_{\lambda, n}(T, b_1, \ldots, b_n) \in R[T, E_1, \ldots, E_n] \quad\text{for}~\lambda=(\lambda_1, \ldots, \lambda_n) \in R^n\]
-   factor as
-   \[\mathscr{P}_q(f) = \prod_{j=1}^n\big(T - q(\alpha_j)\big) \qquad\text{and}\qquad \Sigma_{\lambda}(f) \prod_{\substack{r_1, \ldots, r_n \in R\\\exists \sigma \in S_n: \forall j: r_{\sigma(j)} = \lambda_j}} \left(T - \sum_{j=1}^n r_j\alpha_j\right)\]
-   if
-   \[f := T^n + b_1T^{n-1} + \ldots + b_n \qquad\text{where}~b_i\in S\]
-   factors in \(S[T]\) as \(f = \prod_{j=1}^n (T - \alpha_j)\) where \(\alpha_i \in S\) for every commutative \(R\)-algebra \(S\).
-\end{proposition}
-
 \newpage
 
 \section{Groups}
@@ -1273,7 +1183,7 @@ As an application, we describe polynomials, whose roots are sums respectively po
 \end{remark}
 
 \begin{proposition}
-   Let \(G\) be a group and \(H \subset G\) a subgroup.
+   Let \(G\) be a group and \(H < G\).
    \begin{enumerate}[label=\roman*, align=Center]
       \item \[\forall g, g' \in G: (gH = g'H) \lor (gH \cap g'H = \emptyset)\]
       \item \[\bigcup_{g \in G} gH = G\]
@@ -1321,10 +1231,12 @@ As an application, we describe polynomials, whose roots are sums respectively po
 \end{remark}
 
 \begin{definition}[Index of Subgroup]
-   Given a group \(G\) and \(H < G\),
+   Given a group \(G\) and \(H \triangleleft G\),
    \[[G:H] := |G_{/H}|\]
-   is the \emph{index of \(H\) in \(G\)}.
 \end{definition}
+\begin{remark}[Terminology]
+   We say \([G:H]\) is the \emph{index of \(H\) in \(G\)}.
+\end{remark}
 \begin{remark}[Intuition]
    The index of a subgroup is the relative size of \(H\) in \(G\).
    Differently put, it is the number of cosets of \(H\) which fill up \(G\).
@@ -1633,9 +1545,9 @@ Thus actions of \(G\) on \(X\) and the homomorphisms \(\varphi\) are in bijectiv
    \end{enumerate}
 \end{proposition}
 \begin{remark}
-   Applied to the conjugation action of a finite group \(G\), we obtain the \emph{class equation}
+   For the conjugation action of \(G\) on itself, we obtain the \emph{class equation}
    \[|G| = |Z(G)| + \sum_{i=1}^n [G : C(x_i)]\]
-   with representatives \(x_i\) of the conjugacy classes of non-central elements of \(G\).
+   with \(x_i \in G \cdot x\) where \(x \not\in Z(G)\).
 \end{remark}
 
 \begin{definition}[Equivariant Map]
@@ -1717,15 +1629,15 @@ Isomorphism Theorems exist for every algebraic structure and describe the relati
    \begin{enumerate}[label=\roman*, align=Center]
       \item \(H \cap K \triangleleft H\)
       \item \(HK < G\)
-      \item \(H/(H \cap K) \cong HK/K\) by \(\bar{a} \mapsto \bar{a}\)
+      \item \(H_{/H \cap K} \cong HK_{/K}\) by \(\bar{a} \mapsto \bar{a}\)
    \end{enumerate}
 \end{proposition}
 
 \begin{proposition}[Third Isomorphism Theorem]
    Let \(G\) be a group and \(K \triangleleft H \triangleleft G\), then is
    \begin{enumerate}[label=\roman*, align=Center]
-      \item \(H/K \triangleleft G/K\)
-      \item \((G/K)/(H/K) \cong G_{/H}\) by \(\bar{a}(H/K) \mapsto \bar{a}\)
+      \item \(H_{/K} \triangleleft G_{/K}\)
+      \item \((G_{/K})_{/(H_{/K})} \cong G_{/H}\) by \(\bar{a}(H_{/K}) \mapsto \bar{a}\)
    \end{enumerate}
 \end{proposition}
 
@@ -1759,10 +1671,10 @@ Isomorphism Theorems exist for every algebraic structure and describe the relati
       \item \(H \cap K = \{e_G\} \iff f~\text{is bijective}\)
       \item \(HK = KH \iff HK < G\)
       \item If \(H \cap K = \{e_G\}\) and \(G\) is finite with \(|G| = |H| \cdot |K|\), then \(HK = G\).
-      \item If \(H \cap K = \{e_G\}\) and \(H, K\) are normal, then is \(HK \triangleleft G\) and \(f\) is an isomorphism. \\
+      \item If \(H \cap K = \{e_G\}\) and \(H, K \triangleleft G\), then is \(HK \triangleleft G\) and \(f\) is an isomorphism. \\
       - if also \(HK = G\) then is \(H \times K \cong G\) by \(f\).
-      \item If \(HK = KH\) then is \(H \triangleleft HK < G\) and \(k \mapsto \varphi_k\) defines a homomorphism \(K \to \Aut(H)\) such that we have a surjective homomorphism \(H \rtimes_{\varphi} K \to HK\) by \((h,k) \mapsto h \ast k\) which is an isomorphism iff \(H \cap K = \{e_G\}\). \\
-      - if also \(HK = G\), then is \(H \rtimes K \cong G\).
+      \item If \(HK = KH\) then is \(H \triangleleft HK < G\) and \(k \mapsto \varphi_k\) defines a homomorphism \(K \to \Aut(H)\) such that the homomorphism \(\tilde{f}: H \rtimes_{\varphi} K \to HK\) by \((h,k) \mapsto h \ast k\) is surjective.\\
+         - if also \(HK = G\) and \(H\cap K = \{e_G\}\), then is \(H \rtimes K \cong G\) by \(\tilde{f}\).
    \end{enumerate}
 \end{proposition}
 \begin{remark}
@@ -1960,7 +1872,7 @@ By Lagrange's theorem, if \(|G| = p\) where \(p\) is prime, then \(G\) is genera
 This means that \(G\) is cyclic for every \(g\).
 
 \begin{proposition}
-   Let \(G\) be a group where every element is of order 2, then
+   Let \(G\) be a group where \(\forall g \in G: \abs{g} = 2\), then
    \begin{enumerate}[label=\roman*, align=Center]
       \item \(|G| = 2^m\)
       \item \(G \cong (\mathbb{Z}_{/2\mathbb{Z}})^m\)
@@ -2078,7 +1990,7 @@ So we define
 \end{remark}
 
 \begin{proposition}
-   Let \(G < \OG(2)\), then \(G\) is generated by rotation by \(\frac{2\pi}{n}\) and we have one of the following
+   Let \(G < \OG(2)\), then \(G = \left\langle \frac{2\pi}{n}\right\rangle\) and one of the following
    \begin{enumerate}[label=\roman*, align=Center]
       \item \(G \subset \SO(2)\) and \(n := |G|\), i.e. \(G\) is cyclic
       \item \(G \not\subset \SO(2)\) and \(n := \frac{1}{2} \abs{G}\).
@@ -2111,21 +2023,19 @@ As before we define for the orthogonal group for finite dimensional unitary vect
 \end{remark}
 
 \begin{theorem}
-   The non-trivial subgroups of \(\SO(3)\) are
+   Let \(G < \SO(3)\), and \(n \geq 2\) then we have one of the following
    \begin{enumerate}[label=\roman*, align=Center]
-      \item Cyclic groups generated by \(\frac{2\pi}{n}\) rotation for \(n \geq 2\)
-      \item Dihedral groups generated by \(\frac{2\pi}{n}\) rotation for \(n \geq 2\) and a rotation by \(\pi\) where both generators have orthogonal axes of rotation.
-      \item Tetrahedral rotation group (\(\cong A_4\))
-      \item Octahedral rotation group (\(\cong S_4\))
-      \item Icosahedral rotation group (\(\cong A_5\))
+      \item \(G = \left\langle \frac{2\pi}{n}\right\rangle\), \(\abs{G} = n\), i.e. \(G\) is cyclic.
+      \item \(G \cong D_n\)
+      \item \(G \cong A_4\)
+      \item \(G \cong S_4\)
+      \item \(G \cong A_5\)
    \end{enumerate}
 \end{theorem}
 \begin{remark}
-   Cases (iii)-(v) refer to symmetry group of the platonic solids
+   Cases (iii)-(v) refer to symmetry group of the platonic solids tetrahedron, octahedron and icosahedron.
 \end{remark}
-
 Finally, we obtain a description of \(\SO(3)\) by relating it to the special unitary group \(\SU(2)\).
-
 \begin{proposition}
    The conjugation action of \(\SU(2)\) on trace-zero skew-Hermitian \(\Mat_2(\mathbb{C})\) induces an isomorphism
    \[\SU(2)_{/\{\pm I_2\}} \cong \SO(3)\]
@@ -2199,8 +2109,7 @@ In the special case when \(X = \{1, 2, \ldots, n\}\), the symmetric group on \(X
 \end{example}
 
 \begin{proposition}[Order of \(S_n\)]
-   Let \(X\) be a set with \(|X| = n\), then is
-   \[|S(X)| = n!\]
+   \[\abs{S_n} = n!\]
 \end{proposition}
 
 \paragraph{Inversions}
@@ -2434,9 +2343,6 @@ That is, it introduces a new ring out of an existing one so that it consists of 
       \item Whole Numbers: \((\mathbb{Z}, +, \cdot, 0, 1\) is commutative.
       \item Matrix Ring: \((\Mat_n(K), +, \cdot, 0_n, I_n)\)
       \item Endomorphism Ring: \((\End(K^n), +, \cdot, \id_{K^n})\)
-      \item Polynomial Ring: \((K[x], +, \cdot, 0_K, 1_K)\)
-         \[+(p, q) \mapsto \sum_{i=0}^n p_i \cdot x^i + \sum_{j=0}^m q_j \cdot x^j = \sum_{k=0}^{\max(m,n)} (p_k + q_k) \cdot x^k\]
-         \[\cdot(p, q) \mapsto \sum_{i=0}^n p_i \cdot x^i \cdot \sum_{j=0}^m q_j \cdot x^j = \sum_{k=0}^{m+n} \left(\sum_{i=0}^k (p_i \cdot q_{k-i}) \cdot x^k\right)\]
    \end{enumerate}
 \end{proposition}
 \begin{proof}[Proof (i)]
@@ -2470,6 +2376,118 @@ That is, it introduces a new ring out of an existing one so that it consists of 
    \textit{IS:} Assume IH holds.
    \[m \cdot (n + 1) = m \cdot n + m = n \cdot m + m = (n + 1) \cdot m\]
 \end{proof}
+
+\subsection{Polynomial Ring}
+\begin{definition}[Polynomial]
+   Given a field \(K\) and \((a_i)_{i \in \mathbb{N}} \in K\), where \(a_n \neq 0\) and \(\forall i > n: a_i = 0\).
+   \[p(x) := \sum_{k=0}^n a_k \cdot x^k = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0\]
+   is a polynomial of degree \(n \in \mathbb{N}\).
+\end{definition}
+\begin{remark}[Terminology]
+   A polynomial of degree \(d\) is \emph{normalized} if \(a_d = 1\).
+   A polynomial of degree \(n\) is \emph{monic} if \(a_n = 1\).
+\end{remark}
+
+\begin{definition}[Set of Polynomials]
+   Let \(K\) be a field.
+   \[[K[x] := \left\{\sum_{k=0}^n a_k \cdot x^k ~\middle| \forall 0 \leq k \leq n: a_k \in K\right\}\]
+\end{definition}
+
+\begin{proposition}[Polynomial Ring]
+   \((K[x], +, \cdot, 0_K, 1_K)\) where
+   \[+(p, q) \mapsto \sum_{i=0}^n p_i \cdot x^i + \sum_{j=0}^m q_j \cdot x^j = \sum_{k=0}^{\max(m,n)} (p_k + q_k) \cdot x^k\]
+   \[\cdot(p, q) \mapsto \sum_{i=0}^n p_i \cdot x^i \cdot \sum_{j=0}^m q_j \cdot x^j = \sum_{k=0}^{m+n} \left(\sum_{i=0}^k (p_i \cdot q_{k-i}) \cdot x^k\right)\]
+   is a ring.
+\end{proposition}
+\begin{remark}
+   The polynomial ring is an integral domain.
+\end{remark}
+
+\begin{definition}[Rational Function]
+   Given two polynomials \(p(x), q(x)\)
+   \[f(x) := \frac{p(x)}{q(x)}\]
+\end{definition}
+
+\begin{definition}[Set of Rational Functions]
+   Let \(K\) be a field.
+   \[K(x) := \left\{\frac{p(x)}{q(x)} ~\middle| p(x), q(x) \in K[x]\right\}\]
+\end{definition}
+\begin{remark}
+   \(K(x)\) is the field of fractions of the integral domain \(K[x]\).
+\end{remark}
+
+\subsubsection{Symmetric Polynomials}
+A \emph{symmetric polynomial} is a polynomial \(p(x_1, x_2, \ldots, x_n)\) in \(n\) variables, such that if any of the variables are interchanged, one obtains the same polynomial.
+Formally,
+\begin{definition}[Symmetric Polynomial]
+   Given \(\sigma \in S_n\), \(p\) is a symmetric polynomial iff
+   \[p(x_1, x_2, \ldots, x_n) = p(x_{\sigma(1)}, x_{\sigma(2)}, \ldots, x_{\sigma(n)})\]
+\end{definition}
+\begin{example}
+   \[x_1^3 + x_2^3-7\]
+   \[4x_1^2x_2^2 + x_1^3x_2 + x_1x_2^3 + (x_1 + x_2)^4\]
+   \[x_1x_2x_3 - 2x_1x_2 - 2x_1x_3 - 2x_2x_3\]
+\end{example}
+\emph{Elementary symmetric polynomials} are one type of basic building block for symmetric polynomials, in the sense that any symmetric polynomial can be expressed as a polynomial in elementary symmetric polynomials.
+That is, any symmetric polynomial is given by an expression involving only additions and multiplication of constants and elementary symmetric polynomials.
+
+\begin{definition}[Elementary Symmetric Polynomial]
+   Let \(I \subset \{1, \ldots, n\}\) such that \(\abs{I} = k\), then
+   \[e_k(x_1, \ldots, x_n) := \sum\left(\prod_{i \in I} x_i\right)\]
+\end{definition}
+\begin{example}
+   In every case, \(e_0(x_1, \ldots, x_n) = 1\) and \(e_k = 0\) for \(k > n\).
+
+   For \(n = 1\):
+   \[e_1(x_1) = x_1\]
+
+   For \(n = 2\):
+   \begin{equation*}
+      \begin{split}
+         e_1(x_1,x_2) &= x_1 + x_2\\
+         e_2(x_1,x_2) &= x_1 x_2
+      \end{split}
+   \end{equation*}
+
+   For \(n = 3\):
+   \begin{equation*}
+      \begin{split}
+         e_1(x_1, x_2, x_3) &= x_1 + x_2 + x_3\\
+         e_2(x_1, x_2, x_3) &= x_1x_2 + x_1x_3 + x_2x_3\\
+         e_3(x_1, x_2, x_3) &= x_1x_2x_3
+      \end{split}
+   \end{equation*}
+
+   For \(n = 4\):
+   \begin{equation*}
+      \begin{split}
+         e_1(x_1, x_2, x_3, x_4) &= x_1 + x_2 + x_3 + x_4\\
+         e_2(x_1, x_2, x_3, x_4) &= x_1x_2 + x_1x_3 + x_1x_4 + x_2x_3 + x_2x_4 + x_3x_4\\
+         e_3(x_1, x_2, x_3, x_4) &= x_1x_2x_3 + x_1x_2x_4 + x_1x_3x_4 + x_2x_3x_4\\
+         e_4(x_1, x_2, x_3, x_4) &= x_1x_2x_3x_4
+      \end{split}
+   \end{equation*}
+\end{example}
+
+\begin{proposition}
+   Let \(R\) be a commutative ring.
+   The \(R\)-algebra-homomorphism
+   \[\iota: R[E_1, \ldots, E_n] \to R[X_1, \ldots, X_n] \qquad\text{where}\qquad \iota(E_k) := e_k(X_1, \ldots, X_n)\]
+   is an isomorphism.
+\end{proposition}
+% TODO: concept of the proof?
+
+As an application, we describe polynomials, whose roots are sums respectively powers of the roots of a given monic polynomial.
+\begin{proposition}
+   Let \(R\) be a commutative ring.
+   \[\mathscr{P}_q(f) := \mathscr{P}_{q,n}(T, b_1, \ldots, b_n) \in R[T, E_1, \ldots, E_n] \quad\text{for}~q \in R[U]\]
+   \[\Sigma_{\lambda}(f) := \Sigma_{\lambda, n}(T, b_1, \ldots, b_n) \in R[T, E_1, \ldots, E_n] \quad\text{for}~\lambda=(\lambda_1, \ldots, \lambda_n) \in R^n\]
+   factor as
+   \[\mathscr{P}_q(f) = \prod_{j=1}^n\big(T - q(\alpha_j)\big) \qquad\text{and}\qquad \Sigma_{\lambda}(f) \prod_{\substack{r_1, \ldots, r_n \in R\\\exists \sigma \in S_n: \forall j: r_{\sigma(j)} = \lambda_j}} \left(T - \sum_{j=1}^n r_j\alpha_j\right)\]
+   if
+   \[f := T^n + b_1T^{n-1} + \ldots + b_n \qquad\text{where}~b_i\in S\]
+   factors in \(S[T]\) as \(f = \prod_{j=1}^n (T - \alpha_j)\) where \(\alpha_i \in S\) for every commutative \(R\)-algebra \(S\).
+\end{proposition}
 
 \subsection{Integral Domains}
 \begin{definition}[Integral Domain]\label{def:integral_domain}
@@ -2657,9 +2675,9 @@ A \emph{euclidean domain} is endowed with a \emph{euclidean function} which allo
 \begin{definition}[Irreducible/Prime]
    Given an integral domain \(R\) and \(a \in R \setminus (R^{\times} \cup \{0\})\), then is \(a\)
 
-   \emph{irreducible} if \(\forall b, c \in R: a = b \cdot c\) holds \(b \in R^{\times} \lor b' \in R^{\times}\).
+   \emph{irreducible} if \(\forall b, c \in R: a = b \cdot c\) holds \(b \in R^{\times} \lor c \in R^{\times}\).
 
-   \emph{prime} if \(\forall b, c \in R: a | b \cdot c \implies a | b \lor a | c\).
+   \emph{prime} if \(\forall b, c \in R: a \divides b \cdot c \implies a \divides b \lor a \divides c\).
 \end{definition}
 \begin{remark}
    In an integral domain every prime element is irreducible.
@@ -2783,7 +2801,7 @@ Furthermore there is the canonical homomorphism \(R \to R_{/I}\) where \(a \maps
 
 \subsection{Principal Ideal Domains (PID)}
 \begin{definition}[Principal Ideal Domain (PID)]
-   An integral domain \(R\) in which every ideal is principal.
+   An integral domain in which every ideal is principal.
 \end{definition}
 \begin{example}
    The ring of integers \(\mathbb{Z}\).
@@ -3111,7 +3129,6 @@ with the equivalence relation
 \[(n, d) \sim (m, b) :\iff n \cdot b = m \cdot d\]
 modeled on the property of rational
 
-
 \begin{proposition}[\((\mathbb{Q}, +, \cdot)\) is a Field]\label{pro:Q_field}
    With the operations
    \[+: \mathbb{Q} \times \mathbb{Q} \to \mathbb{Q}\]
@@ -3141,6 +3158,10 @@ modeled on the property of rational
    \[\mathbb{Q}^{\times} = \mathbb{Q} \setminus \{0\} \implies \frac{a}{b} \in \mathbb{Q}: \frac{a}{b} \in \mathbb{Q}^{\times} \iff \frac{a}{b} \neq 0 \iff a \neq 0\]
 \end{proof}
 
+\begin{proposition}
+   The field of fractions of the integral domain \(K[x]\) is the field of rational functions \(K(x)\).
+\end{proposition}
+
 \subsection{Field Extensions}
 An \emph{embedding} is one instance of some mathematical structure contained within another instance, such as a group that is a subgroup.
 When some object \(X\) is said to be embedded in another object \(Y\), the embedding is given by some injective homomorphism \(f: X \hookrightarrow Y\).
@@ -3157,13 +3178,10 @@ As \(K\) is a field we know that \(\im(f)\) is a subfield of \(L\) as the embedd
 This way we can identify \(K\) with a subfield of \(L\).
 %TODO: As every ring homomorphism is injective, does this actually mean that every field is embedded in every other field somehow?
 \begin{definition}[Field Extension]
-   The superfield \(L\) of a subfield \(K \subset L\)
+   A field \(L\) with subfield \(K \subset L\), denoted \(L/K\).
 \end{definition}
 \begin{remark}[Terminology]
    \(L\) is an \emph{extension field} or simply \emph{extension} of \(K\) and this pair of fields is a \emph{field extension}.
-\end{remark}
-\begin{remark}[Notation]
-   We denote a field extension with \(L/K\).
 \end{remark}
 If \(L/K\) is any extension of fields, then the multiplication defined in \(L\) makes \(L\) into a \(K\)-vector space, i.e. elements of \(L\) can be viewed as vectors and elements in \(K\) as scalars.
 So it makes sense to ask if \(L\) is finite-dimensional as \(K\)-vector space.
@@ -3252,17 +3270,6 @@ Indeed \(K[x]\) is already a field.
 If \(x\) is transcendental, then \(K[x] \cong K[T]\) and \(K(x) \cong K[T]\).
 
 \subsubsection{Algebraic Field Extensions}
-We may also speak of an algebraic closure of \(K\) without mentioning any extension field \(L\).
-In that case we mean an algebraically closed, algebraic extension \(\overline{K}\) of \(K\).
-\begin{proposition}
-   Let \(L/K\) be a field extension where \(L\) is algebraically closed, then \(\overline{K}\) is an algebraic closure of \(K\).
-\end{proposition}
-
-\begin{proposition}
-   Let \(\overline{K}\) be an algebraic closure of \(K\).
-   For every finite field extension \(K'/K\) there exists an embedding \(K' \hookrightarrow K\).
-\end{proposition}
-
 We will add the field \(\mathbb{Q} \subset \overline{\mathbb{Q}} \subset \mathbb{C}\), neither contained in nor containing \(\mathbb{R}\).
 This is the field consisting of all roots of polynomials with rational coefficients.
 This means that \(\overline{\mathbb{Q}}\) is the field of \emph{algebraic numbers} and \(\mathbb{C} \setminus \overline{\mathbb{Q}}\) the field of \emph{transcendental numbers}.
@@ -3322,6 +3329,16 @@ Given an algebraic element \(l \in L\), the set of polynomials \(p(x)\) above is
    Let \(L/K\) be a field extension.
    The algebraic closure of \(K\) is a subfield of \(L\).
 \end{proposition}
+We may also speak of an algebraic closure of \(K\) without mentioning any extension field \(L\).
+In that case we mean an algebraically closed, algebraic extension \(\overline{K}\) of \(K\).
+\begin{proposition}
+   Let \(L/K\) be a field extension where \(L\) is algebraically closed, then \(\overline{K}\) is an algebraic closure of \(K\).
+\end{proposition}
+
+\begin{proposition}
+   Let \(\overline{K}\) be an algebraic closure of \(K\).
+   For every finite field extension \(K'/K\) there exists an embedding \(K' \hookrightarrow K\).
+\end{proposition}
 
 \subsubsection{Transcendence Bases}
 \begin{definition}[Algebraic Dependent]
@@ -3375,17 +3392,48 @@ In complete analogy with linear independent collections of elements in a vector 
    Specifically, the union of a transcendence basis of \(L/K\) and a transcendence basis of \(M/L\) is a transcendence basis of \(M/K\).
 \end{proposition}
 
+\subsubsection{Integral Closure}
+Working with extensions of commutative rings rather than fields, a natural notion analogous to the definition of algebraic closure in an extension field is that of integral closure.
+\begin{definition}[Integral Element]
+   Given a commutative ring \(R \subset S\), \(x \in S\) is \emph{integral} over \(R\) iff
+   \[\exists p(x) \in R[x]: p(x) = 0\]
+   where \(p(x)\) is monic.
+\end{definition}
+
+\begin{definition}[Integral Closure of a Ring]
+   The \emph{integral closure} of a commutative ring \(R\) in \(S\) is the set of elements of \(S\) integral over \(R\).
+\end{definition}
 \begin{remark}
-   Working with extensions of commutative rings rather than fields, a natural notion analogous to the definition of algebraic closure in an extension field is that of integral closure.
-   Given commutative ring \(R \subset S\), we say that \(x \in S\) is integral over \(R\) if there exists a monic polynomial \(f \in R[T]\) such that \(f(x) = 0\).
-   The integral closure of \(R\) in \(S\) is the set of elements of \(S\) integral over \(R\); we may see that this is a subring of \(S\).
-   We say that \(R\) is integrally closed in \(S\) if the integral closure is just \(R\).
-   An interesting cas for us will be the ring of algebraic integers, which is the integral closure of \(\mathbb{Z}\) in \(\overline{\mathbb{Q}}\).
-   By Gauss's lemma , an algebraic number is integral over \(\mathbb{Z}\) iff its minimal polynomial has integer coefficients.
+   We may see that this is a subring of \(S\).
+\end{remark}
+
+\begin{definition}[Integrally Closed Ring]
+   A commutative ring \(R\) is integrally closed in \(S\) if the integral closure is just \(R\).
+\end{definition}
+An interesting case for us will be the ring of algebraic integers, which is the integral closure of \(\mathbb{Z}\) in \(\overline{\mathbb{Q}}\).
+
+\begin{proposition}
+   An algebraic number is integral over \(\mathbb{Z}\) iff its minimal polynomial has coefficients in \(\mathbb{Z}\).
+\end{proposition}
+\begin{remark}
+   In field theory the minimal polynomial of a value \(x\) is, roughly speaking, the polynomial of lowest degree having coefficients of a specified type, such that \(x\) is a root of the polynomial.
 \end{remark}
 
 \subsubsection{Finite Extensions}
-   Every finite extension is algebraic.
+Every finite extension is algebraic.
+
+Of particular interest are number fields, which are finite extensions of \(\mathbb{Q}\) and their subrings that are finite over \(\mathbb{Z}\).
+\begin{definition}[Number Field]
+   A finite-degree field extension of the field of rational numbers \(\mathbb{Q}\).
+\end{definition}
+\begin{example}
+   Let \(d \in \mathbb{Z}\) be nonsquare (has no nontrivial square integer factor)
+   \[\mathbb{Q}(\sqrt{d}) := \mathbb{Q}[x]_{/(x^2 -d)}\]
+\end{example}
+
+\begin{proposition}
+   Let \(K\) be a number field. The integral closure of \(\mathbb{Z}\) in \(K\) is isomorphic as \(\mathbb{Z}\)-module to \(\mathbb{Z}^d\), where \(d := [K:\mathbb{Q}]\).
+\end{proposition}
 
 \subsection{Residue Fields}
 % TODO: Include Field of Fractions --> field of fractions = quotient field
